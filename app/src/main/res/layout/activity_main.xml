@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.lzyyd.hsq.viewmodel.MVVMViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/rl_home_layout"
+        android:background="@color/main_bg"
+        android:fitsSystemWindows="true"
+        android:clipToPadding="true"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        >
+        <com.lzyyd.hsq.ui.CustomViewPager
+            android:id="@+id/top_vp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:flipInterval="30"
+            android:layout_above="@+id/menu_bottom" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/menu_bottom"
+            android:layout_width="fill_parent"
+            android:layout_height="55.0dip"
+            android:layout_alignParentBottom="true">
+            <ImageView
+                android:background="@color/line_bg"
+                android:layout_width="fill_parent"
+                android:layout_height="1.0dip" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:id="@+id/menu"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:visibility="gone">
+                <include android:scaleType="centerCrop"
+                    layout="@layout/menu_bottom_1" />
+                <include android:scaleType="centerCrop"
+                    layout="@layout/menu_bottom_4" />
+                <include android:scaleType="centerCrop"
+                    layout="@layout/menu_bottom_2" />
+                <include android:scaleType="centerCrop"
+                    layout="@layout/menu_bottom_3" />
+            </LinearLayout>
+
+            <RadioGroup
+                android:id="@+id/rg_main"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <RadioButton
+                    android:id="@+id/rbChat"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_weight="1"
+                    android:background="@drawable/tab_selector_checked_bg"
+                    android:button="@null"
+                    android:checked="true"
+                    android:drawableTop="@drawable/bottom_bg_1"
+                    android:gravity="center_horizontal|bottom"
+                    android:paddingTop="2dp"
+                    android:text="首页"
+                    android:textColor="@drawable/bottom_text" />
+
+                <RadioButton
+                    android:id="@+id/rbAddress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_weight="1"
+                    android:background="@drawable/tab_selector_checked_bg"
+                    android:button="@null"
+                    android:drawableTop="@drawable/bottom_bg_2"
+                    android:gravity="center_horizontal|bottom"
+                    android:paddingTop="2dp"
+                    android:text="购物车"
+                    android:textColor="@drawable/bottom_text"  />
+
+                <RadioButton
+                    android:id="@+id/rbMe"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_weight="1"
+                    android:background="@drawable/tab_selector_checked_bg"
+                    android:button="@null"
+                    android:drawableTop="@drawable/bottom_bg_4"
+                    android:gravity="center_horizontal|bottom"
+                    android:paddingTop="2dp"
+                    android:text="我的"
+                    android:textColor="@drawable/bottom_text"  />
+
+
+            </RadioGroup>
+
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

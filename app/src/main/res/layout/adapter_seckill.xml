@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="seckillItemViewModel"
+            type="com.lzyyd.hsq.viewmodel.SeckillItemViewModel"/>
+
+        <variable
+            name="seckill"
+            type="com.lzyyd.hsq.bean.SeckillGoodsBean"/>
+    </data>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+
+
+    <ImageView
+        android:id="@+id/iv_face"
+        android:layout_width="114dp"
+        android:layout_height="114dp"
+        android:layout_margin="10dp"
+        android:scaleType="fitXY"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:textColor="@color/text_222222"
+            android:textSize="14sp"
+            android:text="@{seckill.goodsTitles}"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/ic_seckill_hot_bg">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_seckill_hot"
+                android:layout_marginLeft="2dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2.5dp"
+                android:layout_marginRight="2dp"
+                android:textColor="#fffb410f"
+                android:text="热销榜第一"
+                android:textSize="12sp"/>
+            
+
+        </LinearLayout>
+
+            <com.lzyyd.hsq.ui.CountdownView
+                android:id="@+id/tv_rush_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                app:isHideTimeBackground="false"
+                app:timeBgColor="#FF3C38"
+                app:timeBgSize="11sp"
+                app:timeBgRadius="2dp"
+                app:isShowDay="false"
+                app:isShowHour="true"
+                app:isShowMinute="true"
+                app:isShowSecond="true"
+                app:timeTextColor="#ffffff"
+                app:timeTextSize="11sp"
+                app:isTimeTextBold="true"
+                app:suffixGravity="center"
+                app:suffixTextColor="#FF3C38"
+                app:suffixTextSize="11sp"
+                app:suffixHour=":"
+                app:suffixMinute=":"
+                />
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#E4393C"
+            android:layout_marginTop="20dp"
+            android:text="@{'¥' + String.valueOf(seckill.goodsPrice)}"/>
+
+    </LinearLayout>
+
+    
+    
+</LinearLayout>
+
+
+
+</layout>

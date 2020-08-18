@@ -1,0 +1,136 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="AppTheme.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="CheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox_login_selector</item>
+        <item name="android:paddingLeft">0dp</item>
+<!--        <item name="android:drawableLeft">@drawable/checkbox_login_selector</item>-->
+<!--        <item name="buttonCompat">@null</item>-->
+    </style>
+
+    <style name="CheckBox_forgetpsd" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox_forget_psd_selector</item>
+        <item name="android:paddingLeft">0dp</item>
+        <!--        <item name="android:drawableLeft">@drawable/checkbox_login_selector</item>-->
+<!--        <item name="buttonCompat">@null</item>-->
+    </style>.....
+
+    <declare-styleable name="AdapterView">
+        <!--只能设置在 checkbox 中-->
+        <attr name="setCheckValue" format="boolean"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="CountdownView1">
+        <attr format="boolean" name="isHideTimeBackground"/>
+        <attr format="boolean" name="isShowTimeBgDivisionLine"/>
+        <attr format="color" name="timeBgDivisionLineColor"/>
+        <attr format="dimension" name="timeBgDivisionLineSize"/>
+        <attr format="color" name="timeBgColor"/>
+        <attr format="dimension" name="timeBgSize"/>
+        <attr format="dimension" name="timeBgRadius"/>
+        <attr format="boolean" name="isTimeTextBold"/>
+        <attr format="dimension" name="timeTextSize"/>
+        <attr format="color" name="timeTextColor"/>
+        <attr format="boolean" name="isShowDay"/>
+        <attr format="boolean" name="isShowHour"/>
+        <attr format="boolean" name="isShowMinute"/>
+        <attr format="boolean" name="isShowSecond"/>
+        <attr format="boolean" name="isShowMillisecond"/>
+        <attr format="boolean" name="isShowBg"/>
+        <attr format="boolean" name="isSuffixTextBold"/>
+        <attr format="dimension" name="suffixTextSize"/>
+        <attr format="color" name="suffixTextColor"/>
+        <attr format="string" name="suffix"/>
+        <attr format="string" name="suffixDay"/>
+        <attr format="string" name="suffixHour"/>
+        <attr format="string" name="suffixMinute"/>
+        <attr format="string" name="suffixSecond"/>
+        <attr format="string" name="suffixMillisecond"/>
+        <attr name="suffixGravity">
+            <enum name="top" value="0"/>
+            <enum name="center" value="1"/>
+            <enum name="bottom" value="2"/>
+        </attr>
+        <attr format="dimension" name="suffixLRMargin"/>
+        <attr format="dimension" name="suffixDayLeftMargin"/>
+        <attr format="dimension" name="suffixDayRightMargin"/>
+        <attr format="dimension" name="suffixHourLeftMargin"/>
+        <attr format="dimension" name="suffixHourRightMargin"/>
+        <attr format="dimension" name="suffixMinuteLeftMargin"/>
+        <attr format="dimension" name="suffixMinuteRightMargin"/>
+        <attr format="dimension" name="suffixSecondLeftMargin"/>
+        <attr format="dimension" name="suffixSecondRightMargin"/>
+        <attr format="dimension" name="suffixMillisecondLeftMargin"/>
+    </declare-styleable>
+
+
+    <style name="popwin_anim_style" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/pop_enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/pop_exit_anim</item>
+    </style>
+
+    <style name="recyclerview_srollbar_style">
+        <item name="android:scrollbarThumbHorizontal">@color/black</item>
+        <item name="android:scrollbarTrackVertical">@color/white</item>
+        <item name="android:scrollbarSize">5dp</item>
+        <item name="android:overScrollMode">never</item>
+        <!--        横向显示-->
+        <item name="android:scrollbars">horizontal</item>
+        <item name="android:scrollbarStyle">outsideInset</item>
+        <item name="android:fadeScrollbars">false</item>
+    </style>
+
+
+    <!-- 全局Dialog样式 -->
+    <style name="BaseDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+
+    <style name="AppDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+    </style>
+
+    <!--设置tabLayout字体大小-->
+    <style name="MyCustomTabTextAppearance">
+        <item name="android:textSize">15sp</item>
+    </style>
+
+
+    <style name="headtop_styles">
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="windowNoTitle">true</item><!-- 无标题 -->
+        <item name="android:background">@color/white</item>
+    </style>
+
+
+</resources>

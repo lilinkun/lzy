@@ -1,0 +1,165 @@
+<resources>
+    <string name="app_name">壕省钱</string>
+
+    <string name="bottom_text_1">首页</string>
+    <string name="bottom_text_2">购物车</string>
+    <string name="bottom_text_3">whatup</string>
+    <string name="bottom_text_4">我的</string>
+
+
+    <string name="tv_forget_psd">忘记密码</string>
+    <string name="tv_forget_psd_hint">我们已经发送了验证码到你的手机：</string>
+    <string name="tv_forget_get_vcode">获取验证码</string>
+    <string name="tv_forget_input_vcode">请输入验证码</string>
+    <string name="tv_forget_next">下一步</string>
+    <string name="tv_forget_useless_no">手机不可用?</string>
+    <string name="tv_forget_tip">必须是6-20个字母、数字或符号(除空格)</string>
+    <string name="tv_forget_input_new_psd">输入新密码</string>
+    <string name="tv_forget_sure_new_psd">确认新密码</string>
+    <string name="tv_forget_psd_visible">显示密码</string>
+
+    <string name="tv_register_please">请注册</string>
+    <string name="tv_register_input_phone">请输入你的账号或手机号</string>
+    <string name="tv_register_nickname">请输入2至22位的昵称</string>
+    <string name="tv_register_send_vcode">发送验证码</string>
+    <string name="tv_register_input_vcode">请输入收到的验证码</string>
+    <string name="tv_register_input_psd">请设置6位及以上的密码</string>
+    <string name="tv_register_input_invited">请输入邀请码</string>
+    <string name="tv_register_user_agreement">我已阅读并同意《用户协议》</string>
+    <string name="register_input_phone">请输入手机号码</string>
+
+    <string name="tv_login_please">请登录</string>
+
+    <string name="tv_login">登录</string>
+    <string name="tv_login_forget_psd">忘记密码?</string>
+    <string name="tv_login_register">立即注册 ></string>
+    <string name="tv_login_input_psd">请输入密码</string>
+
+    <string name="iconfont"><html><font color='#FF3637'>&#xe63a;</font><font color='#4C4C4C'>&#xe63b;</font></html></string>
+    <string name="ic_home_calendar">&#xe638;</string>
+    <string name="ic_home_message">&#xe639;</string>
+    <string name="tv_home_rush">&#xe63f;</string>
+    <string name="tv_home_zero_sale"><font color='#333333'>免费0元购</font> <font color='#E61D15'>&#xe632;</font></string>
+    <string name="tv_home_exchange"><font color='#333333'>积分兑换</font> <font color='#E61D15'>&#xe63c;</font></string>
+    <string name="tv_home_vip_sale"><font color='#DE3C31'>&#xe63d;</font> <font color='#333333'>VIP专享</font></string>
+    <string name="tv_sureorder_vip_sale"><font color='#413D37'>&#xe63d;</font>   <font color='#333333'>壕省会员</font></string>
+    <string name="tv_uncollect">&#xe627;</string>
+    <string name="tv_collect">&#xe626;</string>
+    <string name="tv_shopping_cart">&#xe625;</string>
+    <string name="tv_shopping_servicer">&#xe624;</string>
+    <string name="tv_back">&#xe622;</string>
+    <string name="tv_more">&#xe623;</string>
+    <string name="me_all_order">&#xe64b;</string>
+    <string name="me_setting">&#xe641;</string>
+
+
+    <string name="clother_host">人气</string>
+    <string name="moren">默认排序</string>
+    <string name="clother_nestest">抵扣金额</string>
+    <string name="clother_price">价格</string>
+    <string name="clother_top">销量</string>
+
+
+    <!--钱包-->
+    <string name="wallet">钱包</string>
+
+
+    <string name="goods_collect">已收藏</string>
+    <string name="goods_uncollect">收藏</string>
+
+
+    <string name="tv_goods_format">规格</string>
+    <string name="goods_buy_now">立刻购买</string>
+    <string name="goods_add_shoppingcar">加入购物车</string>
+    <string name="modify_sure">确定</string>
+
+    <!--我的-->
+    <string name="me_balance">余额</string>
+    <string name="me_integral">积分</string>
+    <string name="me_order">我的订单</string>
+    <string name="me_coupon">我的地址</string>
+    <string name="me_collection">我的收藏</string>
+    <string name="me_record">浏览记录</string>
+    <string name="me_money">充值金额</string>
+    <string name="me_recommend">推荐好友</string>
+    <string name="me_problem">常见问题</string>
+    <string name="me_opinion">意见反馈</string>
+    <string name="me_customer_service">客服热线</string>
+    <string name="me_about">关于我们</string>
+    <string name="me_search_all">查看全部</string>
+    <string name="me_fans">我的粉丝</string>
+    <string name="me_scan">我的二维码</string>
+    <string name="me_shared_friend">分享给好友</string>
+    <string name="me_bind_card">认证绑卡</string>
+    <string name="me_address">收货地址</string>
+
+    <!--个人信息-->
+    <string name="personal_over">完成</string>
+    <string name="personal_head_face">头像</string>
+    <string name="personal_nickname">昵称</string>
+    <string name="personal_phone">手机号</string>
+    <string name="take_photo">拍摄</string>
+    <string name="system_photo">从相册选择</string>
+    <string name="pay_psd">支付密码</string>
+    <string name="setting_delete_cache">清除缓存</string>
+    <string name="about_app">关于壕省钱</string>
+    <string name="setting_exit_login">退出登录</string>
+    <string name="setting_info">个人信息</string>
+
+
+    <!--购物车-->
+    <string name="shopping_car">购物车</string>
+    <string name="shopping_edit">编辑</string>
+    <string name="actionBar_edit">编辑</string>
+    <string name="all">全选</string>
+    <string name="order_total">合计 :</string>
+    <string name="choose_pay">选择支付方式</string>
+    <string name="pay_zfb">支付宝支付</string>
+    <string name="pay_wx">微信支付</string>
+    <string name="pay_self">余额支付</string>
+    <string name="goods_price">商品价格</string>
+    <string name="use_integral">(剩余积分</string>
+    <string name="uses_integral">所需积分</string>
+    <string name="postage">邮费</string>
+    <string name="total_payable">应付总额</string>
+    <string name="getpay">提交订单</string>
+    <string name="empty_tip">购物车空空如也，快去挑件好货！</string>
+    <string name="go_shopping">前去逛逛</string>
+
+
+    <!--收货地址-->
+    <string name="goods_consignee">收货人</string>
+    <string name="goods_consignee_name">收货人:</string>
+    <string name="goods_order_freight">运费:</string>
+    <string name="goods_phone">手机号</string>
+    <string name="goods_local_address">所在地区</string>
+    <string name="goods_detail_address">详细地址</string>
+    <string name="input_detail_address">请填写详细地址</string>
+    <string name="input_address_phone">请填写手机号码</string>
+    <string name="input_address_consignee">请填写收货人</string>
+    <string name="input_length_limit">收货人长度必须大于2</string>
+    <string name="save">保存</string>
+    <string name="add_goods_address">添加收货地址</string>
+
+
+    <!--收藏-->
+    <string name="collect">收藏</string>
+    <string name="empty_collect_goods">小主，您还没有收藏哦~</string>
+
+
+    <!--充值-->
+    <string name="recharge_account">充值</string>
+    <string name="recharge_sum">充值金额</string>
+
+
+    <string name="goods_add_address">添加地址</string>
+
+
+    <string name="you">有</string>
+    <string name="wu">无</string>
+
+
+    <item name="tag_key_data" type="id"/>
+    <item name="tag_key_position" type="id"/>
+
+</resources>

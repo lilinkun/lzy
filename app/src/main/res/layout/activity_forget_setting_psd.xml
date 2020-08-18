@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+
+        <variable
+            name="forgetpsd"
+            type="com.lzyyd.hsq.viewmodel.ForgetSettingPsdViewModel" />
+
+        <import
+            type="android.view.View" />
+        
+        <variable
+            name="setCheckValue"
+            type="Boolean" />
+
+    </data>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:onClick="@{()->forgetpsd.onBack()}"
+            android:paddingLeft="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_back"
+                android:textColor="@color/black"
+                android:typeface="@{forgetpsd.setTypeFace()}"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/text_commom"
+            android:textSize="18sp"
+            android:text="@string/tv_forget_psd"/>
+
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ff666666"
+        android:textSize="14sp"
+        android:layout_margin="10dp"
+        android:text="@string/tv_forget_tip"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_forget_input_new_psd"
+            android:layout_marginLeft="10dp"
+            android:textColor="#ff333333"
+            android:textSize="16sp"/>
+
+        
+        <EditText
+            android:id="@+id/et_input_new_psd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textColor="#ff333333"
+            android:textSize="16sp"
+            android:inputType="textPassword"
+            android:hint="@string/tv_forget_input_new_psd"
+            android:textColorHint="#ffb2b2b2"
+            android:background="@null"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#b2b2b2"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_forget_sure_new_psd"
+            android:layout_marginLeft="10dp"
+            android:textColor="#ff333333"
+            android:textSize="16sp"/>
+
+
+        <EditText
+            android:id="@+id/et_sure_new_psd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textColor="#ff333333"
+            android:textSize="16sp"
+            android:hint="@string/tv_forget_sure_new_psd"
+            android:textColorHint="#ffb2b2b2"
+            android:inputType="textPassword"
+            android:background="@null"
+            android:layout_marginRight="16dp"
+            />
+
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/cb_forget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="@string/tv_forget_psd_visible"
+        android:textColor="@color/text_common_bg"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="5dp"
+        android:onCheckedChanged="@{(cb, isChecked) ->forgetpsd.setChecked(isChecked)}"
+        style="@style/CheckBox_forgetpsd"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/forget_btn_bg"
+        android:text="@string/tv_forget_next"
+        android:textColor="@color/text_common_bg"
+        android:gravity="center"
+        android:textSize="16sp"
+        />
+</LinearLayout>
+</layout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#003700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <color name="white">#ffffff</color>
+
+    <color name="common_bg">#fbf5ef</color>
+
+    <color name="register_text_hint_bg">#ff9d9d9d</color>
+    <color name="text_common_bg">#ffa37d5f</color>
+
+    <color name="text_label">#ff3c38</color>
+    <color name="main_bg">#fff5f5f5</color>
+    <color name="line_bg">#F2F2F2</color>
+
+
+    <color name="text_default">#999999</color>
+    <color name="setting_title_color">#FF3C38</color>
+
+    <color name="text_222222">#222222</color>
+
+    <color name="text_commom">#282828</color>
+
+    <color name="devide_ededed">#EDEDED</color>
+
+    <!-- 灰色 -->
+    <color name="grey_333333">#333333</color>
+    <color name="grey_color2">#666666</color>
+    <color name="grey_color3">#999999</color>
+
+    <color name="red_e61d15">#E61D15</color>
+    <color name="line_DDDDDD">#DDDDDD</color>
+</resources>

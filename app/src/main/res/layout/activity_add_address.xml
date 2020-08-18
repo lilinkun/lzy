@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="addaddressviewmodel"
+            type="com.lzyyd.hsq.viewmodel.AddAddressViewModel" />
+
+        <variable
+            name="add"
+            type="com.lzyyd.hsq.activity.AddAddressActivity" />
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/rl_address"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/line_bg"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:onClick="@{()->addaddressviewmodel.finish()}"
+                android:paddingLeft="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_back"
+                    android:textColor="@color/black"
+                    android:typeface="@{addaddressviewmodel.setTypeFace()}"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/text_commom"
+                android:textSize="18sp"
+                android:text="@string/add_goods_address"/>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:clickable="true"
+                android:onClick="@{()->add.saveClick()}"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/save"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:layout_marginRight="@dimen/margin_10"
+                    />
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/ll_add_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line_bg"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_15"
+                android:textSize="@dimen/textsize14"
+                android:layout_weight="1"
+                android:textColor="@color/grey_color3"
+                android:text="@string/goods_consignee" />
+
+            <EditText
+                android:id="@+id/et_address_consignee"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3.5"
+                android:background="@null"
+                android:maxLength="15"
+                android:text="@={add.AddressName}"
+                android:hint="最少2个字符,最多15个字符"
+                android:textColor="@color/grey_333333"
+                android:textSize="@dimen/textsize14" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line_bg"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_15"
+                android:layout_weight="1"
+                android:textSize="@dimen/textsize14"
+                android:textColor="@color/grey_color3"
+                android:text="@string/goods_phone" />
+
+            <EditText
+                android:id="@+id/et_address_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3.5"
+                android:background="@null"
+                android:inputType="phone"
+                android:hint="@string/register_input_phone"
+                android:textColor="@color/grey_333333"
+                android:text="@={add.AddressMobile}"
+                android:maxLength="11"
+                android:textSize="@dimen/textsize14" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line_bg"/>
+        <LinearLayout
+            android:id="@+id/ll_province"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_15"
+                android:layout_weight="1"
+                android:textSize="@dimen/textsize14"
+                android:textColor="@color/grey_color3"
+                android:text="@string/goods_local_address" />
+
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3.5">
+
+                <TextView
+                    android:id="@+id/tv_local_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/margin_25"
+                    android:textSize="@dimen/textsize16"
+                    android:textColor="@color/grey_333333"
+                    android:layout_centerVertical="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/margin_10"
+                    android:text="@string/tv_more"
+                    android:typeface="@{addaddressviewmodel.setTypeFace()}"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line_bg"/>
+        <LinearLayout
+            android:id="@+id/ll_address_details"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_15"
+                android:layout_weight="1"
+                android:textSize="@dimen/textsize14"
+                android:textColor="@color/grey_color3"
+                android:text="@string/goods_detail_address" />
+
+            <EditText
+                android:id="@+id/et_address_details"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3.5"
+                android:background="@null"
+                android:textColor="@color/grey_333333"
+                android:hint="请输入收件人的详细地址"
+                android:text="@={add.AddressStr}"
+                android:textSize="@dimen/textsize14"/>
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line_bg"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:gravity="center_vertical"
+        android:background="@color/white"
+        android:layout_marginTop="@dimen/margin_20"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_15"
+            android:layout_weight="1"
+            android:textColor="@color/grey_333333"
+            android:text="设为默认地址" />
+
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3">
+
+            <Switch
+                android:id="@+id/switch_turn"
+                android:layout_width="44dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:textOn=""
+                android:textOff=""
+                android:switchMinWidth="43dp"
+                android:thumbTextPadding="1dp"
+                android:layout_marginRight="@dimen/margin_10" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>
+
+</layout>

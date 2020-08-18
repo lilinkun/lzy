@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="register"
+            type="com.lzyyd.hsq.viewmodel.RegisterViewModel" />
+
+
+    </data>
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@mipmap/ic_register_bg">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="215dp"
+        android:layout_above="@+id/ll_register"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_register_face"/>
+
+    <ImageView
+        android:id="@+id/iv_welcome"
+        android:layout_width="129.8dp"
+        android:layout_height="42dp"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/ic_register_welcome"/>
+    
+    
+    <LinearLayout
+        android:id="@+id/ll_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginBottom="60dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:background="@drawable/ic_register_frame">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="37dp"
+            android:text="@string/tv_register_please"
+            android:textColor="@color/grey_333333"
+            android:textSize="20sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp">
+
+            <ImageView
+                android:id="@+id/iv_register_account"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/ic_register_account"/>
+
+            <EditText
+                android:id="@+id/et_input_phone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:textSize="13sp"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_register_account"
+                android:textColorHint="@color/register_text_hint_bg"
+                android:textColor="@color/grey_333333"
+                android:text="@={register.mobileStr}"
+                android:hint="@string/tv_register_input_phone"/>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/text_common_bg"
+                android:layout_alignParentBottom="true"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_vcode"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:orientation="horizontal"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp">
+
+            <ImageView
+                android:id="@+id/ic_vcode"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/ic_register_vcode"/>
+
+            <TextView
+                android:id="@+id/tv_send_vcode"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="3dp"
+                android:layout_centerVertical="true"
+                android:textSize="13sp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:textColor="@color/text_common_bg"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:onClick="@{()->register.sendVCode()}"
+                android:background="@drawable/shape_register_btn"
+                android:text="@string/tv_register_send_vcode"/>
+
+            <EditText
+                android:id="@+id/et_input_vcode"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/ic_vcode"
+                android:layout_toLeftOf="@+id/tv_send_vcode"
+                android:textSize="13sp"
+                android:layout_centerVertical="true"
+                android:textColorHint="@color/register_text_hint_bg"
+                android:textColor="@color/grey_333333"
+                android:text="@={register.vcodeStr}"
+                android:hint="@string/tv_register_input_vcode"/>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/text_common_bg"
+                android:layout_toLeftOf="@+id/tv_send_vcode"
+                android:layout_marginRight="5dp"
+                android:layout_alignParentBottom="true"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp">
+
+            <ImageView
+                android:id="@+id/iv_register_nick"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:padding="6.5dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_register_nickname"/>
+
+            <EditText
+                android:id="@+id/et_input_nick"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:textSize="13sp"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_register_nick"
+                android:textColorHint="@color/register_text_hint_bg"
+                android:textColor="@color/grey_333333"
+                android:text="@={register.nicknameStr}"
+                android:hint="@string/tv_register_nickname"/>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/text_common_bg"
+                android:layout_alignParentBottom="true"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp">
+
+            <ImageView
+                android:id="@+id/iv_register_psd"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/ic_register_psd"/>
+
+            <EditText
+                android:id="@+id/et_input_psd"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:textSize="13sp"
+                android:inputType="textPassword"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_register_psd"
+                android:textColorHint="@color/register_text_hint_bg"
+                android:textColor="@color/grey_333333"
+                android:text="@={register.passwordStr}"
+                android:hint="@string/tv_register_input_psd"/>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/text_common_bg"
+                android:layout_alignParentBottom="true"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp">
+
+            <ImageView
+                android:id="@+id/iv_register_invited"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/ic_register_invited"/>
+
+            <EditText
+                android:id="@+id/et_input_invited"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:textSize="13sp"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_register_invited"
+                android:textColorHint="@color/register_text_hint_bg"
+                android:textColor="@color/grey_333333"
+                android:text="@={register.invitedStr}"
+                android:hint="@string/tv_register_input_invited"/>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/text_common_bg"
+                android:layout_alignParentBottom="true"
+                />
+        </RelativeLayout>
+
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="60dp"
+            android:paddingLeft="3dp"
+            android:textColor="@color/text_common_bg"
+            style="@style/CheckBox_forgetpsd"
+            android:onCheckedChanged="@{(cb, isChecked) ->register.setChecked(isChecked)}"
+            android:text="@string/tv_register_user_agreement"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_next"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:onClick="@{()->register.clickRegister()}"
+        android:background="@drawable/register_circle_next"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_register_arrow"/>
+
+    </LinearLayout>
+    
+    
+
+</RelativeLayout>
+
+
+</layout>

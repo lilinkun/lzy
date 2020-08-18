@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lzyyd.hsq">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.DEVICE_POWER"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:name=".base.ProApplication"
+        android:usesCleartextTraffic="true"
+        android:theme="@style/AppTheme">
+        <activity android:name="com.lzyyd.hsq.activity.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.lzyyd.hsq.activity.MainActivity"/>
+        <activity android:name="com.lzyyd.hsq.activity.RegisterActivity"/>
+        <activity android:name="com.lzyyd.hsq.activity.ForgetPasswordActivity"/>
+        <activity android:name="com.lzyyd.hsq.activity.ForgetSettingPsdActivity"/>
+        <activity android:name="com.lzyyd.hsq.activity.SeckillActivity"/>
+        <activity android:name="com.lzyyd.hsq.activity.GoodsDetailActivity"/>
+        <activity android:name="com.lzyyd.hsq.activity.GoodsListActivity"/>
+        <activity android:name="com.lzyyd.hsq.activity.WebViewActivity"/>
+        <activity android:name="com.lzyyd.hsq.activity.IntegralActivity"/>
+        <activity android:name="com.lzyyd.hsq.activity.PersonalInfoActivity"/>
+        <activity android:name="com.lzyyd.hsq.activity.WalletActivity"/>
+        <activity android:name="com.lzyyd.hsq.activity.CollectGoodsActivity"/>
+        <activity android:name="com.lzyyd.hsq.activity.GetCashActivity"/>
+        <activity android:name="com.lzyyd.hsq.activity.RechargeActivity"/>
+        <activity android:name="com.lzyyd.hsq.activity.OrderListActivity"/>
+        <activity android:name="com.lzyyd.hsq.activity.MyQrcodeActivity"/>
+        <activity android:name="com.lzyyd.hsq.activity.AddressListActivity"/>
+        <activity android:name="com.lzyyd.hsq.activity.AddAddressActivity"/>
+        <activity android:name="com.lzyyd.hsq.activity.ShoppingcartActivity"/>
+        <activity android:name="com.lzyyd.hsq.activity.SureOrderActivity"/>
+
+
+    </application>
+
+</manifest>

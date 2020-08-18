@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="me"
+            type="com.lzyyd.hsq.viewmodel.MeViewModel" />
+
+    </data>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_sure_order_address"
+    android:paddingLeft="@dimen/padding_15"
+    android:paddingRight="@dimen/padding_15"
+    android:layout_marginTop="@dimen/margin_10"
+    android:layout_marginLeft="@dimen/margin_10"
+    android:layout_marginRight="@dimen/margin_10"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_my_all_order"
+        android:layout_width="match_parent"
+        android:onClick="@{()->me.setJumpOrderlist(0)}"
+        android:layout_height="44dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textsize14"
+            android:textColor="@color/grey_333333"
+            android:layout_centerVertical="true"
+            android:text="@string/me_order"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_more"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin_10"
+            android:typeface="@{me.setTypeFace()}"
+            />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_bg"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ll_me_order"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="@{()->me.setJumpOrderlist(0)}"
+            android:orientation="vertical"
+            android:gravity="center">
+
+
+            <com.lzyyd.hsq.ui.NumImageView
+                android:id="@+id/nim_all_order"
+                android:layout_width="45dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="@dimen/margin_10"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:src="@drawable/ic_me_all_order"
+                app:num="@{me.OrderAllNum}"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="全部"
+                android:textSize="@dimen/textsize12"
+                android:textColor="@color/grey_333333"
+                android:layout_marginBottom="@dimen/margin_20"
+                android:layout_marginTop="@dimen/margin_5"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_wait_pay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="@{()->me.setJumpOrderlist(1)}"
+            android:orientation="vertical"
+            android:gravity="center">
+
+
+            <com.lzyyd.hsq.ui.NumImageView
+                android:layout_width="45dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="@dimen/margin_10"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:src="@drawable/ic_me_wait_getcash"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="待付款"
+                android:textSize="@dimen/textsize12"
+                android:textColor="@color/grey_333333"
+                android:layout_marginBottom="@dimen/margin_20"
+                android:layout_marginTop="@dimen/margin_5"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_wait_deliver"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="@{()->me.setJumpOrderlist(2)}"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <com.lzyyd.hsq.ui.NumImageView
+                android:layout_width="45dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="@dimen/margin_10"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:src="@drawable/ic_me_wait_get_goods"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="待发货"
+                android:textSize="@dimen/textsize12"
+                android:textColor="@color/grey_333333"
+                android:layout_marginBottom="@dimen/margin_20"
+                android:layout_marginTop="@dimen/margin_5"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_wait_receiver"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="@{()->me.setJumpOrderlist(3)}"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <com.lzyyd.hsq.ui.NumImageView
+                android:layout_width="45dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="@dimen/margin_10"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:src="@drawable/ic_me_wait_goods"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="待收货"
+                android:textSize="@dimen/textsize12"
+                android:textColor="@color/grey_333333"
+                android:layout_marginBottom="@dimen/margin_20"
+                android:layout_marginTop="@dimen/margin_5"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_after_sale"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="@{()->me.setJumpOrderlist(4)}"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <com.lzyyd.hsq.ui.NumImageView
+                android:layout_width="45dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="@dimen/margin_10"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:src="@drawable/ic_me_successful_trade" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="交易成功"
+                android:textSize="@dimen/textsize12"
+                android:textColor="@color/grey_333333"
+                android:layout_marginBottom="@dimen/margin_20"
+                android:layout_marginTop="@dimen/margin_5"
+                />
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
+</layout>
