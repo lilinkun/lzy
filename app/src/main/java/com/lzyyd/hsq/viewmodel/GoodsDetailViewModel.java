@@ -147,6 +147,44 @@ public class GoodsDetailViewModel extends BaseViewModel<DataRepository> {
                 });
     }
 
+
+    public void getKey(String GoodsId, String AttrId, String Num, String SessionId){
+        HashMap<String, String> params = new HashMap<>();
+        params.put("cls", "OrderInfo");
+        params.put("fun", "BuyRedis");
+        params.put("GoodsId", GoodsId);
+        if (AttrId.equals("")){
+            AttrId = "0";
+        }
+        params.put("attr_id", AttrId);
+        params.put("Num", Num);
+        params.put("SessionId", SessionId);
+        model.addCart(params)
+                .compose(RxUtils.schedulersTransformer())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>(){
+                    @Override
+                    public void accept(Disposable disposable){
+                        showDialog();
+                    }
+                })
+                .subscribe(new HttpResultCallBack<String, Object>() {
+                    @Override
+                    public void onResponse(String collectBeans, String status, Object page) {
+                        dismissDialog();
+                        goodsDetailDataCallBack.SureOrderSuccess(collectBeans);
+
+                    }
+
+                    @Override
+                    public void onErr(String msg, String status) {
+                        dismissDialog();
+                        goodsDetailDataCallBack.SureOrderFail(msg);
+                    }
+                });
+    }
+
     public void jumpShoppingCart(){
         startActivity(ShoppingcartActivity.class);
     }
@@ -163,6 +201,8 @@ public class GoodsDetailViewModel extends BaseViewModel<DataRepository> {
         public void getClickPop();
         public void addCartSuccess(String msg);
         public void addCartFail(String msg);
+        public void SureOrderSuccess(String msg);
+        public void SureOrderFail(String msg);
         public void sureOrder();
     }
 

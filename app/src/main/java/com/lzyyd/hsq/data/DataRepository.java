@@ -8,6 +8,7 @@ import com.lzyyd.hsq.bean.GoodsDetailInfoBean;
 import com.lzyyd.hsq.bean.GoodsListBean;
 import com.lzyyd.hsq.bean.LocalBean;
 import com.lzyyd.hsq.bean.LoginBean;
+import com.lzyyd.hsq.bean.OrderinfoBean;
 import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.bean.ResultBean;
 import com.lzyyd.hsq.bean.UrlBean;
@@ -131,5 +132,10 @@ public class DataRepository extends BaseModel implements HttpDataSource, LocalDa
     //增加收货地址
     public Observable<ResultBean<AddressBean,String>> getSaveAddress(HashMap<String, String> mHashMap) {
         return mHttpDataSource.getSaveAddress(mHashMap);
+    }
+
+    //获取订单详情
+    public Observable<ResultBean<OrderinfoBean,String>> OrderInfoBuyGet(HashMap<String, String> mHashMap) {
+        return mHttpDataSource.OrderInfoBuyGet(mHashMap);
     }
 }

@@ -8,6 +8,7 @@ import com.lzyyd.hsq.bean.GoodsDetailInfoBean;
 import com.lzyyd.hsq.bean.GoodsListBean;
 import com.lzyyd.hsq.bean.LocalBean;
 import com.lzyyd.hsq.bean.LoginBean;
+import com.lzyyd.hsq.bean.OrderinfoBean;
 import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.bean.ResultBean;
 import com.lzyyd.hsq.bean.UrlBean;
@@ -101,6 +102,11 @@ public class HttpDataSourceImpl implements HttpDataSource {
     @Override
     public Observable<ResultBean<AddressBean,String>> getSaveAddress(HashMap<String, String> hashMap) {
         return apiService.getSaveAddress(hashMap);
+    }
+
+    @Override
+    public Observable<ResultBean<OrderinfoBean,String>> OrderInfoBuyGet(HashMap<String, String> hashMap) {
+        return apiService.OrderInfoBuyGet(hashMap);
     }
 
 }

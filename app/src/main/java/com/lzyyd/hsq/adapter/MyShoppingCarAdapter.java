@@ -418,11 +418,11 @@ public class MyShoppingCarAdapter extends BaseExpandableListAdapter {
         @BindView(R.id.goods_data)
         RelativeLayout goodsData;
         @BindView(R.id.reduce_goodsNum)
-        ImageView reduceGoodsNum;
-        @BindView(R.id.goods_Num)
+        TextView reduceGoodsNum;
+        @BindView(R.id.tv_goods_count)
         TextView goodsNum;
         @BindView(R.id.increase_goods_Num)
-        ImageView increaseGoodsNum;
+        TextView increaseGoodsNum;
 
         public ChildViewHolder(View view) {
             ButterKnife.bind(this, view);

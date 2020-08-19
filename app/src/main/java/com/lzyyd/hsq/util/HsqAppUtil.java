@@ -42,6 +42,7 @@ public class HsqAppUtil {
     public static final String RIGHTNOWBUYBEAN = "RightNowBuyBean";
     public static final String GOODSNUM = "GoodsNum";
     public static final String ATTRID = "attr_id";
+    public static final String KEY = "KEY";
     public static final String ORDERID = "orderid";
     public static final String ORDERAMOUNT = "orderamount";
     public static final String CATID = "catid";

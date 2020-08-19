@@ -7,6 +7,10 @@
         <variable
             name="sureorder"
             type="com.lzyyd.hsq.viewmodel.SureOrderViewModel" />
+        <variable
+            name="address"
+            type="com.lzyyd.hsq.bean.AddressBean" />
+
     </data>
 
 <RelativeLayout
@@ -52,24 +56,24 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="20dp"
-                            android:text="湖南省长沙市开福区渔业路"
+                            android:layout_margin="@dimen/margin_10"
+                            android:text="@{address.addressName}"
                             android:textColor="#ff999999"
                             android:textSize="13sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:text="万国城二期一单元一栋106"
+                            android:layout_marginLeft="@dimen/margin_10"
+                            android:text="@{address.address}"
                             android:textColor="#ff333333"
                             android:textSize="18sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="20dp"
-                            android:text="某某某  18525847859"
+                            android:layout_margin="@dimen/margin_10"
+                            android:text="@{address.name+' ' + address.mobile}"
                             android:textColor="#ff666666"
                             android:textSize="14sp" />
 

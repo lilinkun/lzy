@@ -7,10 +7,6 @@
     <data>
 
         <variable
-            name="seckillItemViewModel"
-            type="com.lzyyd.hsq.viewmodel.SeckillItemViewModel"/>
-
-        <variable
             name="seckill"
             type="com.lzyyd.hsq.bean.SeckillGoodsBean"/>
     </data>

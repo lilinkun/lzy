@@ -7,7 +7,11 @@
 
         <variable
             name="orders"
-            type="com.lzyyd.hsq.bean.CartBean" />
+            type="com.lzyyd.hsq.bean.OrderInfoBuyListBean" />
+
+        <variable
+            name="sureadapter"
+            type="com.lzyyd.hsq.adapter.SureOrderAdapter" />
 
     </data>
 
@@ -35,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="7dp"
-                android:text="绿之韵店铺"
+                android:text="@{orders.storeName}"
                 android:textColor="#ff333333"
                 android:textSize="15sp" />
 
@@ -48,6 +52,7 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_goods_orders"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -80,12 +85,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="剩余800积分"
+                    android:text='@{"剩余" + String.valueOf(orders.Integral) + "积分"}'
                     android:textColorHint="#ff999999"
                     android:textSize="12sp"
                     android:layout_marginLeft="@dimen/margin_15"
                     />
-
 
             </LinearLayout>
 
@@ -93,6 +97,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:gravity="center_vertical"
                 android:layout_marginRight="@dimen/margin_10"
                 android:orientation="horizontal"
@@ -111,6 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/tv_more"
+                    android:typeface="@{sureadapter.setTypeFace()}"
                     />
 
 
@@ -205,6 +211,38 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/devide_ededed"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="商品小计"
+                android:layout_centerVertical="true"
+                android:textColor="#ff333333"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/margin_10"
+                android:text="@{'¥' + String.valueOf(orders.goodsAmount)}"
+                android:textColor="@color/red_e61d15"
+                android:textSize="14sp"
+                android:layout_marginLeft="@dimen/margin_15"
+                />
+
+        </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
@@ -231,7 +269,7 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/margin_10"
-                android:text="¥ 655840.2"
+                android:text="@{'¥' + String.valueOf(orders.orderAmount)}"
                 android:textColor="@color/red_e61d15"
                 android:textSize="14sp"
                 android:layout_marginLeft="@dimen/margin_15"

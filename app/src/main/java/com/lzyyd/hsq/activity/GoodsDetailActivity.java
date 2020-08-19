@@ -46,6 +46,9 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
     private GoodsDetailInfoBean<ArrayList<GoodsChooseBean>> goodsDetailBean;
     private int type = 0;
     private PopupWindow popupWindow;
+    private GoodsDetailInfoBean selfGoodsBean;
+    private int num = 1;
+    private String attr_id = "0";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -113,10 +116,10 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         if (popupWindow != null && popupWindow.isShowing()) {
             popupWindow.dismiss();
         }
-        String attr_id = "";
         if (goodsChooseBean != null  && goodsChooseBean.getAttr_id() != 0) {
             attr_id = String.valueOf(goodsChooseBean.getAttr_id());
         }
+        this.num = num;
         viewModel.addCartinterf(goodsDetailBean.getGoodsId(), attr_id + "", num + "", ProApplication.SESSIONID());
     }
 
@@ -130,18 +133,18 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         if (popupWindow != null && popupWindow.isShowing()) {
             popupWindow.dismiss();
         }
+
+        this.selfGoodsBean = selfGoodsBean;
+
         String attr_id = "";
         if (goodsChooseBean != null) {
             attr_id = String.valueOf(goodsChooseBean.getAttr_id());
         }
+
+
+        viewModel.getKey(goodsDetailBean.getGoodsId(), goodsDetailBean.getAttr() + "",   num+"", ProApplication.SESSIONID());
 //        this.goodsChooseBean = goodsChooseBean;
 //        this.num = num + "";
-
-        Bundle bundle = new Bundle();
-        bundle.putString(HsqAppUtil.GOODSID, selfGoodsBean.getGoodsId());
-        bundle.putInt(HsqAppUtil.GOODSNUM, Integer.valueOf(num));
-        bundle.putString(HsqAppUtil.ATTRID, attr_id);
-        startActivity(SureOrderActivity.class,bundle);
 
 
     }
@@ -246,6 +249,21 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
     }
 
     @Override
+    public void SureOrderSuccess(String msg) {
+        Bundle bundle = new Bundle();
+        bundle.putString(HsqAppUtil.GOODSID, selfGoodsBean.getGoodsId());
+        bundle.putInt(HsqAppUtil.GOODSNUM, Integer.valueOf(num));
+        bundle.putString(HsqAppUtil.ATTRID, attr_id);
+        bundle.putString(HsqAppUtil.KEY, msg);
+        startActivity(SureOrderActivity.class,bundle);
+    }
+
+    @Override
+    public void SureOrderFail(String msg) {
+
+    }
+
+    @Override
     public void sureOrder() {
         if (goodsDetailBean != null && Integer.valueOf(goodsDetailBean.getGoodsNumber()) == 0) {
             UToast.show(this,"库存不足，无法下单");
@@ -256,10 +274,6 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
                 }
             } else {
                 if (goodsDetailBean.getQty() == 0) {
-
-                    mRightNowBuy(goodsDetailBean, null, 1);
-
-                }else {
                     getpopup();
                 }
             }

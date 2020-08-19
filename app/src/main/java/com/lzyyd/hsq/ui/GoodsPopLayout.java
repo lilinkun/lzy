@@ -120,6 +120,7 @@ public class GoodsPopLayout extends RelativeLayout implements View.OnClickListen
         tv_add_cart.setOnClickListener(this);
         iv_popup_exit.setOnClickListener(this);
         tv_buy_goods.setOnClickListener(this);
+        tv_buy_goods.setOnClickListener(this);
         tv_goods_count.setOnClickListener(this);
 
         this.addView(view);
