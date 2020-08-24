@@ -17,22 +17,20 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/bg_sure_order_address">
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        lzy:cardBackgroundColor="@android:color/white"
+        lzy:cardCornerRadius="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            lzy:cardBackgroundColor="@android:color/white"
-            lzy:cardCornerRadius="5dp">
 
             <com.lzyyd.hsq.ui.CustomRoundAngleImageView
                 android:id="@+id/iv_goods_pic"
@@ -43,12 +41,9 @@
                 android:adjustViewBounds="true"
                 lzy:image="@{resImgId}"
                 lzy:left_top_radius="5dp"
-                lzy:right_top_radius="5dp"
-                lzy:right_bottom_radius="5dp"
-                lzy:left_bottom_radius="5dp"/>
+                lzy:right_top_radius="5dp"/>
 
 
-        </androidx.cardview.widget.CardView>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -62,7 +57,6 @@
                 android:id="@+id/tv_goods_title_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="50dp"
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:textColor="#212121"
@@ -99,8 +93,7 @@
                     android:id="@+id/ll_buy_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/ll_price"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="@dimen/margin_5"
                     android:orientation="horizontal">
 
 
@@ -131,6 +124,7 @@
         </RelativeLayout>
     </LinearLayout>
 
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>
 </layout>

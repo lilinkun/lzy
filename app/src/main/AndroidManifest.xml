@@ -27,7 +27,7 @@
         android:name=".base.ProApplication"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.lzyyd.hsq.activity.LoginActivity">
+        <activity android:name="com.lzyyd.hsq.activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,6 +35,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activity.LoginActivity"/>
         <activity android:name="com.lzyyd.hsq.activity.MainActivity"/>
         <activity android:name="com.lzyyd.hsq.activity.RegisterActivity"/>
         <activity android:name="com.lzyyd.hsq.activity.ForgetPasswordActivity"/>
@@ -55,6 +56,8 @@
         <activity android:name="com.lzyyd.hsq.activity.AddAddressActivity"/>
         <activity android:name="com.lzyyd.hsq.activity.ShoppingcartActivity"/>
         <activity android:name="com.lzyyd.hsq.activity.SureOrderActivity"/>
+        <activity android:name="com.lzyyd.hsq.activity.VipActivity"/>
+        <activity android:name="com.lzyyd.hsq.activity.ChuangkeActivity"/>
 
 
     </application>

@@ -51,6 +51,8 @@
     <string name="tv_more">&#xe623;</string>
     <string name="me_all_order">&#xe64b;</string>
     <string name="me_setting">&#xe641;</string>
+    <string name="tv_coin">&#xe63c;</string>
+    <string name="tv_shared">&#xe655;</string>
 
 
     <string name="clother_host">人气</string>
@@ -109,7 +111,7 @@
 
     <!--购物车-->
     <string name="shopping_car">购物车</string>
-    <string name="shopping_edit">编辑</string>
+    <string name="shopping_edit">管理</string>
     <string name="actionBar_edit">编辑</string>
     <string name="all">全选</string>
     <string name="order_total">合计 :</string>

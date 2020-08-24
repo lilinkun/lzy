@@ -3,6 +3,8 @@ package com.lzyyd.hsq.http;
 import com.lzyyd.hsq.bean.AddressBean;
 import com.lzyyd.hsq.bean.CartBean;
 import com.lzyyd.hsq.bean.CartListBean;
+import com.lzyyd.hsq.bean.CategoryBean;
+import com.lzyyd.hsq.bean.CollectBean;
 import com.lzyyd.hsq.bean.GoodsChooseBean;
 import com.lzyyd.hsq.bean.GoodsDetailInfoBean;
 import com.lzyyd.hsq.bean.GoodsListBean;
@@ -40,6 +42,11 @@ public interface RetrofitService {
     @POST("Api/")
     Observable<ResultBean<ArrayList<GoodsListBean>, PageBean>> getGoodsListVip(@FieldMap Map<String, String> params);
 
+
+    @FormUrlEncoded
+    @POST("Api/")
+    Observable<ResultBean<ArrayList<CategoryBean>, PageBean>> getCategoryListVip(@FieldMap Map<String, String> params);
+
     @FormUrlEncoded
     @POST("Api/")
     Observable<ResultBean<GoodsDetailInfoBean<ArrayList<GoodsChooseBean>>, String>> getGoodsDetail(@FieldMap Map<String, String> params);
@@ -75,6 +82,18 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("Api/")
     Observable<ResultBean<OrderinfoBean,String>> OrderInfoBuyGet(@FieldMap Map<String, String> params);
+
+    @FormUrlEncoded
+    @POST("Api/")
+    Observable<ResultBean<CollectBean,String>> modifyOrder(@FieldMap Map<String, String> params);
+
+    @FormUrlEncoded
+    @POST("Api/")
+    Observable<ResultBean<String,Object>> deleteGoods(@FieldMap Map<String, String> params);
+
+    @FormUrlEncoded
+    @POST("Api/")
+    Observable<ResultBean<String,String>> OrderSaveRedis(@FieldMap Map<String, String> params);
 
 
 }

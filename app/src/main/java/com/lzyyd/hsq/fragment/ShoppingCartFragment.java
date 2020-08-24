@@ -1,22 +1,28 @@
 package com.lzyyd.hsq.fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.TextView;
 
 import com.lzyyd.hsq.BR;
 import com.lzyyd.hsq.R;
+import com.lzyyd.hsq.activity.SureOrderActivity;
 import com.lzyyd.hsq.adapter.MyShoppingCarAdapter;
+import com.lzyyd.hsq.adapter.SureOrderAdapter;
 import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseFragment;
 import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.CartBean;
 import com.lzyyd.hsq.bean.CartChildBean;
 import com.lzyyd.hsq.bean.CartListBean;
+import com.lzyyd.hsq.bean.CollectBean;
 import com.lzyyd.hsq.bean.OrderGroupBean;
 import com.lzyyd.hsq.databinding.FragmentGoodsCartBinding;
+import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.ShoppingcartViewModel;
 
@@ -27,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.ViewModelProviders;
 
 /**
@@ -35,9 +42,15 @@ import androidx.lifecycle.ViewModelProviders;
  */
 public class ShoppingCartFragment extends BaseFragment<FragmentGoodsCartBinding, ShoppingcartViewModel> implements ShoppingcartViewModel.CartCallback, MyShoppingCarAdapter.CheckInterface, MyShoppingCarAdapter.ModifyCountInterface {
 
+    private MyShoppingCarAdapter myShoppingCarAdapter;
     Map<String,ArrayList<CartChildBean>> map = new HashMap<>();
     private ArrayList<OrderGroupBean<ArrayList<CartBean>>> orderListBeans;
-    private MyShoppingCarAdapter myShoppingCarAdapter;
+    private double mtotalPrice = 0.00;
+    private int mtotalCount = 0;
+    private int totalgoods = 0;
+    private CartChildBean orderBean;
+    //false就是编辑，ture就是管理
+    private boolean flag = false;
 
     @Override
     public int initVariableId() {
@@ -63,7 +76,9 @@ public class ShoppingCartFragment extends BaseFragment<FragmentGoodsCartBinding,
 
     @Override
     public void initData() {
-        viewModel.getGoodsCartList(ProApplication.SESSIONID(),this);
+        binding.setGopay("结算");
+        viewModel.setCallBack(this);
+        viewModel.getGoodsCartList(ProApplication.SESSIONID());
     }
 
     @Override
@@ -90,10 +105,16 @@ public class ShoppingCartFragment extends BaseFragment<FragmentGoodsCartBinding,
                     orderChildBean.setParentId(orderListBean.getStoreId());
                     orderChildBeans.add(orderChildBean);
                     map.put(orderListBean.getStoreId(), orderChildBeans);
+
+                    totalgoods = totalgoods + orderBean.getNum();
+
                 }
                 orderGroupBeans.add(orderGroupBean);
                 this.orderListBeans = orderGroupBeans;
             }
+
+            binding.setTotalgoods("总共" + totalgoods + "件宝贝");
+
             myShoppingCarAdapter = new MyShoppingCarAdapter(orderGroupBeans, map, getActivity(), getActivity());
             binding.listView.setAdapter(myShoppingCarAdapter);
             myShoppingCarAdapter.setCheckInterface(this);
@@ -125,6 +146,7 @@ public class ShoppingCartFragment extends BaseFragment<FragmentGoodsCartBinding,
                     }
                 }
             });
+
         }
 
     }
@@ -134,52 +156,248 @@ public class ShoppingCartFragment extends BaseFragment<FragmentGoodsCartBinding,
         UToast.show(getActivity(),msg);
     }
 
+    @Override
+    public void SureOrderSuccess(String msg) {
+
+        Bundle bundle = new Bundle();
+        bundle.putString(HsqAppUtil.KEY,msg);
+        startActivity(SureOrderActivity.class,bundle);
+    }
+
+    @Override
+    public void SureOrderFail(String msg) {
+        UToast.show(getActivity(),msg);
+    }
+
+    @Override
+    public void deleteGoodsSuccess(String msg) {
+        UToast.show(getActivity(),"删除成功");
+        calulate();
+    }
+
+    @Override
+    public void deleteGoodsFail(String msg) {
+        UToast.show(getActivity(),"删除失败");
+    }
+
+    @Override
+    public void allClick() {
+        doCheckAll();
+    }
+
+    @Override
+    public void editClick() {
+        flag = !flag;
+        if (flag) {
+            binding.orderInfo.setVisibility(View.GONE);
+            binding.shareInfo.setVisibility(View.VISIBLE);
+            binding.tvCartEdit.setText("完成");
+            binding.goPay.setVisibility(View.GONE);
+        } else {
+            binding.orderInfo.setVisibility(View.VISIBLE);
+            binding.shareInfo.setVisibility(View.GONE);
+            binding.goPay.setVisibility(View.VISIBLE);
+            binding.tvCartEdit.setText("管理");
+        }
+    }
+
+    @Override
+    public void modifyOrderSuccess(CollectBean collectBean, int num, View view,int total) {
+        if (collectBean.getStatus() != 0){
+            UToast.show(getActivity(),collectBean.getMessage());
+        }else {
+            orderBean.getOrderBean().setNum(num);
+            ((TextView) view).setText(String.valueOf(num));
+            myShoppingCarAdapter.notifyDataSetChanged();
+            calulate();
+        }
+    }
+
+    @Override
+    public void cartPay() {
+
+        if (mtotalCount == 0) {
+            UToast.show(getActivity(), "请选择要支付的商品");
+            return;
+        }
+
+        viewModel.getKey(getOrderList(),ProApplication.SESSIONID());
+
+    }
+
+    @Override
+    public void cartDel() {
+        if (mtotalCount == 0) {
+            UToast.show(getActivity(), "请选择要删除的商品");
+            return;
+        }
+        AlertDialog dialog = new AlertDialog.Builder(getActivity()).create();
+        dialog.setMessage("确认要删除该商品吗?");
+        dialog.setButton(DialogInterface.BUTTON_POSITIVE, "确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                doDelete();
+            }
+        });
+        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+            }
+        });
+        dialog.show();
+    }
+
     /**
-     * 全选和反选
-     * 错误标记：在这里出现过错误
+     * 删除操作
+     * 1.不要边遍历边删除,容易出现数组越界的情况
+     * 2.把将要删除的对象放进相应的容器中，待遍历完，用removeAll的方式进行删除
      */
-    private void doCheckAll() {
+    private void doDelete() {
+        String deleteStr = "";
+        List<OrderGroupBean> toBeDeleteGroups = new ArrayList<OrderGroupBean>(); //待删除的组元素
         for (int i = 0; i < orderListBeans.size(); i++) {
             OrderGroupBean group = orderListBeans.get(i);
-            group.setChoosed(binding.allCheckBox.isChecked());
+            if (group.isChoosed()) {
+                toBeDeleteGroups.add(group);
+            }
+            List<CartChildBean> toBeDeleteChilds = new ArrayList<CartChildBean>();//待删除的子元素
             List<CartChildBean> child = map.get(group.getOrderListBean().getStoreId());
             for (int j = 0; j < child.size(); j++) {
-                child.get(j).setChoosed(binding.allCheckBox.isChecked());//这里出现过错误
+                if (child.get(j).isChoosed()) {
+                    toBeDeleteChilds.add(child.get(j));
+                    if (deleteStr.equals("")){
+                        deleteStr = child.get(j).getOrderBean().getCartId();
+                    }else {
+                        deleteStr = deleteStr + "," + child.get(j).getOrderBean().getCartId();
+                    }
+
+                }
             }
+            child.removeAll(toBeDeleteChilds);
+        }
+        orderListBeans.removeAll(toBeDeleteGroups);
+        myShoppingCarAdapter.notifyDataSetChanged();
+
+        viewModel.deleteOrder(deleteStr,ProApplication.SESSIONID());
+    }
+
+    public String getOrderList(){
+        String OrderStr = "";
+        for (int i = 0; i < orderListBeans.size(); i++) {
+            OrderGroupBean group = orderListBeans.get(i);
+            List<CartChildBean> child = map.get(group.getOrderListBean().getStoreId());
+            for (int j = 0; j < child.size(); j++) {
+                if (child.get(j).isChoosed()) {
+                    if (OrderStr.equals("")){
+                        OrderStr = child.get(j).getOrderBean().getCartId();
+                    }else {
+                        OrderStr = OrderStr + "," + child.get(j).getOrderBean().getCartId();
+                    }
+                }
+            }
+        }
+        return OrderStr;
+    }
+
+
+    /**
+     * @return 判断组元素是否全选
+     */
+    private boolean isCheckAll() {
+        for (OrderGroupBean<ArrayList<CartBean>> group : orderListBeans) {
+            if (!group.isChoosed()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public void checkGroup(int groupPosition, boolean isChecked) {
+        OrderGroupBean group = orderListBeans.get(groupPosition);
+        List<CartChildBean> child = map.get(group.getOrderListBean().getStoreId());
+        for (int i = 0; i < child.size(); i++) {
+            child.get(i).setChoosed(isChecked);
+        }
+        myShoppingCarAdapter.setGroupClickId(groupPosition, isChecked);
+
+        if (isCheckAll()) {
+            binding.setCheck(true);//全选
+        } else {
+            binding.setCheck(false);//反选
         }
         myShoppingCarAdapter.notifyDataSetChanged();
         calulate();
     }
 
-
-    @Override
-    public void checkGroup(int groupPosition, boolean isChecked) {
-
-    }
-
     @Override
     public void checkChild(int groupPosition, int childPosition, boolean isChecked) {
+        boolean allChildSameState = true; //判断该组下面的所有子元素是否处于同一状态
+        OrderGroupBean group = orderListBeans.get(groupPosition);
+        List<CartChildBean> child = map.get(group.getOrderListBean().getStoreId());
+        for (int i = 0; i < child.size(); i++) {
+            //不选全中
+            if (child.get(i).isChoosed() != isChecked) {
+                allChildSameState = false;
+                break;
+            }
+        }
 
+        if (allChildSameState) {
+            group.setChoosed(isChecked);//如果子元素状态相同，那么对应的组元素也设置成这一种的同一状态
+        } else {
+            group.setChoosed(false);//否则一律视为未选中
+        }
+
+        if (isCheckAll()) {
+            binding.setCheck(true);//全选
+        } else {
+            binding.setCheck(false);//反选
+        }
+
+        myShoppingCarAdapter.notifyDataSetChanged();
+        calulate();
     }
 
     @Override
     public void doIncrease(int groupPosition, int childPosition, View showCountView, boolean isChecked) {
+        orderBean = (CartChildBean)myShoppingCarAdapter.getChild(groupPosition,childPosition);
+        int count = Integer.valueOf(orderBean.getOrderBean().getNum());
+        count++;
+        viewModel.modifyOrder(count,orderBean.getOrderBean().getCartId(),showCountView,ProApplication.SESSIONID(),totalgoods+1);
 
     }
 
     @Override
     public void doDecrease(int groupPosition, int childPosition, View showCountView, boolean isChecked) {
+        orderBean = (CartChildBean)myShoppingCarAdapter.getChild(groupPosition,childPosition);
+        int count = Integer.valueOf(orderBean.getOrderBean().getNum());
+        if (count == 1) {
+            return;
+        }
+        count--;
+        viewModel.modifyOrder(count,orderBean.getOrderBean().getCartId(),showCountView,ProApplication.SESSIONID(),totalgoods-1);
 
     }
 
     @Override
-    public void doUpdate(int groupPosition, int childPosition, View showCountView, boolean isChecked) {
-
+    public void doUpdate(int groupPosition, int childPosition, View showCountView, boolean isChecked,int num) {
+        orderBean = (CartChildBean) myShoppingCarAdapter.getChild(groupPosition, childPosition);
+        int count = Integer.valueOf(orderBean.getOrderBean().getNum());
+        viewModel.modifyOrder(count,orderBean.getOrderBean().getCartId(),showCountView,ProApplication.SESSIONID(),totalgoods + count - num);
     }
 
     @Override
     public void childDelete(int groupPosition, int childPosition) {
-
+        OrderGroupBean group = orderListBeans.get(groupPosition);
+        List<CartChildBean> child = map.get(group.getOrderListBean().getStoreId());
+        child.remove(childPosition);
+        if (child.size() == 0) {
+            orderListBeans.remove(groupPosition);
+        }
+        myShoppingCarAdapter.notifyDataSetChanged();
+        calulate();
     }
 
     /**
@@ -189,8 +407,9 @@ public class ShoppingCartFragment extends BaseFragment<FragmentGoodsCartBinding,
      * 3.给textView填充数据
      */
     private void calulate() {
-        /*mtotalPrice = 0.00;
+        mtotalPrice = 0.00;
         mtotalCount = 0;
+        totalgoods = 0;
         for (int i = 0; i < orderListBeans.size(); i++) {
             OrderGroupBean group = orderListBeans.get(i);
             List<CartChildBean> child = map.get(group.getOrderListBean().getStoreId());
@@ -200,25 +419,43 @@ public class ShoppingCartFragment extends BaseFragment<FragmentGoodsCartBinding,
                     mtotalCount += Integer.valueOf(good.getOrderBean().getNum());
                     mtotalPrice += good.getOrderBean().getPrice() * Integer.valueOf(good.getOrderBean().getNum());
                 }
+                totalgoods += Integer.valueOf(good.getOrderBean().getNum());
             }
         }
+        binding.setTotalgoods("总共" + totalgoods + "件宝贝");
 
         BigDecimal b = new BigDecimal(mtotalPrice);
         mtotalPrice = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 
-        total_price.setText("¥" + mtotalPrice + "");
-        goPay.setText("去支付(" + mtotalCount + ")");
+        binding.setTotalprice("¥" + mtotalPrice + "");
         if (mtotalCount == 0) {
-            setCartNum();
+            //重新设置购物车
+            binding.setGopay("结算");
         } else {
-            titlebar.setTileName("购物车(" + mtotalCount + ")");
+            binding.setGopay("结算(" + mtotalCount + ")");
+//            titlebar.setTileName("购物车(" + mtotalCount + ")");
         }
-
         if (orderListBeans.size() == 0){
-            rl_cart_bottom.setVisibility(View.GONE);
-            linearLayout.setVisibility(View.VISIBLE);
-        }*/
+//            linearLayout.setVisibility(View.VISIBLE);
+//            rl_cart_bottom.setVisibility(View.GONE);
+        }
+    }
 
+    /**
+     * 全选和反选
+     * 错误标记：在这里出现过错误
+     */
+    private void doCheckAll() {
+        for (int i = 0; i < orderListBeans.size(); i++) {
+            OrderGroupBean group = orderListBeans.get(i);
+            group.setChoosed(binding.getCheck());
+            List<CartChildBean> child = map.get(group.getOrderListBean().getStoreId());
+            for (int j = 0; j < child.size(); j++) {
+                child.get(j).setChoosed(binding.getCheck());//这里出现过错误
+            }
+        }
+        myShoppingCarAdapter.notifyDataSetChanged();
+        calulate();
     }
 
 }

@@ -3,6 +3,8 @@ package com.lzyyd.hsq.data;
 import com.lzyyd.hsq.bean.AddressBean;
 import com.lzyyd.hsq.bean.CartBean;
 import com.lzyyd.hsq.bean.CartListBean;
+import com.lzyyd.hsq.bean.CategoryBean;
+import com.lzyyd.hsq.bean.CollectBean;
 import com.lzyyd.hsq.bean.GoodsChooseBean;
 import com.lzyyd.hsq.bean.GoodsDetailInfoBean;
 import com.lzyyd.hsq.bean.GoodsListBean;
@@ -94,6 +96,11 @@ public class DataRepository extends BaseModel implements HttpDataSource, LocalDa
         return mHttpDataSource.getGoodsListVip(hashMap);
     }
 
+    //获取自营商品列表数据
+    public Observable<ResultBean<ArrayList<CategoryBean>, PageBean>> getCategoryListVip(HashMap<String, String> hashMap){
+        return mHttpDataSource.getCategoryListVip(hashMap);
+    }
+
     //获取自营商品数据
     public Observable<ResultBean<GoodsDetailInfoBean<ArrayList<GoodsChooseBean>>, String>> getGoodsDetails(HashMap<String, String> hashMap){
         return mHttpDataSource.getGoodsDetails(hashMap);
@@ -114,9 +121,23 @@ public class DataRepository extends BaseModel implements HttpDataSource, LocalDa
         return mHttpDataSource.login(mHashMap);
     }
 
-    //登陆
+    //获取购物车列表
     public Observable<ResultBean<ArrayList<CartListBean<ArrayList<CartBean>>>, String>> getCartList(HashMap<String, String> mHashMap) {
         return mHttpDataSource.getCartList(mHashMap);
+    }
+
+    /**
+     * 修改购物车信息
+     */
+    public Observable<ResultBean<CollectBean,String>> modifyOrder(HashMap<String,String> mHashMap){
+        return mHttpDataSource.modifyOrder(mHashMap);
+    }
+
+    /**
+     * 删除购物车
+     */
+    public Observable<ResultBean<String,Object>> deleteGoods(HashMap<String,String> mHashMap){
+        return mHttpDataSource.deleteGoods(mHashMap);
     }
 
     //获取地址列表
@@ -137,5 +158,10 @@ public class DataRepository extends BaseModel implements HttpDataSource, LocalDa
     //获取订单详情
     public Observable<ResultBean<OrderinfoBean,String>> OrderInfoBuyGet(HashMap<String, String> mHashMap) {
         return mHttpDataSource.OrderInfoBuyGet(mHashMap);
+    }
+
+    //获取订单详情
+    public Observable<ResultBean<String,String>> OrderSaveRedis(HashMap<String, String> mHashMap) {
+        return mHttpDataSource.OrderSaveRedis(mHashMap);
     }
 }

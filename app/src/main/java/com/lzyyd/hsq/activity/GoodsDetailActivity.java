@@ -255,12 +255,13 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         bundle.putInt(HsqAppUtil.GOODSNUM, Integer.valueOf(num));
         bundle.putString(HsqAppUtil.ATTRID, attr_id);
         bundle.putString(HsqAppUtil.KEY, msg);
+        bundle.putInt(HsqAppUtil.TYPE,goodsDetailBean.getGoodsType());
         startActivity(SureOrderActivity.class,bundle);
     }
 
     @Override
     public void SureOrderFail(String msg) {
-
+        UToast.show(this,msg);
     }
 
     @Override
@@ -277,6 +278,15 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
                     getpopup();
                 }
             }
+        }
+    }
+
+    @Override
+    public void addCart() {
+        if (goodsDetailBean.getQty() == 0) {
+            viewModel.addCartinterf(goodsDetailBean.getGoodsId(), attr_id + "", num + "", ProApplication.SESSIONID());
+        }else {
+            getpopup();
         }
     }
 

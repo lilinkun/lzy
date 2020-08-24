@@ -2,8 +2,6 @@ package com.lzyyd.hsq.ui;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,16 +9,14 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.donkingliang.labels.LabelsView;
 import com.google.gson.Gson;
 import com.lzyyd.hsq.R;
 import com.lzyyd.hsq.base.ProApplication;
-import com.lzyyd.hsq.bean.GoodsBean;
 import com.lzyyd.hsq.bean.GoodsChooseBean;
-import com.lzyyd.hsq.bean.GoodsDetailBean;
 import com.lzyyd.hsq.bean.GoodsDetailInfoBean;
 import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;

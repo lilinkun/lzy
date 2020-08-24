@@ -10,6 +10,7 @@ import com.lzyyd.hsq.activity.MyQrcodeActivity;
 import com.lzyyd.hsq.activity.OrderListActivity;
 import com.lzyyd.hsq.activity.PersonalInfoActivity;
 import com.lzyyd.hsq.activity.RechargeActivity;
+import com.lzyyd.hsq.activity.VipActivity;
 import com.lzyyd.hsq.activity.WalletActivity;
 import com.lzyyd.hsq.data.DataRepository;
 
@@ -55,6 +56,10 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
 
     public void setJumpReCharge(){
         startActivity(RechargeActivity.class);
+    }
+
+    public void setJumpVip(){
+        startActivity(VipActivity.class);
     }
 
     public void setJumpOrderlist(int position){

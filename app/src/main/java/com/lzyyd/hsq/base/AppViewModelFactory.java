@@ -3,9 +3,11 @@ package com.lzyyd.hsq.base;
 import android.annotation.SuppressLint;
 import android.app.Application;
 
+import com.lzyyd.hsq.activity.ChuangkeActivity;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.viewmodel.AddAddressViewModel;
 import com.lzyyd.hsq.viewmodel.AddressListViewModel;
+import com.lzyyd.hsq.viewmodel.ChuangkeViewModel;
 import com.lzyyd.hsq.viewmodel.CollectViewModel;
 import com.lzyyd.hsq.viewmodel.ForgetPasswordViewModel;
 import com.lzyyd.hsq.viewmodel.GetCashViewModel;
@@ -21,6 +23,7 @@ import com.lzyyd.hsq.viewmodel.RechargeViewModel;
 import com.lzyyd.hsq.viewmodel.RegisterViewModel;
 import com.lzyyd.hsq.viewmodel.ShoppingcartViewModel;
 import com.lzyyd.hsq.viewmodel.SureOrderViewModel;
+import com.lzyyd.hsq.viewmodel.VipViewModel;
 import com.lzyyd.hsq.viewmodel.WalletViewModel;
 
 import androidx.annotation.NonNull;
@@ -94,6 +97,10 @@ public class AppViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             return (T) new AddressListViewModel(mApplication, mRepository);
         }else if (modelClass.isAssignableFrom(AddAddressViewModel.class)){
             return (T) new AddAddressViewModel(mApplication, mRepository);
+        }else if (modelClass.isAssignableFrom(VipViewModel.class)){
+            return (T) new VipViewModel(mApplication, mRepository);
+        }else if (modelClass.isAssignableFrom(ChuangkeViewModel.class)){
+            return (T) new ChuangkeViewModel(mApplication, mRepository);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

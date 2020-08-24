@@ -194,6 +194,10 @@ public class GoodsDetailViewModel extends BaseViewModel<DataRepository> {
         goodsDetailDataCallBack.sureOrder();
     }
 
+    public void addCart(){
+        goodsDetailDataCallBack.addCart();
+    }
+
 
     public interface GoodsDetailDataCallBack{
         public void getDataSuccess(GoodsDetailInfoBean<ArrayList<GoodsChooseBean>> goodsListBeans);
@@ -204,6 +208,7 @@ public class GoodsDetailViewModel extends BaseViewModel<DataRepository> {
         public void SureOrderSuccess(String msg);
         public void SureOrderFail(String msg);
         public void sureOrder();
+        public void addCart();
     }
 
 }

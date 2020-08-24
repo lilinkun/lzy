@@ -3,6 +3,8 @@ package com.lzyyd.hsq.data.source;
 import com.lzyyd.hsq.bean.AddressBean;
 import com.lzyyd.hsq.bean.CartBean;
 import com.lzyyd.hsq.bean.CartListBean;
+import com.lzyyd.hsq.bean.CategoryBean;
+import com.lzyyd.hsq.bean.CollectBean;
 import com.lzyyd.hsq.bean.GoodsChooseBean;
 import com.lzyyd.hsq.bean.GoodsDetailInfoBean;
 import com.lzyyd.hsq.bean.GoodsListBean;
@@ -34,6 +36,9 @@ public interface HttpDataSource {
     //获取自营商品列表数据
     Observable<ResultBean<ArrayList<GoodsListBean>, PageBean>> getGoodsListVip(HashMap<String, String> hashMap);
 
+    //获取自营商品列表数据
+    Observable<ResultBean<ArrayList<CategoryBean>, PageBean>> getCategoryListVip(HashMap<String, String> hashMap);
+
     //获取自营商品数据
     Observable<ResultBean<GoodsDetailInfoBean<ArrayList<GoodsChooseBean>>, String>> getGoodsDetails(HashMap<String, String> hashMap);
 
@@ -54,4 +59,10 @@ public interface HttpDataSource {
     Observable<ResultBean<AddressBean,String>> getSaveAddress(HashMap<String, String> hashMap);
 
     Observable<ResultBean<OrderinfoBean,String>> OrderInfoBuyGet(HashMap<String, String> hashMap);
+
+    Observable<ResultBean<String,String>> OrderSaveRedis(HashMap<String, String> hashMap);
+
+    Observable<ResultBean<CollectBean,String>> modifyOrder(HashMap<String, String> hashMap);
+
+    Observable<ResultBean<String,Object>> deleteGoods(HashMap<String, String> hashMap);
 }

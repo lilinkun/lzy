@@ -137,7 +137,7 @@
                  lzy:max_select="1">
 
              </FrameLayout>-->
-            <com.lzyyd.hsq.ui.LabelsView
+            <com.donkingliang.labels.LabelsView
                 android:id="@+id/fl_goods_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -186,7 +186,7 @@
                 android:padding = "5dp">
 
             </com.lzyyd.lyb.ui.FlowLayout>-->
-            <com.lzyyd.hsq.ui.LabelsView
+            <com.donkingliang.labels.LabelsView
                 android:id="@+id/fl_goods_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

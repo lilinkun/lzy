@@ -67,8 +67,8 @@ public class HsqAppUtil {
     public static final String SHAREDMEIMG = "Sharedmeimg";
 
 
-    public static final int GOODSTYPE_INTEGRAL = 1;//积分商城
-    public static final int GOODSTYPE_GROUPON = 2;//团购
+    public static final int GOODSTYPE_COMMON = 1;//普通商品
+    public static final int GOODSTYPE_INTEGRAL = 2;//积分商城
     public static final int GOODSTYPE_VIP = 4;//vip礼包
     public static final int GOODSTYPE_WLM = 8;//唯乐美商品
     public static final int GOODSTYPE_CROWDFUNDING = 16;//众筹

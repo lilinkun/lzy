@@ -18,7 +18,7 @@ import androidx.appcompat.widget.AppCompatImageView;
  */
 public class CustomRoundAngleImageView extends AppCompatImageView {
     float width, height;
-    private int defaultRadius = 20;
+    private int defaultRadius = 0;
     private int radius;
     private int leftTopRadius;
     private int rightTopRadius;

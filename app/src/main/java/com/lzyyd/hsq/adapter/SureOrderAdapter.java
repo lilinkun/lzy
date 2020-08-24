@@ -11,11 +11,13 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.lzyyd.hsq.R;
+import com.lzyyd.hsq.activity.MainActivity;
 import com.lzyyd.hsq.base.BaseBindingAdapter;
 import com.lzyyd.hsq.bean.CartBean;
 import com.lzyyd.hsq.bean.OrderBean;
 import com.lzyyd.hsq.bean.OrderInfoBuyListBean;
 import com.lzyyd.hsq.databinding.AdapterSureOrderBinding;
+import com.lzyyd.hsq.util.UToast;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -24,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableChar;
+import androidx.databinding.ObservableField;
 import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,8 +43,12 @@ public class SureOrderAdapter extends BaseBindingAdapter<OrderInfoBuyListBean, A
     private int mVariableId;
     ObservableArrayList<Integer> integers = new ObservableArrayList<>();
 
-    public SureOrderAdapter(Context context) {
+    public ObservableField<String> orderField = new ObservableField<>();
+    public ObservableField<Double> maxpoint = new ObservableField<>();
+
+    public SureOrderAdapter(Context context,double maxpoint) {
         super(context);
+        this.maxpoint.set(maxpoint);
     }
 
     /*public SureOrderAdapter(Context context, ArrayList<OrderInfoBuyListBean> orderBeans, int mVariableId){
@@ -80,11 +87,49 @@ public class SureOrderAdapter extends BaseBindingAdapter<OrderInfoBuyListBean, A
         orderChildrenAdapter.getItems().addAll(item.getOrderGoodsBuyList());
         binding.rvGoodsOrders.setLayoutManager(linearLayoutManager);
         binding.rvGoodsOrders.setAdapter(orderChildrenAdapter);
+
+        if (maxpoint.get() > item.getIntegral()){
+            orderField.set(item.getIntegral()+"");
+            maxpoint.set(maxpoint.get() - item.getIntegral());
+        }else {
+            orderField.set(maxpoint+"");
+        }
+
+
     }
 
     @Override
     protected void onclick(int position) {
 
+    }
+
+    public void setItemPoint(){
+        /*View view = LayoutInflater.from(context).inflate(R.layout.layout_edittext_point,null);
+        final EditText editText = (EditText) view.findViewById(R.id.edit_num);
+        editText.setText(orderField.get());
+        new AlertDialog.Builder(context).setMessage("修改使用积分").setView(view).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (!editText.getText().toString().isEmpty()){
+                    if (Integer.valueOf(editText.getText().toString()) > buyBeans.getUsermodel().getPoint()){
+                        UToast.show(context, "超出可使用积分");
+                    }else {
+                        if (Integer.valueOf(editText.getText().toString()) > buyBeans.getStoremodel().get(position).getMax_use_Point()) {
+                            UToast.show(context, "超出最大使用积分");
+                        } else {
+                            point += Integer.valueOf(editText.getText().toString()) - (int) (Double.parseDouble(holder.mIntegral.getText().toString()));
+                            holder.mIntegral.setText(editText.getText().toString() + "");
+                            onDataGetFare.onPoint(point);
+                        }
+                    }
+                }
+            }
+        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        }).create().show();*/
     }
 
     public Typeface setTypeFace(){

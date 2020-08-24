@@ -71,7 +71,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
 //        layoutParams.setMargins(0,height,0,0);
 //        binding.titleLayoutSearch.setLayoutParams(layoutParams);
 
-        viewModel.getSelfData(1,80,1,this);
+        viewModel.getSelfData(1,80,2,this);
 
         ArrayList<String> strings = new ArrayList<>();
         strings.add("asdasd");
@@ -148,6 +148,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
         GoodsListAdapter goodsListAdapter = new GoodsListAdapter(getActivity(),goodsListBeans,BR.goodslist);
 
         StaggeredGridLayoutManager gridLayoutManager1 = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+        binding.rvHomeGoodsList.addItemDecoration(new GridSpacingItemDecoration(2, 20, false));
 //        gridLayoutManager1.setOrientation(GridLayoutManager.VERTICAL);
         binding.rvHomeGoodsList.setLayoutManager(gridLayoutManager1);
         binding.rvHomeGoodsList.setAdapter(goodsListAdapter);

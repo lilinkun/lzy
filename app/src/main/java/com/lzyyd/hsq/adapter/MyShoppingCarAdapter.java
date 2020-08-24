@@ -12,6 +12,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ import java.util.Map;
 import androidx.appcompat.app.AlertDialog;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import me.goldze.mvvmhabit.utils.StringUtils;
 
 /**
  * Create by liguo on 2020/8/15
@@ -139,13 +141,21 @@ public class MyShoppingCarAdapter extends BaseExpandableListAdapter {
             childViewHolder = (ChildViewHolder) convertView.getTag();
         }
 
+        if (childPosition == groups.get(groupPosition).getOrderListBean().getListGoods().size()){
+            childViewHolder.itemview.setBackgroundDrawable(mcontext.getResources().getDrawable(R.drawable.shape_cart_bottom));
+        }
+
         final CartChildBean child = (CartChildBean) getChild(groupPosition, childPosition);
         if (child != null) {
             childViewHolder.goodsName.setText(child.getOrderBean().getGoodsName());
             childViewHolder.goodsPrice.setText("¥" + child.getOrderBean().getPrice() + "");
             childViewHolder.goodsNum.setText(String.valueOf(child.getOrderBean().getNum()));
-            childViewHolder.goods_size1.setText( child.getOrderBean().getGoodsSpec1());
-            childViewHolder.goods_size2.setText( child.getOrderBean().getGoodsSpec2());
+            if (child.getOrderBean().getSpec1() != null && !StringUtils.isEmpty(child.getOrderBean().getSpec1())) {
+                childViewHolder.goods_size1.setText(child.getOrderBean().getGoodsSpec1() + ":" + child.getOrderBean().getSpec1());
+            }
+            if (child.getOrderBean().getSpec2() != null && !StringUtils.isEmpty(child.getOrderBean().getSpec2())) {
+                childViewHolder.goods_size2.setText( "," + child.getOrderBean().getGoodsSpec2() + ":" + child.getOrderBean().getSpec2());
+            }
 
             Picasso.with(mcontext).load(ProApplication.HEADIMG + child.getOrderBean().getGoodsImg()).into(childViewHolder.goodsImage);
 
@@ -248,7 +258,7 @@ public class MyShoppingCarAdapter extends BaseExpandableListAdapter {
                     }else {
                         num.setText(String.valueOf(number));
                         child.getOrderBean().setNum(number);
-                        modifyCountInterface.doUpdate(groupPosition, childPosition, showCountView, isChecked);
+                        modifyCountInterface.doUpdate(groupPosition, childPosition, showCountView, isChecked,count);
                         dialog.dismiss();
                     }
                 }
@@ -355,7 +365,7 @@ public class MyShoppingCarAdapter extends BaseExpandableListAdapter {
 
         void doDecrease(int groupPosition, int childPosition, View showCountView, boolean isChecked);
 
-        void doUpdate(int groupPosition, int childPosition, View showCountView, boolean isChecked);
+        void doUpdate(int groupPosition, int childPosition, View showCountView, boolean isChecked,int num);
 
         /**
          * 删除子Item
@@ -423,6 +433,8 @@ public class MyShoppingCarAdapter extends BaseExpandableListAdapter {
         TextView goodsNum;
         @BindView(R.id.increase_goods_Num)
         TextView increaseGoodsNum;
+        @BindView(R.id.itemview)
+        LinearLayout itemview;
 
         public ChildViewHolder(View view) {
             ButterKnife.bind(this, view);

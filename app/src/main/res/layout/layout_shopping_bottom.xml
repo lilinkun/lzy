@@ -90,30 +90,23 @@
 
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="105dp"
+        android:layout_height="40dp"
         android:text="加入购物车"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:layout_marginBottom="3dp"
+        android:gravity="center"
         android:textColor="#ffffffff"
         android:textSize="14sp"
+        android:onClick="@{()->goodsDetailViewModel.addCart()}"
         android:layout_marginLeft="15dp"
         android:background="@drawable/bg_add_cart"
         />
 
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="105dp"
+        android:layout_height="40dp"
         android:text="立即购买"
-        android:paddingLeft="17dp"
-        android:paddingRight="17dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:layout_marginBottom="3dp"
+        android:gravity="center"
         android:textColor="#ffffffff"
         android:textSize="14sp"
         android:background="@drawable/bg_buy_right_now"
@@ -121,9 +114,11 @@
         />
 
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="@dimen/margin_15"
+        android:src="@drawable/ic_goods_detail_shared"
         />
 
 </LinearLayout>

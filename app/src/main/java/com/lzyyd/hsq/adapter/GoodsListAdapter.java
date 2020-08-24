@@ -80,6 +80,11 @@ public class GoodsListAdapter extends RecyclerView.Adapter<GoodsListAdapter.View
     }
 
     @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
     public void onClick(View v) {
         if (mItemClickListener != null) {
             mItemClickListener.onItemClicks((Integer) v.getTag(),goodsListBeans.get((Integer) v.getTag()).getGoodsId());

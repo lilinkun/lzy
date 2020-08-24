@@ -38,6 +38,8 @@ public class GoodsBean implements Serializable {
     private String goods_sn;
     private String goods_spec1;
     private String goods_spec2;
+
+    //1 普通商品 2 积分商品  4 创客  8 服务中心  16 秒杀  32 常常清
     private String goods_type;
     private String goods_weight;
     private double good_BuyPrice;

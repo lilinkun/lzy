@@ -3,6 +3,8 @@ package com.lzyyd.hsq.http;
 import com.lzyyd.hsq.bean.AddressBean;
 import com.lzyyd.hsq.bean.CartBean;
 import com.lzyyd.hsq.bean.CartListBean;
+import com.lzyyd.hsq.bean.CategoryBean;
+import com.lzyyd.hsq.bean.CollectBean;
 import com.lzyyd.hsq.bean.GoodsChooseBean;
 import com.lzyyd.hsq.bean.GoodsDetailInfoBean;
 import com.lzyyd.hsq.bean.GoodsListBean;
@@ -65,6 +67,11 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
+    public Observable<ResultBean<ArrayList<CategoryBean>, PageBean>> getCategoryListVip(HashMap<String, String> hashMap) {
+        return apiService.getCategoryListVip(hashMap);
+    }
+
+    @Override
     public Observable<ResultBean<GoodsDetailInfoBean<ArrayList<GoodsChooseBean>>, String>> getGoodsDetails(HashMap<String, String> hashMap) {
         return apiService.getGoodsDetail(hashMap);
     }
@@ -107,6 +114,21 @@ public class HttpDataSourceImpl implements HttpDataSource {
     @Override
     public Observable<ResultBean<OrderinfoBean,String>> OrderInfoBuyGet(HashMap<String, String> hashMap) {
         return apiService.OrderInfoBuyGet(hashMap);
+    }
+
+    @Override
+    public Observable<ResultBean<CollectBean, String>> modifyOrder(HashMap<String, String> hashMap) {
+        return apiService.modifyOrder(hashMap);
+    }
+
+    @Override
+    public Observable<ResultBean<String, Object>> deleteGoods(HashMap<String, String> hashMap) {
+        return apiService.deleteGoods(hashMap);
+    }
+
+    @Override
+    public Observable<ResultBean<String, String>> OrderSaveRedis(HashMap<String, String> hashMap) {
+        return apiService.OrderSaveRedis(hashMap);
     }
 
 }

@@ -5,11 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.lzyyd.hsq.bean.OrderGoodsBuyListBean;
+
 import androidx.annotation.LayoutRes;
 import androidx.databinding.DataBindingUtil;
+import androidx.databinding.Observable;
 import androidx.databinding.ObservableArrayList;
+import androidx.databinding.ObservableField;
 import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
+import me.goldze.mvvmhabit.utils.StringUtils;
 
 public abstract class BaseBindingAdapter<M, B extends ViewDataBinding> extends RecyclerView.Adapter {
     protected Context context;
@@ -37,6 +42,11 @@ public abstract class BaseBindingAdapter<M, B extends ViewDataBinding> extends R
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+    @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         B binding = DataBindingUtil.inflate(LayoutInflater.from(this.context), this.getLayoutResId(viewType), parent, false);
         return new BaseBindingViewHolder(binding.getRoot());
@@ -52,6 +62,7 @@ public abstract class BaseBindingAdapter<M, B extends ViewDataBinding> extends R
                 onclick(position);
             }
         });
+
         this.onBindItem(binding, this.items.get(position));
     }
 
