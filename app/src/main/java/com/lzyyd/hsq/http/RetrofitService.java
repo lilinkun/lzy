@@ -95,5 +95,9 @@ public interface RetrofitService {
     @POST("Api/")
     Observable<ResultBean<String,String>> OrderSaveRedis(@FieldMap Map<String, String> params);
 
+    @FormUrlEncoded
+    @POST("Api/")
+    Observable<ResultBean<String,String>> buyVipGoods(@FieldMap Map<String, String> params);
+
 
 }

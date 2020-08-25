@@ -102,6 +102,8 @@ public class GoodsDetailViewModel extends BaseViewModel<DataRepository> {
 
 
 
+
+
     /**
      * 加入购物车
      *

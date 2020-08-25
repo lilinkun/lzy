@@ -13,6 +13,7 @@ import com.lzyyd.hsq.bean.UrlBean;
 import com.lzyyd.hsq.databinding.ActivityLoginBinding;
 import com.lzyyd.hsq.util.Eyes;
 import com.lzyyd.hsq.util.HsqAppUtil;
+import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.LoginViewModel;
 
 import androidx.lifecycle.Observer;
@@ -71,6 +72,8 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding,LoginViewMo
         ProApplication.PHONE = urlBean.getKFMobile();
         ProApplication.SERVIESVIP = urlBean.getServiesVip();
         ProApplication.SHAREDMEIMG = urlBean.getShareImg();
+        ProApplication.USERLEVELPRICE10 = urlBean.getUserLevelPrice10();
+        ProApplication.USERLEVELPRICE20 = urlBean.getUserLevelPrice20();
         SharedPreferences sharedPreferences = getSharedPreferences(HsqAppUtil.LOGIN, MODE_PRIVATE);
         sharedPreferences.edit().putString(HsqAppUtil.IMG, ProApplication.HEADIMG).putString(HsqAppUtil.BANNERIMG, ProApplication.BANNERIMG)
                 .putString(HsqAppUtil.CUSTOMER, ProApplication.CUSTOMERIMG).putString(HsqAppUtil.SHAREDIMG, ProApplication.SHAREDIMG)
@@ -79,6 +82,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding,LoginViewMo
 
     @Override
     public void getUrlFail(String msg) {
-
+        UToast.show(this,msg);
     }
 }

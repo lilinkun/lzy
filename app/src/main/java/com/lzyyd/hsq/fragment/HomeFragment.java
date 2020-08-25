@@ -20,6 +20,7 @@ import com.lzyyd.hsq.interf.OnScrollChangedListener;
 import com.lzyyd.hsq.ui.CustomBannerView;
 import com.lzyyd.hsq.ui.GridSpacingItemDecoration;
 import com.lzyyd.hsq.util.DensityUtil;
+import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.viewmodel.HomeFragmentViewModel;
 
 import java.util.ArrayList;
@@ -164,7 +165,8 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
     @Override
     public void onItemClicks(int position,String goodsid) {
         Bundle bundle = new Bundle();
-        bundle.putString("goodsId",goodsid);
+        bundle.putString(HsqAppUtil.GOODSID,goodsid);
+        bundle.putInt(HsqAppUtil.TYPE,0);
         startActivity(GoodsDetailActivity.class,bundle);
     }
 }

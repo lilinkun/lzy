@@ -72,6 +72,42 @@ public class HomeFragmentViewModel extends BaseViewModel<DataRepository> {
 
     }
 
+
+    public void getHomeData(int PageIndex, int PageCount, int GoodsType,final HomeDataCallBack homeDataCallBack){
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("cls", "Goods");
+        params.put("fun", "GoodsListVip");
+        params.put("PageIndex",PageIndex+"");
+        params.put("PageCount",PageCount+"");
+        params.put("GoodsType",GoodsType+"");
+        model.getGoodsListVip(params)
+                .compose(RxUtils.schedulersTransformer())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>(){
+                    @Override
+                    public void accept(Disposable disposable){
+                        showDialog();
+                    }
+                })
+                .subscribe(new HttpResultCallBack<ArrayList<GoodsListBean>, PageBean>() {
+                    @Override
+                    public void onResponse(ArrayList<GoodsListBean> goodsListBeans, String status, PageBean page) {
+                        homeDataCallBack.getDataSuccess(goodsListBeans, page);
+                        dismissDialog();
+                    }
+
+                    @Override
+                    public void onErr(String msg, String status) {
+                        homeDataCallBack.getDataFail(msg);
+                        dismissDialog();
+
+                    }
+                });
+
+    }
+
     public interface HomeDataCallBack{
         public void getDataSuccess(ArrayList<GoodsListBean> goodsListBeans, PageBean pageBean);
         public void getDataFail(String msg);

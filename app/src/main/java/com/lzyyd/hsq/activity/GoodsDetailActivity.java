@@ -51,12 +51,6 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
     private String attr_id = "0";
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-    @Override
     public int initContentView(Bundle savedInstanceState) {
         return R.layout.activity_goods_detail;
     }
@@ -72,10 +66,16 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         Eyes.translucentStatusBar(this);
 
         String goodsid = getIntent().getExtras().getString("goodsId");
+        type = getIntent().getExtras().getInt("type");
 
         viewModel.setClickCallBack(this);
         viewModel.getGoodsDetail(goodsid,ProApplication.SESSIONID());
 
+        if (type == HsqAppUtil.GOODSTYPE_VIP){
+            binding.layoutBottom.setVisibility(View.GONE);
+            binding.llCollect.setVisibility(View.GONE);
+            binding.goodsLayout.llGoodsLayout.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -125,7 +125,9 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
 
     @Override
     public void delete() {
-
+        if (popupWindow != null && popupWindow.isShowing()) {
+            popupWindow.dismiss();
+        }
     }
 
     @Override
@@ -180,7 +182,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
     public void getDataSuccess(GoodsDetailInfoBean<ArrayList<GoodsChooseBean>> goodsListBeans) {
 
         this.goodsDetailBean = goodsListBeans;
-        type = goodsDetailBean.getGoodsType();
+//        type = goodsDetailBean.getGoodsType();
 
         binding.setVariable(BR.goodsDetail,goodsListBeans);
 

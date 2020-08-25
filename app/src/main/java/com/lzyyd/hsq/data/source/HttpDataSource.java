@@ -62,6 +62,8 @@ public interface HttpDataSource {
 
     Observable<ResultBean<String,String>> OrderSaveRedis(HashMap<String, String> hashMap);
 
+    Observable<ResultBean<String,String>> buyVipGoods(HashMap<String, String> hashMap);
+
     Observable<ResultBean<CollectBean,String>> modifyOrder(HashMap<String, String> hashMap);
 
     Observable<ResultBean<String,Object>> deleteGoods(HashMap<String, String> hashMap);

@@ -24,6 +24,7 @@ import com.lzyyd.hsq.bean.CartChildBean;
 import com.lzyyd.hsq.bean.OrderBean;
 import com.lzyyd.hsq.bean.OrderGroupBean;
 import com.lzyyd.hsq.bean.StoreInfo;
+import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.util.UtilTool;
 import com.squareup.picasso.Picasso;
@@ -204,9 +205,9 @@ public class MyShoppingCarAdapter extends BaseExpandableListAdapter {
 
                     Intent intent = new Intent();
                     Bundle bundle = new Bundle();
-                    bundle.putString("goodsid", child.getOrderBean().getGoodsId());
-                    bundle.putString("type", "cart");
-                    intent.putExtra("TYPEID",bundle);
+                    bundle.putString(HsqAppUtil.GOODSID, child.getOrderBean().getGoodsId());
+                    bundle.putInt(HsqAppUtil.TYPE,0);
+                    intent.putExtras(bundle);
                     intent.setClass(activity,GoodsDetailActivity.class);
                     mcontext.startActivity(intent);
 

@@ -164,4 +164,9 @@ public class DataRepository extends BaseModel implements HttpDataSource, LocalDa
     public Observable<ResultBean<String,String>> OrderSaveRedis(HashMap<String, String> mHashMap) {
         return mHttpDataSource.OrderSaveRedis(mHashMap);
     }
+
+    //获取订单详情
+    public Observable<ResultBean<String,String>> buyVipGoods(HashMap<String, String> mHashMap) {
+        return mHttpDataSource.buyVipGoods(mHashMap);
+    }
 }

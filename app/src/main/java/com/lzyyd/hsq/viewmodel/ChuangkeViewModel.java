@@ -2,7 +2,10 @@ package com.lzyyd.hsq.viewmodel;
 
 import android.app.Application;
 
+import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.CategoryBean;
+import com.lzyyd.hsq.bean.GoodsChooseBean;
+import com.lzyyd.hsq.bean.GoodsDetailInfoBean;
 import com.lzyyd.hsq.bean.GoodsListBean;
 import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.data.DataRepository;
@@ -12,11 +15,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.ObservableField;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import me.goldze.mvvmhabit.base.BaseViewModel;
+import me.goldze.mvvmhabit.binding.command.BindingAction;
+import me.goldze.mvvmhabit.binding.command.BindingCommand;
 import me.goldze.mvvmhabit.utils.RxUtils;
 import me.goldze.mvvmhabit.utils.StringUtils;
 
@@ -28,6 +34,11 @@ public class ChuangkeViewModel extends BaseViewModel<DataRepository> {
 
     private ChuangkeDataCallBack chuangkeDataCallBack;
     private ChuangkeCategoryDateCallBack chuangkeCategoryDateCallBack;
+
+    public ObservableField<String> maxPrice = new ObservableField<>("应选" + ProApplication.USERLEVELPRICE10 + "元");
+
+    public ObservableField<Integer> goodsCount = new ObservableField<>();
+    public ObservableField<String> price = new ObservableField<>();
 
     public ChuangkeViewModel(@NonNull Application application,DataRepository dataRepository) {
         super(application,dataRepository);
@@ -114,6 +125,88 @@ public class ChuangkeViewModel extends BaseViewModel<DataRepository> {
 
     }
 
+
+    public void getGoodsDetail(String GoodsId,String SessionId){
+        HashMap<String, String> params = new HashMap<>();
+        params.put("cls", "Goods");
+        params.put("fun", "GoodsGet");
+        params.put("GoodsId",GoodsId);
+        params.put("SessionId",SessionId);
+        model.getGoodsDetails(params)
+                .compose(RxUtils.schedulersTransformer())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>(){
+                    @Override
+                    public void accept(Disposable disposable){
+                        showDialog();
+                    }
+                })
+                .subscribe(new HttpResultCallBack<GoodsDetailInfoBean<ArrayList<GoodsChooseBean>>,String>() {
+
+                    @Override
+                    public void onResponse(GoodsDetailInfoBean<ArrayList<GoodsChooseBean>> s, String status, String page) {
+                        dismissDialog();
+                        chuangkeCategoryDateCallBack.getDetailSucccess(s);
+                    }
+
+                    @Override
+                    public void onErr(String msg, String status) {
+                        dismissDialog();
+                        chuangkeCategoryDateCallBack.getDetailFail(msg);
+                    }
+
+                });
+
+    }
+
+    public void buyVipGoods(String GoodsList,String OrderType,String SessionId){
+        HashMap<String, String> params = new HashMap<>();
+        params.put("cls", "OrderInfo");
+        params.put("fun", "BuyMoreRedis");
+        params.put("GoodsList",GoodsList);
+        params.put("OrderType",OrderType);
+        params.put("SessionId",SessionId);
+        model.buyVipGoods(params)
+                .compose(RxUtils.schedulersTransformer())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>(){
+                    @Override
+                    public void accept(Disposable disposable){
+                        showDialog();
+                    }
+                })
+                .subscribe(new HttpResultCallBack<String,String>() {
+
+                    @Override
+                    public void onResponse(String s, String status, String page) {
+                        dismissDialog();
+                        chuangkeCategoryDateCallBack.sureVipGoodsSuccess(s);
+                    }
+
+                    @Override
+                    public void onErr(String msg, String status) {
+                        dismissDialog();
+                        chuangkeCategoryDateCallBack.sureVipGoodsFail(msg);
+                    }
+
+                });
+
+    }
+
+    public BindingCommand bindingCommand = new BindingCommand(new BindingAction() {
+        @Override
+        public void call() {
+            chuangkeCategoryDateCallBack.sureorder();
+        }
+    });
+
+
+    public void visibleLayout(){
+        chuangkeCategoryDateCallBack.visibleLayout();
+    }
+
     public interface ChuangkeDataCallBack{
 
         public void getDataSuccess(ArrayList<GoodsListBean> goodsListBeans, PageBean page);
@@ -124,6 +217,12 @@ public class ChuangkeViewModel extends BaseViewModel<DataRepository> {
     public interface ChuangkeCategoryDateCallBack{
         public void getCategorySuccess(ArrayList<CategoryBean> goodsListBeans, PageBean page);
         public void getCategoryFail(String msg);
+        public void getDetailSucccess(GoodsDetailInfoBean<ArrayList<GoodsChooseBean>> s);
+        public void getDetailFail(String msg);
+        public void visibleLayout();
+        public void sureorder();
+        public void sureVipGoodsSuccess(String msg);
+        public void sureVipGoodsFail(String msg);
     }
 
 }

@@ -28,6 +28,7 @@ import java.util.HashMap;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Create by liguo on 2020/7/21
@@ -50,6 +51,7 @@ public class GoodsPopLayout extends RelativeLayout implements View.OnClickListen
     private TextView tv_spec1, tv_spec2;
     private int num = 1;
     private OnAddCart onAddCart;
+    private OnVipGoods onVipGoods;
     private GoodsDetailInfoBean<ArrayList<GoodsChooseBean>> goodsDetailBean;
     private GoodsChooseBean goodsChooseBean;
     private LinearLayout mSpecLayout1, mSpecLayout2;
@@ -59,8 +61,10 @@ public class GoodsPopLayout extends RelativeLayout implements View.OnClickListen
     private int spec2 = -1;
     private int position = 0;
     private TextView tv_stock;
+    private RelativeLayout rl_pop;
     private int count = 0;
     private int Stock = 0;
+    private int type = 0;
 
     public GoodsPopLayout(Context context) {
         super(context);
@@ -111,6 +115,8 @@ public class GoodsPopLayout extends RelativeLayout implements View.OnClickListen
 
         tv_stock = (TextView) view.findViewById(R.id.tv_stock);
 
+        rl_pop = (RelativeLayout)view.findViewById(R.id.rl_pop);
+
         iv_goods_plus.setOnClickListener(this);
         iv_goods_subtraction.setOnClickListener(this);
         tv_add_cart.setOnClickListener(this);
@@ -118,6 +124,8 @@ public class GoodsPopLayout extends RelativeLayout implements View.OnClickListen
         tv_buy_goods.setOnClickListener(this);
         tv_buy_goods.setOnClickListener(this);
         tv_goods_count.setOnClickListener(this);
+        rl_pop.setOnClickListener(this);
+
 
         this.addView(view);
     }
@@ -145,9 +153,15 @@ public class GoodsPopLayout extends RelativeLayout implements View.OnClickListen
         this.onAddCart = listener;
     }
 
+    public void setVipListener(OnVipGoods listener){
+        this.onVipGoods = listener;
+    }
+
 
     public void setData(final GoodsDetailInfoBean<ArrayList<GoodsChooseBean>> goodsDetailBean, final int type) {
         this.goodsDetailBean = goodsDetailBean;
+
+        this.type = type;
         //往容器内添加TextView数据
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(10, 15, 10, 10);
@@ -165,11 +179,15 @@ public class GoodsPopLayout extends RelativeLayout implements View.OnClickListen
 
         if (type == HsqAppUtil.GOODSTYPE_INTEGRAL) {
             tv_goods_pop_price.setText(goodsDetailBean.getIntegral() + "积分 + " + goodsDetailBean.getPrice() + "元");
-        } else {
-            tv_goods_pop_price.setText("" + goodsDetailBean.getPrice());
+        } else if (type == HsqAppUtil.GOODSTYPE_VIP) {
+            tv_add_cart.setVisibility(GONE);
+            tv_buy_goods.setBackground(getResources().getDrawable(R.drawable.bg_chuangke_update));
+        }else {
+                tv_goods_pop_price.setText("" + goodsDetailBean.getPrice());
+
         }
 
-        tv_stock.setText("" + goodsDetailBean.getGoodsNumber());
+        tv_stock.setText(goodsDetailBean.getGoodsNumber() + "件");
 
 
         if (goodsDetailBean != null && goodsDetailBean.getAttr() != null && goodsDetailBean.getAttr().size() != 0) {
@@ -532,43 +550,60 @@ public class GoodsPopLayout extends RelativeLayout implements View.OnClickListen
 
             case R.id.iv_popup_exit:
 
-                onAddCart.delete();
+                if (type == HsqAppUtil.GOODSTYPE_VIP){
+                    onVipGoods.delete();
+                }else {
+                    onAddCart.delete();
+                }
 
                 break;
 
             case R.id.tv_buy_goods:
 
-                if (goodsDetailBean.getQty() == 1) {
-                    if (goodsDetailBean == null || goodsChooseBean == null) {
-                        UToast.show(context, "请选择规格");
-                    } else {
-                        if (flowLayout.getSelectLabelDatas().size() > 0) {
+                if (type == HsqAppUtil.GOODSTYPE_VIP){
+                    onVipGoods.mRightNowBuy(goodsDetailBean, goodsChooseBean, num);
+                }else {
+
+                    if (goodsDetailBean.getQty() == 1) {
+                        if (goodsDetailBean == null || goodsChooseBean == null) {
+                            UToast.show(context, "请选择规格");
+                        } else {
+                            if (flowLayout.getSelectLabelDatas().size() > 0) {
 //                            onAddCart.mRightNowBuy(selfGoodsBean, goodsChooseBean, num);
-                        } else {
-                            UToast.show(context, "请完整规格");
+                            } else {
+                                UToast.show(context, "请完整规格");
+                            }
                         }
-                    }
-                } else if (goodsDetailBean.getQty() == 2) {
-                    if (goodsDetailBean == null || goodsChooseBean == null) {
-                        UToast.show(context, "请选择规格选择");
+                    } else if (goodsDetailBean.getQty() == 2) {
+                        if (goodsDetailBean == null || goodsChooseBean == null) {
+                            UToast.show(context, "请选择规格选择");
 
+                        } else {
+                            if (flowLayout.getSelectLabelDatas().size() > 0 && labael_size.getSelectLabelDatas().size() > 0) {
+                                onAddCart.mRightNowBuy(goodsDetailBean, goodsChooseBean, num);
+                            } else {
+                                UToast.show(context, "请选择完整规格");
+                            }
+                        }
                     } else {
-                        if (flowLayout.getSelectLabelDatas().size() > 0 && labael_size.getSelectLabelDatas().size() > 0) {
-                            onAddCart.mRightNowBuy(goodsDetailBean, goodsChooseBean, num);
-                        } else {
-                            UToast.show(context, "请选择完整规格");
-                        }
+                        onAddCart.mRightNowBuy(goodsDetailBean, null, num);
                     }
-                } else {
-                    onAddCart.mRightNowBuy(goodsDetailBean, null, num);
                 }
-
 
                 break;
 
             case R.id.tv_goods_count:
 
                 showDialog(tv_goods_count);
+
+                break;
+
+            case R.id.rl_pop:
+                if (type == HsqAppUtil.GOODSTYPE_VIP){
+                    onVipGoods.delete();
+                }else {
+                    onAddCart.delete();
+                }
 
                 break;
         }
@@ -656,5 +691,10 @@ public class GoodsPopLayout extends RelativeLayout implements View.OnClickListen
         public void delete();
 
         public void mRightNowBuy(GoodsDetailInfoBean selfGoodsBean, GoodsChooseBean goodsChooseBean, int num);
+    }
+
+    public interface OnVipGoods{
+        public void mRightNowBuy(GoodsDetailInfoBean selfGoodsBean, GoodsChooseBean goodsChooseBean, int num);
+        public void delete();
     }
 }

@@ -28,6 +28,8 @@ public class GoodsListBean implements Serializable {
     private String BrowserCount;
     private int GoodsNumber;
     private int UseNumber;
+    //预售
+    private int IsPresell;
     private String GoodsWeight;
     //市场价
     private double MarketPrice;
@@ -50,7 +52,7 @@ public class GoodsListBean implements Serializable {
     private String CreateDate;
     private String LastUpdate;
     private String MobileDesc;
-    private String Qty;
+    private int Qty;
     private String BackSay;
     private String SortRank;
     private String BeginDate;
@@ -332,11 +334,11 @@ public class GoodsListBean implements Serializable {
         MobileDesc = mobileDesc;
     }
 
-    public String getQty() {
+    public int getQty() {
         return Qty;
     }
 
-    public void setQty(String qty) {
+    public void setQty(int qty) {
         Qty = qty;
     }
 
@@ -402,6 +404,14 @@ public class GoodsListBean implements Serializable {
 
     public void setUserLevel(int userLevel) {
         UserLevel = userLevel;
+    }
+
+    public int getIsPresell() {
+        return IsPresell;
+    }
+
+    public void setIsPresell(int isPresell) {
+        IsPresell = isPresell;
     }
 
     @Override

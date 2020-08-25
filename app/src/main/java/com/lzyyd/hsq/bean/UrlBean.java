@@ -18,6 +18,8 @@ public class UrlBean{
     private int IsAndroidAuditing;
     private String LogisticsUrl;
     private String ShareImg;
+    private int UserLevelPrice10;
+    private int UserLevelPrice20;
 
     public String getLogisticsUrl() {
         return LogisticsUrl;
@@ -113,5 +115,21 @@ public class UrlBean{
 
     public void setShareImg(String shareImg) {
         ShareImg = shareImg;
+    }
+
+    public int getUserLevelPrice10() {
+        return UserLevelPrice10;
+    }
+
+    public void setUserLevelPrice10(int userLevelPrice10) {
+        UserLevelPrice10 = userLevelPrice10;
+    }
+
+    public int getUserLevelPrice20() {
+        return UserLevelPrice20;
+    }
+
+    public void setUserLevelPrice20(int userLevelPrice20) {
+        UserLevelPrice20 = userLevelPrice20;
     }
 }

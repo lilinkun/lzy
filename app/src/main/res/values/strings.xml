@@ -53,6 +53,7 @@
     <string name="me_setting">&#xe641;</string>
     <string name="tv_coin">&#xe63c;</string>
     <string name="tv_shared">&#xe655;</string>
+    <string name="dustbin">&#xe656;</string>
 
 
     <string name="clother_host">人气</string>
@@ -73,7 +74,7 @@
     <string name="tv_goods_format">规格</string>
     <string name="goods_buy_now">立刻购买</string>
     <string name="goods_add_shoppingcar">加入购物车</string>
-    <string name="modify_sure">确定</string>
+    <string name="modify_sure">选好了</string>
 
     <!--我的-->
     <string name="me_balance">余额</string>

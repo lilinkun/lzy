@@ -309,6 +309,7 @@
     </LinearLayout>
 
     <include
+        android:id="@+id/goods_layout"
         layout="@layout/goods_layout_common"
         app:goodsDetailViewModel = "@{goodsDetailViewModel}"/>
 
@@ -371,6 +372,7 @@
 
 
     <LinearLayout
+        android:id="@+id/layout_bottom"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true">

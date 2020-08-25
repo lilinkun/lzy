@@ -131,4 +131,10 @@ public class HttpDataSourceImpl implements HttpDataSource {
         return apiService.OrderSaveRedis(hashMap);
     }
 
+
+    @Override
+    public Observable<ResultBean<String, String>> buyVipGoods(HashMap<String, String> hashMap) {
+        return apiService.OrderSaveRedis(hashMap);
+    }
+
 }

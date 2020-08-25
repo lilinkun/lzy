@@ -2,7 +2,10 @@ package com.lzyyd.hsq.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.lzyyd.hsq.BR;
@@ -15,6 +18,7 @@ import com.lzyyd.hsq.bean.CategoryBean;
 import com.lzyyd.hsq.bean.GoodsListBean;
 import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.databinding.FragmentChuangkeBinding;
+import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.ChuangkeViewModel;
 
 import java.util.ArrayList;
@@ -32,12 +36,15 @@ import androidx.viewpager.widget.ViewPager;
  * Create by liguo on 2020/8/24
  * Describe:
  */
-public class ChuangkeFragment extends BaseFragment<FragmentChuangkeBinding, ChuangkeViewModel> implements ChuangkeViewModel.ChuangkeDataCallBack {
+public class ChuangkeFragment extends BaseFragment<FragmentChuangkeBinding, ChuangkeViewModel> implements ChuangkeViewModel.ChuangkeDataCallBack{
 
     private String categoryId = "";
+    private ChuangkeAdapter.ModifyCountInterface handler;
+    private ChuangkeAdapter chuangkeAdapter;
 
-    public ChuangkeFragment(String categoryId){
+    public ChuangkeFragment(String categoryId, ChuangkeAdapter.ModifyCountInterface handler){
         this.categoryId = categoryId;
+        this.handler = handler;
     }
 
     @Override
@@ -88,16 +95,25 @@ public class ChuangkeFragment extends BaseFragment<FragmentChuangkeBinding, Chua
             binding.refreshLayout.setRefreshing(false);
         }
 
-        ChuangkeAdapter goodsListAdapter = new ChuangkeAdapter(getActivity());
-        goodsListAdapter.getItems().addAll(goodsListBeans);
+        chuangkeAdapter = new ChuangkeAdapter(getActivity());
+        chuangkeAdapter.setModifyCountInterface(handler);
+        chuangkeAdapter.getItems().addAll(goodsListBeans);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         binding.rvChuangke.setLayoutManager(linearLayoutManager);
-        binding.rvChuangke.setAdapter(goodsListAdapter);
+        binding.rvChuangke.setAdapter(chuangkeAdapter);
     }
 
     @Override
     public void getDataFail(String msg) {
-
+        UToast.show(getActivity(),msg);
     }
+
+
+    public void setFresh(){
+        if (chuangkeAdapter != null){
+            chuangkeAdapter.notifyDataSetChanged();
+        }
+    }
+
 }

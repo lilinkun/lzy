@@ -15,6 +15,7 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/rlGoods"
     >
 
 <LinearLayout
@@ -83,11 +84,15 @@
 </LinearLayout>
 
 
-
     <LinearLayout
+        android:id="@+id/rl_goods_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:layout_alignParentBottom="true">
+        <include
+            layout="@layout/custom_bottom"
+            app:chuangke="@{chuangke}"/>
+    </LinearLayout>
 
 </RelativeLayout>
 </layout>
