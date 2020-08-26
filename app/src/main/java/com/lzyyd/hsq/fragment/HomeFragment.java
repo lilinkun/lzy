@@ -13,7 +13,10 @@ import com.lzyyd.hsq.adapter.GoodsListAdapter;
 import com.lzyyd.hsq.adapter.GridHomeAdapter;
 import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseFragment;
+import com.lzyyd.hsq.base.ProApplication;
+import com.lzyyd.hsq.bean.FlashBean;
 import com.lzyyd.hsq.bean.GoodsListBean;
+import com.lzyyd.hsq.bean.HomeBean;
 import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.databinding.FragmentHomeBinding;
 import com.lzyyd.hsq.interf.OnScrollChangedListener;
@@ -21,11 +24,13 @@ import com.lzyyd.hsq.ui.CustomBannerView;
 import com.lzyyd.hsq.ui.GridSpacingItemDecoration;
 import com.lzyyd.hsq.util.DensityUtil;
 import com.lzyyd.hsq.util.HsqAppUtil;
+import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.HomeFragmentViewModel;
 
 import java.util.ArrayList;
 
 import androidx.annotation.Nullable;
+import androidx.databinding.BindingMethods;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -71,15 +76,11 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
 //        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 //        layoutParams.setMargins(0,height,0,0);
 //        binding.titleLayoutSearch.setLayoutParams(layoutParams);
+        viewModel.setCallBack(this);
+        viewModel.getSelfData(1,80,2);
+        viewModel.getHomeData(ProApplication.SESSIONID());
 
-        viewModel.getSelfData(1,80,2,this);
 
-        ArrayList<String> strings = new ArrayList<>();
-        strings.add("asdasd");
-        strings.add("asdasd");
-        strings.add("asdasd");
-
-        CustomBannerView.startBanner(strings,binding.bannerView,getActivity());
         binding.tsvHome.init(this);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 5);
@@ -163,10 +164,44 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
     }
 
     @Override
+    public void getHomeDataSuccess(HomeBean homeBean) {
+
+        ArrayList<FlashBean> flashBeans = homeBean.getFlash();
+        CustomBannerView.startBanner(flashBeans,binding.bannerView,getActivity());
+
+    }
+
+    @Override
+    public void getHomeDataFail(String msg) {
+        UToast.show(getActivity(),msg);
+    }
+
+    @Override
+    public void onHomeClick(int position) {
+        switch (position){
+            case 1:
+
+
+
+                break;
+
+            case 2:
+
+                break;
+
+            case 3:
+
+                break;
+        }
+    }
+
+    @Override
     public void onItemClicks(int position,String goodsid) {
         Bundle bundle = new Bundle();
         bundle.putString(HsqAppUtil.GOODSID,goodsid);
         bundle.putInt(HsqAppUtil.TYPE,0);
         startActivity(GoodsDetailActivity.class,bundle);
     }
+
+
 }

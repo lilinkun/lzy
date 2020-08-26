@@ -8,8 +8,10 @@ import com.lzyyd.hsq.bean.CollectBean;
 import com.lzyyd.hsq.bean.GoodsChooseBean;
 import com.lzyyd.hsq.bean.GoodsDetailInfoBean;
 import com.lzyyd.hsq.bean.GoodsListBean;
+import com.lzyyd.hsq.bean.HomeBean;
 import com.lzyyd.hsq.bean.LocalBean;
 import com.lzyyd.hsq.bean.LoginBean;
+import com.lzyyd.hsq.bean.OrderListBean;
 import com.lzyyd.hsq.bean.OrderinfoBean;
 import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.bean.ResultBean;
@@ -97,6 +99,11 @@ public class DataRepository extends BaseModel implements HttpDataSource, LocalDa
     }
 
     //获取自营商品列表数据
+    public Observable<ResultBean<HomeBean, String>> getHomeData(HashMap<String, String> hashMap){
+        return mHttpDataSource.getHomeData(hashMap);
+    }
+
+    //获取自营商品列表数据
     public Observable<ResultBean<ArrayList<CategoryBean>, PageBean>> getCategoryListVip(HashMap<String, String> hashMap){
         return mHttpDataSource.getCategoryListVip(hashMap);
     }
@@ -168,5 +175,14 @@ public class DataRepository extends BaseModel implements HttpDataSource, LocalDa
     //获取订单详情
     public Observable<ResultBean<String,String>> buyVipGoods(HashMap<String, String> mHashMap) {
         return mHttpDataSource.buyVipGoods(mHashMap);
+    }
+
+    //确认收货
+    public Observable<ResultBean<String,String>> sureReceipt(HashMap<String, String> mHashMap) {
+        return mHttpDataSource.sureReceipt(mHashMap);
+    }
+
+    public Observable<ResultBean<ArrayList<OrderListBean>,PageBean>> getOrderList(HashMap<String, String> mHashMap) {
+        return mHttpDataSource.getOrderList(mHashMap);
     }
 }

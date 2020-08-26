@@ -205,178 +205,7 @@
                     android:scaleType="fitXY"
                     android:onClick="@{()->home.setImageClick()}"
                     />
-        
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="290dp"
-                    android:orientation="vertical"
-                    android:background="@drawable/shape_home_title_gridview"
-                    >
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="145dp"
-                android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                >
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center_vertical"
-                    android:gravity="center_vertical"
-                    android:layout_marginTop="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tv_home_rush"
-                    android:textColor="@color/grey_333333"
-                    android:textSize="15sp"
-                    android:layout_marginLeft="10dp"
-                    android:typeface="@{home.setTypeFace()}"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="限量折上折"
-                    android:textColor="#ffffffff"
-                    android:textSize="12sp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/ic_home_fold_up"
-                    />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:textSize="15sp"
-                    android:text="@string/tv_home_zero_sale"
-                    android:typeface="@{home.setTypeFace()}"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="尝尝鲜 · 超值体验"
-                    android:textColor="@color/red_e61d15"
-                    android:textSize="12sp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="10dp"
-                    />
-
-
-            </LinearLayout>
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="145dp"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginTop="10dp"
-                        >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/tv_home_vip_sale"
-                            android:typeface="@{home.setTypeFace()}"
-                            android:layout_marginLeft="10dp"
-                            android:textSize="15sp"
-                            />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/ic_home_vip"
-                            android:textColor="#ffffffff"
-                            android:textSize="12sp"
-                            android:layout_marginLeft="10dp"
-                            android:text="福利多多"
-                            />
-
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="独一份，就要宠坏你"
-                        android:textColor="@color/red_e61d15"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="8dp"
-                        android:textSize="12sp"
-                        />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/tv_home_exchange"
-                        android:textColor="@color/grey_333333"
-                        android:textSize="15sp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:typeface="@{home.setTypeFace()}"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="天天积分当钱花"
-                        android:textColor="@color/red_e61d15"
-                        android:textSize="12sp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="8dp"
-                        />
-
-                </LinearLayout>
-            </LinearLayout>
-
-
-
-
-        </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -530,6 +359,117 @@
                 </LinearLayout>
 
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/margin_10"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:onClick="@{home."
+                        android:gravity="center"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="全部"
+                            android:textColor="@drawable/bg_home_text"
+                            android:textSize="15sp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="好货优选"
+                            android:textColor="#ffffffff"
+                            android:textSize="10sp"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="排行榜"
+                            android:textColor="#ff333333"
+                            android:textSize="15sp"
+                            />
+
+                        <TextView
+                            android:layout_width="49dp"
+                            android:layout_height="10dp"
+                            android:text="跟榜选好物"
+                            android:textColor="#ff666666"
+                            android:textSize="10sp"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="实惠"
+                            android:textColor="#ff333333"
+                            android:textSize="15sp"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="便宜好货"
+                            android:textColor="#ff666666"
+                            android:textSize="10sp"
+                        />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="力荐"
+                            android:textColor="#ff333333"
+                            android:textSize="15sp"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="超值精选"
+                            android:textColor="#ff666666"
+                            android:textSize="10sp"
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_home_goods_list"
                     android:layout_width="match_parent"
@@ -554,7 +494,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#E00000"
+            android:background="@color/RED_E00000"
             android:paddingTop="30dp"
             >
 

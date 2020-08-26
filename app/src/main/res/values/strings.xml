@@ -144,6 +144,17 @@
     <string name="save">保存</string>
     <string name="add_goods_address">添加收货地址</string>
 
+    <!--订单-->
+    <string name="order_exit">取消订单</string>
+    <string name="query_logistics">查看物流</string>
+    <string name="go_pay">去付款</string>
+    <string name="no_order_tip">还没有相关的订单呢</string>
+    <string name="right_now_pay">立即支付</string>
+    <string name="membership">会员特惠</string>
+    <string name="pay_choose">选择支付方式</string>
+    <string name="pay_invoice">发票</string>
+    <string name="order_remarks">备注</string>
+
 
     <!--收藏-->
     <string name="collect">收藏</string>

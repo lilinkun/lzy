@@ -18,6 +18,7 @@ import com.lzyyd.hsq.viewmodel.LoginViewModel;
 import com.lzyyd.hsq.viewmodel.MeViewModel;
 import com.lzyyd.hsq.viewmodel.MyQrcodeViewModel;
 import com.lzyyd.hsq.viewmodel.OrderListViewModel;
+import com.lzyyd.hsq.viewmodel.PayViewModel;
 import com.lzyyd.hsq.viewmodel.PersonalInfoViewModel;
 import com.lzyyd.hsq.viewmodel.RechargeViewModel;
 import com.lzyyd.hsq.viewmodel.RegisterViewModel;
@@ -101,6 +102,8 @@ public class AppViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             return (T) new VipViewModel(mApplication, mRepository);
         }else if (modelClass.isAssignableFrom(ChuangkeViewModel.class)){
             return (T) new ChuangkeViewModel(mApplication, mRepository);
+        }else if (modelClass.isAssignableFrom(PayViewModel.class)){
+            return (T) new PayViewModel(mApplication, mRepository);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

@@ -8,8 +8,10 @@ import com.lzyyd.hsq.bean.CollectBean;
 import com.lzyyd.hsq.bean.GoodsChooseBean;
 import com.lzyyd.hsq.bean.GoodsDetailInfoBean;
 import com.lzyyd.hsq.bean.GoodsListBean;
+import com.lzyyd.hsq.bean.HomeBean;
 import com.lzyyd.hsq.bean.LocalBean;
 import com.lzyyd.hsq.bean.LoginBean;
+import com.lzyyd.hsq.bean.OrderListBean;
 import com.lzyyd.hsq.bean.OrderinfoBean;
 import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.bean.ResultBean;
@@ -36,6 +38,9 @@ public interface HttpDataSource {
     //获取自营商品列表数据
     Observable<ResultBean<ArrayList<GoodsListBean>, PageBean>> getGoodsListVip(HashMap<String, String> hashMap);
 
+    //获取主页数据
+    Observable<ResultBean<HomeBean, String>> getHomeData(HashMap<String, String> hashMap);
+
     //获取自营商品列表数据
     Observable<ResultBean<ArrayList<CategoryBean>, PageBean>> getCategoryListVip(HashMap<String, String> hashMap);
 
@@ -54,6 +59,8 @@ public interface HttpDataSource {
 
     Observable<ResultBean<ArrayList<AddressBean>, PageBean>> getAddressListData(HashMap<String, String> hashMap);
 
+    Observable<ResultBean<ArrayList<OrderListBean>, PageBean>> getOrderList(HashMap<String, String> hashMap);
+
     Observable<ResultBean<ArrayList<LocalBean>, String>> getLocalData(HashMap<String, String> hashMap);
 
     Observable<ResultBean<AddressBean,String>> getSaveAddress(HashMap<String, String> hashMap);
@@ -63,6 +70,8 @@ public interface HttpDataSource {
     Observable<ResultBean<String,String>> OrderSaveRedis(HashMap<String, String> hashMap);
 
     Observable<ResultBean<String,String>> buyVipGoods(HashMap<String, String> hashMap);
+
+    Observable<ResultBean<String,String>> sureReceipt(HashMap<String, String> hashMap);
 
     Observable<ResultBean<CollectBean,String>> modifyOrder(HashMap<String, String> hashMap);
 

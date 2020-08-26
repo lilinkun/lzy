@@ -5,6 +5,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.lzyyd.hsq.R;
+import com.lzyyd.hsq.base.ProApplication;
+import com.lzyyd.hsq.bean.FlashBean;
 import com.lzyyd.hsq.transform.BannerTransform;
 import com.squareup.picasso.Picasso;
 import com.xw.banner.Banner;
@@ -25,7 +27,7 @@ public class CustomBannerView {
      * @param banner
      * @param context
      */
-    public static void startBanner(final ArrayList<String> arrayList, Banner banner, final Context context) {
+    public static void startBanner(final ArrayList<FlashBean> arrayList, Banner banner, final Context context) {
         ArrayList<String> strings = new ArrayList<>();
         for (int i = 0; i < arrayList.size(); i++) {
             strings.add("111111" + i);
@@ -38,7 +40,7 @@ public class CustomBannerView {
         banner.setImageLoader(new ImageLoaderInterface() {
             @Override
             public void displayImage(Context context, Object path, View imageView) {
-                Picasso.with(context).load("http://sa").error(R.mipmap.ic_banner).into((ImageView) imageView);
+                Picasso.with(context).load(ProApplication.BANNERIMG + ((FlashBean) path).getFlashPic()).error(R.mipmap.ic_banner).into((ImageView) imageView);
             }
 
             @Override
@@ -65,7 +67,6 @@ public class CustomBannerView {
                 .setOnBannerListener(new OnBannerListener() {
                     @Override
                     public void OnBannerClick(int position) {
-
 
                     }
                 })

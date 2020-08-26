@@ -8,8 +8,10 @@ import com.lzyyd.hsq.bean.CollectBean;
 import com.lzyyd.hsq.bean.GoodsChooseBean;
 import com.lzyyd.hsq.bean.GoodsDetailInfoBean;
 import com.lzyyd.hsq.bean.GoodsListBean;
+import com.lzyyd.hsq.bean.HomeBean;
 import com.lzyyd.hsq.bean.LocalBean;
 import com.lzyyd.hsq.bean.LoginBean;
+import com.lzyyd.hsq.bean.OrderListBean;
 import com.lzyyd.hsq.bean.OrderinfoBean;
 import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.bean.ResultBean;
@@ -131,10 +133,23 @@ public class HttpDataSourceImpl implements HttpDataSource {
         return apiService.OrderSaveRedis(hashMap);
     }
 
-
     @Override
     public Observable<ResultBean<String, String>> buyVipGoods(HashMap<String, String> hashMap) {
-        return apiService.OrderSaveRedis(hashMap);
+        return apiService.buyVipGoods(hashMap);
+    }
+
+    @Override
+    public Observable<ResultBean<String, String>> sureReceipt(HashMap<String, String> hashMap) {
+        return apiService.sureReceipt(hashMap);
+    }
+
+    @Override
+    public Observable<ResultBean<HomeBean, String>> getHomeData(HashMap<String, String> hashMap) {
+        return apiService.getHomeData(hashMap);
+    }
+    @Override
+    public Observable<ResultBean<ArrayList<OrderListBean>, PageBean>> getOrderList(HashMap<String, String> hashMap) {
+        return apiService.getOrderList(hashMap);
     }
 
 }
