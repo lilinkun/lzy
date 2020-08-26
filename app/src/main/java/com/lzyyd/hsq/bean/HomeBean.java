@@ -1,6 +1,7 @@
 package com.lzyyd.hsq.bean;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Create by liguo on 2020/8/26
@@ -14,6 +15,42 @@ public class HomeBean {
     private ArrayList<HomeItemBean> GoodsList5;
     private ArrayList<HomeItemBean> GoodsList6;
     private ArrayList<FlashBean> flash;
+    private ArrayList<HomeGridItemBean> SqIcon;
+    private HomeGridItemBean Vip;
+    private HomeGridItemBean Sq;
+    private List<ArticleDetailBean> News;
+
+    public List<ArticleDetailBean> getNews() {
+        return News;
+    }
+
+    public void setNews(List<ArticleDetailBean> news) {
+        News = news;
+    }
+
+    public HomeGridItemBean getVip() {
+        return Vip;
+    }
+
+    public void setVip(HomeGridItemBean vip) {
+        Vip = vip;
+    }
+
+    public HomeGridItemBean getSq() {
+        return Sq;
+    }
+
+    public void setSq(HomeGridItemBean sq) {
+        Sq = sq;
+    }
+
+    public ArrayList<HomeGridItemBean> getSqIcon() {
+        return SqIcon;
+    }
+
+    public void setSqIcon(ArrayList<HomeGridItemBean> sqIcon) {
+        SqIcon = sqIcon;
+    }
 
     public ArrayList<HomeItemBean> getGoodsList1() {
         return GoodsList1;

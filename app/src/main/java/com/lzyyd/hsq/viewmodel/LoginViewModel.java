@@ -99,6 +99,9 @@ public class LoginViewModel extends BaseViewModel<DataRepository> {
                     public void onResponse(LoginBean mLoginBean, String status, String page) {
                         dismissDialog();
 
+                        ProApplication.PROJECT = mLoginBean.getProject();
+                        ProApplication.LEVEL = mLoginBean.getUserLevel();
+
                         SharedPreferences sharedPreferences = context.getSharedPreferences(HsqAppUtil.LOGIN, MODE_PRIVATE);
                         sharedPreferences.edit().putString("sessionid", ProApplication.SESSIONID()).putBoolean(HsqAppUtil.LOGIN, true)
                                 .putString(HsqAppUtil.ACCOUNT, mLoginBean.getNickName()).putString(HsqAppUtil.TELEPHONE, mLoginBean.getMobile())
@@ -116,27 +119,6 @@ public class LoginViewModel extends BaseViewModel<DataRepository> {
                     }
 
                 });
-        /*addSubscribe(model.login()
-        .compose(RxUtils.schedulersTransformer())
-        .doOnSubscribe(new Consumer<Disposable>(){
-            @Override
-            public void accept(Disposable disposable){
-                    showDialog();
-            }
-        })
-        .subscribe(new Consumer<Object>() {
-            @Override
-            public void accept(Object o) throws Exception {
-                dismissDialog();
-                //保存账号密码
-//                model.saveUserName(userName.get());
-//                model.savePassword(password.get());
-                //进入DemoActivity页面
-                startActivity(MainActivity.class);
-                //关闭页面
-                finish();
-            }
-        }));*/
 
     }
 

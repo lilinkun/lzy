@@ -22,6 +22,15 @@ public class LoginBean implements Serializable {
     private String ActivationTime;
     private String RefereesName;
     private String SharedErm;
+    private int Project;
+
+    public int getProject() {
+        return Project;
+    }
+
+    public void setProject(int project) {
+        Project = project;
+    }
 
     public String getUserId() {
         return UserId;

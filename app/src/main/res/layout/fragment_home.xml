@@ -11,8 +11,8 @@
             type="com.lzyyd.hsq.viewmodel.HomeFragmentViewModel" />
 
         <variable
-            name="resImgId"
-            type="String" />
+            name="homebean"
+            type="com.lzyyd.hsq.bean.HomeBean" />
 
     </data>
 
@@ -109,7 +109,10 @@
                      android:layout_height="wrap_content"
                      android:orientation="horizontal"
                      android:layout_gravity="center_vertical"
-                     android:layout_margin="10dp">
+                     android:layout_marginLeft="10dp"
+                     android:layout_marginRight="@dimen/margin_10"
+                     android:layout_marginTop="@dimen/margin_10"
+                     >
         
         
                      <TextView
@@ -117,10 +120,11 @@
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
                          android:typeface="@{home.setTypeFace()}"
+                         android:layout_marginTop="@dimen/margin_4"
                          android:textSize="12sp"
                          android:text="@string/iconfont" />
         
-                     <TextView
+                     <!--<TextView
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
                          android:layout_marginLeft="10dp"
@@ -138,6 +142,12 @@
                          android:textColor="#ff8b8b8b"
                          android:layout_marginLeft="10dp"
                          android:textSize="12sp"
+                         />-->
+                     
+                     <com.lzyyd.hsq.ui.AdverView
+                         android:id="@+id/av_title"
+                         android:layout_width="wrap_content"
+                         android:layout_height="20dp"
                          />
         
         
@@ -154,14 +164,16 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:background="@drawable/shape_home_title_gridview"
-                    android:layout_marginTop="40dp"
-                    ></ImageView>
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:layout_marginTop="10dp"
+                    app:image="@{homebean.sq.img}"
+                    />
 
 
 
-                 <ImageView
+                 <!--<ImageView
                      android:id="@+id/iv_home_haosheng"
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
@@ -193,7 +205,7 @@
                             android:layout_marginTop="2dp"
                             />
         
-                    </LinearLayout>
+                    </LinearLayout>-->
         
         
                 </RelativeLayout>
@@ -203,6 +215,7 @@
                     android:layout_height="wrap_content"
                     android:src="@mipmap/ic_home_vip"
                     android:scaleType="fitXY"
+                    app:image="@{homebean.vip.img}"
                     android:onClick="@{()->home.setImageClick()}"
                     />
 
@@ -289,9 +302,10 @@
                                 />
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:image="@{resImgId}"
+                                android:layout_width="105dp"
+                                android:layout_height="105dp"
+                                android:scaleType="centerInside"
+                                app:image="@{homebean.goodsList1.get(0).goodsImg}"
                                 />
 
 
@@ -315,9 +329,10 @@
                                 />
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:image="@{resImgId}"
+                                android:layout_width="105dp"
+                                android:layout_height="105dp"
+                                android:scaleType="centerInside"
+                                app:image="@{homebean.goodsList2.get(0).goodsImg}"
                                 />
 
 
@@ -341,9 +356,10 @@
                                 />
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:image="@{resImgId}"
+                                android:layout_width="105dp"
+                                android:layout_height="105dp"
+                                android:scaleType="centerInside"
+                                app:image="@{homebean.goodsList3.get(0).goodsImg}"
                                 />
 
 
@@ -371,27 +387,25 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:onClick="@{home."
                         android:gravity="center"
                         >
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="全部"
-                            android:textColor="@drawable/bg_home_text"
+                            android:text="力荐"
+                            android:textColor="#ff333333"
                             android:textSize="15sp"
                             />
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="好货优选"
-                            android:textColor="#ffffffff"
+                            android:text="超值精选"
+                            android:textColor="#ff666666"
                             android:textSize="10sp"
                             />
-
                     </LinearLayout>
+
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -410,8 +424,8 @@
                             />
 
                         <TextView
-                            android:layout_width="49dp"
-                            android:layout_height="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:text="跟榜选好物"
                             android:textColor="#ff666666"
                             android:textSize="10sp"
@@ -455,17 +469,19 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="力荐"
-                            android:textColor="#ff333333"
+                            android:text="更多"
+                            android:textColor="@drawable/bg_home_text"
                             android:textSize="15sp"
                             />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="超值精选"
-                            android:textColor="#ff666666"
+                            android:text="好货优选"
+                            android:textColor="#ffffffff"
                             android:textSize="10sp"
                             />
+
                     </LinearLayout>
 
                 </LinearLayout>
@@ -503,6 +519,9 @@
                 android:id="@+id/lin_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:src="@mipmap/ic_logo_hsq"
                 />
 
             <LinearLayout

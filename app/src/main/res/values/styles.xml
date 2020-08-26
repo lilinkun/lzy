@@ -133,4 +133,10 @@
     </style>
 
 
+
+    <declare-styleable name="AdverView">
+        <attr name="gap" format="integer" />
+        <attr name="animDuration" format="integer"/>
+    </declare-styleable>
+
 </resources>

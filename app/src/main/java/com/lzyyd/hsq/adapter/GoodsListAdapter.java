@@ -13,6 +13,7 @@ import com.lzyyd.hsq.BR;
 import com.lzyyd.hsq.R;
 import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.GoodsListBean;
+import com.lzyyd.hsq.bean.HomeItemBean;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -30,12 +31,12 @@ import androidx.recyclerview.widget.RecyclerView;
 public class GoodsListAdapter extends RecyclerView.Adapter<GoodsListAdapter.ViewHolder> implements View.OnClickListener {
 
     private Context context;
-    private ArrayList<GoodsListBean> goodsListBeans;
+    private ArrayList<HomeItemBean> goodsListBeans;
     // mvvm绑定的viewModel引用
     private int mVariableId;
     private OnItemClickListener mItemClickListener;
 
-    public GoodsListAdapter(Context context,ArrayList<GoodsListBean> goodsListBeans,int mVariableId){
+    public GoodsListAdapter(Context context, ArrayList<HomeItemBean> goodsListBeans, int mVariableId){
        this.context = context;
        this.goodsListBeans = goodsListBeans;
        this.mVariableId = mVariableId;

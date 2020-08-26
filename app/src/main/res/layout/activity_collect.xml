@@ -53,6 +53,7 @@
 
 
     <LinearLayout
+        android:id="@+id/ll_no_collect"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -84,6 +85,12 @@
             android:textSize="18sp" />
 
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_collectlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 
 
 </LinearLayout>

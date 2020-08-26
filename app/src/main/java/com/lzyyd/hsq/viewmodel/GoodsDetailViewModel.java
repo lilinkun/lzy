@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.lzyyd.hsq.activity.ShoppingcartActivity;
+import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.GoodsBean;
 import com.lzyyd.hsq.bean.GoodsChooseBean;
 import com.lzyyd.hsq.bean.GoodsDetailBean;
@@ -31,6 +32,7 @@ public class GoodsDetailViewModel extends BaseViewModel<DataRepository> {
 
     private Application application;
     private GoodsDetailDataCallBack goodsDetailDataCallBack;
+    private String goodsId;
 
     public ObservableBoolean observableBoolean = new ObservableBoolean();
 
@@ -49,24 +51,127 @@ public class GoodsDetailViewModel extends BaseViewModel<DataRepository> {
 
 
     public void setCollect(){
-        addSubscribe(model.login()
+        if (observableBoolean.get()){
+            deleteCollect(goodsId,"1", ProApplication.SESSIONID());
+        }else {
+            addGoodCollect(goodsId,"1",ProApplication.SESSIONID());
+        }
+    }
+
+    public void addGoodCollect(String OtherId, String CollectType, String SessionId) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("cls", "Collect");
+        params.put("fun", "CollectCreate");
+        params.put("OtherId", OtherId);
+        params.put("CollectType", CollectType);
+        params.put("SessionId", SessionId);
+                model.addGoodCollect(params)
+                        .compose(RxUtils.schedulersTransformer())
+                        .subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doOnSubscribe(new Consumer<Disposable>(){
+                            @Override
+                            public void accept(Disposable disposable){
+                                showDialog();
+                            }
+                        })
+                .subscribe(new HttpResultCallBack<String, Object>() {
+
+                    @Override
+                    public void onResponse(String collectBean, String status, Object page) {
+                        dismissDialog();
+                        goodsDetailDataCallBack.addCollectSuccess(collectBean);
+                        observableBoolean.set(true);
+                    }
+
+                    @Override
+                    public void onErr(String msg, String status) {
+                        dismissDialog();
+                        goodsDetailDataCallBack.addCollectFail(msg);
+                    }
+                });
+    }
+
+    /**
+     * 是否有收藏
+     *
+     * @param goodsId
+     * @param SessionId
+     */
+    public void isCollect(String goodsId, String SessionId) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("cls", "Collect");
+        params.put("fun", "IsCollect");
+        params.put("CollectId", goodsId);
+        params.put("SessionId", SessionId);
+        model.DeleteCollectGood(params)
                 .compose(RxUtils.schedulersTransformer())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>(){
                     @Override
                     public void accept(Disposable disposable){
                         showDialog();
                     }
                 })
-                .subscribe(new Consumer<Object>() {
+                .subscribe(new HttpResultCallBack<String, Object>() {
+
                     @Override
-                    public void accept(Object o) throws Exception {
+                    public void onResponse(String collectBean, String status, Object page) {
+//                        selfGoodsDetailContract.addCollectSuccess(collectBean);
                         dismissDialog();
-                        observableBoolean.set(!observableBoolean.get());
+                        goodsDetailDataCallBack.isGoodsCollectSuccess(collectBean);
                     }
-                }));
+
+                    @Override
+                    public void onErr(String msg, String status) {
+                        dismissDialog();
+//                        selfGoodsDetailContract.addCollectFail(msg);
+                    }
+
+                });
     }
 
+    /**
+     * 删除收藏
+     *
+     * @param SessionId
+     */
+    public void deleteCollect(String goodsId, String CollectType, String SessionId) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("cls", "Collect");
+        params.put("fun", "CollectDeleteGoods");
+        params.put("OtherId", goodsId);
+        params.put("CollectType", CollectType);
+        params.put("SessionId", SessionId);
+        model.DeleteCollectGood(params)
+                .compose(RxUtils.schedulersTransformer())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>(){
+                    @Override
+                    public void accept(Disposable disposable){
+                        showDialog();
+                    }
+                })
+                .subscribe(new HttpResultCallBack<String, Object>() {
+                    @Override
+                    public void onResponse(String collectBeans, String status, Object page) {
+                        dismissDialog();
+                        goodsDetailDataCallBack.deleteCollectSuccess(collectBeans);
+                        observableBoolean.set(false);
+                    }
+
+                    @Override
+                    public void onErr(String msg, String status) {
+                        dismissDialog();
+                    }
+                });
+    }
+
+
     public void getGoodsDetail(String GoodsId,String SessionId){
+        this.goodsId = GoodsId;
         HashMap<String, String> params = new HashMap<>();
         params.put("cls", "Goods");
         params.put("fun", "GoodsGet");
@@ -211,6 +316,13 @@ public class GoodsDetailViewModel extends BaseViewModel<DataRepository> {
         public void SureOrderFail(String msg);
         public void sureOrder();
         public void addCart();
+        public void addCollectSuccess(String collectBean);
+
+        public void addCollectFail(String msg);
+
+        public void isGoodsCollectSuccess(String msg);
+
+        public void deleteCollectSuccess(String msg);
     }
 
 }

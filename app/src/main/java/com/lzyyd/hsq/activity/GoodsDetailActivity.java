@@ -65,10 +65,11 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
 
         Eyes.translucentStatusBar(this);
 
-        String goodsid = getIntent().getExtras().getString("goodsId");
+        String goodsid = getIntent().getExtras().getString(HsqAppUtil.GOODSID);
         type = getIntent().getExtras().getInt("type");
 
         viewModel.setClickCallBack(this);
+        viewModel.isCollect(goodsid,ProApplication.SESSIONID());
         viewModel.getGoodsDetail(goodsid,ProApplication.SESSIONID());
 
         if (type == HsqAppUtil.GOODSTYPE_VIP){
@@ -290,6 +291,26 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         }else {
             getpopup();
         }
+    }
+
+    @Override
+    public void addCollectSuccess(String collectBean) {
+
+    }
+
+    @Override
+    public void addCollectFail(String msg) {
+
+    }
+
+    @Override
+    public void isGoodsCollectSuccess(String msg) {
+        viewModel.observableBoolean.set(true);
+    }
+
+    @Override
+    public void deleteCollectSuccess(String msg) {
+
     }
 
     @Override

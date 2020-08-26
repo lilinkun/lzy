@@ -8,6 +8,8 @@ import com.lzyyd.hsq.BR;
 import com.lzyyd.hsq.R;
 import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseFragment;
+import com.lzyyd.hsq.base.ProApplication;
+import com.lzyyd.hsq.bean.BalanceBean;
 import com.lzyyd.hsq.databinding.FragmentMeBinding;
 import com.lzyyd.hsq.viewmodel.MeViewModel;
 
@@ -19,7 +21,7 @@ import androidx.lifecycle.ViewModelProviders;
  * Create by liguo on 2020/8/6
  * Describe:
  */
-public class MeFragment extends BaseFragment<FragmentMeBinding, MeViewModel> {
+public class MeFragment extends BaseFragment<FragmentMeBinding, MeViewModel> implements MeViewModel.MeBackCall {
 
     @Override
     public int initVariableId() {
@@ -45,10 +47,24 @@ public class MeFragment extends BaseFragment<FragmentMeBinding, MeViewModel> {
     @Override
     public void initData() {
 //        binding.orderLayout.nimAllOrder.setNum(4);
+
+        viewModel.setListener(this);
+        viewModel.getBalance(ProApplication.SESSIONID());
+
     }
 
     @Override
     public void initViewObservable() {
+
+    }
+
+    @Override
+    public void getBalanceSuccess(BalanceBean balanceBean) {
+        binding.setBalance(balanceBean);
+    }
+
+    @Override
+    public void getBalanceFail(String msg) {
 
     }
 }

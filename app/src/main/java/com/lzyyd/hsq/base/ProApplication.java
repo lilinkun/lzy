@@ -120,6 +120,10 @@ public class ProApplication extends Application {
 
     public static int USERLEVELPRICE20 = 0;
 
+    public static int PROJECT = 0;
+
+    public static int LEVEL = 0;
+
     public static final String IMG_BIG = "imgdb/";
     public static final String IMG_HOME_ADDRESS = "imgdb/velet/";
     public static final String IMG_SMALL = "img/300/300/";

@@ -1,10 +1,12 @@
 package com.lzyyd.hsq.data;
 
 import com.lzyyd.hsq.bean.AddressBean;
+import com.lzyyd.hsq.bean.BalanceBean;
 import com.lzyyd.hsq.bean.CartBean;
 import com.lzyyd.hsq.bean.CartListBean;
 import com.lzyyd.hsq.bean.CategoryBean;
 import com.lzyyd.hsq.bean.CollectBean;
+import com.lzyyd.hsq.bean.CollectListBean;
 import com.lzyyd.hsq.bean.GoodsChooseBean;
 import com.lzyyd.hsq.bean.GoodsDetailInfoBean;
 import com.lzyyd.hsq.bean.GoodsListBean;
@@ -185,4 +187,36 @@ public class DataRepository extends BaseModel implements HttpDataSource, LocalDa
     public Observable<ResultBean<ArrayList<OrderListBean>,PageBean>> getOrderList(HashMap<String, String> mHashMap) {
         return mHttpDataSource.getOrderList(mHashMap);
     }
+
+    /**
+     * 删除自营商品收藏列
+     */
+    public Observable<ResultBean<String, Object>> DeleteCollectGood(HashMap<String, String> mHashMap) {
+        return mHttpDataSource.DeleteCollectGood(mHashMap);
+    }
+
+
+    /**
+     * 增加自营商品收藏
+     */
+    public Observable<ResultBean<String, Object>> addGoodCollect(HashMap<String, String> mHashMap) {
+        return mHttpDataSource.addGoodCollect(mHashMap);
+    }
+
+    /**
+     * 是否是自营商品收藏商品
+     */
+    public Observable<ResultBean<String, Object>> isGoodCollect(HashMap<String, String> mHashMap) {
+        return mHttpDataSource.isGoodCollect(mHashMap);
+    }
+
+
+    public Observable<ResultBean<ArrayList<CollectListBean>, Object>> GoodCollectList(HashMap<String, String> mHashMap) {
+        return mHttpDataSource.GoodCollectList(mHashMap);
+    }
+
+    public Observable<ResultBean<BalanceBean, Object>> getBalance(HashMap<String, String> mHashMap) {
+        return mHttpDataSource.getBalance(mHashMap);
+    }
+
 }

@@ -87,6 +87,7 @@ dependencies {
     //读取gif动画
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.8'
 
+
     implementation project(":banner")
     //MVVMHabit
     implementation project(':mvvmhabit')

@@ -7,7 +7,7 @@
 
         <variable
             name="goodslist"
-            type="com.lzyyd.hsq.bean.GoodsListBean" />
+            type="com.lzyyd.hsq.bean.HomeItemBean" />
 
         <variable
             name="resImgId"

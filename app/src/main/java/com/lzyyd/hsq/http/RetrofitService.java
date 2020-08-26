@@ -1,10 +1,12 @@
 package com.lzyyd.hsq.http;
 
 import com.lzyyd.hsq.bean.AddressBean;
+import com.lzyyd.hsq.bean.BalanceBean;
 import com.lzyyd.hsq.bean.CartBean;
 import com.lzyyd.hsq.bean.CartListBean;
 import com.lzyyd.hsq.bean.CategoryBean;
 import com.lzyyd.hsq.bean.CollectBean;
+import com.lzyyd.hsq.bean.CollectListBean;
 import com.lzyyd.hsq.bean.GoodsChooseBean;
 import com.lzyyd.hsq.bean.GoodsDetailInfoBean;
 import com.lzyyd.hsq.bean.GoodsListBean;
@@ -116,5 +118,24 @@ public interface RetrofitService {
     @POST("Api/")
     Observable<ResultBean<ArrayList<OrderListBean>,PageBean>> getOrderList(@FieldMap Map<String, String> params);
 
+    @FormUrlEncoded
+    @POST("Api/")
+    Observable<ResultBean<String, Object>> addGoodCollect(@FieldMap Map<String, String> params);
+
+    @FormUrlEncoded
+    @POST("Api/")
+    Observable<ResultBean<String, Object>> isGoodCollect(@FieldMap Map<String, String> params);
+
+    @FormUrlEncoded
+    @POST("Api/")
+    Observable<ResultBean<ArrayList<CollectListBean>, Object>> GoodCollectList(@FieldMap Map<String, String> params);
+
+    @FormUrlEncoded
+    @POST("Api/")
+    Observable<ResultBean<String, Object>> DeleteCollectGood(@FieldMap Map<String, String> params);
+
+    @FormUrlEncoded
+    @POST("Api/")
+    Observable<ResultBean<BalanceBean, Object>> getBalance(@FieldMap Map<String, String> params);
 
 }

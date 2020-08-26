@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="collect"
+            type="com.lzyyd.hsq.bean.CollectListBean" />
+
+    </data>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="95dp"
+    android:background="@drawable/bg_sure_order_address"
+    android:orientation="horizontal">
+    
+    <com.lzyyd.hsq.ui.CustomRoundAngleImageView
+        android:layout_width="95dp"
+        android:layout_height="95dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:scaleType="centerCrop"
+        app:image="@{collect.goodsImg}"
+        app:radius="5dp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/margin_10"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:textColor="#ff333333"
+            android:textSize="12sp"
+            android:text="@{collect.goodsName}"
+            />
+
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/margin_5"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{String.valueOf(collect.price)}'
+                android:textColor="#E43A3C"
+                />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{String.valueOf(collect.marketPrice)}'
+                    android:textColor="#9A9A9A"
+                    />
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="刪除"
+                android:background="@drawable/bg_collect_btn"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/margin_10"
+                />
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+    
+
+</LinearLayout>
+
+</layout>

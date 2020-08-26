@@ -12,12 +12,21 @@ import com.lzyyd.hsq.activity.PersonalInfoActivity;
 import com.lzyyd.hsq.activity.RechargeActivity;
 import com.lzyyd.hsq.activity.VipActivity;
 import com.lzyyd.hsq.activity.WalletActivity;
+import com.lzyyd.hsq.bean.BalanceBean;
 import com.lzyyd.hsq.data.DataRepository;
+import com.lzyyd.hsq.http.callback.HttpResultCallBack;
+
+import java.util.HashMap;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ViewDataBinding;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import me.goldze.mvvmhabit.base.BaseViewModel;
+import me.goldze.mvvmhabit.utils.RxUtils;
 
 /**
  * Create by liguo on 2020/8/6
@@ -25,17 +34,17 @@ import me.goldze.mvvmhabit.base.BaseViewModel;
  */
 public class MeViewModel extends BaseViewModel<DataRepository> {
 
+    private MeBackCall meBackCall;
     public ObservableField<Integer> OrderAllNum = new ObservableField<>();
-
-    public MeViewModel(@NonNull Application application) {
-        super(application);
-    }
 
     public MeViewModel(@NonNull Application application, DataRepository model) {
         super(application, model);
 
     }
 
+    public void setListener(MeBackCall meBackCall){
+        this.meBackCall = meBackCall;
+    }
 
     public void setJumpPersonal(){
         startActivity(PersonalInfoActivity.class);
@@ -75,5 +84,43 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
 
     public void setJumpAddress(){
         startActivity(AddressListActivity.class);
+    }
+
+
+    public void getBalance(String SessionId) {
+//        final ProgressDialog progressDialog = ProgressDialog.show(mContext,"请稍等...","获取数据中...",true);
+        HashMap<String, String> params = new HashMap<>();
+        params.put("cls", "UserBase");
+        params.put("fun", "BankBase_GetBalance");
+        params.put("SessionId", SessionId);
+        model.getBalance(params)
+                .compose(RxUtils.schedulersTransformer())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>(){
+                    @Override
+                    public void accept(Disposable disposable){
+                        showDialog();
+                    }
+                })
+                .subscribe(new HttpResultCallBack<BalanceBean, Object>() {
+                    @Override
+                    public void onResponse(BalanceBean balanceBean, String status, Object page) {
+                        dismissDialog();
+                        meBackCall.getBalanceSuccess(balanceBean);
+                    }
+
+                    @Override
+                    public void onErr(String msg, String status) {
+                        dismissDialog();
+                        meBackCall.getBalanceFail(msg);
+                    }
+                });
+    }
+
+
+    public interface MeBackCall{
+        public void getBalanceSuccess(BalanceBean balanceBean);
+        public void getBalanceFail(String msg);
     }
 }

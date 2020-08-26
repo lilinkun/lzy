@@ -8,6 +8,10 @@
             name="me"
             type="com.lzyyd.hsq.viewmodel.MeViewModel" />
 
+        <variable
+            name="balance"
+            type="com.lzyyd.hsq.bean.BalanceBean" />
+
     </data>
 
 
@@ -133,12 +137,12 @@
         
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="15dp"
+            android:layout_height="60dp"
             android:orientation="horizontal"
             android:gravity="center_vertical"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/bg_sure_order_address"
             >
 
@@ -153,7 +157,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="31"
+                    android:text="@{String.valueOf(balance.money2Balance)}"
                     android:textColor="#ffe94240"
                     android:textSize="14sp"
                     />
@@ -161,20 +165,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="收藏夹"
+                    android:text="电子币"
                     android:textColor="#ff666666"
                     android:textSize="12sp"
                     />
 
             </LinearLayout>
-
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="30dp"
-                android:background="#999999"
-                />
-
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -186,38 +182,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="31"
-                    android:textColor="#ffe94240"
-                    android:textSize="14sp"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="优惠券"
-                    android:textColor="#ff666666"
-                    android:textSize="12sp"
-                    />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="30dp"
-                android:background="#999999"
-                />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="31"
+                    android:text="@{String.valueOf(balance.money3Balance)}"
                     android:textColor="#ffe94240"
                     android:textSize="14sp"
                     />
@@ -232,11 +197,31 @@
 
             </LinearLayout>
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="30dp"
-                android:background="#999999"
-                />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="@{()->me.setJumpWallet()}"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(balance.money5Balance)}"
+                    android:textColor="#ffe94240"
+                    android:textSize="14sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="余额"
+                    android:textColor="#ff666666"
+                    android:textSize="12sp"
+                    />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -248,7 +233,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="31"
+                    android:text="@{String.valueOf(balance.money6Balance)}"
                     android:textColor="#ffe94240"
                     android:textSize="14sp"
                     />
@@ -256,7 +241,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="卡券"
+                    android:text="优惠券"
                     android:textColor="#ff666666"
                     android:textSize="12sp"
                     />
@@ -266,85 +251,6 @@
         </LinearLayout>
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_10"
-            android:background="@drawable/bg_sure_order_address"
-            android:onClick="@{()->me.setJumpWallet()}"
-            >
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_10"
-                android:layout_marginTop="@dimen/margin_10"
-                android:layout_marginBottom="@dimen/margin_10"
-                android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="110,103,495.00"
-                android:textColor="#ffe94240"
-                android:textSize="18sp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="可用余额"
-                android:textColor="#ff666666"
-                android:textSize="12sp"
-                />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/margin_10"
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="提现"
-                    android:textColor="#ffe94240"
-                    android:textSize="12sp"
-                    android:paddingLeft="@dimen/padding_18"
-                    android:paddingRight="@dimen/padding_18"
-                    android:paddingTop="@dimen/padding_5"
-                    android:paddingBottom="@dimen/padding_5"
-                    android:onClick="@{()->me.setJumpGetCash()}"
-                    android:background="@drawable/bg_me_btn_cash"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="充值"
-                    android:textColor="#ffffffff"
-                    android:textSize="12sp"
-                    android:paddingLeft="@dimen/padding_18"
-                    android:paddingRight="@dimen/padding_18"
-                    android:paddingTop="@dimen/padding_5"
-                    android:paddingBottom="@dimen/padding_5"
-                    android:onClick="@{()->me.setJumpReCharge()}"
-                    android:background="@drawable/bg_me_btn_charge"
-                    android:layout_marginLeft="@dimen/margin_20"
-                    />
-
-
-            </LinearLayout>
-
-
-
-        </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -352,6 +258,7 @@
                 android:orientation="horizontal"
                 android:layout_marginLeft="@dimen/margin_10"
                 android:layout_marginRight="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_10"
                 >
 
                 <ImageView
@@ -380,6 +287,13 @@
                 android:id="@+id/order_layout"
                 layout="@layout/layout_me_order"
                 app:me="@{me}"/>
+
+
+            <include
+                layout="@layout/me_changchangqing_layout"
+                />
+
+
 
             <include
                 layout="@layout/layout_me_fans"

@@ -1,10 +1,12 @@
 package com.lzyyd.hsq.http;
 
 import com.lzyyd.hsq.bean.AddressBean;
+import com.lzyyd.hsq.bean.BalanceBean;
 import com.lzyyd.hsq.bean.CartBean;
 import com.lzyyd.hsq.bean.CartListBean;
 import com.lzyyd.hsq.bean.CategoryBean;
 import com.lzyyd.hsq.bean.CollectBean;
+import com.lzyyd.hsq.bean.CollectListBean;
 import com.lzyyd.hsq.bean.GoodsChooseBean;
 import com.lzyyd.hsq.bean.GoodsDetailInfoBean;
 import com.lzyyd.hsq.bean.GoodsListBean;
@@ -151,5 +153,28 @@ public class HttpDataSourceImpl implements HttpDataSource {
     public Observable<ResultBean<ArrayList<OrderListBean>, PageBean>> getOrderList(HashMap<String, String> hashMap) {
         return apiService.getOrderList(hashMap);
     }
+
+    public Observable<ResultBean<ArrayList<CollectListBean>, Object>> GoodCollectList(HashMap<String, String> mHashMap) {
+        return apiService.GoodCollectList(mHashMap);
+    }
+
+    public Observable<ResultBean<String, Object>> DeleteCollectGood(HashMap<String, String> mHashMap) {
+        return apiService.DeleteCollectGood(mHashMap);
+    }
+
+    public Observable<ResultBean<String, Object>> isGoodCollect(HashMap<String, String> mHashMap) {
+        return apiService.isGoodCollect(mHashMap);
+    }
+
+
+    public Observable<ResultBean<String, Object>> addGoodCollect(HashMap<String, String> mHashMap) {
+        return apiService.addGoodCollect(mHashMap);
+    }
+
+
+    public Observable<ResultBean<BalanceBean, Object>> getBalance(HashMap<String, String> mHashMap) {
+        return apiService.getBalance(mHashMap);
+    }
+
 
 }

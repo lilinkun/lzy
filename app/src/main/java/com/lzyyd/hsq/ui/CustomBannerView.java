@@ -40,7 +40,7 @@ public class CustomBannerView {
         banner.setImageLoader(new ImageLoaderInterface() {
             @Override
             public void displayImage(Context context, Object path, View imageView) {
-                Picasso.with(context).load(ProApplication.BANNERIMG + ((FlashBean) path).getFlashPic()).error(R.mipmap.ic_banner).into((ImageView) imageView);
+                Picasso.with(context).load(ProApplication.BANNERIMG + ((FlashBean) path).getFlashPic()).error(R.color.gray).into((ImageView) imageView);
             }
 
             @Override

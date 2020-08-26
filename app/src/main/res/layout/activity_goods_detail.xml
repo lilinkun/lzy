@@ -212,14 +212,14 @@
                     android:layout_height="wrap_content"
                     android:padding="3.0dip"
                     android:typeface="@{goodsDetailViewModel.setTypeFace()}"
-                    android:text="@{goodsDetailViewModel.observableBoolean ? @string/tv_uncollect:@string/tv_collect }"/>
+                    android:text="@{goodsDetailViewModel.observableBoolean ? @string/tv_collect:@string/tv_uncollect }"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#ff999999"
                     android:textSize="11sp"
-                    android:text="@{goodsDetailViewModel.observableBoolean ? @string/goods_uncollect:@string/goods_collect }"/>
+                    android:text="@{goodsDetailViewModel.observableBoolean ? @string/goods_collect: @string/goods_uncollect}"/>
 
             </LinearLayout>
 

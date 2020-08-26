@@ -11,6 +11,7 @@ import com.lzyyd.hsq.activity.GoodsDetailActivity;
 import com.lzyyd.hsq.activity.WebViewActivity;
 import com.lzyyd.hsq.adapter.GoodsListAdapter;
 import com.lzyyd.hsq.adapter.GridHomeAdapter;
+import com.lzyyd.hsq.adapter.ViewAdapter;
 import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseFragment;
 import com.lzyyd.hsq.base.ProApplication;
@@ -35,7 +36,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragmentViewModel> implements OnScrollChangedListener, GridHomeAdapter.OnItemClickListener, HomeFragmentViewModel.HomeDataCallBack, GoodsListAdapter.OnItemClickListener {
+public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragmentViewModel> implements OnScrollChangedListener, HomeFragmentViewModel.HomeDataCallBack, GoodsListAdapter.OnItemClickListener {
 
     /**  ScrollView 滚动动态改变标题栏 */
     // 滑动的最小距离（自行定义，you happy jiu ok）
@@ -77,37 +78,11 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
 //        layoutParams.setMargins(0,height,0,0);
 //        binding.titleLayoutSearch.setLayoutParams(layoutParams);
         viewModel.setCallBack(this);
-        viewModel.getSelfData(1,80,2);
         viewModel.getHomeData(ProApplication.SESSIONID());
 
 
         binding.tsvHome.init(this);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 5);
-
-        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
-
-        binding.rvHome.setLayoutManager(gridLayoutManager);
-
-        GridHomeAdapter gridHomeAdapter = new GridHomeAdapter(getActivity());
-
-        int spanCount = 5; // 3 columns
-        int spacing = 20; // 50px
-        boolean includeEdge = false;
-        binding.rvHome.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
-
-        binding.rvHome.setAdapter(gridHomeAdapter);
-
-        gridHomeAdapter.setItemClickListener(this);
-
-        ArrayList<String> strings1 = new ArrayList<>();
-        strings1.add("asdasdasd");
-        strings1.add("assssssssssssssssssssssssssssssssssssssssss");
-        strings1.add("11111111111");
-        strings1.add("ssssssssssssssssssssssssssssssssssssssssssssssssssss");
-        strings1.add("assssssssssssssssssssssssssssssssssssssssss");
-        strings1.add("11111111111");
-        strings1.add("ssssssssssssssssssssssssssssssssssssssssssssssssssss");
 
 
     }
@@ -122,15 +97,15 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
 
         if (scrollView.getScrollY() > minHeight  && scrollView.getScrollY() < maxHeight){
 //            params.(10,40,scrollView.getScrollY(),0);
-            binding.llSearch.setPadding(0,topHeight,scrollView.getScrollY(),0);
+            binding.llSearch.setPadding(scrollView.getScrollY(),topHeight,scrollView.getScrollY(),0);
         }else if (scrollView.getScrollY() > maxHeight && scrollView.getScrollY() <= maxHeight + topHeight){
-            binding.llSearch.setPadding(0,topHeight - scrollView.getScrollY() + maxHeight,maxHeight,0);
+            binding.llSearch.setPadding(maxHeight,topHeight - scrollView.getScrollY() + maxHeight,maxHeight,0);
         }
 
         if (scrollView.getScrollY() == 0){
             binding.llSearch.setPadding(0,topHeight,0,0);
         }else if (scrollView.getScrollY() >= maxHeight + topHeight){
-            binding.llSearch.setPadding(0, minHeight,maxHeight,0);
+            binding.llSearch.setPadding(maxHeight, minHeight,maxHeight,0);
         }
 
     }
@@ -141,13 +116,34 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
     }
 
     @Override
-    public void onItemClick(int position) {
-        startActivity(WebViewActivity.class);
-    }
+    public void getHomeDataSuccess(HomeBean homeBean) {
 
-    @Override
-    public void getDataSuccess(ArrayList<GoodsListBean> goodsListBeans, PageBean pageBean) {
-        GoodsListAdapter goodsListAdapter = new GoodsListAdapter(getActivity(),goodsListBeans,BR.goodslist);
+        binding.setHomebean(homeBean);
+
+        ArrayList<FlashBean> flashBeans = homeBean.getFlash();
+        CustomBannerView.startBanner(flashBeans,binding.bannerView,getActivity());
+
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 5);
+
+        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
+
+        binding.rvHome.setLayoutManager(gridLayoutManager);
+
+        GridHomeAdapter gridHomeAdapter = new GridHomeAdapter(getActivity());
+
+        gridHomeAdapter.getItems().addAll(homeBean.getSqIcon());
+
+        int spanCount = 5; // 3 columns
+        int spacing = 20; // 50px
+        boolean includeEdge = false;
+        binding.rvHome.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
+
+        binding.rvHome.setAdapter(gridHomeAdapter);
+
+
+
+        GoodsListAdapter goodsListAdapter = new GoodsListAdapter(getActivity(),homeBean.getGoodsList6(),BR.goodslist);
 
         StaggeredGridLayoutManager gridLayoutManager1 = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
         binding.rvHomeGoodsList.addItemDecoration(new GridSpacingItemDecoration(2, 20, false));
@@ -156,19 +152,10 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
         binding.rvHomeGoodsList.setAdapter(goodsListAdapter);
 
         goodsListAdapter.setItemClickListener(this);
-    }
 
-    @Override
-    public void getDataFail(String msg) {
-
-    }
-
-    @Override
-    public void getHomeDataSuccess(HomeBean homeBean) {
-
-        ArrayList<FlashBean> flashBeans = homeBean.getFlash();
-        CustomBannerView.startBanner(flashBeans,binding.bannerView,getActivity());
-
+        ViewAdapter viewAdapter = new ViewAdapter(homeBean.getNews());
+        binding.avTitle.setAdapter(viewAdapter);
+        binding.avTitle.start();
     }
 
     @Override

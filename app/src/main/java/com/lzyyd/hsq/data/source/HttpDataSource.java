@@ -1,10 +1,12 @@
 package com.lzyyd.hsq.data.source;
 
 import com.lzyyd.hsq.bean.AddressBean;
+import com.lzyyd.hsq.bean.BalanceBean;
 import com.lzyyd.hsq.bean.CartBean;
 import com.lzyyd.hsq.bean.CartListBean;
 import com.lzyyd.hsq.bean.CategoryBean;
 import com.lzyyd.hsq.bean.CollectBean;
+import com.lzyyd.hsq.bean.CollectListBean;
 import com.lzyyd.hsq.bean.GoodsChooseBean;
 import com.lzyyd.hsq.bean.GoodsDetailInfoBean;
 import com.lzyyd.hsq.bean.GoodsListBean;
@@ -76,4 +78,16 @@ public interface HttpDataSource {
     Observable<ResultBean<CollectBean,String>> modifyOrder(HashMap<String, String> hashMap);
 
     Observable<ResultBean<String,Object>> deleteGoods(HashMap<String, String> hashMap);
+
+    Observable<ResultBean<String,Object>> addGoodCollect(HashMap<String, String> hashMap);
+
+    Observable<ResultBean<String,Object>> isGoodCollect(HashMap<String, String> hashMap);
+
+    Observable<ResultBean<String,Object>> DeleteCollectGood(HashMap<String, String> hashMap);
+
+    Observable<ResultBean<ArrayList<CollectListBean>,Object>> GoodCollectList(HashMap<String, String> hashMap);
+
+    Observable<ResultBean<BalanceBean,Object>> getBalance(HashMap<String, String> hashMap);
+
+
 }

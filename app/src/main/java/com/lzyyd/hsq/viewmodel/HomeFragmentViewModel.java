@@ -4,6 +4,7 @@ import android.app.Application;
 import android.os.Handler;
 import android.view.View;
 
+import com.lzyyd.hsq.activity.VipActivity;
 import com.lzyyd.hsq.bean.GoodsListBean;
 import com.lzyyd.hsq.bean.HomeBean;
 import com.lzyyd.hsq.bean.PageBean;
@@ -41,44 +42,8 @@ public class HomeFragmentViewModel extends BaseViewModel<DataRepository> {
     }
 
     public void setImageClick(){
-        UToast.show(application,"home.imageview");
+        startActivity(VipActivity.class);
     }
-
-    public void getSelfData(int PageIndex, int PageCount, int GoodsType){
-
-        HashMap<String, String> params = new HashMap<>();
-        params.put("cls", "Goods");
-        params.put("fun", "GoodsListVip");
-        params.put("PageIndex",PageIndex+"");
-        params.put("PageCount",PageCount+"");
-        params.put("GoodsType",GoodsType+"");
-        model.getGoodsListVip(params)
-                .compose(RxUtils.schedulersTransformer())
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(new Consumer<Disposable>(){
-                    @Override
-                    public void accept(Disposable disposable){
-                        showDialog();
-                    }
-                })
-                .subscribe(new HttpResultCallBack<ArrayList<GoodsListBean>, PageBean>() {
-                    @Override
-                    public void onResponse(ArrayList<GoodsListBean> goodsListBeans, String status, PageBean page) {
-                        homeDataCallBack.getDataSuccess(goodsListBeans, page);
-                        dismissDialog();
-                    }
-
-                    @Override
-                    public void onErr(String msg, String status) {
-                        homeDataCallBack.getDataFail(msg);
-                        dismissDialog();
-
-                    }
-                });
-
-    }
-
 
     public void getHomeData(String SessionId){
 
@@ -118,8 +83,6 @@ public class HomeFragmentViewModel extends BaseViewModel<DataRepository> {
 
 
     public interface HomeDataCallBack{
-        public void getDataSuccess(ArrayList<GoodsListBean> goodsListBeans, PageBean pageBean);
-        public void getDataFail(String msg);
 
         public void getHomeDataSuccess(HomeBean homeBean);
         public void getHomeDataFail(String msg);
