@@ -42,7 +42,43 @@ public class BalanceBean implements Serializable {
     private double MoneyUse6;
     private double MoneyLock6;
     private double Money6Balance;
+    private double Money7;
+    private double MoneyUse7;
+    private double MoneyLock7;
+    private double Money7Balance;
     private int RefereesCount;
+
+    public double getMoney7() {
+        return Money7;
+    }
+
+    public void setMoney7(double money7) {
+        Money7 = money7;
+    }
+
+    public double getMoneyUse7() {
+        return MoneyUse7;
+    }
+
+    public void setMoneyUse7(double moneyUse7) {
+        MoneyUse7 = moneyUse7;
+    }
+
+    public double getMoneyLock7() {
+        return MoneyLock7;
+    }
+
+    public void setMoneyLock7(double moneyLock7) {
+        MoneyLock7 = moneyLock7;
+    }
+
+    public double getMoney7Balance() {
+        return Money7Balance;
+    }
+
+    public void setMoney7Balance(double money7Balance) {
+        Money7Balance = money7Balance;
+    }
 
     public String getUserId() {
         return UserId;

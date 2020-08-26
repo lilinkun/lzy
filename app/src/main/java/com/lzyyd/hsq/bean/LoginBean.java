@@ -23,6 +23,15 @@ public class LoginBean implements Serializable {
     private String RefereesName;
     private String SharedErm;
     private int Project;
+    private int CcqType;
+
+    public int getCcqType() {
+        return CcqType;
+    }
+
+    public void setCcqType(int ccqType) {
+        CcqType = ccqType;
+    }
 
     public int getProject() {
         return Project;

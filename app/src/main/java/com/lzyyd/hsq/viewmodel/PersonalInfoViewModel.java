@@ -91,4 +91,32 @@ public class PersonalInfoViewModel extends BaseViewModel<DataRepository> {
 
     }
 
+    public void LoginOut(String SessionId) {
+        /*HashMap<String, String> params = new HashMap<>();
+        params.put("cls", "UserBase");
+        params.put("fun", "Logout");
+        params.put("SessionId", SessionId);
+        model.loginout(params)
+                .compose(RxUtils.schedulersTransformer())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>(){
+                    @Override
+                    public void accept(Disposable disposable){
+                        showDialog();
+                    }
+                })
+                .subscribe(new HttpCallBack<String>() {
+                    @Override
+                    public void onResponse(String o) {
+                        Toast.makeText(context,o,Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onErr(String msg) {
+                        Toast.makeText(context,"ole",Toast.LENGTH_SHORT).show();
+                    }
+                });*/
+    }
+
 }

@@ -278,22 +278,17 @@
                     android:layout_marginLeft="8.5dp"
                     />
 
-
             </LinearLayout>
-
-
 
             <include
                 android:id="@+id/order_layout"
                 layout="@layout/layout_me_order"
                 app:me="@{me}"/>
 
-
             <include
                 layout="@layout/me_changchangqing_layout"
+                app:me="@{me}"
                 />
-
-
 
             <include
                 layout="@layout/layout_me_fans"
@@ -328,63 +323,7 @@
 
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/rl_bind_card"
-                android:layout_width="match_parent"
-                android:layout_marginLeft="@dimen/margin_10"
-                android:layout_marginRight="@dimen/margin_10"
-                android:layout_marginBottom="@dimen/margin_10"
-                android:background="@drawable/bg_sure_order_address"
-                android:paddingLeft="@dimen/padding_15"
-                android:paddingRight="@dimen/padding_15"
-                android:layout_height="44dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/textsize14"
-                    android:textColor="@color/grey_333333"
-                    android:layout_centerVertical="true"
-                    android:text="@string/me_bind_card"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tv_more"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:typeface="@{me.setTypeFace()}"
-                    />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_me_customer_service"
-                android:layout_width="match_parent"
-                android:layout_marginLeft="@dimen/margin_10"
-                android:layout_marginRight="@dimen/margin_10"
-                android:layout_marginBottom="@dimen/margin_10"
-                android:background="@drawable/bg_sure_order_address"
-                android:paddingLeft="@dimen/padding_15"
-                android:paddingRight="@dimen/padding_15"
-                android:layout_height="44dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/textsize14"
-                    android:textColor="@color/grey_333333"
-                    android:layout_centerVertical="true"
-                    android:text="@string/me_customer_service"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tv_more"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:typeface="@{me.setTypeFace()}"
-                    />
-
-            </RelativeLayout>
 
 
         </LinearLayout>

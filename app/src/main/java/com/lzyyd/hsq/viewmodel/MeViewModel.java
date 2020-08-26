@@ -12,6 +12,7 @@ import com.lzyyd.hsq.activity.PersonalInfoActivity;
 import com.lzyyd.hsq.activity.RechargeActivity;
 import com.lzyyd.hsq.activity.VipActivity;
 import com.lzyyd.hsq.activity.WalletActivity;
+import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.BalanceBean;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
@@ -36,6 +37,7 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
 
     private MeBackCall meBackCall;
     public ObservableField<Integer> OrderAllNum = new ObservableField<>();
+    public ObservableField<Integer> ccqField = new ObservableField<>(ProApplication.CCQTYPE);
 
     public MeViewModel(@NonNull Application application, DataRepository model) {
         super(application, model);
@@ -88,7 +90,6 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
 
 
     public void getBalance(String SessionId) {
-//        final ProgressDialog progressDialog = ProgressDialog.show(mContext,"请稍等...","获取数据中...",true);
         HashMap<String, String> params = new HashMap<>();
         params.put("cls", "UserBase");
         params.put("fun", "BankBase_GetBalance");

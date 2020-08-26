@@ -94,7 +94,7 @@
     <string name="me_scan">我的二维码</string>
     <string name="me_shared_friend">分享给好友</string>
     <string name="me_bind_card">认证绑卡</string>
-    <string name="me_address">收货地址</string>
+    <string name="me_address">我的地址</string>
 
     <!--个人信息-->
     <string name="personal_over">完成</string>

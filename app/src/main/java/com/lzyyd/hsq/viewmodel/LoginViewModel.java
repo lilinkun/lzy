@@ -101,6 +101,7 @@ public class LoginViewModel extends BaseViewModel<DataRepository> {
 
                         ProApplication.PROJECT = mLoginBean.getProject();
                         ProApplication.LEVEL = mLoginBean.getUserLevel();
+                        ProApplication.CCQTYPE = mLoginBean.getCcqType();
 
                         SharedPreferences sharedPreferences = context.getSharedPreferences(HsqAppUtil.LOGIN, MODE_PRIVATE);
                         sharedPreferences.edit().putString("sessionid", ProApplication.SESSIONID()).putBoolean(HsqAppUtil.LOGIN, true)
