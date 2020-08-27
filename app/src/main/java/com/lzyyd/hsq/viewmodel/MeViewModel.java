@@ -4,6 +4,7 @@ import android.app.Application;
 import android.os.Bundle;
 
 import com.lzyyd.hsq.activity.AddressListActivity;
+import com.lzyyd.hsq.activity.CcqActivity;
 import com.lzyyd.hsq.activity.CollectGoodsActivity;
 import com.lzyyd.hsq.activity.GetCashActivity;
 import com.lzyyd.hsq.activity.MyQrcodeActivity;
@@ -14,8 +15,10 @@ import com.lzyyd.hsq.activity.VipActivity;
 import com.lzyyd.hsq.activity.WalletActivity;
 import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.BalanceBean;
+import com.lzyyd.hsq.bean.CcqBean;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
+import com.lzyyd.hsq.util.HsqAppUtil;
 
 import java.util.HashMap;
 
@@ -73,6 +76,10 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
         startActivity(VipActivity.class);
     }
 
+    public void setJumpCcq(){
+        startActivity(CcqActivity.class);
+    }
+
     public void setJumpOrderlist(int position){
         Bundle bundle = new Bundle();
         bundle.putInt("position",position);
@@ -86,6 +93,11 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
 
     public void setJumpAddress(){
         startActivity(AddressListActivity.class);
+    }
+
+
+    public void setQrcode(){
+        meBackCall.clickQrcode();
     }
 
 
@@ -120,8 +132,45 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
     }
 
 
+
+    public void getCcqUse(String SessionId) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("cls", "UserCcq");
+        params.put("fun", "UserCcqUse");
+        params.put("SessionId", SessionId);
+        model.getCcqUse(params)
+                .compose(RxUtils.schedulersTransformer())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>(){
+                    @Override
+                    public void accept(Disposable disposable){
+                        showDialog();
+                    }
+                })
+                .subscribe(new HttpResultCallBack<CcqBean, Object>() {
+                    @Override
+                    public void onResponse(CcqBean ccqBean, String status, Object page) {
+                        dismissDialog();
+                        meBackCall.getCcqSuccess(ccqBean);
+                    }
+
+                    @Override
+                    public void onErr(String msg, String status) {
+                        dismissDialog();
+                        meBackCall.getCcqFail(msg);
+                    }
+                });
+    }
+
+
     public interface MeBackCall{
         public void getBalanceSuccess(BalanceBean balanceBean);
         public void getBalanceFail(String msg);
+
+        public void getCcqSuccess(CcqBean ccqBean);
+        public void getCcqFail(String msg);
+
+        public void clickQrcode();
     }
 }

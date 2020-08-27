@@ -12,6 +12,12 @@
             name="balance"
             type="com.lzyyd.hsq.bean.BalanceBean" />
 
+        <variable
+            name="ccq"
+            type="com.lzyyd.hsq.bean.CcqBean" />
+
+        <import type="android.view.View"/>
+
     </data>
 
 
@@ -119,15 +125,26 @@
                     >
 
                     <TextView
+                        android:layout_width="19dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/margin_15"
+                        android:onClick="@{()->me.setQrcode()}"
+                        android:text="@string/ic_qrcode"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/margin_20"
+                        android:typeface="@{me.setTypeFace()}"
+                        android:visibility="@{me.ccqField > 0 ? View.VISIBLE : View.GONE}" />
+
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/me_setting"
                         android:textSize="@dimen/margin_20"
-                        android:layout_marginRight="@dimen/margin_10"
+                        android:layout_marginRight="@dimen/margin_25"
                         android:typeface="@{me.setTypeFace()}"
                         android:textColor="@color/white"
+                        android:onClick="@{()->me.setJumpPersonal()}"
                         />
-
 
 
                 </LinearLayout>
@@ -288,6 +305,7 @@
             <include
                 layout="@layout/me_changchangqing_layout"
                 app:me="@{me}"
+                app:ccq="@{ccq}"
                 />
 
             <include

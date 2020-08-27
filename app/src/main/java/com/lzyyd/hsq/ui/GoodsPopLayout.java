@@ -169,7 +169,6 @@ public class GoodsPopLayout extends RelativeLayout implements View.OnClickListen
             flowLayout.removeAllViews();
         }
 
-
         changeBgColor(type);
         Stock = Integer.valueOf(goodsDetailBean.getGoodsNumber());
 
@@ -179,7 +178,7 @@ public class GoodsPopLayout extends RelativeLayout implements View.OnClickListen
 
         if (type == HsqAppUtil.GOODSTYPE_INTEGRAL) {
             tv_goods_pop_price.setText(goodsDetailBean.getIntegral() + "积分 + " + goodsDetailBean.getPrice() + "元");
-        } else if (type == HsqAppUtil.GOODSTYPE_VIP) {
+        } else if (type == HsqAppUtil.GOODSTYPE_CCQ) {
             tv_add_cart.setVisibility(GONE);
             tv_buy_goods.setBackground(getResources().getDrawable(R.drawable.bg_chuangke_update));
         }else {

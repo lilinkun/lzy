@@ -9,12 +9,26 @@
             name="me"
             type="com.lzyyd.hsq.viewmodel.MeViewModel" />
 
+        <variable
+            name="balance"
+            type="com.lzyyd.hsq.bean.BalanceBean" />
+
+        <variable
+            name="ccq"
+            type="com.lzyyd.hsq.bean.CcqBean" />
+
+        <import type="android.view.View"/>
+
     </data>
 
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_sure_order_address"
+    android:layout_marginLeft="@dimen/margin_10"
+    android:layout_marginRight="@dimen/margin_10"
+    android:layout_marginTop="@dimen/margin_10"
+    android:paddingBottom="@dimen/margin_10"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -22,9 +36,6 @@
         android:layout_width="match_parent"
         android:paddingLeft="@dimen/padding_15"
         android:paddingRight="@dimen/padding_15"
-        android:layout_marginTop="@dimen/margin_10"
-        android:layout_marginLeft="@dimen/margin_10"
-        android:layout_marginRight="@dimen/margin_10"
         android:layout_height="44dp">
         <TextView
             android:layout_width="wrap_content"
@@ -45,19 +56,103 @@
 
     </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_changchangqing_btn"
+        android:layout_height="80dp"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:onClick="@{()->me.setJumpCcq()}"
         >
 
+       <ImageView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:src="@mipmap/ic_gift_item"
+           android:scaleType="fitCenter"
+           android:adjustViewBounds="true"
+           />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="@dimen/margin_10"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{"剩余"+ String.valueOf(ccq.ccq.ccqNoUse) + @string/piece}'
+                android:textColor="#ffe61e16"
+                android:textSize="10sp"
+                android:background="@drawable/shape_me_ccq"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{@string/used + String.valueOf(ccq.ccq.ccqUse) + @string/piece}'
+                android:textColor="#ff333333"
+                android:textSize="10sp"
+                android:layout_marginLeft="@dimen/margin_10"
+                />
+
+        </LinearLayout>
 
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/margin_10"
+        android:visibility="@{me.ccqField > 0 ? View.VISIBLE : View.GONE}"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_ccq_gift_item"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_marginBottom="@dimen/margin_10"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{"剩余"+ String.valueOf(balance.money7Balance) + @string/piece}'
+                android:textColor="#ffe61e16"
+                android:textSize="10sp"
+                android:background="@drawable/shape_me_ccq"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{"已提"+ String.valueOf(balance.money7Balance) + @string/piece}'
+                android:textColor="#ff333333"
+               android:textSize="10sp"
+                android:layout_marginLeft="@dimen/margin_10"
+                />
+
+        </LinearLayout>
 
 
-
-    </LinearLayout>
+    </RelativeLayout>
 
 
 </LinearLayout>

@@ -5,6 +5,8 @@ import com.lzyyd.hsq.bean.BalanceBean;
 import com.lzyyd.hsq.bean.CartBean;
 import com.lzyyd.hsq.bean.CartListBean;
 import com.lzyyd.hsq.bean.CategoryBean;
+import com.lzyyd.hsq.bean.CcqBean;
+import com.lzyyd.hsq.bean.CcqListBean;
 import com.lzyyd.hsq.bean.CollectBean;
 import com.lzyyd.hsq.bean.CollectListBean;
 import com.lzyyd.hsq.bean.GoodsChooseBean;
@@ -88,6 +90,10 @@ public interface HttpDataSource {
     Observable<ResultBean<ArrayList<CollectListBean>,Object>> GoodCollectList(HashMap<String, String> hashMap);
 
     Observable<ResultBean<BalanceBean,Object>> getBalance(HashMap<String, String> hashMap);
+
+    Observable<ResultBean<CcqBean,Object>> getCcqUse(HashMap<String, String> hashMap);
+
+    Observable<ResultBean<ArrayList<CcqListBean>,PageBean>> getCcqList(HashMap<String, String> hashMap);
 
 
 }

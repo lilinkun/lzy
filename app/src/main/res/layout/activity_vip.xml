@@ -133,7 +133,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_20"
-                    android:onClick="@{()->vip.setJumpChuangke()}"
+                    android:onClick="@{()->vip.setJumpChuangke(4)}"
                     >
 
                 <ImageView
@@ -161,6 +161,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_20"
+                    android:onClick="@{()->vip.setJumpChuangke(8)}"
                     android:visibility="@{vip.projectField == 1 ? View.VISIBLE : View.GONE}"
                     >
 
@@ -192,6 +193,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_20"
                     android:layout_marginBottom="@dimen/margin_20"
+                    android:onClick="@{()->vip.setJumpChuangke(16)}"
                     >
 
                     <ImageView

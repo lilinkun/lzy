@@ -54,6 +54,8 @@
     <string name="tv_coin">&#xe63c;</string>
     <string name="tv_shared">&#xe655;</string>
     <string name="dustbin">&#xe656;</string>
+    <string name="ic_qrcode">&#xe653;</string>
+    <string name="ic_code">&#xe657;</string>
 
 
     <string name="clother_host">人气</string>
@@ -62,6 +64,12 @@
     <string name="clother_price">价格</string>
     <string name="clother_top">销量</string>
 
+
+    <string name="piece">张</string>
+    <string name="used">已使用</string>
+    <string name="estimate">预计</string>
+    <string name="deliver_goods">发货</string>
+    <string name="de_date">有效期至：</string>
 
     <!--钱包-->
     <string name="wallet">钱包</string>

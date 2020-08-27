@@ -5,6 +5,8 @@ import com.lzyyd.hsq.bean.BalanceBean;
 import com.lzyyd.hsq.bean.CartBean;
 import com.lzyyd.hsq.bean.CartListBean;
 import com.lzyyd.hsq.bean.CategoryBean;
+import com.lzyyd.hsq.bean.CcqBean;
+import com.lzyyd.hsq.bean.CcqListBean;
 import com.lzyyd.hsq.bean.CollectBean;
 import com.lzyyd.hsq.bean.CollectListBean;
 import com.lzyyd.hsq.bean.GoodsChooseBean;
@@ -217,6 +219,14 @@ public class DataRepository extends BaseModel implements HttpDataSource, LocalDa
 
     public Observable<ResultBean<BalanceBean, Object>> getBalance(HashMap<String, String> mHashMap) {
         return mHttpDataSource.getBalance(mHashMap);
+    }
+
+    public Observable<ResultBean<CcqBean, Object>> getCcqUse(HashMap<String, String> mHashMap) {
+        return mHttpDataSource.getCcqUse(mHashMap);
+    }
+
+    public Observable<ResultBean<ArrayList<CcqListBean>, PageBean>> getCcqList(HashMap<String, String> mHashMap) {
+        return mHttpDataSource.getCcqList(mHashMap);
     }
 
 }

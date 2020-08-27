@@ -7,14 +7,28 @@
         <variable
             name="goodsDetailViewModel"
             type="com.lzyyd.hsq.viewmodel.GoodsDetailViewModel" />
+
+        <variable
+            name="goodsDetail"
+            type="com.lzyyd.hsq.bean.GoodsDetailInfoBean" />
+
+        <import type="android.view.View"/>
     </data>
 
 <LinearLayout
     android:id="@+id/ll_goods_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical">
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#F2F2F2"
+        />
+
 
     <RelativeLayout
         android:id="@+id/rl_goods_format"
@@ -31,8 +45,8 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="@string/tv_goods_format"
-            android:textColor="@color/grey_color3"
-            android:textSize="14.4sp" />
+            android:textColor="#9A9A9A"
+            android:textSize="14sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -40,6 +54,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/tv_goods_format"
+            android:textSize="14sp"
             android:text="选择颜色和尺寸"
             android:textColor="@color/text_222222" />
 
@@ -63,24 +78,20 @@
     <RelativeLayout
         android:id="@+id/rl_no_delivery"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone">
+        android:layout_height="44dp"
+        android:visibility="@{goodsDetail.isPresell > 0 ? View.VISIBLE : View.GONE}"
+        >
 
-        <LinearLayout
+        <TextView
             android:id="@+id/ll_no_delivery"
             android:layout_width="wrap_content"
-            android:layout_height="44dp"
-            android:gravity="center_vertical"
-            android:layout_marginRight="10dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="不配送区域"
-                android:textColor="#999999"
-                android:textSize="13sp"
-                android:layout_marginLeft="10dp"/>
+            android:layout_height="wrap_content"
+            android:textColor="#9A9A9A"
+            android:layout_centerVertical="true"
+            android:text="@string/deliver_goods"
+            android:textSize="14sp"
+            android:layout_marginLeft="10dp"/>
 
-        </LinearLayout>
 
 
         <TextView
@@ -90,29 +101,13 @@
             android:layout_marginLeft="13dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="14dp"
-            android:text="台湾省、澳门特别行政区、香港特别行政区、西藏藏族自治区、广西壮族自治区、内蒙古自治区"
-            android:textSize="13sp"
+            android:textSize="14sp"
             android:ellipsize="end"
             android:maxLines="1"
+            android:text="@{@string/estimate + goodsDetail.presellDate + @string/deliver_goods}"
             android:layout_toRightOf="@+id/ll_no_delivery"
-            android:layout_toLeftOf="@+id/ll_right"
-            android:textColor="#333333"/>
+            android:textColor="#FF3C38"/>
 
-        <LinearLayout
-            android:id="@+id/ll_right"
-            android:layout_width="wrap_content"
-            android:layout_height="44dp"
-            android:gravity="center_vertical"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
-            >
-            <ImageView
-                android:id="@+id/iv_more"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_right_arrow"
-                />
-        </LinearLayout>
     </RelativeLayout>
 </LinearLayout>
 </layout>

@@ -87,6 +87,9 @@ dependencies {
     //读取gif动画
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.8'
 
+    /*zxing*/
+    implementation 'com.google.zxing:core:3.3.0'
+
 
     implementation project(":banner")
     //MVVMHabit

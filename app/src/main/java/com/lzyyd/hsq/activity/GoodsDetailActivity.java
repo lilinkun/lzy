@@ -66,7 +66,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         Eyes.translucentStatusBar(this);
 
         String goodsid = getIntent().getExtras().getString(HsqAppUtil.GOODSID);
-        type = getIntent().getExtras().getInt("type");
+        type = getIntent().getExtras().getInt(HsqAppUtil.TYPE);
 
         viewModel.setClickCallBack(this);
         viewModel.isCollect(goodsid,ProApplication.SESSIONID());
@@ -74,6 +74,10 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
 
         if (type == HsqAppUtil.GOODSTYPE_VIP){
             binding.layoutBottom.setVisibility(View.GONE);
+            binding.llCollect.setVisibility(View.GONE);
+            binding.goodsLayout.llGoodsLayout.setVisibility(View.GONE);
+        }else if (type == HsqAppUtil.GOODSTYPE_CCQ){
+            viewModel.goodsBoolean.set(true);
             binding.llCollect.setVisibility(View.GONE);
             binding.goodsLayout.llGoodsLayout.setVisibility(View.GONE);
         }
@@ -108,7 +112,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
                 }*/
             }
         });
-        goodsPopLayout.setPosition(3);
+//        goodsPopLayout.setPosition(3);
         popupWindow.showAtLocation(binding.rlGoods, Gravity.CENTER | Gravity.CENTER, 0, 0);
     }
 
@@ -187,12 +191,11 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
 
         binding.setVariable(BR.goodsDetail,goodsListBeans);
 
-        TextUtil.setText(this,goodsListBeans.getGoodsName(),"秒杀",binding.tvGoodsContent);
+//        TextUtil.setText(this,goodsListBeans.getGoodsName(),"秒杀",binding.tvGoodsContent);
 
         binding.tvOldPrice.setText("￥" + goodsListBeans.getMarketPrice());
 
         binding.tvOldPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-        binding.tvRushTime.start("2020-07-28 07:00:00");
         binding.tsvDetail.init(this);
 
         List<String> list_path = new ArrayList<>();
@@ -272,7 +275,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         if (goodsDetailBean != null && Integer.valueOf(goodsDetailBean.getGoodsNumber()) == 0) {
             UToast.show(this,"库存不足，无法下单");
         } else {
-            if (type == HsqAppUtil.GOODSTYPE_VIP || type == HsqAppUtil.GOODSTYPE_SECKILL || type == HsqAppUtil.GOODSTYPE_CROWDFUNDING) {
+            if (type == HsqAppUtil.GOODSTYPE_VIP || type == HsqAppUtil.GOODSTYPE_SECKILL) {
                 if (goodsDetailBean != null) {
                     mRightNowBuy(goodsDetailBean, null, 1);
                 }

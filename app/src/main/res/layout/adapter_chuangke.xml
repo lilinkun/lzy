@@ -126,8 +126,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
-                        android:layout_marginLeft="@dimen/margin_5"
-                        android:layout_marginRight="@dimen/margin_5"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:layout_marginRight="@dimen/margin_10"
                         android:gravity="center"
                         android:textColor="@color/grey_333333"
                         android:textSize="14sp" />

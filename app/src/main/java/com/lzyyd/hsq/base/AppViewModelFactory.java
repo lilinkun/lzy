@@ -7,11 +7,13 @@ import com.lzyyd.hsq.activity.ChuangkeActivity;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.viewmodel.AddAddressViewModel;
 import com.lzyyd.hsq.viewmodel.AddressListViewModel;
+import com.lzyyd.hsq.viewmodel.CcqViewModel;
 import com.lzyyd.hsq.viewmodel.ChuangkeViewModel;
 import com.lzyyd.hsq.viewmodel.CollectViewModel;
 import com.lzyyd.hsq.viewmodel.ForgetPasswordViewModel;
 import com.lzyyd.hsq.viewmodel.GetCashViewModel;
 import com.lzyyd.hsq.viewmodel.GoodsDetailViewModel;
+import com.lzyyd.hsq.viewmodel.GoodsListViewModel;
 import com.lzyyd.hsq.viewmodel.HomeFragmentViewModel;
 import com.lzyyd.hsq.viewmodel.IntegralViewModel;
 import com.lzyyd.hsq.viewmodel.LoginViewModel;
@@ -104,6 +106,10 @@ public class AppViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             return (T) new ChuangkeViewModel(mApplication, mRepository);
         }else if (modelClass.isAssignableFrom(PayViewModel.class)){
             return (T) new PayViewModel(mApplication, mRepository);
+        }else if (modelClass.isAssignableFrom(CcqViewModel.class)){
+            return (T) new CcqViewModel(mApplication, mRepository);
+        }else if (modelClass.isAssignableFrom(GoodsListViewModel.class)){
+            return (T) new GoodsListViewModel(mApplication, mRepository);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

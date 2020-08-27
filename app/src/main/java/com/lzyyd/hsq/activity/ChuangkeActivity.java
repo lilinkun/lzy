@@ -50,6 +50,7 @@ public class ChuangkeActivity extends BaseActivity<ActivityChuangkeBinding, Chua
     private PopupWindow popupWindow;
     private PopupWindow vipGoodsPopupWindow;
     private int positionFragment = 0;
+    private int goodstype = 0;
 
     @Override
     public int initContentView(Bundle savedInstanceState) {
@@ -70,6 +71,8 @@ public class ChuangkeActivity extends BaseActivity<ActivityChuangkeBinding, Chua
     @Override
     public void initData() {
 
+        goodstype = getIntent().getExtras().getInt(HsqAppUtil.GOODSTYPE);
+
         viewModel.setChuangkeCategoryDateCallBack(this);
         viewModel.getCategoryData(1,20);
 
@@ -78,11 +81,11 @@ public class ChuangkeActivity extends BaseActivity<ActivityChuangkeBinding, Chua
     @Override
     public void getCategorySuccess(ArrayList<CategoryBean> categoryBeans, PageBean page) {
         ArrayList<String> mTitles = new ArrayList<>();
-        ChuangkeFragment chuangkeFragment1 = new ChuangkeFragment("",this);
+        ChuangkeFragment chuangkeFragment1 = new ChuangkeFragment("",goodstype,this);
         mTitles.add("全部");
         fragments.add(chuangkeFragment1);
         for (CategoryBean categoryBean : categoryBeans){
-            ChuangkeFragment chuangkeFragment = new ChuangkeFragment(categoryBean.getCategoryID(),this);
+            ChuangkeFragment chuangkeFragment = new ChuangkeFragment(categoryBean.getCategoryID(),goodstype,this);
             mTitles.add(categoryBean.getCategoryName());
             fragments.add(chuangkeFragment);
         }

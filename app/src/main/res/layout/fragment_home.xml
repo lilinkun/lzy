@@ -171,52 +171,26 @@
                     app:image="@{homebean.sq.img}"
                     />
 
-
-
-                 <!--<ImageView
-                     android:id="@+id/iv_home_haosheng"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:src="@mipmap/ic_haosheng"/>
-        
-        
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@id/iv_home_haosheng"
-                        android:orientation="vertical">
-        
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="壕省"
-                            android:textColor="#ffde3c31"
-                            android:textSize="15sp"
-                            android:layout_marginTop="1.5dp"
-                            android:layout_marginLeft="1.5dp"
-                            />
-        
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="精打细算 为你省钱"
-                            android:textColor="#ffde3c31"
-                            android:textSize="10sp"
-                            android:layout_marginTop="2dp"
-                            />
-        
-                    </LinearLayout>-->
-        
         
                 </RelativeLayout>
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    app:image="@{homebean.vip.img}"
+                    android:onClick="@{()->home.setImageClick()}"
+                    />
+
         
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_home_vip"
                     android:scaleType="fitXY"
-                    app:image="@{homebean.vip.img}"
-                    android:onClick="@{()->home.setImageClick()}"
+                    app:image="@{homebean.ccq.get(0).flashPic}"
+                    android:onClick="@{()->home.ccqEntrance(homebean.ccq.get(0).flashUrl)}"
+                    android:layout_marginTop="@dimen/margin_10"
                     />
 
 
@@ -387,6 +361,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
+                        android:onClick="@{()->home.onClick(1)}"
                         android:gravity="center"
                         >
 
@@ -394,14 +369,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="力荐"
-                            android:textColor="#ff333333"
+                            android:textColor="@{home.recommemdFirst ? @color/text_label : @color/grey_333333}"
                             android:textSize="15sp"
                             />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="超值精选"
-                            android:textColor="#ff666666"
+                            android:textColor="@{home.recommemdFirst ? @color/white : @color/grey_color2}"
+                            android:background="@{home.recommemdFirst ? @drawable/bg_home_recommend_click : @drawable/bg_home_recommend_unclick}"
                             android:textSize="10sp"
                             />
                     </LinearLayout>
@@ -412,6 +388,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
+                        android:onClick="@{()->home.onClick(2)}"
                         android:gravity="center"
                         >
 
@@ -419,7 +396,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="排行榜"
-                            android:textColor="#ff333333"
+                            android:textColor="@{home.recommemdSecond ? @color/text_label : @color/grey_333333}"
                             android:textSize="15sp"
                             />
 
@@ -427,7 +404,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="跟榜选好物"
-                            android:textColor="#ff666666"
+                            android:textColor="@{home.recommemdSecond ? @color/white : @color/grey_color2}"
+                            android:background="@{home.recommemdSecond ? @drawable/bg_home_recommend_click : @drawable/bg_home_recommend_unclick}"
                             android:textSize="10sp"
                             />
 
@@ -438,6 +416,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
+                        android:onClick="@{()->home.onClick(3)}"
                         android:gravity="center"
                         >
 
@@ -445,14 +424,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="实惠"
-                            android:textColor="#ff333333"
+                            android:textColor="@{home.recommemdThird ? @color/text_label : @color/grey_333333}"
                             android:textSize="15sp"
                             />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="便宜好货"
-                            android:textColor="#ff666666"
+                            android:textColor="@{home.recommemdThird ? @color/white : @color/grey_color2}"
+                            android:background="@{home.recommemdThird ? @drawable/bg_home_recommend_click : @drawable/bg_home_recommend_unclick}"
                             android:textSize="10sp"
                         />
 
@@ -463,6 +443,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
+                        android:onClick="@{()->home.onClick(4)}"
                         android:gravity="center"
                         >
 
@@ -478,7 +459,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="好货优选"
-                            android:textColor="#ffffffff"
+                            android:textColor="@color/grey_color2"
                             android:textSize="10sp"
                             />
 

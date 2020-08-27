@@ -14,6 +14,7 @@
             name="goodsDetail"
             type="com.lzyyd.hsq.bean.GoodsDetailInfoBean" />
 
+        <import type="android.view.View"/>
 
     </data>
 
@@ -44,6 +45,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="64dp"
+        android:visibility="gone"
         android:background="@drawable/goods_detail_discount">
 
 
@@ -87,7 +89,6 @@
                 />
 
             <TextView
-                android:id="@+id/tv_old_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#ffffffff"
@@ -128,41 +129,6 @@
                 android:textColor="#ffffffff"
                 android:textSize="17sp" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="距结束 "
-                    android:textColor="#ffffffff"
-                    android:textSize="10sp"
-                    />
-
-                <com.lzyyd.hsq.ui.CountdownView
-                    android:id="@+id/tv_rush_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:isHideTimeBackground="false"
-                    app:isShowDay="false"
-                    app:isShowHour="true"
-                    app:isShowMinute="true"
-                    app:isShowSecond="true"
-                    app:timeTextColor="#ffffff"
-                    app:timeTextSize="11sp"
-                    app:isTimeTextBold="true"
-                    app:suffixGravity="center"
-                    app:suffixTextSize="11sp"
-                    app:suffixHour=":"
-                    app:suffixMinute=":"
-                    />
-
-
-            </LinearLayout>
 
 
         </LinearLayout>
@@ -173,10 +139,40 @@
     
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="wrap_content"
         android:background="#ffffff"
         android:orientation="vertical"
         android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="￥"
+            android:textColor="#E61E16"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(goodsDetail.price)}"
+            android:textColor="#E61E16"
+            android:textSize="25sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_old_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey_color3"
+            android:textSize="12sp"
+            android:layout_marginLeft="5dp"
+            />
+        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -190,6 +186,7 @@
                 android:maxLines="2"
                 android:textColor="#ff333333"
                 android:textSize="15sp"
+                android:text="@{goodsDetail.goodsName}"
                 android:layout_toLeftOf="@+id/ll_collect"
                 android:layout_marginRight="5dp"
                 />
@@ -232,7 +229,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="创客礼包"
-            android:textColor="#ffff3c38"
+            android:textColor="@color/text_label"
             android:textSize="10sp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
@@ -311,13 +308,16 @@
     <include
         android:id="@+id/goods_layout"
         layout="@layout/goods_layout_common"
-        app:goodsDetailViewModel = "@{goodsDetailViewModel}"/>
+        app:goodsDetailViewModel ="@{goodsDetailViewModel}"
+        app:goodsDetail="@{goodsDetail}"
+        />
 
-        <WebView
-            android:id="@+id/wv_detail"
-            android:layout_width="match_parent"
-            android:layout_height="500dp"
-            />
+
+    <WebView
+        android:id="@+id/wv_detail"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        />
 
 
     </LinearLayout>
@@ -375,11 +375,28 @@
         android:id="@+id/layout_bottom"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_alignParentBottom="true">
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
 
     <include
         layout="@layout/layout_shopping_bottom"
+        android:visibility="@{goodsDetailViewModel.goodsBoolean ? View.GONE : View.VISIBLE}"
         app:goodsDetailViewModel="@{goodsDetailViewModel}"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_25"
+            android:layout_marginRight="@dimen/margin_25"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:padding="@dimen/padding_10"
+            android:background="@drawable/bg_goods_detail_bottom_btn"
+            android:text="立即购买"
+            android:onClick="@{()->goodsDetailViewModel.sureOrder()}"
+            android:visibility="@{goodsDetailViewModel.goodsBoolean ? View.VISIBLE : View.GONE}"
+            />
 
     </LinearLayout>
 

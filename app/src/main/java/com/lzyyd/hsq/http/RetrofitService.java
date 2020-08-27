@@ -5,6 +5,8 @@ import com.lzyyd.hsq.bean.BalanceBean;
 import com.lzyyd.hsq.bean.CartBean;
 import com.lzyyd.hsq.bean.CartListBean;
 import com.lzyyd.hsq.bean.CategoryBean;
+import com.lzyyd.hsq.bean.CcqBean;
+import com.lzyyd.hsq.bean.CcqListBean;
 import com.lzyyd.hsq.bean.CollectBean;
 import com.lzyyd.hsq.bean.CollectListBean;
 import com.lzyyd.hsq.bean.GoodsChooseBean;
@@ -137,5 +139,13 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("Api/")
     Observable<ResultBean<BalanceBean, Object>> getBalance(@FieldMap Map<String, String> params);
+
+    @FormUrlEncoded
+    @POST("Api/")
+    Observable<ResultBean<CcqBean, Object>> getCcqUse(@FieldMap Map<String, String> params);
+
+    @FormUrlEncoded
+    @POST("Api/")
+    Observable<ResultBean<ArrayList<CcqListBean>, PageBean>> getCcqList(@FieldMap Map<String, String> params);
 
 }

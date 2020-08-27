@@ -215,7 +215,14 @@
                 android:background="#E7E7E7"
                 android:visibility="gone" />
         </RelativeLayout>
+
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_goods_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 
 </LinearLayout>
 

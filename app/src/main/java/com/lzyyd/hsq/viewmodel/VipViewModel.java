@@ -1,10 +1,12 @@
 package com.lzyyd.hsq.viewmodel;
 
 import android.app.Application;
+import android.os.Bundle;
 
 import com.lzyyd.hsq.activity.ChuangkeActivity;
 import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.data.DataRepository;
+import com.lzyyd.hsq.util.HsqAppUtil;
 
 import androidx.databinding.ObservableField;
 import me.goldze.mvvmhabit.base.BaseViewModel;
@@ -22,8 +24,10 @@ public class VipViewModel extends BaseViewModel<DataRepository> {
         super(application,dataRepository);
     }
 
-    public void setJumpChuangke(){
-        startActivity(ChuangkeActivity.class);
+    public void setJumpChuangke(int goodstype){
+        Bundle bundle = new Bundle();
+        bundle.putInt(HsqAppUtil.GOODSTYPE,goodstype);
+        startActivity(ChuangkeActivity.class,bundle);
     }
 
 

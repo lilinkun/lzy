@@ -25,6 +25,7 @@ public class HsqAppUtil {
 
 
     public static final String TYPEID = "TYPEID";
+    public static final String GOODSTYPE = "GOODSTYPE";
     public static final String USERNAME = "username";
     public static final String GOODSNAME = "goodsname";
     public static final String USERID = "userid";
@@ -69,13 +70,10 @@ public class HsqAppUtil {
 
     public static final int GOODSTYPE_COMMON = 1;//普通商品
     public static final int GOODSTYPE_INTEGRAL = 2;//积分商城
-    public static final int GOODSTYPE_VIP = 4;//vip礼包
-    public static final int GOODSTYPE_WLM = 8;//唯乐美商品
-    public static final int GOODSTYPE_CROWDFUNDING = 16;//众筹
-    public static final int GOODSTYPE_POINT = 32;//九九尖货
-    public static final int GOODSTYPE_WLMBUY = 64;//唯乐购
-    public static final int GOODSTYPE_SECKILL = 128;//秒杀
-    public static final int GOODSTYPE_BEAUTY_HEALTH = 256;//医美健康
+    public static final int GOODSTYPE_VIP = 4;//vip创客礼包
+    public static final int GOODSTYPE_SERVICE_CENTER = 8;//服务中心
+    public static final int GOODSTYPE_SECKILL = 16;//秒杀
+    public static final int GOODSTYPE_CCQ = 64;//常常清
 
 
     @BindingAdapter({"image"})

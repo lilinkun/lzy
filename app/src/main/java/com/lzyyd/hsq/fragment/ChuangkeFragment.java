@@ -14,6 +14,7 @@ import com.lzyyd.hsq.adapter.ChuangkeAdapter;
 import com.lzyyd.hsq.adapter.TabPageAdapter;
 import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseFragment;
+import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.CategoryBean;
 import com.lzyyd.hsq.bean.GoodsListBean;
 import com.lzyyd.hsq.bean.PageBean;
@@ -41,10 +42,12 @@ public class ChuangkeFragment extends BaseFragment<FragmentChuangkeBinding, Chua
     private String categoryId = "";
     private ChuangkeAdapter.ModifyCountInterface handler;
     private ChuangkeAdapter chuangkeAdapter;
+    private int goodstype = 0 ;
 
-    public ChuangkeFragment(String categoryId, ChuangkeAdapter.ModifyCountInterface handler){
+    public ChuangkeFragment(String categoryId,int goodstype, ChuangkeAdapter.ModifyCountInterface handler){
         this.categoryId = categoryId;
         this.handler = handler;
+        this.goodstype = goodstype;
     }
 
     @Override
@@ -72,12 +75,14 @@ public class ChuangkeFragment extends BaseFragment<FragmentChuangkeBinding, Chua
     @Override
     public void initData() {
         viewModel.setChuangkeDataCallBack(this);
-        viewModel.getSelfData(1,20,4,categoryId);
+
+
+        viewModel.getSelfData(1,20,goodstype,categoryId, ProApplication.SESSIONID());
 
         binding.refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                viewModel.getSelfData(1,20,4,categoryId);
+                viewModel.getSelfData(1,20,goodstype,categoryId,ProApplication.SESSIONID());
             }
         });
     }

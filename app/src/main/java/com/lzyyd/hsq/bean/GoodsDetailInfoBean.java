@@ -56,6 +56,24 @@ public class GoodsDetailInfoBean<T> implements Serializable {
     private String TeamTypeName;
     private int UserLevel;
     private T Attr;
+    private int IsPresell;
+    private String PresellDate;
+
+    public int getIsPresell() {
+        return IsPresell;
+    }
+
+    public void setIsPresell(int isPresell) {
+        IsPresell = isPresell;
+    }
+
+    public String getPresellDate() {
+        return PresellDate;
+    }
+
+    public void setPresellDate(String presellDate) {
+        PresellDate = presellDate;
+    }
 
     public int getUserLevel() {
         return UserLevel;

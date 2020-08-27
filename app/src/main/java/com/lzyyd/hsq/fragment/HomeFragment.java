@@ -8,9 +8,11 @@ import android.widget.ScrollView;
 import com.lzyyd.hsq.BR;
 import com.lzyyd.hsq.R;
 import com.lzyyd.hsq.activity.GoodsDetailActivity;
+import com.lzyyd.hsq.activity.GoodsListActivity;
 import com.lzyyd.hsq.activity.WebViewActivity;
 import com.lzyyd.hsq.adapter.GoodsListAdapter;
 import com.lzyyd.hsq.adapter.GridHomeAdapter;
+import com.lzyyd.hsq.adapter.RecommendAdapter;
 import com.lzyyd.hsq.adapter.ViewAdapter;
 import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseFragment;
@@ -36,7 +38,10 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragmentViewModel> implements OnScrollChangedListener, HomeFragmentViewModel.HomeDataCallBack, GoodsListAdapter.OnItemClickListener {
+public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragmentViewModel> implements OnScrollChangedListener, HomeFragmentViewModel.HomeDataCallBack {
+
+    private RecommendAdapter recommendAdapter;
+    private HomeBean homeBean;
 
     /**  ScrollView 滚动动态改变标题栏 */
     // 滑动的最小距离（自行定义，you happy jiu ok）
@@ -71,19 +76,10 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
     @Override
     public void initData() {
 
-//        Resources resources = getResources();
-//        int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
-//        int height = resources.getDimensionPixelSize(resourceId);
-//        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-//        layoutParams.setMargins(0,height,0,0);
-//        binding.titleLayoutSearch.setLayoutParams(layoutParams);
         viewModel.setCallBack(this);
         viewModel.getHomeData(ProApplication.SESSIONID());
 
-
         binding.tsvHome.init(this);
-
-
 
     }
 
@@ -118,6 +114,8 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
     @Override
     public void getHomeDataSuccess(HomeBean homeBean) {
 
+        this.homeBean = homeBean;
+
         binding.setHomebean(homeBean);
 
         ArrayList<FlashBean> flashBeans = homeBean.getFlash();
@@ -141,21 +139,19 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
 
         binding.rvHome.setAdapter(gridHomeAdapter);
 
-
-
-        GoodsListAdapter goodsListAdapter = new GoodsListAdapter(getActivity(),homeBean.getGoodsList6(),BR.goodslist);
+        recommendAdapter = new RecommendAdapter(getActivity());
+        recommendAdapter.getItems().addAll(homeBean.getGoodsList6());
 
         StaggeredGridLayoutManager gridLayoutManager1 = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
         binding.rvHomeGoodsList.addItemDecoration(new GridSpacingItemDecoration(2, 20, false));
 //        gridLayoutManager1.setOrientation(GridLayoutManager.VERTICAL);
         binding.rvHomeGoodsList.setLayoutManager(gridLayoutManager1);
-        binding.rvHomeGoodsList.setAdapter(goodsListAdapter);
-
-        goodsListAdapter.setItemClickListener(this);
+        binding.rvHomeGoodsList.setAdapter(recommendAdapter);
 
         ViewAdapter viewAdapter = new ViewAdapter(homeBean.getNews());
         binding.avTitle.setAdapter(viewAdapter);
         binding.avTitle.start();
+        onHomeClick(1);
     }
 
     @Override
@@ -167,28 +163,38 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
     public void onHomeClick(int position) {
         switch (position){
             case 1:
-
-
-
+                viewModel.recommemdFirst.set(true);
+                viewModel.recommemdSecond.set(false);
+                viewModel.recommemdThird.set(false);
+                recommendAdapter.getItems().clear();
+                recommendAdapter.getItems().addAll(homeBean.getGoodsList6());
+                recommendAdapter.notifyDataSetChanged();
                 break;
 
             case 2:
-
+                viewModel.recommemdFirst.set(false);
+                viewModel.recommemdSecond.set(true);
+                viewModel.recommemdThird.set(false);
+                recommendAdapter.getItems().clear();
+                recommendAdapter.getItems().addAll(homeBean.getGoodsList4());
+                recommendAdapter.notifyDataSetChanged();
                 break;
 
             case 3:
+                viewModel.recommemdFirst.set(false);
+                viewModel.recommemdSecond.set(false);
+                viewModel.recommemdThird.set(true);
+                recommendAdapter.getItems().clear();
+                recommendAdapter.getItems().addAll(homeBean.getGoodsList5());
+                recommendAdapter.notifyDataSetChanged();
+                break;
+
+            case 4:
+
+                startActivity(GoodsListActivity.class);
 
                 break;
         }
     }
-
-    @Override
-    public void onItemClicks(int position,String goodsid) {
-        Bundle bundle = new Bundle();
-        bundle.putString(HsqAppUtil.GOODSID,goodsid);
-        bundle.putInt(HsqAppUtil.TYPE,0);
-        startActivity(GoodsDetailActivity.class,bundle);
-    }
-
 
 }

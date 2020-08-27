@@ -17,6 +17,10 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
     <uses-permission android:name="android.permission.DEVICE_POWER"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+
 
     <application
         android:allowBackup="true"
@@ -35,29 +39,54 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.LoginActivity"/>
-        <activity android:name="com.lzyyd.hsq.activity.MainActivity"/>
-        <activity android:name="com.lzyyd.hsq.activity.RegisterActivity"/>
-        <activity android:name="com.lzyyd.hsq.activity.ForgetPasswordActivity"/>
-        <activity android:name="com.lzyyd.hsq.activity.ForgetSettingPsdActivity"/>
-        <activity android:name="com.lzyyd.hsq.activity.SeckillActivity"/>
-        <activity android:name="com.lzyyd.hsq.activity.GoodsDetailActivity"/>
-        <activity android:name="com.lzyyd.hsq.activity.GoodsListActivity"/>
-        <activity android:name="com.lzyyd.hsq.activity.WebViewActivity"/>
-        <activity android:name="com.lzyyd.hsq.activity.IntegralActivity"/>
-        <activity android:name="com.lzyyd.hsq.activity.PersonalInfoActivity"/>
-        <activity android:name="com.lzyyd.hsq.activity.WalletActivity"/>
-        <activity android:name="com.lzyyd.hsq.activity.CollectGoodsActivity"/>
-        <activity android:name="com.lzyyd.hsq.activity.GetCashActivity"/>
-        <activity android:name="com.lzyyd.hsq.activity.RechargeActivity"/>
-        <activity android:name="com.lzyyd.hsq.activity.OrderListActivity"/>
-        <activity android:name="com.lzyyd.hsq.activity.MyQrcodeActivity"/>
-        <activity android:name="com.lzyyd.hsq.activity.AddressListActivity"/>
-        <activity android:name="com.lzyyd.hsq.activity.AddAddressActivity"/>
-        <activity android:name="com.lzyyd.hsq.activity.ShoppingcartActivity"/>
-        <activity android:name="com.lzyyd.hsq.activity.SureOrderActivity"/>
-        <activity android:name="com.lzyyd.hsq.activity.VipActivity"/>
-        <activity android:name="com.lzyyd.hsq.activity.ChuangkeActivity"/>
+        <activity android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.RegisterActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.ForgetPasswordActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.ForgetSettingPsdActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.SeckillActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.GoodsDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.GoodsListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.WebViewActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.IntegralActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.PersonalInfoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.WalletActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.CollectGoodsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.GetCashActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.RechargeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.OrderListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.MyQrcodeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.AddressListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.AddAddressActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.ShoppingcartActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.SureOrderActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.VipActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.ChuangkeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.CcqActivity"
+            android:screenOrientation="portrait"/>
 
 
     </application>

@@ -35,6 +35,7 @@ public class GoodsDetailViewModel extends BaseViewModel<DataRepository> {
     private String goodsId;
 
     public ObservableBoolean observableBoolean = new ObservableBoolean();
+    public ObservableBoolean goodsBoolean = new ObservableBoolean(false);
 
     public GoodsDetailViewModel(Application application, DataRepository dataRepository) {
         super(application,dataRepository);

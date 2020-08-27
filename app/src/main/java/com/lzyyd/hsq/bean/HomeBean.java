@@ -19,6 +19,15 @@ public class HomeBean {
     private HomeGridItemBean Vip;
     private HomeGridItemBean Sq;
     private List<ArticleDetailBean> News;
+    private ArrayList<FlashBean> Ccq;
+
+    public ArrayList<FlashBean> getCcq() {
+        return Ccq;
+    }
+
+    public void setCcq(ArrayList<FlashBean> ccq) {
+        Ccq = ccq;
+    }
 
     public List<ArticleDetailBean> getNews() {
         return News;

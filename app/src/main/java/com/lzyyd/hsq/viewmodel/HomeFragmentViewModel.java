@@ -1,21 +1,25 @@
 package com.lzyyd.hsq.viewmodel;
 
 import android.app.Application;
+import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
+import com.lzyyd.hsq.activity.GoodsDetailActivity;
 import com.lzyyd.hsq.activity.VipActivity;
 import com.lzyyd.hsq.bean.GoodsListBean;
 import com.lzyyd.hsq.bean.HomeBean;
 import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
+import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.ObservableField;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -31,6 +35,9 @@ public class HomeFragmentViewModel extends BaseViewModel<DataRepository> {
 
     private Application application;
     private HomeDataCallBack homeDataCallBack;
+    public ObservableField<Boolean> recommemdFirst = new ObservableField<>();
+    public ObservableField<Boolean> recommemdSecond = new ObservableField<>();
+    public ObservableField<Boolean> recommemdThird = new ObservableField<>();
 
     public HomeFragmentViewModel(@NonNull Application application,DataRepository dataRepository) {
         super(application,dataRepository);
@@ -43,6 +50,13 @@ public class HomeFragmentViewModel extends BaseViewModel<DataRepository> {
 
     public void setImageClick(){
         startActivity(VipActivity.class);
+    }
+
+    public void ccqEntrance(String goodsid){
+        Bundle bundle = new Bundle();
+        bundle.putString(HsqAppUtil.GOODSID,goodsid);
+        bundle.putInt(HsqAppUtil.TYPE,64);
+        startActivity(GoodsDetailActivity.class,bundle);
     }
 
     public void getHomeData(String SessionId){

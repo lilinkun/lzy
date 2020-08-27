@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:orientation="horizontal"
-        android:background="#FF3C38"
+        android:background="@color/text_label"
         >
 
         <ImageView

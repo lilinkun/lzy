@@ -14,10 +14,6 @@ import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.OrderListBean;
 import com.lzyyd.hsq.databinding.ActivityOrderlistBinding;
 import com.lzyyd.hsq.fragment.OrderAllFragment;
-import com.lzyyd.hsq.fragment.OrderOverFragment;
-import com.lzyyd.hsq.fragment.OrderWaitCompletedFragment;
-import com.lzyyd.hsq.fragment.OrderWaitPayFragment;
-import com.lzyyd.hsq.fragment.OrderWaitReceiveFragment;
 import com.lzyyd.hsq.util.Eyes;
 import com.lzyyd.hsq.viewmodel.OrderListViewModel;
 
@@ -38,10 +34,6 @@ public class OrderListActivity extends BaseActivity<ActivityOrderlistBinding, Or
     private List<String> mTitles;
     private List<Fragment> fragments = new ArrayList<>();
     private OrderAllFragment allOrderFragment;
-    private OrderWaitPayFragment waitPayFragment = new OrderWaitPayFragment();
-    private OrderWaitReceiveFragment waitReceiveFragment = new OrderWaitReceiveFragment();
-    private OrderWaitCompletedFragment completedOrderFragment = new OrderWaitCompletedFragment();
-    private OrderOverFragment orderOverFragment = new OrderOverFragment();
 
     @Override
     public int initContentView(Bundle savedInstanceState) {
@@ -71,12 +63,6 @@ public class OrderListActivity extends BaseActivity<ActivityOrderlistBinding, Or
         mTitles.add("待发货");
         mTitles.add("待收货");
         mTitles.add("交易成功");
-
-        /*fragments.add(allOrderFragment);
-        fragments.add(waitPayFragment);
-        fragments.add(waitReceiveFragment);
-        fragments.add(completedOrderFragment);
-        fragments.add(orderOverFragment);*/
 
         for (int i = 0; i < mTitles.size(); i++){
             allOrderFragment = new OrderAllFragment(i,this);

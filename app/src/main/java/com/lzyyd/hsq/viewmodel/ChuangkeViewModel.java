@@ -87,7 +87,15 @@ public class ChuangkeViewModel extends BaseViewModel<DataRepository> {
     }
 
 
-    public void getSelfData(int PageIndex, int PageCount, int GoodsType,String CategoryId){
+
+    //        普通订单 = 1, //PV
+    //        创客 = 4,
+    //        服务中心 = 8,
+    //        复购 = 16,
+    //        秒杀 = 32,
+    //        常常清 = 64,
+    //        扫码提货 = 128
+    public void getSelfData(int PageIndex, int PageCount, int GoodsType,String CategoryId,String SessionId){
 
         HashMap<String, String> params = new HashMap<>();
         params.put("cls", "Goods");
@@ -95,6 +103,7 @@ public class ChuangkeViewModel extends BaseViewModel<DataRepository> {
         params.put("PageIndex",PageIndex+"");
         params.put("PageCount",PageCount+"");
         params.put("GoodsType",GoodsType+"");
+        params.put("SessionId",SessionId);
         if (CategoryId != null && StringUtils.isEmpty(CategoryId)) {
             params.put("CategoryId", CategoryId + "");
         }
