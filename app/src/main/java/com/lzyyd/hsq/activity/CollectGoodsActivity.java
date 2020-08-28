@@ -1,7 +1,10 @@
 package com.lzyyd.hsq.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
+import android.widget.Toast;
 
 import com.lzyyd.hsq.BR;
 import com.lzyyd.hsq.R;
@@ -12,13 +15,16 @@ import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.CollectListBean;
 import com.lzyyd.hsq.databinding.ActivityCollectBinding;
 import com.lzyyd.hsq.ui.GridSpacingItemDecoration;
+import com.lzyyd.hsq.ui.SpacesItemDecoration;
 import com.lzyyd.hsq.util.Eyes;
+import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.CollectViewModel;
 import com.lzyyd.hsq.viewmodel.ForgetPasswordViewModel;
 import com.lzyyd.hsq.viewmodel.GoodsListViewModel;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,6 +38,8 @@ public class CollectGoodsActivity extends BaseActivity<ActivityCollectBinding, C
     private int PageIndex = 1;
     private int PAGE_COUNT = 20;
 
+    private RecordAdapter recordAdapter;
+
     @Override
     public int initContentView(Bundle savedInstanceState) {
         return R.layout.activity_collect;
@@ -41,6 +49,21 @@ public class CollectGoodsActivity extends BaseActivity<ActivityCollectBinding, C
     public int initVariableId() {
         return BR.collect;
     }
+
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            switch (msg.what){
+                case 0x11:
+
+                    String collectid = msg.getData().getString("collectid");
+
+                    viewModel.deleteCollectGoods(collectid,ProApplication.SESSIONID());
+
+                    break;
+            }
+        }
+    };
 
     @Override
     public CollectViewModel initViewModel() {
@@ -61,23 +84,38 @@ public class CollectGoodsActivity extends BaseActivity<ActivityCollectBinding, C
         if (msg != null && msg.size() > 0){
             binding.llNoCollect.setVisibility(View.GONE);
 
-            RecordAdapter recordAdapter = new RecordAdapter(this);
+            if(recordAdapter == null ) {
+                recordAdapter = new RecordAdapter(this, handler);
 
-            recordAdapter.getItems().addAll(msg);
+                recordAdapter.getItems().addAll(msg);
 
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-            linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
-            int spanCount = 3; // 3 columns
-            int spacing = 20; // 50px
-            boolean includeEdge = false;
-            binding.rvCollectlist.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
-            binding.rvCollectlist.setLayoutManager(linearLayoutManager);
-            binding.rvCollectlist.setAdapter(recordAdapter);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+                linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
+
+                int spacing = 30; // 50px
+                binding.rvCollectlist.addItemDecoration(new SpacesItemDecoration(spacing));
+                binding.rvCollectlist.setLayoutManager(linearLayoutManager);
+                binding.rvCollectlist.setAdapter(recordAdapter);
+            }else {
+                recordAdapter.getItems().clear();
+                recordAdapter.getItems().addAll(msg);
+                recordAdapter.notifyDataSetChanged();
+            }
         }
     }
 
     @Override
     public void getCollectFail(String msg) {
+        UToast.show(this,msg);
+    }
 
+    @Override
+    public void getDeleteCollectGoodsSuccess(String msg) {
+        viewModel.getCollectDataList(PageIndex + "", PAGE_COUNT + "", "1", ProApplication.SESSIONID());
+    }
+
+    @Override
+    public void getDeleteCollectGoodsFail(String msg) {
+        UToast.show(this,msg);
     }
 }

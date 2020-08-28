@@ -12,6 +12,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -89,6 +90,9 @@ dependencies {
 
     /*zxing*/
     implementation 'com.google.zxing:core:3.3.0'
+
+
+    implementation 'com.android.support:multidex:1.0.3'
 
 
     implementation project(":banner")

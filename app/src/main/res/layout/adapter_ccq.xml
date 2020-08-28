@@ -12,9 +12,12 @@
 
 
     <RelativeLayout
-        android:layout_width="400dp"
+        android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginTop="@dimen/margin_10"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
+        android:background="@drawable/bg_ccq_youxiao"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -22,6 +25,7 @@
             android:id="@+id/ll_ccq_layout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -35,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="￥1680"
-                    android:textColor="#ffe61e16"
+                    android:textColor="@{ccq.CcqStatus == 0 ? @color/red_e61e16 : @color/grey_color2}"
                     android:textSize="17sp" />
 
                 <LinearLayout
@@ -49,15 +53,16 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_5"
                         android:text="线下体验码"
-                        android:textColor="#ffe61e16"
+                        android:textColor="@{ccq.CcqStatus == 0 ? @color/red_e61e16 : @color/grey_color2}"
+                        android:gravity="center_vertical"
                         android:textSize="11sp" />
 
-                    <TextView
+                    <ImageView
                         android:layout_width="10dp"
                         android:layout_height="10dp"
-                        android:text="@string/ic_code" />
+                        android:gravity="center_vertical"
+                        android:src="@drawable/ic_qrcode"/>
 
                 </LinearLayout>
 
@@ -75,8 +80,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/margin_10"
-            android:layout_toLeftOf="@+id/tv_use"
+            android:layout_toLeftOf="@+id/ll_use"
             android:layout_toRightOf="@+id/ll_ccq_layout"
             android:gravity="center_horizontal"
             android:orientation="vertical">
@@ -96,23 +100,32 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="@dimen/margin_10"
-                android:background="@drawable/shape_me_ccq"
+                android:background="@{ccq.CcqStatus == 0 ? @drawable/shape_me_ccq : @drawable/shape_me_ccq_shixiao}"
                 android:text='@{@string/de_date + ccq.periodOfValidity}'
-                android:textColor="#ffe61e16"
+                android:textColor="@{ccq.CcqStatus == 0 ? @color/red_e61e16 : @color/grey_color2}"
                 android:textSize="10sp" />
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_use"
+        <LinearLayout
+            android:id="@+id/ll_use"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:ems="1"
-            android:paddingLeft="@dimen/padding_10"
-            android:paddingRight="@dimen/padding_10"
-            android:textColor="@color/black"
-            android:text="立即使用" />
+            android:background="@{ccq.CcqStatus == 0 ? @drawable/bg_ccq_youxiao_btn : @drawable/bg_ccq_shixiao_btn}"
+            android:gravity="center"
+            >
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="1"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_marginRight="@dimen/margin_10"
+            android:textSize="@dimen/textsize12"
+            android:text="立即使用" />
+        </LinearLayout>
     </RelativeLayout>
 </layout>

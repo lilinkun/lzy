@@ -7,6 +7,7 @@ import com.lzyyd.hsq.activity.ChuangkeActivity;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.viewmodel.AddAddressViewModel;
 import com.lzyyd.hsq.viewmodel.AddressListViewModel;
+import com.lzyyd.hsq.viewmodel.BindCardViewModel;
 import com.lzyyd.hsq.viewmodel.CcqViewModel;
 import com.lzyyd.hsq.viewmodel.ChuangkeViewModel;
 import com.lzyyd.hsq.viewmodel.CollectViewModel;
@@ -17,6 +18,7 @@ import com.lzyyd.hsq.viewmodel.GoodsListViewModel;
 import com.lzyyd.hsq.viewmodel.HomeFragmentViewModel;
 import com.lzyyd.hsq.viewmodel.IntegralViewModel;
 import com.lzyyd.hsq.viewmodel.LoginViewModel;
+import com.lzyyd.hsq.viewmodel.MVVMViewModel;
 import com.lzyyd.hsq.viewmodel.MeViewModel;
 import com.lzyyd.hsq.viewmodel.MyQrcodeViewModel;
 import com.lzyyd.hsq.viewmodel.OrderListViewModel;
@@ -110,6 +112,10 @@ public class AppViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             return (T) new CcqViewModel(mApplication, mRepository);
         }else if (modelClass.isAssignableFrom(GoodsListViewModel.class)){
             return (T) new GoodsListViewModel(mApplication, mRepository);
+        }else if (modelClass.isAssignableFrom(MVVMViewModel.class)){
+            return (T) new MVVMViewModel(mApplication, mRepository);
+        }else if (modelClass.isAssignableFrom(BindCardViewModel.class)){
+            return (T) new BindCardViewModel(mApplication, mRepository);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

@@ -10,12 +10,15 @@ import com.lzyyd.hsq.activity.GetCashActivity;
 import com.lzyyd.hsq.activity.MyQrcodeActivity;
 import com.lzyyd.hsq.activity.OrderListActivity;
 import com.lzyyd.hsq.activity.PersonalInfoActivity;
+import com.lzyyd.hsq.activity.PointActivity;
 import com.lzyyd.hsq.activity.RechargeActivity;
 import com.lzyyd.hsq.activity.VipActivity;
 import com.lzyyd.hsq.activity.WalletActivity;
 import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.BalanceBean;
 import com.lzyyd.hsq.bean.CcqBean;
+import com.lzyyd.hsq.bean.CcqListBean;
+import com.lzyyd.hsq.bean.LoginBean;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
 import com.lzyyd.hsq.util.HsqAppUtil;
@@ -64,6 +67,10 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
         startActivity(CollectGoodsActivity.class);
     }
 
+    public void setJumpPoint(){
+        startActivity(PointActivity.class);
+    }
+
     public void setJumpGetCash(){
         startActivity(GetCashActivity.class);
     }
@@ -90,10 +97,6 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
         startActivity(MyQrcodeActivity.class);
     }
 
-
-    public void setJumpAddress(){
-        startActivity(AddressListActivity.class);
-    }
 
 
     public void setQrcode(){
@@ -164,6 +167,70 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
     }
 
 
+    public void getUserInfo(String UserName,String SessionId) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("cls", "UserBase");
+        params.put("fun", "UserBaseQueryGet");
+        params.put("UserName",UserName);
+        params.put("SessionId", SessionId);
+        model.getUserInfo(params)
+                .compose(RxUtils.schedulersTransformer())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>(){
+                    @Override
+                    public void accept(Disposable disposable){
+                        showDialog();
+                    }
+                })
+                .subscribe(new HttpResultCallBack<LoginBean, Object>() {
+                    @Override
+                    public void onResponse(LoginBean ccqBean, String status, Object page) {
+                        dismissDialog();
+                        meBackCall.getUserInfoSuccess(ccqBean);
+                    }
+
+                    @Override
+                    public void onErr(String msg, String status) {
+                        dismissDialog();
+                        meBackCall.getUserInfoFail(msg);
+                    }
+                });
+    }
+
+
+    public void getQrcodeCcqData(String CcqOrderSn , String SessionId) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("cls", "UserCcq");
+        params.put("fun", "UserCcqVipGet");
+        params.put("CcqOrderSn",CcqOrderSn);
+        params.put("SessionId", SessionId);
+        model.getQrcodeCcqData(params)
+                .compose(RxUtils.schedulersTransformer())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>(){
+                    @Override
+                    public void accept(Disposable disposable){
+                        showDialog();
+                    }
+                })
+                .subscribe(new HttpResultCallBack<CcqListBean, Object>() {
+                    @Override
+                    public void onResponse(CcqListBean ccqListBean, String status, Object page) {
+                        dismissDialog();
+                        meBackCall.getCcqListSuccess(ccqListBean);
+                    }
+
+                    @Override
+                    public void onErr(String msg, String status) {
+                        dismissDialog();
+                        meBackCall.getCcqListFail(msg);
+                    }
+                });
+    }
+
+
     public interface MeBackCall{
         public void getBalanceSuccess(BalanceBean balanceBean);
         public void getBalanceFail(String msg);
@@ -171,6 +238,12 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
         public void getCcqSuccess(CcqBean ccqBean);
         public void getCcqFail(String msg);
 
+        public void getCcqListSuccess(CcqListBean ccqBean);
+        public void getCcqListFail(String msg);
+
         public void clickQrcode();
+
+        public void getUserInfoSuccess(LoginBean loginBean);
+        public void getUserInfoFail(String msg);
     }
 }

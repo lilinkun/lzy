@@ -199,6 +199,40 @@
 
             </LinearLayout>
 
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_10"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:background="@color/white"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="253.20"
+                    android:textColor="#ffffffff"
+                    android:textSize="17sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="预到账余额"
+                    android:textColor="#ffffffff"
+                    android:textSize="12sp"
+                    />
+
+
+            </LinearLayout>
+
 
 
         </LinearLayout>
@@ -220,6 +254,7 @@
             />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_wallet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />

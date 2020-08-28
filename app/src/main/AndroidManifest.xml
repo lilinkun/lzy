@@ -87,6 +87,18 @@
             android:screenOrientation="portrait"/>
         <activity android:name="com.lzyyd.hsq.activity.CcqActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.SplashActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.BindCardActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.PointActivity"
+            android:screenOrientation="portrait"/>
+
+
+
+
+        <activity android:name=".qrcode.android.CaptureActivity"
+            />
 
 
     </application>

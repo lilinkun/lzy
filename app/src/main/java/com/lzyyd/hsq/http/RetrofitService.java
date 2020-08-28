@@ -2,6 +2,7 @@ package com.lzyyd.hsq.http;
 
 import com.lzyyd.hsq.bean.AddressBean;
 import com.lzyyd.hsq.bean.BalanceBean;
+import com.lzyyd.hsq.bean.BalanceDetailBean;
 import com.lzyyd.hsq.bean.CartBean;
 import com.lzyyd.hsq.bean.CartListBean;
 import com.lzyyd.hsq.bean.CategoryBean;
@@ -22,6 +23,7 @@ import com.lzyyd.hsq.bean.OrderinfoBean;
 import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.bean.ResultBean;
 import com.lzyyd.hsq.bean.UrlBean;
+import com.lzyyd.hsq.bean.UserBankBean;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -101,6 +103,10 @@ public interface RetrofitService {
 
     @FormUrlEncoded
     @POST("Api/")
+    Observable<ResultBean<String,Object>> isDefault(@FieldMap Map<String, String> params);
+
+    @FormUrlEncoded
+    @POST("Api/")
     Observable<ResultBean<String,String>> OrderSaveRedis(@FieldMap Map<String, String> params);
 
     @FormUrlEncoded
@@ -147,5 +153,21 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("Api/")
     Observable<ResultBean<ArrayList<CcqListBean>, PageBean>> getCcqList(@FieldMap Map<String, String> params);
+
+    @FormUrlEncoded
+    @POST("Api/")
+    Observable<ResultBean<CcqListBean, PageBean>> getQrcodeCcqData(@FieldMap Map<String, String> params);
+
+    @FormUrlEncoded
+    @POST("Api/")
+    Observable<ResultBean<LoginBean, Object>> getUserInfo(@FieldMap Map<String, String> params);
+
+    @FormUrlEncoded
+    @POST("Api/")
+    Observable<ResultBean<UserBankBean, Object>> getBankCard(@FieldMap Map<String, String> params);
+
+    @FormUrlEncoded
+    @POST("Api/")
+    Observable<ResultBean<ArrayList<BalanceDetailBean>, Object>> getAmountPrice(@FieldMap Map<String, String> params);
 
 }

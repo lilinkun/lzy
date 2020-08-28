@@ -14,6 +14,7 @@ import com.lzyyd.hsq.R;
 import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseActivity;
 import com.lzyyd.hsq.base.ProApplication;
+import com.lzyyd.hsq.bean.AddressBean;
 import com.lzyyd.hsq.bean.LocalBean;
 import com.lzyyd.hsq.databinding.ActivityAddAddressBinding;
 import com.lzyyd.hsq.util.UToast;
@@ -39,9 +40,13 @@ public class AddAddressActivity extends BaseActivity<ActivityAddAddressBinding, 
     private String mCityCode;
     private String mAreaCode;
     private String mZipCode;
+    private String isDefault;
     public ObservableField<String> AddressName = new ObservableField<>();
     public ObservableField<String> AddressStr = new ObservableField<>();
     public ObservableField<String> AddressMobile = new ObservableField<>();
+    public ObservableField<String> AddressDetail = new ObservableField<>();
+
+    private AddressBean addressBean;
 
     @Override
     public int initContentView(Bundle savedInstanceState) {
@@ -66,6 +71,27 @@ public class AddAddressActivity extends BaseActivity<ActivityAddAddressBinding, 
         binding.llProvince.setOnClickListener(this);
 
         binding.setVariable(BR.add,this);
+
+        if (getIntent() != null) {
+            if (getIntent().getExtras() != null) {
+                addressBean = (AddressBean) getIntent().getExtras().getSerializable("addressBean");
+            }
+        }
+
+        if (addressBean != null) {
+            binding.switchTurn.setChecked(addressBean.isDefault());
+            AddressMobile.set(addressBean.getMobile());
+            AddressDetail.set(addressBean.getAddressName());
+            AddressName.set(addressBean.getName());
+            AddressStr.set(addressBean.getAddress());
+            binding.tvTitle.setText("修改");
+
+            mProvinceCode = addressBean.getProv();
+            mCityCode = addressBean.getCity();
+            mAreaCode = addressBean.getArea();
+            mZipCode = addressBean.getPost();
+            isDefault = addressBean.isDefault() ? "1" : "0";
+        }
     }
 
     @Override
@@ -91,12 +117,13 @@ public class AddAddressActivity extends BaseActivity<ActivityAddAddressBinding, 
 
     @Override
     public void modifySuccess() {
-
+        setResult(RESULT_OK);
+        finish();
     }
 
     @Override
     public void modifyFail(String msg) {
-
+        UToast.show(this,msg);
     }
 
     @Override
@@ -162,9 +189,15 @@ public class AddAddressActivity extends BaseActivity<ActivityAddAddressBinding, 
         }else if (StringUtils.isEmpty(AddressMobile.get())){
             UToast.show(this,"请填写手机号码");
         }else {
-            viewModel.getSaveAddress(AddressName.get(),mProvinceCode,mCityCode,mAreaCode,AddressStr.get(),mZipCode,AddressMobile.get(),
-                    binding.switchTurn.isChecked() ?"1" : "0", ProApplication.SESSIONID());
+
+            if (addressBean == null) {
+                viewModel.getSaveAddress(AddressName.get(), mProvinceCode, mCityCode, mAreaCode, AddressStr.get(), mZipCode, AddressMobile.get(),
+                        binding.switchTurn.isChecked() ? "1" : "0", ProApplication.SESSIONID());
+            }else {
+                viewModel.modifyAddress(addressBean.getAddressID(), AddressName.get(), mProvinceCode, mCityCode, mAreaCode, AddressStr.get(), mZipCode, AddressMobile.get(), binding.switchTurn.isChecked() ? "1" : "0", ProApplication.SESSIONID());
+            }
         }
 
     }
+
 }

@@ -2,6 +2,7 @@ package com.lzyyd.hsq.activity;
 
 import android.os.Bundle;
 
+import com.lzyyd.hsq.BR;
 import com.lzyyd.hsq.R;
 import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseActivity;
@@ -24,7 +25,7 @@ public class MyQrcodeActivity extends BaseActivity<ActivityMyqrcodeBinding, MyQr
 
     @Override
     public int initVariableId() {
-        return 0;
+        return BR.myqrcode;
     }
 
     @Override

@@ -16,6 +16,10 @@
             name="ccq"
             type="com.lzyyd.hsq.bean.CcqBean" />
 
+        <variable
+            name="userinfo"
+            type="com.lzyyd.hsq.bean.LoginBean" />
+
         <import type="android.view.View"/>
 
     </data>
@@ -47,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="@dimen/margin_25"
+                android:layout_marginTop="@dimen/margin_28"
                 >
 
                 <com.lzyyd.hsq.ui.RoundImageView
@@ -69,6 +73,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/textsize16"
                         android:textColor="@color/white"
+                        android:text="@{userinfo.nickName}"
                         android:layout_marginTop="@dimen/margin_4"
                         />
 
@@ -94,7 +99,7 @@
                             android:id="@+id/tv_me_vip"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="VIP等级 : 345"
+                            android:text='@{"VIP等级 :" + userinfo.userLevel}'
                             android:textColor="#ffffffff"
                             android:textSize="@dimen/textsize10"
                             android:layout_marginLeft="3dp"
@@ -168,7 +173,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:onClick="@{()->me.setJumpCollect()}"
+                android:onClick="@{()->me.setJumpPoint()}"
                 android:orientation="vertical">
 
                 <TextView
@@ -318,7 +323,7 @@
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/margin_10"
                 android:background="@drawable/bg_sure_order_address"
-                android:onClick="@{()->me.setJumpAddress()}"
+                android:onClick="@{()->me.setJumpCollect()}"
                 android:paddingLeft="@dimen/padding_15"
                 android:paddingRight="@dimen/padding_15"
                 android:layout_height="44dp">
@@ -328,7 +333,7 @@
                     android:textSize="@dimen/textsize14"
                     android:textColor="@color/grey_333333"
                     android:layout_centerVertical="true"
-                    android:text="@string/me_coupon"/>
+                    android:text="@string/me_collect"/>
 
                 <TextView
                     android:layout_width="wrap_content"

@@ -1,12 +1,21 @@
 package com.lzyyd.hsq.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.RadioButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lzyyd.hsq.R;
+import com.lzyyd.hsq.base.BaseBindingAdapter;
 import com.lzyyd.hsq.bean.AddressBean;
+import com.lzyyd.hsq.databinding.AdapterAddresslistBinding;
+import com.lzyyd.hsq.util.UToast;
 
 import java.util.ArrayList;
 
@@ -19,36 +28,95 @@ import androidx.recyclerview.widget.RecyclerView;
  * Create by liguo on 2020/8/17
  * Describe:
  */
-public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHolder> {
-    private Context context;
-    private ArrayList<AddressBean> addressBeans;
-    private int mVariableId;
+public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHolder> implements View.OnClickListener {
 
-    public AddressAdapter(Context context,ArrayList<AddressBean> addressBeans,int mVariableId){
+    private ArrayList<AddressBean> addressBeans;
+    private LayoutInflater layoutInflater;
+    private OnDeleteAddress onDeleteAddress;
+    private ArrayList<RadioButton> radioButtons = new ArrayList<>();
+    private Context context;
+    private SetOnItemClickListener onItemClick;
+
+    public AddressAdapter(Context context, ArrayList<AddressBean> addressBeans, LayoutInflater layoutInflater, OnDeleteAddress onDeleteAddress) {
         this.context = context;
         this.addressBeans = addressBeans;
-        this.mVariableId = mVariableId;
+        this.layoutInflater = layoutInflater;
+        this.onDeleteAddress = onDeleteAddress;
     }
 
-    @NonNull
+    public void setData(ArrayList<AddressBean> addressBeans) {
+        this.addressBeans = addressBeans;
+        notifyDataSetChanged();
+    }
+
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        ViewDataBinding viewDataBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.adapter_addresslist,parent,false);
+        View v = layoutInflater.inflate(R.layout.adapter_addresslist, null);
 
-        ViewHolder viewHolder = new ViewHolder(viewDataBinding.getRoot());
+        ViewHolder viewHolder = new ViewHolder(v);
 
-        viewHolder.setBinding(viewDataBinding);
+        v.setOnClickListener(this);
 
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+        holder.itemView.setTag(position);
+        holder.tvAddress.setText(addressBeans.get(position).getAddressName() + addressBeans.get(position).getAddress());
+        holder.tvName.setText(addressBeans.get(position).getName());
 
-        holder.binding.setVariable(mVariableId,addressBeans.get(position));
-        holder.binding.executePendingBindings();
+        String phone = addressBeans.get(position).getMobile();
 
+        holder.tvPhone.setText(phone + "");
+
+        holder.deleteAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                new AlertDialog.Builder(context).setMessage("删除确认").setMessage("您确定要删除改地址嘛？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        onDeleteAddress.delete(addressBeans.get(position).getAddressID());
+                    }
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).create().show();
+            }
+        });
+
+        holder.modifyAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onDeleteAddress.modify(position);
+            }
+        });
+
+        radioButtons.add(holder.radioButton);
+
+        if (addressBeans.get(position).isDefault()) {
+            holder.radioButton.setChecked(true);
+        } else {
+            holder.radioButton.setChecked(false);
+        }
+
+        holder.radioButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i < radioButtons.size(); i++) {
+                    if (radioButtons.get(i) == (RadioButton) v) {
+                        ((RadioButton) v).setChecked(true);
+                        onDeleteAddress.isDefault(position);
+                    } else {
+                        radioButtons.get(i).setChecked(false);
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -56,21 +124,44 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
         return addressBeans.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-
-        ViewDataBinding binding;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-        }
-
-        public ViewDataBinding getBinding() {
-            return binding;
-        }
-
-        public void setBinding(ViewDataBinding binding) {
-            this.binding = binding;
+    @Override
+    public void onClick(View v) {
+        if (onItemClick != null) {
+            onItemClick.onItemClick((Integer) v.getTag());
         }
     }
 
+    public void setOnItemclick(SetOnItemClickListener onItemclick) {
+        this.onItemClick = onItemclick;
+    }
+
+    public interface SetOnItemClickListener {
+        public void onItemClick(int position);
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder {
+
+        private TextView tvAddress, tvName, tvPhone;
+        private TextView deleteAddress, modifyAddress;
+        private RadioButton radioButton;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            tvAddress = (TextView) itemView.findViewById(R.id.tv_goods_address);
+            tvName = (TextView) itemView.findViewById(R.id.tv_goods_consignee_name);
+            tvPhone = (TextView) itemView.findViewById(R.id.tv_goods_consignee_phone);
+            deleteAddress = (TextView) itemView.findViewById(R.id.tv_delete);
+            modifyAddress = (TextView) itemView.findViewById(R.id.tv_modify);
+            radioButton = (RadioButton) itemView.findViewById(R.id.rb_default);
+        }
+    }
+
+    public interface OnDeleteAddress {
+        public void delete(String userAddressId);
+
+        public void modify(int position);
+
+        public void isDefault(int addressId);
+    }
 }
+

@@ -14,13 +14,14 @@
             name="add"
             type="com.lzyyd.hsq.activity.AddAddressActivity" />
 
+
     </data>
 
     <LinearLayout
         android:id="@+id/rl_address"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/line_bg"
+        android:background="@color/common_bg"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -49,6 +50,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -81,12 +83,14 @@
         </RelativeLayout>
 
 
-
     <LinearLayout
         android:id="@+id/ll_add_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@drawable/bg_sure_order_address"
+        android:layout_marginTop="@dimen/margin_10"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
         android:orientation="vertical">
 
         <View
@@ -187,6 +191,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/margin_25"
                     android:textSize="@dimen/textsize16"
+                    android:text="@{add.AddressDetail}"
                     android:textColor="@color/grey_333333"
                     android:layout_centerVertical="true"/>
 
@@ -245,7 +250,9 @@
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:gravity="center_vertical"
-        android:background="@color/white"
+        android:background="@drawable/bg_sure_order_address"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
         android:layout_marginTop="@dimen/margin_20"
         android:orientation="horizontal">
 

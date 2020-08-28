@@ -18,8 +18,11 @@ import me.tatarka.bindingcollectionadapter2.ItemBinding;
  */
 public class CcqAdapter extends BaseBindingAdapter<CcqListBean,AdapterCcqBinding> {
 
-    public CcqAdapter(Context context) {
+    private OnItemClick onItemClick;
+
+    public CcqAdapter(Context context,OnItemClick onItemClick) {
         super(context);
+        this.onItemClick = onItemClick;
     }
 
     @Override
@@ -34,6 +37,10 @@ public class CcqAdapter extends BaseBindingAdapter<CcqListBean,AdapterCcqBinding
 
     @Override
     protected void onclick(int position) {
+        onItemClick.getQrcode(items.get(position).getCcqOrderSn());
+    }
 
+    public interface OnItemClick{
+        public void getQrcode(String CcqOrderSn);
     }
 }

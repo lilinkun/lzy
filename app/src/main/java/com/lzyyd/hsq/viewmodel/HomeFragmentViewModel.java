@@ -59,6 +59,13 @@ public class HomeFragmentViewModel extends BaseViewModel<DataRepository> {
         startActivity(GoodsDetailActivity.class,bundle);
     }
 
+    public void onClickGoodsItem(String goodsid){
+        Bundle bundle = new Bundle();
+        bundle.putString(HsqAppUtil.GOODSID,goodsid);
+        bundle.putInt(HsqAppUtil.TYPE,1);
+        startActivity(GoodsDetailActivity.class,bundle);
+    }
+
     public void getHomeData(String SessionId){
 
         HashMap<String, String> params = new HashMap<>();

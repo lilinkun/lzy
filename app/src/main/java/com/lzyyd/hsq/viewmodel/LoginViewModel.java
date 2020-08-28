@@ -112,11 +112,13 @@ public class LoginViewModel extends BaseViewModel<DataRepository> {
                                 .putString(HsqAppUtil.USERLEVELNAME, mLoginBean.getUserLevelName()).commit();
 
                         startActivity(MainActivity.class);
+                        finish();
                     }
 
                     @Override
                     public void onErr(String msg, String status) {
                         dismissDialog();
+                        UToast.show(context,msg);
                     }
 
                 });

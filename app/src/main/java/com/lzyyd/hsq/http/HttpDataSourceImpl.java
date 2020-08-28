@@ -2,6 +2,7 @@ package com.lzyyd.hsq.http;
 
 import com.lzyyd.hsq.bean.AddressBean;
 import com.lzyyd.hsq.bean.BalanceBean;
+import com.lzyyd.hsq.bean.BalanceDetailBean;
 import com.lzyyd.hsq.bean.CartBean;
 import com.lzyyd.hsq.bean.CartListBean;
 import com.lzyyd.hsq.bean.CategoryBean;
@@ -20,6 +21,7 @@ import com.lzyyd.hsq.bean.OrderinfoBean;
 import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.bean.ResultBean;
 import com.lzyyd.hsq.bean.UrlBean;
+import com.lzyyd.hsq.bean.UserBankBean;
 import com.lzyyd.hsq.data.source.HttpDataSource;
 
 import java.util.ArrayList;
@@ -133,6 +135,11 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
+    public Observable<ResultBean<String, Object>> isDefault(HashMap<String, String> hashMap) {
+        return apiService.isDefault(hashMap);
+    }
+
+    @Override
     public Observable<ResultBean<String, String>> OrderSaveRedis(HashMap<String, String> hashMap) {
         return apiService.OrderSaveRedis(hashMap);
     }
@@ -184,6 +191,22 @@ public class HttpDataSourceImpl implements HttpDataSource {
 
     public Observable<ResultBean<ArrayList<CcqListBean>, PageBean>> getCcqList(HashMap<String, String> mHashMap) {
         return apiService.getCcqList(mHashMap);
+    }
+
+    public Observable<ResultBean<CcqListBean, PageBean>> getQrcodeCcqData(HashMap<String, String> mHashMap) {
+        return apiService.getQrcodeCcqData(mHashMap);
+    }
+
+    public Observable<ResultBean<LoginBean, Object>> getUserInfo(HashMap<String, String> mHashMap) {
+        return apiService.getUserInfo(mHashMap);
+    }
+
+    public Observable<ResultBean<UserBankBean, Object>> getBankCard(HashMap<String, String> mHashMap) {
+        return apiService.getBankCard(mHashMap);
+    }
+
+    public Observable<ResultBean<ArrayList<BalanceDetailBean>, Object>> getAmountPrice(HashMap<String, String> mHashMap) {
+        return apiService.getAmountPrice(mHashMap);
     }
 
 

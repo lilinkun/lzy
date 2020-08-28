@@ -77,6 +77,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
     public void initData() {
 
         viewModel.setCallBack(this);
+
         viewModel.getHomeData(ProApplication.SESSIONID());
 
         binding.tsvHome.init(this);

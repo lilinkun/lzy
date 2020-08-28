@@ -12,6 +12,8 @@ import com.lzyyd.hsq.base.BaseActivity;
 import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.AddressBean;
 import com.lzyyd.hsq.databinding.ActivityAddressBinding;
+import com.lzyyd.hsq.ui.GridSpacingItemDecoration;
+import com.lzyyd.hsq.ui.SpacesItemDecoration;
 import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.AddressListViewModel;
 
@@ -27,7 +29,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
  * Create by liguo on 2020/8/12
  * Describe:
  */
-public class AddressListActivity extends BaseActivity<ActivityAddressBinding, AddressListViewModel> implements AddressListViewModel.AddressCallBack, SwipeRefreshLayout.OnRefreshListener {
+public class AddressListActivity extends BaseActivity<ActivityAddressBinding, AddressListViewModel> implements AddressListViewModel.AddressCallBack, SwipeRefreshLayout.OnRefreshListener, AddressAdapter.SetOnItemClickListener, AddressAdapter.OnDeleteAddress {
+
+    private AddressAdapter addressAdapter;
+    private ArrayList<AddressBean> addressBeans;
+    public int resultAddAddress = 0x1231;
 
     @Override
     public int initContentView(Bundle savedInstanceState) {
@@ -47,7 +53,8 @@ public class AddressListActivity extends BaseActivity<ActivityAddressBinding, Ad
 
     @Override
     public void initData() {
-        viewModel.getDatalist("1","20", ProApplication.SESSIONID(),this);
+        viewModel.setListener(this);
+        viewModel.getDatalist("1","80", ProApplication.SESSIONID());
 
         binding.refreshLayout.setOnRefreshListener(this);
     }
@@ -59,15 +66,25 @@ public class AddressListActivity extends BaseActivity<ActivityAddressBinding, Ad
             binding.refreshLayout.setRefreshing(false);
         }
 
-        binding.llEmpty.setVisibility(View.GONE);
+        binding.rvChooseAddress.setVisibility(View.VISIBLE);
+        this.addressBeans = addressBeans;
+        if (addressBeans.size() > 0) {
+            binding.llEmpty.setVisibility(View.GONE);
+        }
+        if (addressAdapter == null) {
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+            linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
-        AddressAdapter addressAdapter = new AddressAdapter(this,addressBeans,BR.addressbeans);
+            binding.rvChooseAddress.addItemDecoration(new SpacesItemDecoration( 20));
 
-        binding.rvChooseAddress.setLayoutManager(linearLayoutManager);
-        binding.rvChooseAddress.setAdapter(addressAdapter);
+            binding.rvChooseAddress.setLayoutManager(linearLayoutManager);
+            addressAdapter = new AddressAdapter(this, addressBeans, getLayoutInflater(), this);
+            binding.rvChooseAddress.setAdapter(addressAdapter);
+            addressAdapter.setOnItemclick(this);
+        } else {
+            addressAdapter.setData(addressBeans);
+        }
 
     }
 
@@ -76,18 +93,66 @@ public class AddressListActivity extends BaseActivity<ActivityAddressBinding, Ad
 //        UToast.show(this,msg);
     }
 
+    @Override
+    public void isDefaultSuccess(String isDefaultStr) {
+        UToast.show(this,"设置默认成功");
+        viewModel.getDatalist("1", "80", ProApplication.SESSIONID());
+    }
+
+    @Override
+    public void isDefaultFail(String msg) {
+
+    }
+
+    @Override
+    public void deleteSuccess(String s) {
+        viewModel.getDatalist("1", "80", ProApplication.SESSIONID());
+    }
+
+    @Override
+    public void deleteFail(String msg) {
+
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (resultCode == RESULT_OK){
-            if (requestCode == 0x123){
-                viewModel.getDatalist("1","20", ProApplication.SESSIONID(),this);
+            if (requestCode == resultAddAddress){
+                viewModel.getDatalist("1","80", ProApplication.SESSIONID());
             }
         }
     }
 
     @Override
     public void onRefresh() {
-        viewModel.getDatalist("1","20", ProApplication.SESSIONID(),this);
+        viewModel.getDatalist("1","80", ProApplication.SESSIONID());
+    }
+
+    @Override
+    public void onItemClick(int position) {
+    }
+
+    @Override
+    public void delete(String userAddressId) {
+        viewModel.deletAddress(userAddressId, ProApplication.SESSIONID());
+    }
+
+    @Override
+    public void modify(int position) {
+        AddressBean addressBean = addressBeans.get(position);
+        if (addressBean.isDefault()) {
+            String isDefault = "1";
+        }
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("addressBean", addressBean);
+        startActivity( AddAddressActivity.class,bundle, resultAddAddress);
+
+    }
+
+    @Override
+    public void isDefault(int addressId) {
+        viewModel.isDefault(addressBeans.get(addressId).getAddressID(),ProApplication.SESSIONID());
     }
 }

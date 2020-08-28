@@ -2,6 +2,7 @@ package com.lzyyd.hsq.data.source;
 
 import com.lzyyd.hsq.bean.AddressBean;
 import com.lzyyd.hsq.bean.BalanceBean;
+import com.lzyyd.hsq.bean.BalanceDetailBean;
 import com.lzyyd.hsq.bean.CartBean;
 import com.lzyyd.hsq.bean.CartListBean;
 import com.lzyyd.hsq.bean.CategoryBean;
@@ -20,6 +21,7 @@ import com.lzyyd.hsq.bean.OrderinfoBean;
 import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.bean.ResultBean;
 import com.lzyyd.hsq.bean.UrlBean;
+import com.lzyyd.hsq.bean.UserBankBean;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -81,6 +83,8 @@ public interface HttpDataSource {
 
     Observable<ResultBean<String,Object>> deleteGoods(HashMap<String, String> hashMap);
 
+    Observable<ResultBean<String,Object>> isDefault(HashMap<String, String> hashMap);
+
     Observable<ResultBean<String,Object>> addGoodCollect(HashMap<String, String> hashMap);
 
     Observable<ResultBean<String,Object>> isGoodCollect(HashMap<String, String> hashMap);
@@ -94,6 +98,14 @@ public interface HttpDataSource {
     Observable<ResultBean<CcqBean,Object>> getCcqUse(HashMap<String, String> hashMap);
 
     Observable<ResultBean<ArrayList<CcqListBean>,PageBean>> getCcqList(HashMap<String, String> hashMap);
+
+    Observable<ResultBean<CcqListBean,PageBean>> getQrcodeCcqData(HashMap<String, String> hashMap);
+
+    Observable<ResultBean<LoginBean,Object>> getUserInfo(HashMap<String, String> hashMap);
+
+    Observable<ResultBean<UserBankBean,Object>> getBankCard(HashMap<String, String> hashMap);
+
+    Observable<ResultBean<ArrayList<BalanceDetailBean>,Object>> getAmountPrice(HashMap<String, String> hashMap);
 
 
 }

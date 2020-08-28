@@ -5,6 +5,7 @@ import android.app.Application;
 import android.os.Bundle;
 
 import com.lzyyd.hsq.activity.AddAddressActivity;
+import com.lzyyd.hsq.activity.AddressListActivity;
 import com.lzyyd.hsq.bean.AddressBean;
 import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.data.DataRepository;
@@ -26,14 +27,91 @@ import me.goldze.mvvmhabit.utils.RxUtils;
  */
 public class AddressListViewModel extends BaseViewModel<DataRepository> {
 
+    private AddressCallBack addressCallBack;
+
     public AddressListViewModel(Application application,DataRepository dataRepository){
 
         super(application,dataRepository);
 
     }
 
+    public void setListener(AddressCallBack addressCallBack){
+        this.addressCallBack = addressCallBack;
+    }
 
-    public void getDatalist(String PageIndex,String PageCount,String SessionId,AddressCallBack addressCallBack){
+
+    public void isDefault(String UserAddressId, String SessionId) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("cls", "ReceiptAddress");
+        params.put("fun", "ReceiptAddressSetDefault");
+        params.put("AddressID", UserAddressId);
+        params.put("SessionId", SessionId);
+        model.isDefault(params)
+                .compose(RxUtils.schedulersTransformer())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>(){
+                    @Override
+                    public void accept(Disposable disposable){
+                        showDialog();
+                    }
+                })
+                .subscribe(new HttpResultCallBack<String, Object>() {
+                    @Override
+                    public void onResponse(String s, String status, Object page) {
+                        dismissDialog();
+                        addressCallBack.isDefaultSuccess(s);
+                    }
+
+                    @Override
+                    public void onErr(String msg, String status) {
+                        dismissDialog();
+                        addressCallBack.isDefaultFail(msg);
+                    }
+
+                });
+    }
+
+    /**
+     * 删除地址
+     *
+     * @param userAddressId
+     */
+    public void deletAddress(String userAddressId, String SessionId) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("cls", "ReceiptAddress");
+        params.put("fun", "ReceiptAddressDelete");
+        params.put("AddressID", userAddressId);
+        params.put("SessionId", SessionId);
+
+        model.isDefault(params)
+                .compose(RxUtils.schedulersTransformer())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>(){
+                    @Override
+                    public void accept(Disposable disposable){
+                        showDialog();
+                    }
+                })
+                .subscribe(new HttpResultCallBack<String, Object>() {
+                    @Override
+                    public void onResponse(String s, String status, Object page) {
+                        dismissDialog();
+                        addressCallBack.deleteSuccess(s);
+                    }
+
+                    @Override
+                    public void onErr(String msg, String status) {
+                        dismissDialog();
+                        addressCallBack.deleteFail(msg);
+                    }
+
+                });
+    }
+
+
+    public void getDatalist(String PageIndex,String PageCount,String SessionId){
         HashMap<String, String> params = new HashMap<>();
         params.put("cls", "ReceiptAddress");
         params.put("fun", "ReceiptAddressList");
@@ -70,11 +148,18 @@ public class AddressListViewModel extends BaseViewModel<DataRepository> {
     public interface AddressCallBack{
         public void getAddressSuccess(ArrayList<AddressBean> addressBeans);
         public void getAddressFail(String msg);
+
+        public void isDefaultSuccess(String isDefaultStr);
+        public void isDefaultFail(String msg);
+
+
+        public void deleteSuccess(String s);
+        public void deleteFail(String msg);
     }
 
 
     public void onJumpAddAddress(){
-        startActivity(AddAddressActivity.class,null,0x123);
+        startActivity(AddAddressActivity.class,null,0x1231);
     }
 
 

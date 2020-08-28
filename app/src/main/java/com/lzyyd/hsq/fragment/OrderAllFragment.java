@@ -14,6 +14,7 @@ import com.lzyyd.hsq.bean.OrderListBean;
 import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.databinding.FragmentAllOrderBinding;
 import com.lzyyd.hsq.ui.GridSpacingItemDecoration;
+import com.lzyyd.hsq.ui.SpacesItemDecoration;
 import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.MeViewModel;
 import com.lzyyd.hsq.viewmodel.OrderListViewModel;
@@ -75,10 +76,8 @@ public class OrderAllFragment extends BaseFragment<FragmentAllOrderBinding, Orde
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
 
-        int spanCount = 5; // 3 columns
         int spacing = 20; // 50px
-        boolean includeEdge = false;
-        binding.allOrderRv.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
+        binding.allOrderRv.addItemDecoration(new SpacesItemDecoration(spacing));
 
         binding.allOrderRv.setLayoutManager(linearLayoutManager);
     }
@@ -98,7 +97,6 @@ public class OrderAllFragment extends BaseFragment<FragmentAllOrderBinding, Orde
 
     @Override
     public void getDataFail(String msg) {
-        UToast.show(getActivity(),msg);
     }
 
     @Override

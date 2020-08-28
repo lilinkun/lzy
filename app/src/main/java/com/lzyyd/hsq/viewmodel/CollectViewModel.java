@@ -66,11 +66,45 @@ public class CollectViewModel extends BaseViewModel<DataRepository> {
                 });
     }
 
+    public void deleteCollectGoods(String CollectId, String SessionId) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("cls", "Collect");
+        params.put("fun", "CollectDelete");
+        params.put("CollectId", CollectId);
+        params.put("SessionId", SessionId);
+        model.DeleteCollectGood(params)
+                .compose(RxUtils.schedulersTransformer())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>(){
+                    @Override
+                    public void accept(Disposable disposable){
+                        showDialog();
+                    }
+                })
+                .subscribe(new HttpResultCallBack<String, Object>() {
+
+                    @Override
+                    public void onResponse(String collectBean, String status, Object page) {
+                        dismissDialog();
+                        listener.getDeleteCollectGoodsSuccess(collectBean);
+                    }
+
+                    @Override
+                    public void onErr(String msg, String status) {
+                        dismissDialog();
+                        listener.getDeleteCollectGoodsFail(msg);
+                    }
+                });
+    }
+
+
     public interface CollectGoodsListener{
 
         public void getCollectDataSuccess(ArrayList<CollectListBean> msg);
         public void getCollectFail(String msg);
 
-
+        public void getDeleteCollectGoodsSuccess(String msg);
+        public void getDeleteCollectGoodsFail(String msg);
     }
 }

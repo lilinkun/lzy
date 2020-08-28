@@ -1,6 +1,9 @@
 package com.lzyyd.hsq.http.factory;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
+import com.lzyyd.hsq.bean.ResultBean;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -24,10 +27,20 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
     public T convert(ResponseBody value) throws IOException {
         String response = value.string();
         try {
-
+            ResultBean result = gson.fromJson(response, ResultBean.class);
+            String code = result.getStatus();
+            if (code.equals("success")){
                 return gson.fromJson(response, type);
-
-        } finally {
+            } else {
+                Log.d("HttpManager", "返回err==：" + response);
+                ResultBean errResponse = gson.fromJson(response, ResultBean.class);
+                if(code.equals("error")){
+                    throw new ResultException(errResponse.getDesc(), code);
+                }else{
+                    throw new ResultException(errResponse.getDesc(), code);
+                }
+            }
+        }finally {
             value.close();
         }
     }

@@ -2,6 +2,7 @@ package com.lzyyd.hsq.data;
 
 import com.lzyyd.hsq.bean.AddressBean;
 import com.lzyyd.hsq.bean.BalanceBean;
+import com.lzyyd.hsq.bean.BalanceDetailBean;
 import com.lzyyd.hsq.bean.CartBean;
 import com.lzyyd.hsq.bean.CartListBean;
 import com.lzyyd.hsq.bean.CategoryBean;
@@ -20,6 +21,7 @@ import com.lzyyd.hsq.bean.OrderinfoBean;
 import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.bean.ResultBean;
 import com.lzyyd.hsq.bean.UrlBean;
+import com.lzyyd.hsq.bean.UserBankBean;
 import com.lzyyd.hsq.data.source.HttpDataSource;
 import com.lzyyd.hsq.data.source.LocalDataSource;
 
@@ -151,6 +153,13 @@ public class DataRepository extends BaseModel implements HttpDataSource, LocalDa
         return mHttpDataSource.deleteGoods(mHashMap);
     }
 
+    /**
+     * 删除购物车
+     */
+    public Observable<ResultBean<String,Object>> isDefault(HashMap<String,String> mHashMap){
+        return mHttpDataSource.isDefault(mHashMap);
+    }
+
     //获取地址列表
     public Observable<ResultBean<ArrayList<AddressBean>, PageBean>> getAddressListData(HashMap<String, String> mHashMap) {
         return mHttpDataSource.getAddressListData(mHashMap);
@@ -212,7 +221,6 @@ public class DataRepository extends BaseModel implements HttpDataSource, LocalDa
         return mHttpDataSource.isGoodCollect(mHashMap);
     }
 
-
     public Observable<ResultBean<ArrayList<CollectListBean>, Object>> GoodCollectList(HashMap<String, String> mHashMap) {
         return mHttpDataSource.GoodCollectList(mHashMap);
     }
@@ -227,6 +235,22 @@ public class DataRepository extends BaseModel implements HttpDataSource, LocalDa
 
     public Observable<ResultBean<ArrayList<CcqListBean>, PageBean>> getCcqList(HashMap<String, String> mHashMap) {
         return mHttpDataSource.getCcqList(mHashMap);
+    }
+
+    public Observable<ResultBean<CcqListBean, PageBean>> getQrcodeCcqData(HashMap<String, String> mHashMap) {
+        return mHttpDataSource.getQrcodeCcqData(mHashMap);
+    }
+
+    public Observable<ResultBean<LoginBean, Object>> getUserInfo(HashMap<String, String> mHashMap) {
+        return mHttpDataSource.getUserInfo(mHashMap);
+    }
+
+    public Observable<ResultBean<UserBankBean, Object>> getBankCard(HashMap<String, String> mHashMap) {
+        return mHttpDataSource.getBankCard(mHashMap);
+    }
+
+    public Observable<ResultBean<ArrayList<BalanceDetailBean>, Object>> getAmountPrice(HashMap<String, String> mHashMap) {
+        return mHttpDataSource.getAmountPrice(mHashMap);
     }
 
 }

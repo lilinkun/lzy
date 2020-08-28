@@ -20,12 +20,10 @@
     <com.lzyyd.hsq.ui.CustomRoundAngleImageView
         android:layout_width="95dp"
         android:layout_height="95dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="@dimen/margin_10"
         android:scaleType="centerCrop"
         app:image="@{collect.goodsImg}"
-        app:radius="5dp" />
+        app:left_top_radius="5dp"
+        app:left_bottom_radius="5dp"/>
 
 
     <LinearLayout
@@ -41,6 +39,7 @@
             android:maxLines="2"
             android:textColor="#ff333333"
             android:textSize="12sp"
+            android:layout_marginTop="@dimen/margin_10"
             android:text="@{collect.goodsName}"
             />
 
@@ -62,21 +61,26 @@
                 android:layout_height="wrap_content"
                 android:text='@{String.valueOf(collect.price)}'
                 android:textColor="#E43A3C"
+                android:textSize="@dimen/textsize12"
                 />
 
                 <TextView
+                    android:id="@+id/tv_macketprice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text='@{String.valueOf(collect.marketPrice)}'
+                    android:layout_marginLeft="@dimen/margin_10"
                     android:textColor="#9A9A9A"
+                    android:textSize="@dimen/textsize11"
                     />
             </LinearLayout>
 
 
             <TextView
+                android:id="@+id/tv_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="刪除"
+                android:text="删除"
                 android:background="@drawable/bg_collect_btn"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"

@@ -279,6 +279,7 @@
                                 android:layout_width="105dp"
                                 android:layout_height="105dp"
                                 android:scaleType="centerInside"
+                                android:onClick="@{()->home.onClickGoodsItem(homebean.goodsList1.get(0).goodsId)}"
                                 app:image="@{homebean.goodsList1.get(0).goodsImg}"
                                 />
 
@@ -307,6 +308,7 @@
                                 android:layout_height="105dp"
                                 android:scaleType="centerInside"
                                 app:image="@{homebean.goodsList2.get(0).goodsImg}"
+                                android:onClick="@{()->home.onClickGoodsItem(homebean.goodsList2.get(0).goodsId)}"
                                 />
 
 
@@ -334,6 +336,7 @@
                                 android:layout_height="105dp"
                                 android:scaleType="centerInside"
                                 app:image="@{homebean.goodsList3.get(0).goodsImg}"
+                                android:onClick="@{()->home.onClickGoodsItem(homebean.goodsList3.get(0).goodsId)}"
                                 />
 
 
