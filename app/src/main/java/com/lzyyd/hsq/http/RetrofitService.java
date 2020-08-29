@@ -3,6 +3,7 @@ package com.lzyyd.hsq.http;
 import com.lzyyd.hsq.bean.AddressBean;
 import com.lzyyd.hsq.bean.BalanceBean;
 import com.lzyyd.hsq.bean.BalanceDetailBean;
+import com.lzyyd.hsq.bean.BankBean;
 import com.lzyyd.hsq.bean.CartBean;
 import com.lzyyd.hsq.bean.CartListBean;
 import com.lzyyd.hsq.bean.CategoryBean;
@@ -144,6 +145,10 @@ public interface RetrofitService {
 
     @FormUrlEncoded
     @POST("Api/")
+    Observable<ResultBean<String, Object>> getCash(@FieldMap Map<String, String> params);
+
+    @FormUrlEncoded
+    @POST("Api/")
     Observable<ResultBean<BalanceBean, Object>> getBalance(@FieldMap Map<String, String> params);
 
     @FormUrlEncoded
@@ -169,5 +174,13 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("Api/")
     Observable<ResultBean<ArrayList<BalanceDetailBean>, Object>> getAmountPrice(@FieldMap Map<String, String> params);
+
+    @FormUrlEncoded
+    @POST("Api/")
+    Observable<ResultBean<ArrayList<BankBean>, Object>> getBankInfo(@FieldMap Map<String, String> params);
+
+    @FormUrlEncoded
+    @POST("Api/")
+    Observable<ResultBean<String, Object>> setTransferout(@FieldMap Map<String, String> params);
 
 }

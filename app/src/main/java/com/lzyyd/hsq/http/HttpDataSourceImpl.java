@@ -3,6 +3,7 @@ package com.lzyyd.hsq.http;
 import com.lzyyd.hsq.bean.AddressBean;
 import com.lzyyd.hsq.bean.BalanceBean;
 import com.lzyyd.hsq.bean.BalanceDetailBean;
+import com.lzyyd.hsq.bean.BankBean;
 import com.lzyyd.hsq.bean.CartBean;
 import com.lzyyd.hsq.bean.CartListBean;
 import com.lzyyd.hsq.bean.CategoryBean;
@@ -171,6 +172,10 @@ public class HttpDataSourceImpl implements HttpDataSource {
         return apiService.DeleteCollectGood(mHashMap);
     }
 
+    public Observable<ResultBean<String, Object>> getCash(HashMap<String, String> mHashMap) {
+        return apiService.getCash(mHashMap);
+    }
+
     public Observable<ResultBean<String, Object>> isGoodCollect(HashMap<String, String> mHashMap) {
         return apiService.isGoodCollect(mHashMap);
     }
@@ -207,6 +212,14 @@ public class HttpDataSourceImpl implements HttpDataSource {
 
     public Observable<ResultBean<ArrayList<BalanceDetailBean>, Object>> getAmountPrice(HashMap<String, String> mHashMap) {
         return apiService.getAmountPrice(mHashMap);
+    }
+
+    public Observable<ResultBean<ArrayList<BankBean>, Object>> getBankInfo(HashMap<String, String> mHashMap) {
+        return apiService.getBankInfo(mHashMap);
+    }
+
+    public Observable<ResultBean<String, Object>> setTransferout(HashMap<String, String> mHashMap) {
+        return apiService.setTransferout(mHashMap);
     }
 
 

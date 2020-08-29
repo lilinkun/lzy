@@ -132,6 +132,8 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
         uc.startActivityEvent1.postValue(params);
     }
 
+
+
     /**
      * 跳转容器页面
      *

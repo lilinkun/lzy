@@ -133,7 +133,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
 
         gridHomeAdapter.getItems().addAll(homeBean.getSqIcon());
 
-        int spanCount = 5; // 3 columns
+        int spanCount = 2; // 3 columns
         int spacing = 20; // 50px
         boolean includeEdge = false;
         binding.rvHome.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));

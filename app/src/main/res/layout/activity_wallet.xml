@@ -7,7 +7,11 @@
         <variable
             name="wallet"
             type="com.lzyyd.hsq.viewmodel.WalletViewModel" />
-        
+
+        <variable
+            name="balance"
+            type="com.lzyyd.hsq.bean.BalanceBean" />
+
     </data>
     
     
@@ -79,7 +83,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="8690.20"
+                    android:text="@{String.valueOf(balance.money5Balance)}"
                     android:textColor="#ffffffff"
                     android:textSize="20sp"
                     />
@@ -111,13 +115,14 @@
                     android:text="提现"
                     android:textColor="@color/text_common_bg"
                     android:textSize="14sp"
+                    android:onClick="@{()->wallet.getJumpGetCash()}"
                     />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_wallet_charge"
-                    android:text="充值"
+                    android:text="转电子币"
                     android:textColor="@color/text_common_bg"
                     android:textSize="14sp"
                     android:layout_marginLeft="@dimen/margin_15"
@@ -149,7 +154,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="300.20"
+                    android:text="@{String.valueOf(balance.money5)}"
                     android:textColor="#ffffffff"
                     android:textSize="17sp"
                     />
@@ -183,15 +188,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="253.20"
+                    android:text="@{String.valueOf(balance.moneyUse5)}"
                     android:textColor="#ffffffff"
-                    android:textSize="17sp"
-                    />
+                    android:textSize="17sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="已提现(元)"
+                    android:text="已使用(元)"
                     android:textColor="#ffffffff"
                     android:textSize="12sp"
                     />
@@ -217,7 +221,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="253.20"
+                    android:text="@{String.valueOf(balance.money4Balance)}"
                     android:textColor="#ffffffff"
                     android:textSize="17sp"
                     />
@@ -253,10 +257,12 @@
             android:layout_marginTop="@dimen/margin_15"
             />
 
-        <androidx.recyclerview.widget.RecyclerView
++        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_wallet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_marginTop="1dp"
             />
 
 

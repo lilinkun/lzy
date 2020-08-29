@@ -199,6 +199,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:onClick="@{()->me.setJumpIntegral()}"
                 android:orientation="vertical">
 
                 <TextView

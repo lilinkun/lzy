@@ -57,6 +57,9 @@
     <string name="ic_qrcode">&#xe653;</string>
     <string name="ic_code">&#xe657;</string>
 
+    <string name="add">+</string>
+    <string name="reduce">-</string>
+
 
     <string name="clother_host">人气</string>
     <string name="moren">默认排序</string>
@@ -74,6 +77,7 @@
 
     <!--钱包-->
     <string name="wallet">钱包</string>
+    <string name="ele_coin">电子币</string>
 
 
     <string name="goods_collect">已收藏</string>

@@ -72,8 +72,21 @@ public class PersonalInfoActivity extends BaseActivity<ActivityPersonalInfoBindi
     }
 
     @Override
-    public void getUserInfoSuccess(LoginBean loginBean) {
-        binding.setPersoninfo(loginBean);
+    public void getUserInfoSuccess(LoginBean mLoginBean) {
+        binding.setPersoninfo(mLoginBean);
+
+
+        ProApplication.PROJECT = mLoginBean.getProject();
+        ProApplication.LEVEL = mLoginBean.getUserLevel();
+        ProApplication.CCQTYPE = mLoginBean.getCcqType();
+
+        SharedPreferences sharedPreferences = getSharedPreferences(HsqAppUtil.LOGIN, MODE_PRIVATE);
+        sharedPreferences.edit().putString("sessionid", ProApplication.SESSIONID()).putBoolean(HsqAppUtil.LOGIN, true)
+                .putString(HsqAppUtil.ACCOUNT, mLoginBean.getNickName()).putString(HsqAppUtil.TELEPHONE, mLoginBean.getMobile())
+                .putString(HsqAppUtil.USERNAME, mLoginBean.getUserName()).putString(HsqAppUtil.USERID, mLoginBean.getUserId())
+                .putString(HsqAppUtil.VIPVALIDITY, mLoginBean.getVipValidity())
+                .putString(HsqAppUtil.USERLEVEL, mLoginBean.getUserLevel() + "")
+                .putString(HsqAppUtil.USERLEVELNAME, mLoginBean.getUserLevelName()).commit();
     }
 
     @Override

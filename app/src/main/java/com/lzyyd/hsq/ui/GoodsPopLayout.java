@@ -598,6 +598,7 @@ public class GoodsPopLayout extends RelativeLayout implements View.OnClickListen
                 break;
 
             case R.id.rl_pop:
+
                 if (type == HsqAppUtil.GOODSTYPE_VIP){
                     onVipGoods.delete();
                 }else {

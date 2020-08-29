@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_back_white"
             android:layout_centerVertical="true"
+            android:onClick="@{()->integral.finish()}"
             />
 
         <TextView
@@ -100,135 +101,9 @@
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_integral_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:layout_marginTop="1dp"
-        />
-
-    <com.lzyyd.hsq.ui.RecyclerViewSlidingBar
-        android:id="@+id/rvb"
-        android:layout_width="17dp"
-        android:layout_height="3dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        />
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="5dp"
-        android:visibility="gone"
-        >
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_integral_sign_in_everyday"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="每日签到"
-                android:textColor="#ff333333"
-                android:textSize="14sp"
-                android:layout_marginTop="5dp"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_integral_task"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="积分任务"
-                android:textColor="#ff333333"
-                android:textSize="14sp"
-                android:layout_marginTop="5dp"
-                />
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_integral_luck_draw"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="积分抽奖"
-                android:textColor="#ff333333"
-                android:textSize="14sp"
-                android:layout_marginTop="5dp"
-                />
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_integral_make_integral"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="购物赚积分"
-                android:textColor="#ff333333"
-                android:textSize="14sp"
-                android:layout_marginTop="5dp"
-                />
-
-        </LinearLayout>
-
-
-
-
-    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_integral"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />

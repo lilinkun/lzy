@@ -8,6 +8,11 @@
             name="point"
             type="com.lzyyd.hsq.viewmodel.WalletViewModel" />
 
+        <variable
+            name="balance"
+            type="com.lzyyd.hsq.bean.BalanceBean" />
+
+
     </data>
 
 
@@ -29,7 +34,7 @@
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:gravity="center"
-                android:onClick="@{()->point.onBackPressed()}"
+                android:onClick="@{()->point.finished()}"
                 android:paddingLeft="16dp">
 
                 <TextView
@@ -48,7 +53,7 @@
                 android:layout_centerInParent="true"
                 android:textColor="@color/text_commom"
                 android:textSize="18sp"
-                android:text="@string/wallet"/>
+                android:text="@string/ele_coin"/>
 
 
         </RelativeLayout>
@@ -79,7 +84,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="8690.20"
+                        android:text="@{String.valueOf(balance.money2Balance)}"
                         android:textColor="#ffffffff"
                         android:textSize="20sp"
                         />
@@ -111,6 +116,7 @@
                         android:text="充值"
                         android:textColor="@color/text_common_bg"
                         android:textSize="14sp"
+                        android:onClick="@{()->point.getReCharge()}"
                         />
 
                     <TextView
@@ -120,6 +126,7 @@
                         android:text="转赠"
                         android:textColor="@color/text_common_bg"
                         android:textSize="14sp"
+                        android:onClick="@{()->point.getTransferout()}"
                         android:layout_marginLeft="@dimen/margin_15"
                         />
 
@@ -130,6 +137,22 @@
             </LinearLayout>
 
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="申请天丰E购电子币转入"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize12"
+                android:layout_marginRight="@dimen/margin_10"
+                android:background="@drawable/bg_ele_point_tv"
+                />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -150,7 +173,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="300.20"
+                        android:text="@{String.valueOf(balance.money2)}"
                         android:textColor="#ffffffff"
                         android:textSize="17sp"
                         />
@@ -184,7 +207,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="253.20"
+                        android:text="@{String.valueOf(balance.moneyUse2)}"
                         android:textColor="#ffffffff"
                         android:textSize="17sp"
                         />
@@ -218,7 +241,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="253.20"
+                        android:text="@{String.valueOf(balance.moneyLock2)}"
                         android:textColor="#ffffffff"
                         android:textSize="17sp"
                         />
@@ -257,7 +280,10 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_point"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:backgroundTint="@color/white"
+            android:layout_marginTop="1dp"
             />
 
 

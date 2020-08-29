@@ -164,7 +164,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:textColor="@color/white"
+                        android:textColor="#A47E60"
                         android:padding="@dimen/padding_5"
                         android:textSize="@dimen/textsize13"
                         android:background="@drawable/bg_bindcard_vcode"
@@ -246,12 +246,13 @@
                 android:layout_height="44dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/textsize16"
+                    android:text="开户银行"
                     android:textColor="@color/grey_333333"
-                    android:text="开户银行"/>
+                    android:textSize="@dimen/textsize16" />
 
 
                 <RelativeLayout
@@ -260,15 +261,15 @@
                     android:orientation="horizontal"
                     android:layout_marginLeft="@dimen/margin_20"
                     >
+
                     <TextView
                         android:id="@+id/tv_bank_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/textsize14"
+                        android:layout_centerVertical="true"
                         android:text="@{String.valueOf(cardInfo.bankName)}"
                         android:textColor="@color/grey_333333"
-                        android:layout_centerVertical="true"
-                        />
+                        android:textSize="@dimen/textsize14" />
 
                     <TextView
                         android:layout_width="wrap_content"

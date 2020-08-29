@@ -3,6 +3,7 @@ package com.lzyyd.hsq.data;
 import com.lzyyd.hsq.bean.AddressBean;
 import com.lzyyd.hsq.bean.BalanceBean;
 import com.lzyyd.hsq.bean.BalanceDetailBean;
+import com.lzyyd.hsq.bean.BankBean;
 import com.lzyyd.hsq.bean.CartBean;
 import com.lzyyd.hsq.bean.CartListBean;
 import com.lzyyd.hsq.bean.CategoryBean;
@@ -102,6 +103,14 @@ public class DataRepository extends BaseModel implements HttpDataSource, LocalDa
     //获取自营商品列表数据
     public Observable<ResultBean<ArrayList<GoodsListBean>, PageBean>> getGoodsListVip(HashMap<String, String> hashMap){
         return mHttpDataSource.getGoodsListVip(hashMap);
+    }
+
+
+    /**
+     * 获取提现支付
+     */
+    public Observable<ResultBean<String, Object>> getCash(HashMap<String, String> mHashMap) {
+        return mHttpDataSource.getCash(mHashMap);
     }
 
     //获取自营商品列表数据
@@ -249,8 +258,16 @@ public class DataRepository extends BaseModel implements HttpDataSource, LocalDa
         return mHttpDataSource.getBankCard(mHashMap);
     }
 
+    public Observable<ResultBean<ArrayList<BankBean>, Object>> getBankInfo(HashMap<String, String> mHashMap) {
+        return mHttpDataSource.getBankInfo(mHashMap);
+    }
+
     public Observable<ResultBean<ArrayList<BalanceDetailBean>, Object>> getAmountPrice(HashMap<String, String> mHashMap) {
         return mHttpDataSource.getAmountPrice(mHashMap);
+    }
+
+    public Observable<ResultBean<String, Object>> setTransferout(HashMap<String, String> mHashMap) {
+        return mHttpDataSource.setTransferout(mHashMap);
     }
 
 }

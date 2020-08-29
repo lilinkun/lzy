@@ -51,11 +51,9 @@ public abstract class HttpResultCallBack<M, T> extends DisposableObserver<Result
         String jsonResponse = new Gson().toJson(result);
         Log.d("HttpResultCallBack", "返回ok==：" + jsonResponse);
         if (result.getStatus().equals(HsqAppUtil.RESULT_SUCCESS)) {
-            if (result.getData() == null) {
-                onResponse(result.getData(), result.getDesc(), result.getPage());
-            } else {
-                onResponse(result.getData(), HsqAppUtil.RESULT_SUCCESS, result.getPage());
-            }
+
+            onResponse(result.getData(), result.getDesc(), result.getPage());
+
         } else {
             onHttpFail(result.getDesc(), HsqAppUtil.RESULT_FAIL + result.getCode());
         }

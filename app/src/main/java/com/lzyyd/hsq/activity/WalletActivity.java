@@ -8,9 +8,11 @@ import com.lzyyd.hsq.adapter.WalletAdapter;
 import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseActivity;
 import com.lzyyd.hsq.base.ProApplication;
+import com.lzyyd.hsq.bean.BalanceBean;
 import com.lzyyd.hsq.bean.BalanceDetailBean;
 import com.lzyyd.hsq.databinding.ActivityWalletBinding;
 import com.lzyyd.hsq.util.Eyes;
+import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.WalletViewModel;
 
 import java.util.ArrayList;
@@ -27,6 +29,7 @@ public class WalletActivity extends BaseActivity<ActivityWalletBinding, WalletVi
 
     private int PAGE_INDEX = 1;
     private int PAGE_COUNT = 20;
+    public static final int WALLRESULT = 0x323;
 
     @Override
     public int initContentView(Bundle savedInstanceState) {
@@ -49,7 +52,8 @@ public class WalletActivity extends BaseActivity<ActivityWalletBinding, WalletVi
         Eyes.setStatusBarWhiteColor(this, getResources().getColor(R.color.white));
 
         viewModel.setListener(this);
-        viewModel.getPriceData(PAGE_INDEX + "", PAGE_COUNT+"", "3", ProApplication.SESSIONID());
+        viewModel.getBalance(ProApplication.SESSIONID());
+        viewModel.getPriceData(PAGE_INDEX + "", PAGE_COUNT+"", "5", ProApplication.SESSIONID());
     }
 
 
@@ -64,11 +68,27 @@ public class WalletActivity extends BaseActivity<ActivityWalletBinding, WalletVi
 
         binding.rvWallet.setAdapter(walletAdapter);
 
+        walletAdapter.getItems().addAll(balanceDetailBeans);
 
     }
 
     @Override
     public void getDataFail(String msg) {
+        UToast.show(this,msg);
+    }
+
+    @Override
+    public void getBalanceSuccess(BalanceBean balanceBean) {
+        binding.setBalance(balanceBean);
+    }
+
+    @Override
+    public void getBalanceFail(String msg) {
+        UToast.show(this,msg);
+    }
+
+    @Override
+    public void finishForResult() {
 
     }
 }

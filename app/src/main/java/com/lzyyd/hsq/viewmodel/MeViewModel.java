@@ -7,6 +7,7 @@ import com.lzyyd.hsq.activity.AddressListActivity;
 import com.lzyyd.hsq.activity.CcqActivity;
 import com.lzyyd.hsq.activity.CollectGoodsActivity;
 import com.lzyyd.hsq.activity.GetCashActivity;
+import com.lzyyd.hsq.activity.IntegralActivity;
 import com.lzyyd.hsq.activity.MyQrcodeActivity;
 import com.lzyyd.hsq.activity.OrderListActivity;
 import com.lzyyd.hsq.activity.PersonalInfoActivity;
@@ -20,6 +21,7 @@ import com.lzyyd.hsq.bean.CcqBean;
 import com.lzyyd.hsq.bean.CcqListBean;
 import com.lzyyd.hsq.bean.LoginBean;
 import com.lzyyd.hsq.data.DataRepository;
+import com.lzyyd.hsq.fragment.MeFragment;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
 import com.lzyyd.hsq.util.HsqAppUtil;
 
@@ -67,8 +69,12 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
         startActivity(CollectGoodsActivity.class);
     }
 
+    public void setJumpIntegral(){
+        startActivity(IntegralActivity.class);
+    }
+
     public void setJumpPoint(){
-        startActivity(PointActivity.class);
+        startActivity(PointActivity.class,null, MeFragment.RESULT_CODE_POINT);
     }
 
     public void setJumpGetCash(){

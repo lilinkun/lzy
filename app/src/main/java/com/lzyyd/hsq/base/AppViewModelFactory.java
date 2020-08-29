@@ -28,6 +28,7 @@ import com.lzyyd.hsq.viewmodel.RechargeViewModel;
 import com.lzyyd.hsq.viewmodel.RegisterViewModel;
 import com.lzyyd.hsq.viewmodel.ShoppingcartViewModel;
 import com.lzyyd.hsq.viewmodel.SureOrderViewModel;
+import com.lzyyd.hsq.viewmodel.TransferoutViewModel;
 import com.lzyyd.hsq.viewmodel.VipViewModel;
 import com.lzyyd.hsq.viewmodel.WalletViewModel;
 
@@ -116,6 +117,8 @@ public class AppViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             return (T) new MVVMViewModel(mApplication, mRepository);
         }else if (modelClass.isAssignableFrom(BindCardViewModel.class)){
             return (T) new BindCardViewModel(mApplication, mRepository);
+        }else if (modelClass.isAssignableFrom(TransferoutViewModel.class)){
+            return (T) new TransferoutViewModel(mApplication, mRepository);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

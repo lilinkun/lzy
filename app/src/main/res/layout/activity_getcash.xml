@@ -9,6 +9,10 @@
             name="getcash"
             type="com.lzyyd.hsq.viewmodel.GetCashViewModel" />
 
+        <variable
+            name="balance"
+            type="com.lzyyd.hsq.bean.BalanceBean" />
+
     </data>
 
 <LinearLayout
@@ -28,7 +32,7 @@
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:gravity="center"
-            android:onClick="@{()->getcash.onBackPressed()}"
+            android:onClick="@{()->getcash.finishforresult()}"
             android:paddingLeft="16dp">
 
             <TextView
@@ -138,12 +142,13 @@
 
 
                 <EditText
-                    android:id="@+id/et_wlm_coin"
+                    android:id="@+id/et_hsq_coin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_commom"
                     android:textSize="30sp"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
+                    android:text="@{getcash.inputAmount}"
                     android:background="@null"/>
 
             </LinearLayout>
@@ -174,6 +179,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_commom"
                     android:textSize="@dimen/textsize14"
+                    android:text="@{String.valueOf(balance.money5Balance)}"
                     />
 
                 <TextView
@@ -209,6 +215,7 @@
             android:layout_marginRight="@dimen/margin_15"
             android:layout_marginBottom="@dimen/margin_10"
             android:layout_alignParentBottom="true"
+            app:onClickCommand="@{getcash.bindingCommand}"
             android:background="@drawable/shape_getcash_btn_bg"
             android:gravity="center"/>
 

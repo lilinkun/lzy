@@ -134,7 +134,10 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
             @Override
             public void onChanged(@Nullable Map<String, Object> params) {
                 Class<?> clz = (Class<?>) params.get(ParameterField.CLASS);
-                Bundle bundle = (Bundle) params.get(ParameterField.BUNDLE);
+                Bundle bundle = null;
+                if (params.get(ParameterField.BUNDLE) != null) {
+                    bundle = (Bundle) params.get(ParameterField.BUNDLE);
+                }
                 int forResult = (Integer) params.get(ParameterField.FRORESULT);
                 startActivity(clz, bundle,forResult);
             }

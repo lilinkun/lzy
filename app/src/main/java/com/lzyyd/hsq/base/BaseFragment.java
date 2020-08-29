@@ -131,6 +131,19 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
                 startActivity(clz, bundle);
             }
         });
+        //跳入新页面
+        viewModel.getUC().getStartActivityEventForesult().observe(this, new Observer<Map<String, Object>>() {
+            @Override
+            public void onChanged(@Nullable Map<String, Object> params) {
+                Class<?> clz = (Class<?>) params.get(BaseViewModel.ParameterField.CLASS);
+                Bundle bundle = null;
+                if (params.get(BaseViewModel.ParameterField.BUNDLE) != null) {
+                    bundle = (Bundle) params.get(BaseViewModel.ParameterField.BUNDLE);
+                }
+                int forResult = (Integer) params.get(BaseViewModel.ParameterField.FRORESULT);
+                startActivity(clz, bundle,forResult);
+            }
+        });
         //跳入ContainerActivity
         viewModel.getUC().getStartContainerActivityEvent().observe(this, new Observer<Map<String, Object>>() {
             @Override
@@ -203,6 +216,21 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         }
         startActivity(intent);
     }
+
+    /**
+     * 跳转页面
+     *
+     * @param clz    所跳转的目的Activity类
+     * @param bundle 跳转所携带的信息
+     */
+    public void startActivity(Class<?> clz, Bundle bundle,int forresult) {
+        Intent intent = new Intent(getContext(), clz);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        startActivityForResult(intent,forresult);
+    }
+
 
     /**
      * 跳转容器页面

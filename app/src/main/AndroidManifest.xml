@@ -93,6 +93,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name="com.lzyyd.hsq.activity.PointActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.TransferoutActivity"
+            android:screenOrientation="portrait"/>
 
 
 

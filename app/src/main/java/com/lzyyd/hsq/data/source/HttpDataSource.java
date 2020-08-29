@@ -3,6 +3,7 @@ package com.lzyyd.hsq.data.source;
 import com.lzyyd.hsq.bean.AddressBean;
 import com.lzyyd.hsq.bean.BalanceBean;
 import com.lzyyd.hsq.bean.BalanceDetailBean;
+import com.lzyyd.hsq.bean.BankBean;
 import com.lzyyd.hsq.bean.CartBean;
 import com.lzyyd.hsq.bean.CartListBean;
 import com.lzyyd.hsq.bean.CategoryBean;
@@ -43,6 +44,9 @@ public interface HttpDataSource {
 
     //获取自营商品列表数据
     Observable<ResultBean<ArrayList<GoodsListBean>, PageBean>> getGoodsListVip(HashMap<String, String> hashMap);
+
+    //获取自营商品列表数据
+    Observable<ResultBean<String, Object>> getCash(HashMap<String, String> hashMap);
 
     //获取主页数据
     Observable<ResultBean<HomeBean, String>> getHomeData(HashMap<String, String> hashMap);
@@ -105,7 +109,10 @@ public interface HttpDataSource {
 
     Observable<ResultBean<UserBankBean,Object>> getBankCard(HashMap<String, String> hashMap);
 
+    Observable<ResultBean<ArrayList<BankBean>,Object>> getBankInfo(HashMap<String, String> hashMap);
+
     Observable<ResultBean<ArrayList<BalanceDetailBean>,Object>> getAmountPrice(HashMap<String, String> hashMap);
 
+    Observable<ResultBean<String,Object>> setTransferout(HashMap<String, String> hashMap);
 
 }

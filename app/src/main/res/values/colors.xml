@@ -37,6 +37,8 @@
 
     <color name="RED_E00000">#E00000</color>
 
+    <color name="yellow_A47E60">#A47E60</color>
+
 
     <!--Zxing相关-->
     <color name="contents_text">#ff000000</color>

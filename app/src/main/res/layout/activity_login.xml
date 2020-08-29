@@ -144,7 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="13sp"
-                android:textColor="#A47E60"
+                android:textColor="@color/yellow_A47E60"
                 android:text="@string/tv_login_forget_psd"
                 android:onClick="@{login::forgetPsd}"/>
 
@@ -159,7 +159,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="13sp"
-                android:textColor="#A47E60"
+                android:textColor="@color/yellow_A47E60"
                 android:text="@string/tv_login_register"
                 android:onClick="@{login::register}"/>
 
@@ -173,7 +173,7 @@
             android:layout_marginTop="16dp"
             android:gravity="center"
             android:textSize="15sp"
-            android:textColor="#A47E60"
+            android:textColor="@color/yellow_A47E60"
             android:onClick="@{()->login.clickLogin()}"
             android:text="@string/tv_login"/>
         

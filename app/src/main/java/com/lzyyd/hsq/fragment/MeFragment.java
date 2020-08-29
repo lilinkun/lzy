@@ -52,6 +52,8 @@ public class MeFragment extends BaseFragment<FragmentMeBinding, MeViewModel> imp
     private static final String DECODED_BITMAP_KEY = "codedBitmap";
     private static final int REQUEST_CODE_SCAN = 0x0000;
 
+    public static final int RESULT_CODE_POINT = 0X2212;
+
     @Override
     public int initVariableId() {
         return BR.me;
@@ -90,7 +92,6 @@ public class MeFragment extends BaseFragment<FragmentMeBinding, MeViewModel> imp
 
     @Override
     public void initViewObservable() {
-
     }
 
     @Override
@@ -188,6 +189,11 @@ public class MeFragment extends BaseFragment<FragmentMeBinding, MeViewModel> imp
 
                 viewModel.getQrcodeCcqData(content,ProApplication.SESSIONID());
             }
+        }else if (requestCode == RESULT_CODE_POINT && resultCode == RESULT_OK){
+
+            BalanceBean balanceBean = (BalanceBean) data.getSerializableExtra("balance");
+            binding.setBalance(balanceBean);
+
         }
     }
 
