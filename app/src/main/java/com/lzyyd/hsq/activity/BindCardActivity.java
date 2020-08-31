@@ -84,8 +84,8 @@ public class BindCardActivity extends BaseActivity<ActivityBindCardBinding, Bind
     }
 
     @Override
-    public void onSendVcodeSuccess() {
-        UToast.show(this,"已发送验证码");
+    public void onSendVcodeSuccess(String msg) {
+        UToast.show(this,msg);
     }
 
     @Override

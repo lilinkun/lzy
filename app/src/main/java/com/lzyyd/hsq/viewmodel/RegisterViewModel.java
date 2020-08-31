@@ -34,6 +34,7 @@ public class RegisterViewModel extends BaseViewModel<DataRepository> {
     public ObservableField<String> passwordStr = new ObservableField<>();
     public ObservableField<String> invitedStr = new ObservableField<>();
     public ObservableField<String> nicknameStr = new ObservableField<>();
+    private OnRegisterListener listener;
 
     //封装一个界面发生改变的观察者
     public UIChangeObservable uc = new UIChangeObservable();
@@ -64,6 +65,10 @@ public class RegisterViewModel extends BaseViewModel<DataRepository> {
         isSeeFile = isCheck;
     }
 
+    public void setListener(OnRegisterListener listener){
+        this.listener = listener;
+    }
+
 
     public void clickRegister(){
 
@@ -73,10 +78,10 @@ public class RegisterViewModel extends BaseViewModel<DataRepository> {
             UToast.show(context,"请输入验证码");
         }else if (StringUtils.isEmpty(nicknameStr.get()) || nicknameStr.get().trim().length() < 2 || nicknameStr.get().trim().length() > 22){
             UToast.show(context,"请输入正确昵称");
-        }else if (StringUtils.isEmpty(passwordStr.get())  || passwordStr.get().trim().length() < 6){
-            UToast.show(context,"请输入正确密码格式");
+        }else if (StringUtils.isEmpty(passwordStr.get())){
+            UToast.show(context,"请输入密码");
         }else if (StringUtils.isEmpty(invitedStr.get())){
-            UToast.show(context,"请再次邀请码");
+            UToast.show(context,"请输入邀请码");
         }else if (!isSeeFile){
             UToast.show(context,"请同意阅读《用户协议》");
         }else {
@@ -93,6 +98,7 @@ public class RegisterViewModel extends BaseViewModel<DataRepository> {
         params.put("PassWord",passwordStr.get());
         params.put("NickName",nicknameStr.get());
         params.put("Referees",invitedStr.get());
+        params.put("OpenId","11212121");
         params.put("TPLType","2");
         model.register(params)
                 .compose(RxUtils.schedulersTransformer())
@@ -112,12 +118,6 @@ public class RegisterViewModel extends BaseViewModel<DataRepository> {
                     }
 
                     @Override
-                    public void onComplete() {
-                        dismissDialog();
-                        Toast.makeText(context,"完成",Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
                     public void onErr(String msg, String status) {
                         dismissDialog();
                         Toast.makeText(context,msg,Toast.LENGTH_SHORT).show();
@@ -128,30 +128,16 @@ public class RegisterViewModel extends BaseViewModel<DataRepository> {
 
     //发送验证码
     public void sendVCode(){
+
+        if (StringUtils.isEmpty(mobileStr.get())){
+            UToast.show(context,"请填写手机号或账号");
+            return;
+        }
+
         HashMap<String, String> params = new HashMap<>();
-        params.put("cls", "Home");
-        params.put("fun", "SettingParameter");
-        /*addSubscribe(model.login()
-        .compose(RxUtils.schedulersTransformer())
-        .doOnSubscribe(new Consumer<Disposable>(){
-            @Override
-            public void accept(Disposable disposable){
-                    showDialog();
-            }
-        })
-        .subscribe(new Consumer<Object>() {
-            @Override
-            public void accept(Object o) throws Exception {
-                dismissDialog();
-                //保存账号密码
-//                model.saveUserName(userName.get());
-//                model.savePassword(password.get());
-                //进入DemoActivity页面
-                startActivity(MainActivity.class);
-                //关闭页面
-                finish();
-            }
-        }));*/
+        params.put("cls", "SendSms");
+        params.put("fun", "RegisterCode");
+        params.put("phone",mobileStr.get());
 
         model.sendVCode(params)
                 .compose(RxUtils.schedulersTransformer())
@@ -163,18 +149,25 @@ public class RegisterViewModel extends BaseViewModel<DataRepository> {
                         showDialog();
                     }
                 })
-                .subscribe(new HttpCallBack<String>() {
+                .subscribe(new HttpResultCallBack<String,String>() {
                     @Override
-                    public void onResponse(String o) {
-                        Toast.makeText(context,o,Toast.LENGTH_SHORT).show();
+                    public void onResponse(String s, String status, String page) {
+                        dismissDialog();
+                        Toast.makeText(context,status,Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
-                    public void onErr(String msg) {
-                        Toast.makeText(context,"ole",Toast.LENGTH_SHORT).show();
+                    public void onErr(String msg, String status) {
+                        dismissDialog();
+                        Toast.makeText(context,msg,Toast.LENGTH_SHORT).show();
                     }
+
                 });
 
+    }
+
+    public interface OnRegisterListener{
+        public void sendCode();
     }
 
 }

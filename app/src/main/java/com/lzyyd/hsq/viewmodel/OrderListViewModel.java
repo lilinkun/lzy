@@ -102,11 +102,53 @@ public class OrderListViewModel extends BaseViewModel<DataRepository> {
                 });
     }
 
+    /**
+     * 取消订单
+     *
+     * @param OrderId
+     * @param SessionId
+     */
+    public void exitOrder(String OrderId, String SessionId) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("cls", "OrderInfo");
+        params.put("fun", "OrderInfoVIPCancel");
+        params.put("OrderSn", OrderId);
+        params.put("SessionId", SessionId);
+        model.register(params)
+                .compose(RxUtils.schedulersTransformer())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>(){
+                    @Override
+                    public void accept(Disposable disposable){
+                        showDialog();
+                    }
+                })
+                .subscribe(new HttpResultCallBack<String, String>() {
+
+                    @Override
+                    public void onResponse(String msg, String status, String page) {
+                        onGetDataCallback.exitOrderSuccess(msg);
+                        dismissDialog();
+                    }
+
+                    @Override
+                    public void onErr(String msg, String status) {
+                        onGetDataCallback.exitOrderFail(msg);
+                        dismissDialog();
+                    }
+
+                });
+    }
+
     public interface OnGetDataCallback{
         public void getDataSuccess(ArrayList<OrderListBean> orderListBeans,PageBean pageBean);
         public void getDataFail(String msg);
 
         public void sureReceiptSuccess(String msg);
         public void sureReceiptFail(String msg);
+
+        public void exitOrderSuccess(String s);
+        public void exitOrderFail(String msg);
     }
 }

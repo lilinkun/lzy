@@ -4,10 +4,12 @@ import android.app.Application;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import com.lzyyd.hsq.activity.BalanceTransferOutActivity;
 import com.lzyyd.hsq.activity.BindCardActivity;
 import com.lzyyd.hsq.activity.GetCashActivity;
 import com.lzyyd.hsq.activity.PointActivity;
 import com.lzyyd.hsq.activity.RechargeActivity;
+import com.lzyyd.hsq.activity.TianfengCoinActivity;
 import com.lzyyd.hsq.activity.TransferoutActivity;
 import com.lzyyd.hsq.activity.WalletActivity;
 import com.lzyyd.hsq.base.ProApplication;
@@ -68,6 +70,20 @@ public class WalletViewModel extends BaseViewModel<DataRepository> {
     public void getJumpGetCash(){
 
         getBankCard(ProApplication.SESSIONID());
+
+    }
+
+    public void getJumpTianfeng(){
+        Bundle bundle = new Bundle();
+        bundle.putDouble("balance",balanceBean.getMoney2Balance());
+        startActivity(TianfengCoinActivity.class,bundle, WalletActivity.TRANFERRESULT);
+    }
+
+    public void getJumpTranferout(){
+
+        Bundle bundle = new Bundle();
+        bundle.putDouble("balance",balanceBean.getMoney5Balance());
+        startActivity(BalanceTransferOutActivity.class,bundle, WalletActivity.TRANFERRESULT);
 
     }
 
@@ -156,12 +172,13 @@ public class WalletViewModel extends BaseViewModel<DataRepository> {
                 })
                 .subscribe(new HttpResultCallBack<UserBankBean,Object>() {
                     @Override
-                    public void onResponse(UserBankBean balanceDetailBeans, String status, Object page) {
+                    public void onResponse(UserBankBean bankBean, String status, Object page) {
                         dismissDialog();
-                        if (balanceDetailBeans.getBankNo() != null && balanceDetailBeans.getBankNo().length() > 0){
+                        if (bankBean.getBankNo() != null && bankBean.getBankNo().length() > 0){
                             if (balanceBean != null) {
                                 Bundle bundle = new Bundle();
                                 bundle.putSerializable("balance",balanceBean);
+                                bundle.putSerializable("bankBean",bankBean);
                                 startActivity(GetCashActivity.class,bundle, WalletActivity.WALLRESULT);
                             }
                         }else {

@@ -7,6 +7,7 @@ import com.lzyyd.hsq.activity.ChuangkeActivity;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.viewmodel.AddAddressViewModel;
 import com.lzyyd.hsq.viewmodel.AddressListViewModel;
+import com.lzyyd.hsq.viewmodel.BalanceTransferoutViewModel;
 import com.lzyyd.hsq.viewmodel.BindCardViewModel;
 import com.lzyyd.hsq.viewmodel.CcqViewModel;
 import com.lzyyd.hsq.viewmodel.ChuangkeViewModel;
@@ -21,6 +22,7 @@ import com.lzyyd.hsq.viewmodel.LoginViewModel;
 import com.lzyyd.hsq.viewmodel.MVVMViewModel;
 import com.lzyyd.hsq.viewmodel.MeViewModel;
 import com.lzyyd.hsq.viewmodel.MyQrcodeViewModel;
+import com.lzyyd.hsq.viewmodel.OrderDetailViewModel;
 import com.lzyyd.hsq.viewmodel.OrderListViewModel;
 import com.lzyyd.hsq.viewmodel.PayViewModel;
 import com.lzyyd.hsq.viewmodel.PersonalInfoViewModel;
@@ -28,6 +30,7 @@ import com.lzyyd.hsq.viewmodel.RechargeViewModel;
 import com.lzyyd.hsq.viewmodel.RegisterViewModel;
 import com.lzyyd.hsq.viewmodel.ShoppingcartViewModel;
 import com.lzyyd.hsq.viewmodel.SureOrderViewModel;
+import com.lzyyd.hsq.viewmodel.TianfengCoinViewModel;
 import com.lzyyd.hsq.viewmodel.TransferoutViewModel;
 import com.lzyyd.hsq.viewmodel.VipViewModel;
 import com.lzyyd.hsq.viewmodel.WalletViewModel;
@@ -119,6 +122,12 @@ public class AppViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             return (T) new BindCardViewModel(mApplication, mRepository);
         }else if (modelClass.isAssignableFrom(TransferoutViewModel.class)){
             return (T) new TransferoutViewModel(mApplication, mRepository);
+        }else if (modelClass.isAssignableFrom(OrderDetailViewModel.class)){
+            return (T) new OrderDetailViewModel(mApplication, mRepository);
+        }else if (modelClass.isAssignableFrom(TianfengCoinViewModel.class)){
+            return (T) new TianfengCoinViewModel(mApplication, mRepository);
+        }else if (modelClass.isAssignableFrom(BalanceTransferoutViewModel.class)){
+            return (T) new BalanceTransferoutViewModel(mApplication, mRepository);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

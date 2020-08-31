@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseActivity;
 import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.BalanceBean;
+import com.lzyyd.hsq.bean.BankBean;
+import com.lzyyd.hsq.bean.UserBankBean;
 import com.lzyyd.hsq.databinding.ActivityGetcashBinding;
 import com.lzyyd.hsq.util.Eyes;
 import com.lzyyd.hsq.util.UToast;
@@ -61,6 +64,11 @@ public class GetCashActivity extends BaseActivity<ActivityGetcashBinding, GetCas
         balanceBean = (BalanceBean) getIntent().getExtras().getSerializable("balance");
         binding.setBalance(balanceBean);
 
+        UserBankBean bankBean = (UserBankBean) getIntent().getExtras().getSerializable("bankBean");
+
+        String bankStr = bankBean.getBankNo().substring(bankBean.getBankNo().length() - 4, bankBean.getBankNo().length());
+        binding.tvBankName.setText(bankBean.getBankNameDesc() + "(" + bankStr + ")");
+
         viewModel.setListener(this);
 
     }
@@ -74,6 +82,16 @@ public class GetCashActivity extends BaseActivity<ActivityGetcashBinding, GetCas
     @Override
     public void getCashFail(String msg) {
         UToast.show(this,msg);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            setResult(RESULT_OK);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override

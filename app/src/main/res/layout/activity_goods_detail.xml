@@ -136,15 +136,116 @@
 
     </RelativeLayout>
 
-    
+        
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/goods_detail_discount"
+        android:id="@+id/rl_integral_detail"
+        android:visibility="gone"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_marginTop="@dimen/margin_5"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_integral_macketprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{@string/price + String.valueOf(goodsDetail.marketPrice)}"
+                android:textColor="#fff9c5c2"
+                android:textSize="12sp"
+                />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(goodsDetail.integral)}"
+                    android:textColor="#ffffffff"
+                    android:textSize="25sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="积分+"
+                    android:textColor="#ffffffff"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(goodsDetail.price)}"
+                    android:textColor="#ffffffff"
+                    android:textSize="25sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="元"
+                    android:textColor="#ffffffff"
+                    android:textSize="12sp"
+                    />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+        
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_detail_integral"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_integral_detail"
+                android:layout_marginTop="@dimen/margin_10"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_14"
+                android:layout_marginLeft="@dimen/margin_19"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                />
+
+
+
+        </LinearLayout>
+
+        
+
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:paddingLeft="10dp"
+        android:paddingRight="@dimen/margin_10"
+        android:layout_marginBottom="@dimen/margin_10">
 
         <LinearLayout
+            android:id="@+id/ll_common"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">

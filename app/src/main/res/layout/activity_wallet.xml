@@ -33,7 +33,7 @@
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:gravity="center"
-                android:onClick="@{()->wallet.onBackPressed()}"
+                android:onClick="@{()->wallet.finished()}"
                 android:paddingLeft="16dp">
 
                 <TextView
@@ -126,6 +126,7 @@
                     android:textColor="@color/text_common_bg"
                     android:textSize="14sp"
                     android:layout_marginLeft="@dimen/margin_15"
+                    android:onClick="@{()->wallet.getJumpTranferout()}"
                     />
 
             </LinearLayout>

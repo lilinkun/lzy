@@ -1,5 +1,6 @@
 package com.lzyyd.hsq.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.FloatProperty;
 
@@ -8,6 +9,7 @@ import com.lzyyd.hsq.adapter.SureOrderAdapter;
 import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseActivity;
 import com.lzyyd.hsq.base.ProApplication;
+import com.lzyyd.hsq.bean.AddressBean;
 import com.lzyyd.hsq.bean.OrderGoodsBuyListBean;
 import com.lzyyd.hsq.bean.OrderInfoBuyListBean;
 import com.lzyyd.hsq.bean.OrderinfoBean;
@@ -20,6 +22,7 @@ import com.lzyyd.hsq.viewmodel.SureOrderViewModel;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,10 +32,13 @@ import me.tatarka.bindingcollectionadapter2.BR;
  * Create by liguo on 2020/7/21
  * Describe:
  */
-public class SureOrderActivity extends BaseActivity<ActivitySureOrderBinding, SureOrderViewModel> implements SureOrderViewModel.SureOrderCallBack {
+public class SureOrderActivity extends BaseActivity<ActivitySureOrderBinding, SureOrderViewModel> implements SureOrderViewModel.SureOrderCallBack, SureOrderAdapter.OnDataGetFare {
 
     private String key;
     private OrderinfoBean orderinfoBean;
+    private AddressBean addressBean;
+    private SureOrderAdapter sureOrderAdapter;
+    public static final int ADDRESS_RESULT = 0x032;
 
     @Override
     public int initContentView(Bundle savedInstanceState) {
@@ -68,18 +74,22 @@ public class SureOrderActivity extends BaseActivity<ActivitySureOrderBinding, Su
 
         this.orderinfoBean = orderinfoBean;
 
-        SureOrderAdapter sureOrderAdapter = new SureOrderAdapter(this,orderinfoBean.getMoney3Balance());
+        if (sureOrderAdapter == null) {
+            sureOrderAdapter = new SureOrderAdapter(this, (int)orderinfoBean.getMoney3Balance(),this);
 
-        sureOrderAdapter.getItems().addAll(orderinfoBean.getOrderInfoBuyList());
+            sureOrderAdapter.getItems().addAll(orderinfoBean.getOrderInfoBuyList());
 
-        binding.setAddress(orderinfoBean.getAddress());
+            addressBean = orderinfoBean.getAddress();
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(linearLayoutManager.VERTICAL);
-        binding.rvSureOrder.setLayoutManager(linearLayoutManager);
-        binding.rvSureOrder.setAdapter(sureOrderAdapter);
+            binding.setAddress(orderinfoBean.getAddress());
 
-        binding.setOrderPrice(orderinfoBean.getOrderAmount() + "");
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+            linearLayoutManager.setOrientation(linearLayoutManager.VERTICAL);
+            binding.rvSureOrder.setLayoutManager(linearLayoutManager);
+            binding.rvSureOrder.setAdapter(sureOrderAdapter);
+
+            binding.setOrderPrice(orderinfoBean.getOrderAmount() + "");
+        }
     }
 
     @Override
@@ -89,7 +99,9 @@ public class SureOrderActivity extends BaseActivity<ActivitySureOrderBinding, Su
 
     @Override
     public void getOrderSuccess(String msg) {
-        UToast.show(this,msg);
+
+        viewModel.waitpay(msg,ProApplication.SESSIONID());
+
     }
 
     @Override
@@ -99,6 +111,12 @@ public class SureOrderActivity extends BaseActivity<ActivitySureOrderBinding, Su
 
     @Override
     public void orderClick() {
+
+        if (addressBean == null){
+            UToast.show(this,"请选择地址");
+            return;
+        }
+
 
         try{
             JSONObject jsonObject = new JSONObject();
@@ -139,6 +157,42 @@ public class SureOrderActivity extends BaseActivity<ActivitySureOrderBinding, Su
 
         }
 
+
+    }
+
+    @Override
+    public void getOrderPaySuccess(String msg) {
+        UToast.show(this,msg);
+    }
+
+    @Override
+    public void getOrderPayFail(String msg) {
+        UToast.show(this,msg);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        if (resultCode == RESULT_OK){
+            if (requestCode == ADDRESS_RESULT){
+                addressBean = (AddressBean) data.getSerializableExtra(HsqAppUtil.ADDRESS);
+                binding.setAddress(addressBean);
+            }
+        }
+
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onPoint(int point) {
+        double orderPrice = orderinfoBean.getOrderAmount() - ((int)orderinfoBean.getMoney3Balance() - point);
+
+        if (orderinfoBean.getMoney3Balance() == point){
+            binding.setOrderPrice(orderPrice+"");
+        }else {
+            binding.setOrderPrice(orderPrice + "(包含"+ ((int)orderinfoBean.getMoney3Balance() - point) +"积分)");
+        }
 
     }
 }

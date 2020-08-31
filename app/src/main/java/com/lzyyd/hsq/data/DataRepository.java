@@ -17,6 +17,7 @@ import com.lzyyd.hsq.bean.GoodsListBean;
 import com.lzyyd.hsq.bean.HomeBean;
 import com.lzyyd.hsq.bean.LocalBean;
 import com.lzyyd.hsq.bean.LoginBean;
+import com.lzyyd.hsq.bean.OrderDetailAddressBean;
 import com.lzyyd.hsq.bean.OrderListBean;
 import com.lzyyd.hsq.bean.OrderinfoBean;
 import com.lzyyd.hsq.bean.PageBean;
@@ -91,7 +92,7 @@ public class DataRepository extends BaseModel implements HttpDataSource, LocalDa
 
 
     //发送验证码
-    public Observable<HashMap<String, String>> sendVCode(HashMap<String, String> hashMap){
+    public Observable<ResultBean<String, String>> sendVCode(HashMap<String, String> hashMap){
         return mHttpDataSource.sendVCode(hashMap);
     }
 
@@ -266,8 +267,18 @@ public class DataRepository extends BaseModel implements HttpDataSource, LocalDa
         return mHttpDataSource.getAmountPrice(mHashMap);
     }
 
-    public Observable<ResultBean<String, Object>> setTransferout(HashMap<String, String> mHashMap) {
-        return mHttpDataSource.setTransferout(mHashMap);
+    @Override
+    public Observable<ResultBean<String, Object>> setTransferout(HashMap<String, String> hashMap) {
+        return mHttpDataSource.setTransferout(hashMap);
+    }
+
+    @Override
+    public Observable<ResultBean<Integer, Object>> setTtianfeng(HashMap<String, String> hashMap) {
+        return mHttpDataSource.setTtianfeng(hashMap);
+    }
+
+    public Observable<ResultBean<OrderDetailAddressBean, Object>> getOrderDetail(HashMap<String, String> mHashMap) {
+        return mHttpDataSource.getOrderDetail(mHashMap);
     }
 
 }

@@ -1,8 +1,10 @@
 package com.lzyyd.hsq.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PostProcessor;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +13,13 @@ import android.widget.TextView;
 
 import com.lzyyd.hsq.BR;
 import com.lzyyd.hsq.R;
+import com.lzyyd.hsq.activity.GoodsDetailActivity;
 import com.lzyyd.hsq.base.BaseBindingAdapter;
 import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.GoodsListBean;
 import com.lzyyd.hsq.bean.HomeItemBean;
 import com.lzyyd.hsq.databinding.AdapterGoodslistBinding;
+import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.viewmodel.GoodsListViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -53,6 +57,15 @@ public class GoodsListAdapter extends BaseBindingAdapter<GoodsListBean, AdapterG
 
     @Override
     protected void onclick(int position) {
+
+        Intent intent = new Intent();
+        Bundle bundle = new Bundle();
+        bundle.putInt(HsqAppUtil.TYPE,HsqAppUtil.GOODSTYPE_INTEGRAL);
+        bundle.putString(HsqAppUtil.GOODSID,items.get(position).getGoodsId());
+        intent.putExtras(bundle);
+        intent.setClass(context, GoodsDetailActivity.class);
+        context.startActivity(intent);
+
     }
 
 

@@ -150,6 +150,7 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/textsize12"
                 android:layout_marginRight="@dimen/margin_10"
+                android:onClick="@{()->point.getJumpTianfeng()}"
                 android:background="@drawable/bg_ele_point_tv"
                 />
             </LinearLayout>

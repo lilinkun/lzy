@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 
+import com.lzyyd.hsq.activity.IntegralListActivity;
 import com.lzyyd.hsq.bean.GoodsListBean;
 import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.data.DataRepository;
@@ -71,6 +72,11 @@ public class IntegralViewModel extends BaseViewModel<DataRepository> {
                     }
                 });
 
+    }
+
+
+    public void integralList(){
+        startActivity(IntegralListActivity.class);
     }
 
     public interface GetGoodsListCallBack{

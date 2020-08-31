@@ -186,12 +186,32 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
     @Override
     public void getDataSuccess(GoodsDetailInfoBean<ArrayList<GoodsChooseBean>> goodsListBeans) {
 
+        if (type == 0){
+            if (goodsListBeans.getIntegral() == 0){
+                type = HsqAppUtil.GOODSTYPE_COMMON;
+            }else {
+                type = HsqAppUtil.GOODSTYPE_INTEGRAL;
+            }
+        }
+
+
         this.goodsDetailBean = goodsListBeans;
 //        type = goodsDetailBean.getGoodsType();
 
         binding.setVariable(BR.goodsDetail,goodsListBeans);
 
-//        TextUtil.setText(this,goodsListBeans.getGoodsName(),"秒杀",binding.tvGoodsContent);
+        if (goodsListBeans.getIsPresell() == 1) {
+            TextUtil.setText(this, goodsListBeans.getGoodsName(), "预售", binding.tvGoodsContent);
+        }
+
+        if (type == HsqAppUtil.GOODSTYPE_INTEGRAL){
+
+            binding.rlIntegralDetail.setVisibility(View.VISIBLE);
+            binding.llCommon.setVisibility(View.GONE);
+            TextUtil.setText(this, goodsListBeans.getGoodsName(), "积分", binding.tvGoodsContent);
+            binding.tvIntegralMacketprice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        }
+
 
         binding.tvOldPrice.setText("￥" + goodsListBeans.getMarketPrice());
 

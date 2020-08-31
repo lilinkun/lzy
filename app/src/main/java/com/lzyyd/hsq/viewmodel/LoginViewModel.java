@@ -18,6 +18,7 @@ import com.lzyyd.hsq.http.callback.HttpResultCallBack;
 import com.lzyyd.hsq.model.LoginModel;
 import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
 
 import java.util.HashMap;
 
@@ -38,6 +39,11 @@ public class LoginViewModel extends BaseViewModel<DataRepository> {
     LoginModel loginModel;
     //封装一个界面发生改变的观察者
     public UIChangeObservable uc = new UIChangeObservable();
+    private LoginCallBack loginCallBack;
+
+    public void setListener(LoginCallBack loginCallBack){
+        this.loginCallBack = loginCallBack;
+    }
 
     public ObservableField<String> usernameField = new ObservableField<>();
     public ObservableField<String> passWordField = new ObservableField<>();
@@ -127,8 +133,9 @@ public class LoginViewModel extends BaseViewModel<DataRepository> {
 
 
     public void seckill(View view){
-//        startActivity(IntegralActivity.class);
-        startActivity(SeckillActivity.class);
+
+        loginCallBack.getOnclickWxLogin();
+
     }
 
 
@@ -142,7 +149,7 @@ public class LoginViewModel extends BaseViewModel<DataRepository> {
     /**
      * 获取图片地址前缀
      */
-    public void getUrl(final LoginCallBack loginCallBack) {
+    public void getUrl() {
         HashMap<String, String> params = new HashMap<>();
         params.put("cls", "Home");
         params.put("fun", "SettingParameter");
@@ -179,6 +186,8 @@ public class LoginViewModel extends BaseViewModel<DataRepository> {
     public interface LoginCallBack{
         public void getUrlSuccess(UrlBean urlBean);
         public void getUrlFail(String msg);
+
+        public void getOnclickWxLogin();
     }
 
 }

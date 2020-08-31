@@ -17,6 +17,7 @@ import com.lzyyd.hsq.bean.GoodsListBean;
 import com.lzyyd.hsq.bean.HomeBean;
 import com.lzyyd.hsq.bean.LocalBean;
 import com.lzyyd.hsq.bean.LoginBean;
+import com.lzyyd.hsq.bean.OrderDetailAddressBean;
 import com.lzyyd.hsq.bean.OrderListBean;
 import com.lzyyd.hsq.bean.OrderinfoBean;
 import com.lzyyd.hsq.bean.PageBean;
@@ -61,8 +62,8 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
-    public Observable<HashMap<String, String>> sendVCode(HashMap<String, String> hashMap) {
-        return apiService.setTest(hashMap); //延迟3秒
+    public Observable<ResultBean<String, String>> sendVCode(HashMap<String, String> hashMap) {
+        return apiService.sendVCode(hashMap); //延迟3秒
     }
 
     @Override
@@ -220,6 +221,15 @@ public class HttpDataSourceImpl implements HttpDataSource {
 
     public Observable<ResultBean<String, Object>> setTransferout(HashMap<String, String> mHashMap) {
         return apiService.setTransferout(mHashMap);
+    }
+
+    public Observable<ResultBean<Integer, Object>> setTtianfeng(HashMap<String, String> mHashMap) {
+        return apiService.setTtianfeng(mHashMap);
+    }
+
+
+    public Observable<ResultBean<OrderDetailAddressBean, Object>> getOrderDetail(HashMap<String, String> mHashMap) {
+        return apiService.getOrderDetail(mHashMap);
     }
 
 

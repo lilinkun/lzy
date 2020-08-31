@@ -14,6 +14,7 @@ import com.lzyyd.hsq.bean.AddressBean;
 import com.lzyyd.hsq.databinding.ActivityAddressBinding;
 import com.lzyyd.hsq.ui.GridSpacingItemDecoration;
 import com.lzyyd.hsq.ui.SpacesItemDecoration;
+import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.AddressListViewModel;
 
@@ -34,6 +35,7 @@ public class AddressListActivity extends BaseActivity<ActivityAddressBinding, Ad
     private AddressAdapter addressAdapter;
     private ArrayList<AddressBean> addressBeans;
     public int resultAddAddress = 0x1231;
+    private boolean isOrder = false;
 
     @Override
     public int initContentView(Bundle savedInstanceState) {
@@ -55,6 +57,10 @@ public class AddressListActivity extends BaseActivity<ActivityAddressBinding, Ad
     public void initData() {
         viewModel.setListener(this);
         viewModel.getDatalist("1","80", ProApplication.SESSIONID());
+
+        if(getIntent() != null && getIntent().getExtras() != null && getIntent().getExtras().getString(HsqAppUtil.ADDRESS) != null){
+            isOrder = true;
+        }
 
         binding.refreshLayout.setOnRefreshListener(this);
     }
@@ -90,7 +96,12 @@ public class AddressListActivity extends BaseActivity<ActivityAddressBinding, Ad
 
     @Override
     public void getAddressFail(String msg) {
-//        UToast.show(this,msg);
+        if (msg.contains("查无数据")){
+            binding.rvChooseAddress.setVisibility(View.GONE);
+            binding.llEmpty.setVisibility(View.VISIBLE);
+        }else {
+            UToast.show(this, msg);
+        }
     }
 
     @Override
@@ -131,6 +142,14 @@ public class AddressListActivity extends BaseActivity<ActivityAddressBinding, Ad
 
     @Override
     public void onItemClick(int position) {
+
+        if (isOrder){
+            Intent intent = new Intent();
+            intent.putExtra(HsqAppUtil.ADDRESS,addressBeans.get(position));
+            setResult(RESULT_OK,intent);
+            finish();
+        }
+
     }
 
     @Override

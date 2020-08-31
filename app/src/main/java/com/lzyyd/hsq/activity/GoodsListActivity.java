@@ -14,6 +14,7 @@ import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.databinding.ActivityGoodslistBinding;
 import com.lzyyd.hsq.ui.GridSpacingItemDecoration;
 import com.lzyyd.hsq.util.Eyes;
+import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.GoodsListViewModel;
 
 import java.util.ArrayList;
@@ -69,6 +70,8 @@ public class GoodsListActivity extends BaseActivity<ActivityGoodslistBinding, Go
 
     @Override
     public void getDataFail(String msg) {
-
+        UToast.show(this,msg);
     }
+
+
 }

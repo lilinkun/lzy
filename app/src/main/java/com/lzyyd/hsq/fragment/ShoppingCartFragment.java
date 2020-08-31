@@ -1,6 +1,7 @@
 package com.lzyyd.hsq.fragment;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.lzyyd.hsq.BR;
 import com.lzyyd.hsq.R;
+import com.lzyyd.hsq.activity.LoginActivity;
 import com.lzyyd.hsq.activity.SureOrderActivity;
 import com.lzyyd.hsq.adapter.MyShoppingCarAdapter;
 import com.lzyyd.hsq.adapter.SureOrderAdapter;
@@ -86,9 +88,13 @@ public class ShoppingCartFragment extends BaseFragment<FragmentGoodsCartBinding,
 
     }
 
+    public void setUpdate(){
+        viewModel.getGoodsCartList(ProApplication.SESSIONID());
+    }
+
     @Override
     public void getCartListSuccess(ArrayList<CartListBean<ArrayList<CartBean>>> storeCartBeans) {
-
+        totalgoods = 0;
 //        MyShoppingCarAdapter myShoppingCarAdapter = new MyShoppingCarAdapter(getActivity(),storeCartBeans,BR.storeinfo);
         ArrayList<OrderGroupBean<ArrayList<CartBean>>> orderGroupBeans = new ArrayList<>();
 
@@ -153,6 +159,9 @@ public class ShoppingCartFragment extends BaseFragment<FragmentGoodsCartBinding,
 
     @Override
     public void getCartListFail(String msg) {
+        if(msg.contains("登录已失效") || msg.contains("用户不存在")){
+            startActivity(LoginActivity.class);
+        }
         UToast.show(getActivity(),msg);
     }
 

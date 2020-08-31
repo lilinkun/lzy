@@ -10,18 +10,25 @@ import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseActivity;
 import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.UrlBean;
+import com.lzyyd.hsq.bean.WxUserInfo;
 import com.lzyyd.hsq.databinding.ActivityLoginBinding;
+import com.lzyyd.hsq.interf.IWxLoginListener;
 import com.lzyyd.hsq.util.Eyes;
 import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.LoginViewModel;
+import com.lzyyd.hsq.wxapi.WXEntryActivity;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-public class LoginActivity extends BaseActivity<ActivityLoginBinding,LoginViewModel> implements LoginViewModel.LoginCallBack {
+public class LoginActivity extends BaseActivity<ActivityLoginBinding,LoginViewModel> implements LoginViewModel.LoginCallBack, IWxLoginListener {
 
     LoginViewModel loginViewModel;
+    IWXAPI iwxapi = null;
 
     @Override
     public int initContentView(Bundle savedInstanceState) {
@@ -43,7 +50,18 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding,LoginViewMo
     public void initData() {
         Eyes.translucentStatusBar(this);
 
-        viewModel.getUrl(this);
+
+        iwxapi = WXAPIFactory.createWXAPI(this, HsqAppUtil.APP_ID, true);
+        iwxapi.registerApp(HsqAppUtil.APP_ID);
+        WXEntryActivity.wxType(HsqAppUtil.WXTYPE_LOGIN);
+        WXEntryActivity.setLoginListener(this);
+
+        SharedPreferences sharedPreferences = getSharedPreferences(HsqAppUtil.LOGIN,MODE_PRIVATE);
+        sharedPreferences.edit().clear().commit();
+
+
+        viewModel.setListener(this);
+        viewModel.getUrl();
 
     }
 
@@ -83,5 +101,23 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding,LoginViewMo
     @Override
     public void getUrlFail(String msg) {
         UToast.show(this,msg);
+    }
+
+    @Override
+    public void getOnclickWxLogin() {
+        final SendAuth.Req req = new SendAuth.Req();
+        req.scope = "snsapi_userinfo";
+        req.state = "wechat_sdk_微信登录";
+        iwxapi.sendReq(req);
+    }
+
+    @Override
+    public void setWxLoginSuccess(WxUserInfo wxSuccess) {
+
+    }
+
+    @Override
+    public void setWxLoginFail(String msg) {
+
     }
 }

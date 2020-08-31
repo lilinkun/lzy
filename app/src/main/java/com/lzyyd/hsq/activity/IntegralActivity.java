@@ -55,6 +55,9 @@ public class IntegralActivity extends BaseActivity<ActivityIntegralBinding,Integ
 
         Eyes.setStatusBarColor1(this, Color.parseColor("#FF3C38"));
 
+        int integral = getIntent().getExtras().getInt("integral");
+        binding.setIntegralCount(integral + "");
+
         viewModel.setListener(this);
         viewModel.getGoodsListData(1,20,2, ProApplication.SESSIONID());
     }

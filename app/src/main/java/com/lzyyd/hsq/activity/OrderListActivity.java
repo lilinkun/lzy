@@ -15,11 +15,13 @@ import com.lzyyd.hsq.bean.OrderListBean;
 import com.lzyyd.hsq.databinding.ActivityOrderlistBinding;
 import com.lzyyd.hsq.fragment.OrderAllFragment;
 import com.lzyyd.hsq.util.Eyes;
+import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.OrderListViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -29,11 +31,12 @@ import androidx.viewpager.widget.ViewPager;
  * Create by liguo on 2020/8/12
  * Describe:
  */
-public class OrderListActivity extends BaseActivity<ActivityOrderlistBinding, OrderListViewModel> implements SelfOrderAdapter.OnItemClick {
+public class OrderListActivity extends BaseActivity<ActivityOrderlistBinding, OrderListViewModel> {
 
     private List<String> mTitles;
     private List<Fragment> fragments = new ArrayList<>();
     private OrderAllFragment allOrderFragment;
+    public static final int ORDERRESULT = 0x322;
 
     @Override
     public int initContentView(Bundle savedInstanceState) {
@@ -65,7 +68,7 @@ public class OrderListActivity extends BaseActivity<ActivityOrderlistBinding, Or
         mTitles.add("交易成功");
 
         for (int i = 0; i < mTitles.size(); i++){
-            allOrderFragment = new OrderAllFragment(i,this);
+            allOrderFragment = new OrderAllFragment(i);
             fragments.add(allOrderFragment);
         }
 
@@ -84,7 +87,7 @@ public class OrderListActivity extends BaseActivity<ActivityOrderlistBinding, Or
 
             @Override
             public void onPageSelected(int position) {
-
+                ((OrderAllFragment)fragments.get(position)).setItemsNoti();
             }
 
             @Override
@@ -101,40 +104,4 @@ public class OrderListActivity extends BaseActivity<ActivityOrderlistBinding, Or
 
     }
 
-    @Override
-    public void exit_order(String orderId) {
-
-    }
-
-    @Override
-    public void go_pay(OrderListBean orderId) {
-
-    }
-
-    @Override
-    public void sureReceipt(String orderId) {
-
-        new AlertDialog.Builder(this).setMessage("是否确定收货").setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                viewModel.sureReceipt(orderId, ProApplication.SESSIONID());
-            }
-        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        }).show();
-
-    }
-
-    @Override
-    public void cancelOrder(String orderId) {
-
-    }
-
-    @Override
-    public void getQrcode(String orderId) {
-
-    }
 }

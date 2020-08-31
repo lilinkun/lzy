@@ -17,6 +17,8 @@ import com.lzyyd.hsq.bean.GoodsListBean;
 import com.lzyyd.hsq.bean.HomeBean;
 import com.lzyyd.hsq.bean.LocalBean;
 import com.lzyyd.hsq.bean.LoginBean;
+import com.lzyyd.hsq.bean.OrderDetailAddressBean;
+import com.lzyyd.hsq.bean.OrderGoodsBuyListBean;
 import com.lzyyd.hsq.bean.OrderListBean;
 import com.lzyyd.hsq.bean.OrderinfoBean;
 import com.lzyyd.hsq.bean.PageBean;
@@ -37,7 +39,7 @@ public interface HttpDataSource {
     Observable<Object> login();
 
     //发送验证码
-    Observable<HashMap<String, String>> sendVCode(HashMap<String, String> hashMap);
+    Observable<ResultBean<String, String>> sendVCode(HashMap<String, String> hashMap);
 
     //注冊
     Observable<ResultBean<String, String>> register(HashMap<String, String> hashMap);
@@ -114,5 +116,9 @@ public interface HttpDataSource {
     Observable<ResultBean<ArrayList<BalanceDetailBean>,Object>> getAmountPrice(HashMap<String, String> hashMap);
 
     Observable<ResultBean<String,Object>> setTransferout(HashMap<String, String> hashMap);
+
+    Observable<ResultBean<Integer,Object>> setTtianfeng(HashMap<String, String> hashMap);
+
+    Observable<ResultBean<OrderDetailAddressBean,Object>> getOrderDetail(HashMap<String, String> hashMap);
 
 }

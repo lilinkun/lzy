@@ -98,9 +98,9 @@
 
 
         <RelativeLayout
+            android:id="@+id/rl_integral"
             android:layout_width="match_parent"
             android:layout_height="44dp"
-            android:onClick="@{()->sureadapter.setItemPoint()}"
             >
 
             <LinearLayout
@@ -120,7 +120,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text='@{"剩余" + String.valueOf(sureadapter.maxpoint) + "积分"}'
+                    android:text='@{"剩余" + String.valueOf(sureadapter.maxpoint) + @string/me_integral}'
                     android:textColorHint="#ff999999"
                     android:textSize="12sp"
                     android:layout_marginLeft="@dimen/margin_15"
@@ -140,9 +140,10 @@
 
 
                 <TextView
+                    android:id="@+id/order_integral"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@={sureadapter.orderField}"
+                    android:text="@{String.valueOf(orders.integral)}"
                     android:textColor="#ffa37d5f"
                     android:textSize="14sp"
                     />

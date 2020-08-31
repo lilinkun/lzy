@@ -1,10 +1,14 @@
 package com.lzyyd.hsq.viewmodel;
 
 import android.app.Application;
+import android.os.Bundle;
 
+import com.lzyyd.hsq.activity.AddressListActivity;
+import com.lzyyd.hsq.activity.SureOrderActivity;
 import com.lzyyd.hsq.bean.OrderinfoBean;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
+import com.lzyyd.hsq.util.HsqAppUtil;
 
 import java.util.HashMap;
 
@@ -34,6 +38,12 @@ public class SureOrderViewModel extends BaseViewModel<DataRepository> {
 
     public void setOnClick(SureOrderCallBack sureOrderCallBack){
         this.sureOrderCallBack = sureOrderCallBack;
+    }
+
+    public void setChooseAddress(){
+        Bundle bundle = new Bundle();
+        bundle.putString(HsqAppUtil.ADDRESS,"ADDRESS");
+        startActivity(AddressListActivity.class,bundle, SureOrderActivity.ADDRESS_RESULT);
     }
 
 
@@ -103,6 +113,38 @@ public class SureOrderViewModel extends BaseViewModel<DataRepository> {
 
                 });
     }
+    //准备支付
+    public void waitpay(String OrderSn,String SessionId){
+        HashMap<String, String> params = new HashMap<>();
+        params.put("cls", "OrderInfo");
+        params.put("fun", "OrderInfoGetPayByKey");
+        params.put("OrderSn", OrderSn);
+        params.put("SessionId", SessionId);
+        model.OrderSaveRedis(params)
+                .compose(RxUtils.schedulersTransformer())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>(){
+                    @Override
+                    public void accept(Disposable disposable){
+                        showDialog();
+                    }
+                })
+                .subscribe(new HttpResultCallBack<String, String>() {
+                    @Override
+                    public void onResponse(String addressBeans, String status, String page) {
+                        dismissDialog();
+                        sureOrderCallBack.getOrderPaySuccess(addressBeans);
+                    }
+
+                    @Override
+                    public void onErr(String msg, String status) {
+                        dismissDialog();
+                        sureOrderCallBack.getOrderPayFail(msg);
+                    }
+
+                });
+    }
 
     public BindingCommand  SureOrderOnClick = new BindingCommand(new BindingAction() {
         @Override
@@ -118,6 +160,8 @@ public class SureOrderViewModel extends BaseViewModel<DataRepository> {
         public void getOrderSuccess(String msg);
         public void getOrderFail(String msg);
         public void orderClick();
+        public void getOrderPaySuccess(String msg);
+        public void getOrderPayFail(String msg);
 
     }
 }

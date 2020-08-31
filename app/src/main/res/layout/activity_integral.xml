@@ -9,6 +9,10 @@
             name="integral"
             type="com.lzyyd.hsq.viewmodel.IntegralViewModel" />
 
+        <variable
+            name="integral_count"
+            type="String" />
+
     </data>
 
 <LinearLayout
@@ -42,6 +46,19 @@
 
 
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="积分明细"
+            android:layout_marginRight="@dimen/margin_10"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:onClick="@{()->integral.integralList()}"
+            />
+
+
     </RelativeLayout>
 
     <LinearLayout
@@ -63,21 +80,9 @@
             android:layout_height="wrap_content"
             android:textColor="#C47F36"
             android:textSize="20sp"
-            android:text="10000"
+            android:text="@{integral_count}"
             android:layout_gravity="center_vertical"
             />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right|center_vertical"
-            android:layout_gravity="right|center_vertical"
-            android:text="明细"
-            android:layout_marginRight="5dp"
-            android:textColor="#ff333333"
-            android:textSize="14sp"
-            />
-
 
     </LinearLayout>
 
@@ -87,6 +92,7 @@
         android:layout_height="35dp"
         android:orientation="horizontal"
         android:background="#ffffff"
+        android:visibility="gone"
         android:gravity="center_vertical"
         >
 
@@ -106,6 +112,8 @@
         android:id="@+id/rv_integral"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
         />
 
 </LinearLayout>

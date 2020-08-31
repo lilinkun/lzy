@@ -1,18 +1,16 @@
 package com.lzyyd.hsq.viewmodel;
 
 import android.app.Application;
+import android.content.Intent;
 import android.os.Bundle;
 
-import com.lzyyd.hsq.activity.AddressListActivity;
 import com.lzyyd.hsq.activity.CcqActivity;
 import com.lzyyd.hsq.activity.CollectGoodsActivity;
-import com.lzyyd.hsq.activity.GetCashActivity;
 import com.lzyyd.hsq.activity.IntegralActivity;
 import com.lzyyd.hsq.activity.MyQrcodeActivity;
 import com.lzyyd.hsq.activity.OrderListActivity;
 import com.lzyyd.hsq.activity.PersonalInfoActivity;
 import com.lzyyd.hsq.activity.PointActivity;
-import com.lzyyd.hsq.activity.RechargeActivity;
 import com.lzyyd.hsq.activity.VipActivity;
 import com.lzyyd.hsq.activity.WalletActivity;
 import com.lzyyd.hsq.base.ProApplication;
@@ -23,13 +21,11 @@ import com.lzyyd.hsq.bean.LoginBean;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.fragment.MeFragment;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
-import com.lzyyd.hsq.util.HsqAppUtil;
 
 import java.util.HashMap;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
-import androidx.databinding.ViewDataBinding;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -46,6 +42,7 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
     private MeBackCall meBackCall;
     public ObservableField<Integer> OrderAllNum = new ObservableField<>();
     public ObservableField<Integer> ccqField = new ObservableField<>(ProApplication.CCQTYPE);
+    private BalanceBean balanceBeans;
 
     public MeViewModel(@NonNull Application application, DataRepository model) {
         super(application, model);
@@ -62,7 +59,7 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
 
 
     public void setJumpWallet(){
-        startActivity(WalletActivity.class);
+        startActivity(WalletActivity.class,null, MeFragment.RESULT_CODE_POINT);
     }
 
     public void setJumpCollect(){
@@ -70,19 +67,13 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
     }
 
     public void setJumpIntegral(){
-        startActivity(IntegralActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt("integral",(int) balanceBeans.getMoney3Balance());
+        startActivity(IntegralActivity.class,bundle);
     }
 
     public void setJumpPoint(){
         startActivity(PointActivity.class,null, MeFragment.RESULT_CODE_POINT);
-    }
-
-    public void setJumpGetCash(){
-        startActivity(GetCashActivity.class);
-    }
-
-    public void setJumpReCharge(){
-        startActivity(RechargeActivity.class);
     }
 
     public void setJumpVip(){
@@ -130,6 +121,7 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
                     public void onResponse(BalanceBean balanceBean, String status, Object page) {
                         dismissDialog();
                         meBackCall.getBalanceSuccess(balanceBean);
+                        balanceBeans = balanceBean;
                     }
 
                     @Override

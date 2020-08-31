@@ -78,6 +78,7 @@ public class PointActivity extends BaseActivity<ActivityPointBinding, WalletView
         }else {
             walletAdapter.getItems().clear();
             walletAdapter.getItems().addAll(balanceDetailBeans);
+            walletAdapter.notifyDataSetChanged();
         }
     }
 

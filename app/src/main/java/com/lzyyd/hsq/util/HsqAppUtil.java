@@ -18,11 +18,11 @@ public class HsqAppUtil {
     public static final int PAGE_MALL = 2;
     public static final int PAGE_ME = 3;
 
-
+    public static final int WXTYPE_LOGIN = 1;
+    public static final int WXTYPE_SHARED = 2;
 
     public static String RESULT_SUCCESS = "success";
     public static String RESULT_FAIL = "fail";
-
 
     public static final String TYPEID = "TYPEID";
     public static final String GOODSTYPE = "GOODSTYPE";
@@ -66,6 +66,8 @@ public class HsqAppUtil {
     public static final String USERLEVEL = "UserLevel";
     public static final String USERLEVELNAME = "UserLevelName";
     public static final String SHAREDMEIMG = "Sharedmeimg";
+    public static final String ADDRESS = "ADDRESS";
+
 
 
     public static final int GOODSTYPE_COMMON = 1;//普通商品
@@ -74,6 +76,9 @@ public class HsqAppUtil {
     public static final int GOODSTYPE_SERVICE_CENTER = 8;//服务中心
     public static final int GOODSTYPE_SECKILL = 16;//秒杀
     public static final int GOODSTYPE_CCQ = 64;//常常清
+
+    public static final String APP_ID = "wx27fb4ad747521493";
+    public static final String SECRET = "579a6a72da743151f2a4eb6c78fef144";
 
 
     @BindingAdapter({"image"})

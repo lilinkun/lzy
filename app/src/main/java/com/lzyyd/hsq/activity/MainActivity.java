@@ -32,6 +32,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MVVMViewMode
 
     private final SparseArray<BaseFragment> sparseArray = new SparseArray<>();
 
+    private ShoppingCartFragment shoppingCartFragment = new ShoppingCartFragment();
+
     @Override
     public int initContentView(Bundle savedInstanceState) {
         return R.layout.activity_main;
@@ -56,7 +58,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MVVMViewMode
 
     private void getMenusFragments() {
         sparseArray.put(HsqAppUtil.PAGE_HOMEPAGE, new HomeFragment());
-        sparseArray.put(HsqAppUtil.PAGE_FIND, new ShoppingCartFragment());
+        sparseArray.put(HsqAppUtil.PAGE_FIND, shoppingCartFragment);
         sparseArray.put(HsqAppUtil.PAGE_MALL,new MeFragment());
     }
 
@@ -117,6 +119,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MVVMViewMode
 
                     case R.id.rbMe:
                         binding.topVp.setCurrentItem(2,false);
+                        shoppingCartFragment.setUpdate();
                         break;
 
                     case R.id.rbAddress:

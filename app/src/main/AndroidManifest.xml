@@ -95,6 +95,14 @@
             android:screenOrientation="portrait"/>
         <activity android:name="com.lzyyd.hsq.activity.TransferoutActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.IntegralListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.OrderDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.BalanceTransferOutActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.TianfengCoinActivity"
+            android:screenOrientation="portrait"/>
 
 
 

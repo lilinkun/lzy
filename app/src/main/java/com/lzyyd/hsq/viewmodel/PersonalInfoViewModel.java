@@ -6,6 +6,8 @@ import android.widget.Toast;
 
 import com.lzyyd.hsq.activity.AddressListActivity;
 import com.lzyyd.hsq.activity.BindCardActivity;
+import com.lzyyd.hsq.activity.LoginActivity;
+import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.LoginBean;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.http.callback.HttpCallBack;
@@ -85,16 +87,17 @@ public class PersonalInfoViewModel extends BaseViewModel<DataRepository> {
                         showDialog();
                     }
                 })
-                .subscribe(new HttpCallBack<String>() {
+                .subscribe(new HttpResultCallBack<String,String>() {
                     @Override
-                    public void onResponse(String o) {
-                        Toast.makeText(context,o,Toast.LENGTH_SHORT).show();
+                    public void onResponse(String s, String status, String page) {
+
                     }
 
                     @Override
-                    public void onErr(String msg) {
-                        Toast.makeText(context,"ole",Toast.LENGTH_SHORT).show();
+                    public void onErr(String msg, String status) {
+
                     }
+
                 });
 
 
@@ -141,12 +144,12 @@ public class PersonalInfoViewModel extends BaseViewModel<DataRepository> {
     }
 
 
-    public void LoginOut(String SessionId) {
-        /*HashMap<String, String> params = new HashMap<>();
+    public void LoginOut() {
+        HashMap<String, String> params = new HashMap<>();
         params.put("cls", "UserBase");
         params.put("fun", "Logout");
-        params.put("SessionId", SessionId);
-        model.loginout(params)
+        params.put("SessionId", ProApplication.SESSIONID());
+        model.register(params)
                 .compose(RxUtils.schedulersTransformer())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -156,23 +159,27 @@ public class PersonalInfoViewModel extends BaseViewModel<DataRepository> {
                         showDialog();
                     }
                 })
-                .subscribe(new HttpCallBack<String>() {
+                .subscribe(new HttpResultCallBack<String,String>() {
                     @Override
-                    public void onResponse(String o) {
-                        Toast.makeText(context,o,Toast.LENGTH_SHORT).show();
+                    public void onResponse(String s, String status, String page) {
+                        dismissDialog();
+                        startActivity(LoginActivity.class);
                     }
 
                     @Override
-                    public void onErr(String msg) {
-                        Toast.makeText(context,"ole",Toast.LENGTH_SHORT).show();
+                    public void onErr(String msg, String status) {
+                        dismissDialog();
+                        onPersonelInfoCallback.getUserInfoFail(msg);
                     }
-                });*/
+
+                });
     }
 
     public interface OnPersonelInfoCallback{
 
         public void getUserInfoSuccess(LoginBean loginBean);
         public void getUserInfoFail(String msg);
+
     }
 
 }

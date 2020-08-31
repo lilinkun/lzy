@@ -38,36 +38,21 @@ import androidx.recyclerview.widget.RecyclerView;
 public class SureOrderAdapter extends BaseBindingAdapter<OrderInfoBuyListBean, AdapterSureOrderBinding> {
 
     private ArrayList<OrderInfoBuyListBean> orderBeans;
+    private OrderInfoBuyListBean orderInfoBuyListBean;
     protected LayoutInflater mInflater;
     // mvvm绑定的viewModel引用
     private int mVariableId;
     ObservableArrayList<Integer> integers = new ObservableArrayList<>();
+    private OnDataGetFare onDataGetFare;
 
     public ObservableField<String> orderField = new ObservableField<>();
-    public ObservableField<Double> maxpoint = new ObservableField<>();
+    public ObservableField<Integer> maxpoint = new ObservableField<>();
 
-    public SureOrderAdapter(Context context,double maxpoint) {
+    public SureOrderAdapter(Context context,int maxpoint,OnDataGetFare onDataGetFare) {
         super(context);
         this.maxpoint.set(maxpoint);
+        this.onDataGetFare = onDataGetFare;
     }
-
-    /*public SureOrderAdapter(Context context, ArrayList<OrderInfoBuyListBean> orderBeans, int mVariableId){
-        this.context = context;
-        this.orderBeans = orderBeans;
-        mInflater = LayoutInflater.from(context);
-        this.mVariableId = mVariableId;
-    }*/
-
-    /*@NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        ViewDataBinding viewDataBinding = DataBindingUtil.inflate(LayoutInflater.from(context),R.layout.adapter_sure_order,parent,false);
-
-        ViewHolder viewHolder = new ViewHolder(viewDataBinding.getRoot());
-        viewHolder.setBinding(viewDataBinding);
-        return viewHolder;
-    }*/
 
     @Override
     protected int getLayoutResId(int viewType) {
@@ -79,6 +64,8 @@ public class SureOrderAdapter extends BaseBindingAdapter<OrderInfoBuyListBean, A
         binding.setOrders(item);
         binding.setSureadapter(this);
 
+        this.orderInfoBuyListBean = item;
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
 
@@ -88,11 +75,61 @@ public class SureOrderAdapter extends BaseBindingAdapter<OrderInfoBuyListBean, A
         binding.rvGoodsOrders.setLayoutManager(linearLayoutManager);
         binding.rvGoodsOrders.setAdapter(orderChildrenAdapter);
 
-        if (maxpoint.get() > item.getIntegral()){
-            orderField.set(item.getIntegral()+"");
-            maxpoint.set(maxpoint.get() - item.getIntegral());
+        if (item.getIntegral() == 0){
+            binding.rlIntegral.setVisibility(View.GONE);
+        }
+
+        if (maxpoint.get() > 0) {
+
+            if (maxpoint.get() > item.getIntegral()) {
+                orderField.set(item.getIntegral() + "");
+                maxpoint.set(maxpoint.get() - item.getIntegral());
+            } else {
+                orderField.set(maxpoint + "");
+            }
         }else {
-            orderField.set(maxpoint+"");
+            orderField.set("0");
+        }
+
+        binding.rlIntegral.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View view = LayoutInflater.from(context).inflate(R.layout.layout_edittext_point,null);
+                final EditText editText = (EditText) view.findViewById(R.id.edit_num);
+                editText.setText(orderField.get());
+                new AlertDialog.Builder(context).setMessage("修改使用积分").setView(view).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (!editText.getText().toString().isEmpty()){
+                            if (Integer.valueOf(editText.getText().toString()) > orderInfoBuyListBean.getIntegral()){
+                                UToast.show(context, "超出可使用积分");
+                            }else {
+                                if (Integer.valueOf(editText.getText().toString()) > maxpoint.get()) {
+                                    UToast.show(context, "超出最大使用积分");
+                                } else {
+
+                                    int point = Integer.valueOf(editText.getText().toString()) - Integer.valueOf(binding.orderIntegral.getText().toString());
+
+                                    maxpoint.set(maxpoint.get() - point);
+                                    orderField.set(editText.getText().toString());
+                                    binding.orderIntegral.setText(editText.getText().toString() + "");
+
+                                    onDataGetFare.onPoint(maxpoint.get());
+                                }
+                            }
+                        }
+                    }
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).create().show();
+            }
+        });
+
+        if (item.getStoreId() == items.get(items.size()-1).getStoreId()){
+            onDataGetFare.onPoint(maxpoint.get());
         }
 
 
@@ -103,102 +140,14 @@ public class SureOrderAdapter extends BaseBindingAdapter<OrderInfoBuyListBean, A
 
     }
 
-    public void setItemPoint(){
-        /*View view = LayoutInflater.from(context).inflate(R.layout.layout_edittext_point,null);
-        final EditText editText = (EditText) view.findViewById(R.id.edit_num);
-        editText.setText(orderField.get());
-        new AlertDialog.Builder(context).setMessage("修改使用积分").setView(view).setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (!editText.getText().toString().isEmpty()){
-                    if (Integer.valueOf(editText.getText().toString()) > buyBeans.getUsermodel().getPoint()){
-                        UToast.show(context, "超出可使用积分");
-                    }else {
-                        if (Integer.valueOf(editText.getText().toString()) > buyBeans.getStoremodel().get(position).getMax_use_Point()) {
-                            UToast.show(context, "超出最大使用积分");
-                        } else {
-                            point += Integer.valueOf(editText.getText().toString()) - (int) (Double.parseDouble(holder.mIntegral.getText().toString()));
-                            holder.mIntegral.setText(editText.getText().toString() + "");
-                            onDataGetFare.onPoint(point);
-                        }
-                    }
-                }
-            }
-        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        }).create().show();*/
-    }
-
     public Typeface setTypeFace(){
         Typeface iconfont = Typeface.createFromAsset(context.getAssets(), "iconfont.ttf");
         return iconfont;
     }
 
-    /*public void onPointClick(){
-        View view = LayoutInflater.from(context).inflate(R.layout.layout_edittext_point,null);
-        final EditText editText = (EditText) view.findViewById(R.id.edit_num);
-        editText.setText(holder.mIntegral.getText().toString());
-        new AlertDialog.Builder(context).setMessage("修改使用积分").setView(view).setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (!editText.getText().toString().isEmpty()) {
-                    if (Integer.valueOf(editText.getText().toString()) > buyBeans.getUsermodel().getPoint()) {
-                        UToast.show(context, "超出可使用积分");
-                    }else {
-                        if (Integer.valueOf(editText.getText().toString()) > buyBeans.getStoremodel().get(position).getMax_use_Point()) {
-                            UToast.show(context, "超出此商品所用最大积分");
-                            return;
-                        } else {
-                            point += (int) (Double.valueOf(editText.getText().toString()) - Double.valueOf(holder.mIntegral.getText().toString()));
-                            holder.mIntegral.setText(editText.getText().toString() + "");
-                            onDataGetFare.onPoint(point, position, Integer.valueOf(editText.getText().toString()));
-                        }
-                    }
-                }
-            }
-        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        }).create().show();
-    }*/
 
-    /*@Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.binding.setVariable(mVariableId,orderBeans.get(position));
-        holder.binding.executePendingBindings();
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-    }*/
-
-    /*@Override
-    public int getItemCount() {
-        return null == orderBeans ? 0 : orderBeans.size();
+    public interface OnDataGetFare{
+        public void onPoint(int point);
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        return position;
-    }
-
-    class ViewHolder extends RecyclerView.ViewHolder{
-        private ViewDataBinding binding;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-        }
-
-        public ViewDataBinding getBinding() {
-            return binding;
-        }
-
-        public void setBinding(ViewDataBinding binding) {
-            this.binding = binding;
-        }
-    }*/
 }

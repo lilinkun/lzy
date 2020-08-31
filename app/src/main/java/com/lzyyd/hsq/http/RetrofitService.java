@@ -18,6 +18,7 @@ import com.lzyyd.hsq.bean.HomeBean;
 import com.lzyyd.hsq.bean.LocalBean;
 import com.lzyyd.hsq.bean.LoginBean;
 import com.lzyyd.hsq.bean.OrderBean;
+import com.lzyyd.hsq.bean.OrderDetailAddressBean;
 import com.lzyyd.hsq.bean.OrderGoodsBuyListBean;
 import com.lzyyd.hsq.bean.OrderListBean;
 import com.lzyyd.hsq.bean.OrderinfoBean;
@@ -43,7 +44,7 @@ public interface RetrofitService {
 
     @FormUrlEncoded
     @POST("Api/")
-    Observable<HashMap<String,String>> setTest(@FieldMap Map<String, String> map);
+    Observable<ResultBean<String,String>> sendVCode(@FieldMap Map<String, String> map);
 
     @FormUrlEncoded
     @POST("Api/")
@@ -182,5 +183,13 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("Api/")
     Observable<ResultBean<String, Object>> setTransferout(@FieldMap Map<String, String> params);
+
+    @FormUrlEncoded
+    @POST("Api/")
+    Observable<ResultBean<Integer, Object>> setTtianfeng(@FieldMap Map<String, String> params);
+
+    @FormUrlEncoded
+    @POST("Api/")
+    Observable<ResultBean<OrderDetailAddressBean, Object>> getOrderDetail(@FieldMap Map<String, String> params);
 
 }
