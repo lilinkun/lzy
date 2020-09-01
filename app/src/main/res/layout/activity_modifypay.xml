@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lzy="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="modify"
+            type="com.lzyyd.hsq.viewmodel.ModifyPayViewModel" />
+
+    </data>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        >
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:onClick="@{()->modify.finish()}"
+            android:paddingLeft="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_back"
+                android:textColor="@color/black"
+                android:typeface="@{modify.setTypeFace()}"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/text_commom"
+            android:textSize="18sp"
+            android:text="修改支付密码"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/margin_10"
+        android:background="@drawable/bg_sure_order_address">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:paddingLeft="@dimen/margin_10"
+                android:textSize="@dimen/textsize16"
+                android:textColor="@color/grey_333333"
+                android:text="手机号"/>
+
+            <TextView
+                android:id="@+id/tv_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textSize="@dimen/textsize14"
+                android:textColor="@color/grey_333333"
+                android:paddingLeft="@dimen/padding_10"
+                android:background="@null"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line_bg"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:paddingLeft="@dimen/margin_10"
+                android:textSize="@dimen/textsize16"
+                android:textColor="@color/grey_333333"
+                android:text="验证码"/>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3">
+                <EditText
+                    android:id="@+id/ev_vcode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/tv_send_vcode"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="3"
+                    android:paddingLeft="@dimen/padding_10"
+                    android:hint="@string/tv_register_input_vcode"
+                    android:background="@null"/>
+
+                <TextView
+                    android:id="@+id/tv_send_vcode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/textsize14"
+                    android:onClick="@{()->modify.SendVCode()}"
+                    android:gravity="center"
+                    android:textColor="@color/red_e61e16"
+                    android:paddingLeft="@dimen/padding_10"
+                    android:paddingRight="@dimen/padding_10"
+                    android:text="@string/tv_forget_get_vcode"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line_bg"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/margin_10"
+                android:textSize="@dimen/textsize16"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:textColor="@color/grey_333333"
+                android:text="新密码"/>
+
+            <EditText
+                android:id="@+id/ev_new_psd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:paddingLeft="@dimen/padding_10"
+                android:inputType="numberPassword"
+                android:hint="@string/tv_forget_input_new_psd"
+                android:background="@null"/>
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line_bg"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:paddingLeft="@dimen/margin_10"
+                android:textSize="@dimen/textsize16"
+                android:textColor="@color/grey_333333"
+                android:text="确认密码"/>
+
+            <EditText
+                android:id="@+id/ev_sure_psd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:paddingLeft="@dimen/padding_10"
+                android:inputType="numberPassword"
+                android:hint="@string/tv_forget_sure_new_psd"
+                android:background="@null"/>
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line_bg"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/margin_15"
+        android:gravity="bottom">
+        <TextView
+            android:id="@+id/tv_modify_commit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_30"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_marginRight="@dimen/margin_10"
+            android:padding="@dimen/margin_10"
+            android:text="@string/sure"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:onClick="@{()->modify.OnSureChange()}"
+            android:textSize="@dimen/textsize18"
+            android:background="@drawable/shape_getcash_btn_bg"/>
+    </LinearLayout>
+</LinearLayout>
+</layout>

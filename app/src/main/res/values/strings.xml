@@ -89,6 +89,9 @@
     <string name="goods_add_shoppingcar">加入购物车</string>
     <string name="modify_sure">选好了</string>
 
+
+    <string name="sure">确定</string>
+
     <!--我的-->
     <string name="me_balance">余额</string>
     <string name="me_integral">积分</string>

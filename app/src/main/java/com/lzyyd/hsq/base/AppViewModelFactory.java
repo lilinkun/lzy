@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 
 import com.lzyyd.hsq.activity.ChuangkeActivity;
+import com.lzyyd.hsq.activity.ModifyPayActivity;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.viewmodel.AddAddressViewModel;
 import com.lzyyd.hsq.viewmodel.AddressListViewModel;
@@ -21,6 +22,7 @@ import com.lzyyd.hsq.viewmodel.IntegralViewModel;
 import com.lzyyd.hsq.viewmodel.LoginViewModel;
 import com.lzyyd.hsq.viewmodel.MVVMViewModel;
 import com.lzyyd.hsq.viewmodel.MeViewModel;
+import com.lzyyd.hsq.viewmodel.ModifyPayViewModel;
 import com.lzyyd.hsq.viewmodel.MyQrcodeViewModel;
 import com.lzyyd.hsq.viewmodel.OrderDetailViewModel;
 import com.lzyyd.hsq.viewmodel.OrderListViewModel;
@@ -128,6 +130,8 @@ public class AppViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             return (T) new TianfengCoinViewModel(mApplication, mRepository);
         }else if (modelClass.isAssignableFrom(BalanceTransferoutViewModel.class)){
             return (T) new BalanceTransferoutViewModel(mApplication, mRepository);
+        }else if (modelClass.isAssignableFrom(ModifyPayViewModel.class)){
+            return (T) new ModifyPayViewModel(mApplication, mRepository);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

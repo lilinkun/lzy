@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ import com.lzyyd.hsq.bean.CcqBean;
 import com.lzyyd.hsq.bean.CcqListBean;
 import com.lzyyd.hsq.bean.LoginBean;
 import com.lzyyd.hsq.databinding.FragmentMeBinding;
+import com.lzyyd.hsq.interf.OnScrollChangedListener;
 import com.lzyyd.hsq.qrcode.android.CaptureActivity;
 import com.lzyyd.hsq.qrcode.encode.CodeCreator;
 import com.lzyyd.hsq.util.HsqAppUtil;
@@ -39,14 +41,18 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProviders;
+import in.srain.cube.views.ptr.PtrClassicDefaultHeader;
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
 
 import static android.app.Activity.RESULT_OK;
+import static in.srain.cube.views.ptr.util.PtrLocalDisplay.dp2px;
 
 /**
  * Create by liguo on 2020/8/6
  * Describe:
  */
-public class MeFragment extends BaseFragment<FragmentMeBinding, MeViewModel> implements MeViewModel.MeBackCall {
+public class MeFragment extends BaseFragment<FragmentMeBinding, MeViewModel> implements MeViewModel.MeBackCall{
 
     private static final String DECODED_CONTENT_KEY = "codedContent";
     private static final String DECODED_BITMAP_KEY = "codedBitmap";
@@ -85,7 +91,9 @@ public class MeFragment extends BaseFragment<FragmentMeBinding, MeViewModel> imp
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(HsqAppUtil.LOGIN, getActivity().MODE_PRIVATE);
 
-        viewModel.getUserInfo(sharedPreferences.getString(HsqAppUtil.USERNAME, ""),ProApplication.SESSIONID());
+        viewModel.getUserInfo(sharedPreferences.getString(HsqAppUtil.USERNAME, ""),ProApplication.SESSIONID(),getActivity());
+
+        initPtrFrame();
 
     }
 
@@ -150,6 +158,18 @@ public class MeFragment extends BaseFragment<FragmentMeBinding, MeViewModel> imp
 
         binding.setUserinfo(loginBean);
 
+        if(loginBean.getCcqType() == 0 ) {
+            binding.tvGoScan.setVisibility(View.GONE);
+            binding.ccqLayout.rlCcqTihuo.setVisibility(View.GONE);
+        }else {
+            binding.tvGoScan.setVisibility(View.VISIBLE);
+            binding.ccqLayout.rlCcqTihuo.setVisibility(View.VISIBLE);
+        }
+
+        if (binding.mPtrframe != null &&binding.mPtrframe.isEnabled()){
+            binding.mPtrframe.refreshComplete();
+        }
+
     }
 
     @Override
@@ -197,5 +217,31 @@ public class MeFragment extends BaseFragment<FragmentMeBinding, MeViewModel> imp
         }
     }
 
+    private void initPtrFrame() {
+//        final StoreHouseHeader header=new StoreHouseHeader(this);
+//        header.setPadding(dp2px(20), dp2px(20), 0, 0);
+//        header.initWithString("xiaoma is good");
+        final PtrClassicDefaultHeader header=new PtrClassicDefaultHeader(getActivity());
+        header.setPadding(dp2px(20), dp2px(20), 0, 0);
+        binding.mPtrframe.setHeaderView(header);
+        binding.mPtrframe.addPtrUIHandler(header);
+        binding.mPtrframe.setPtrHandler(new PtrDefaultHandler() {
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+
+                viewModel.getBalance(ProApplication.SESSIONID());
+                viewModel.getCcqUse(ProApplication.SESSIONID());
+
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences(HsqAppUtil.LOGIN, getActivity().MODE_PRIVATE);
+
+                viewModel.getUserInfo(sharedPreferences.getString(HsqAppUtil.USERNAME, ""),ProApplication.SESSIONID(),getActivity());
+            }
+
+            @Override
+            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+                return PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
+            }
+        });
+    }
 
 }

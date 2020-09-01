@@ -7,6 +7,7 @@ import android.widget.Toast;
 import com.lzyyd.hsq.activity.AddressListActivity;
 import com.lzyyd.hsq.activity.BindCardActivity;
 import com.lzyyd.hsq.activity.LoginActivity;
+import com.lzyyd.hsq.activity.ModifyPayActivity;
 import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.LoginBean;
 import com.lzyyd.hsq.data.DataRepository;
@@ -25,6 +26,8 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import me.goldze.mvvmhabit.base.BaseViewModel;
+import me.goldze.mvvmhabit.binding.command.BindingAction;
+import me.goldze.mvvmhabit.binding.command.BindingCommand;
 import me.goldze.mvvmhabit.utils.RxUtils;
 
 /**
@@ -115,7 +118,7 @@ public class PersonalInfoViewModel extends BaseViewModel<DataRepository> {
     public void getUserInfo(String UserName,String SessionId) {
         HashMap<String, String> params = new HashMap<>();
         params.put("cls", "UserBase");
-        params.put("fun", "UserBaseQueryGet");
+        params.put("fun", "UserBaseVipGet");
         params.put("UserName",UserName);
         params.put("SessionId", SessionId);
         model.getUserInfo(params)
@@ -174,6 +177,14 @@ public class PersonalInfoViewModel extends BaseViewModel<DataRepository> {
 
                 });
     }
+
+
+    public BindingCommand bindingCommand = new BindingCommand(new BindingAction() {
+        @Override
+        public void call() {
+            startActivity(ModifyPayActivity.class);
+        }
+    });
 
     public interface OnPersonelInfoCallback{
 

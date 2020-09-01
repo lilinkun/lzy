@@ -25,8 +25,8 @@ public class RetrofitHelper {
     //        接口根地址
     //    public static final String BASE_URL = "http://wlm.mmibb.net:99/api/WebService/";
 //   public static final String BASE_URL = "http://192.168.3.168:8080/liguo/";
-   public static final String BASE_URL = "http://hsq.mmibb.net:99/api/WebService/";
-//   public static final String BASE_URL = "http://192.168.1.168:8085/api/WebService/";
+//   public static final String BASE_URL = "http://hsq.mmibb.net:99/api/WebService/";
+   public static final String BASE_URL = "http://192.168.1.168:8085/api/WebService/";
 
     public static final String ImageUrl = "http://api.boos999.com/api/ClearImg/Upload";
     //    设置超时时间

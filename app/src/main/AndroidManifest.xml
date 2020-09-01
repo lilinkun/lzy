@@ -103,6 +103,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name="com.lzyyd.hsq.activity.TianfengCoinActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.ModifyPayActivity"
+            android:screenOrientation="portrait"/>
 
 
 

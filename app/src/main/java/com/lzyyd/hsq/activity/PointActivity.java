@@ -121,7 +121,7 @@ public class PointActivity extends BaseActivity<ActivityPointBinding, WalletView
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (resultCode == RESULT_OK){
-            if (requestCode == foresult){
+            if (requestCode == foresult || requestCode == WalletActivity.TRANFERRESULT){
                 viewModel.getBalance(ProApplication.SESSIONID());
                 viewModel.getPriceData("1","20","2", ProApplication.SESSIONID());
             }

@@ -40,6 +40,9 @@
     <color name="yellow_A47E60">#A47E60</color>
 
 
+    <color name="register_vcode_bg">#FE744A</color>
+
+
     <!--Zxing相关-->
     <color name="contents_text">#ff000000</color>
     <color name="encode_view">#ffffffff</color>

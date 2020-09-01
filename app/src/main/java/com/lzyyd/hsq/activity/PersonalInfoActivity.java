@@ -86,17 +86,15 @@ public class PersonalInfoActivity extends BaseActivity<ActivityPersonalInfoBindi
     public void getUserInfoSuccess(LoginBean mLoginBean) {
         binding.setPersoninfo(mLoginBean);
 
-
-        ProApplication.PROJECT = mLoginBean.getProject();
-        ProApplication.LEVEL = mLoginBean.getUserLevel();
-        ProApplication.CCQTYPE = mLoginBean.getCcqType();
-
         SharedPreferences sharedPreferences = getSharedPreferences(HsqAppUtil.LOGIN, MODE_PRIVATE);
         sharedPreferences.edit().putString("sessionid", ProApplication.SESSIONID()).putBoolean(HsqAppUtil.LOGIN, true)
                 .putString(HsqAppUtil.ACCOUNT, mLoginBean.getNickName()).putString(HsqAppUtil.TELEPHONE, mLoginBean.getMobile())
                 .putString(HsqAppUtil.USERNAME, mLoginBean.getUserName()).putString(HsqAppUtil.USERID, mLoginBean.getUserId())
                 .putString(HsqAppUtil.VIPVALIDITY, mLoginBean.getVipValidity())
                 .putString(HsqAppUtil.USERLEVEL, mLoginBean.getUserLevel() + "")
+                .putString(HsqAppUtil.CCQTYPE,mLoginBean.getCcqType()+"")
+                .putString(HsqAppUtil.LEVEL,mLoginBean.getUserLevel()+"")
+                .putString(HsqAppUtil.PROJECT,mLoginBean.getProject()+"")
                 .putString(HsqAppUtil.USERLEVELNAME, mLoginBean.getUserLevelName()).commit();
     }
 

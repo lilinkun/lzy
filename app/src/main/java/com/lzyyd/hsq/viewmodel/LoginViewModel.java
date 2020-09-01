@@ -6,10 +6,8 @@ import android.content.SharedPreferences;
 import android.view.View;
 
 import com.lzyyd.hsq.activity.ForgetPasswordActivity;
-import com.lzyyd.hsq.activity.IntegralActivity;
 import com.lzyyd.hsq.activity.MainActivity;
 import com.lzyyd.hsq.activity.RegisterActivity;
-import com.lzyyd.hsq.activity.SeckillActivity;
 import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.LoginBean;
 import com.lzyyd.hsq.bean.UrlBean;
@@ -18,7 +16,6 @@ import com.lzyyd.hsq.http.callback.HttpResultCallBack;
 import com.lzyyd.hsq.model.LoginModel;
 import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
-import com.tencent.mm.opensdk.modelmsg.SendAuth;
 
 import java.util.HashMap;
 
@@ -105,16 +102,15 @@ public class LoginViewModel extends BaseViewModel<DataRepository> {
                     public void onResponse(LoginBean mLoginBean, String status, String page) {
                         dismissDialog();
 
-                        ProApplication.PROJECT = mLoginBean.getProject();
-                        ProApplication.LEVEL = mLoginBean.getUserLevel();
-                        ProApplication.CCQTYPE = mLoginBean.getCcqType();
-
                         SharedPreferences sharedPreferences = context.getSharedPreferences(HsqAppUtil.LOGIN, MODE_PRIVATE);
                         sharedPreferences.edit().putString("sessionid", ProApplication.SESSIONID()).putBoolean(HsqAppUtil.LOGIN, true)
                                 .putString(HsqAppUtil.ACCOUNT, mLoginBean.getNickName()).putString(HsqAppUtil.TELEPHONE, mLoginBean.getMobile())
                                 .putString(HsqAppUtil.USERNAME, mLoginBean.getUserName()).putString(HsqAppUtil.USERID, mLoginBean.getUserId())
                                 .putString(HsqAppUtil.VIPVALIDITY, mLoginBean.getVipValidity())
                                 .putString(HsqAppUtil.USERLEVEL, mLoginBean.getUserLevel() + "")
+                                .putString(HsqAppUtil.CCQTYPE,mLoginBean.getCcqType()+"")
+                                .putString(HsqAppUtil.LEVEL,mLoginBean.getUserLevel()+"")
+                                .putString(HsqAppUtil.PROJECT,mLoginBean.getProject()+"")
                                 .putString(HsqAppUtil.USERLEVELNAME, mLoginBean.getUserLevelName()).commit();
 
                         startActivity(MainActivity.class);

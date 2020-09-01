@@ -22,8 +22,23 @@
 
         <import type="android.view.View"/>
 
+        <variable
+            name="go_scan"
+            type="Integer" />
+
     </data>
 
+    <in.srain.cube.views.ptr.PtrFrameLayout
+        android:background="#F1F1F2"
+        android:id="@+id/mPtrframe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:ptr_resistance="1.7"
+        app:ptr_ratio_of_header_height_to_refresh="1.2"
+        app:ptr_duration_to_close="300"
+        app:ptr_duration_to_close_header="2000"
+        app:ptr_keep_header_when_refresh="true"
+        app:ptr_pull_to_fresh="false">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -130,6 +145,7 @@
                     >
 
                     <TextView
+                        android:id="@+id/tv_go_scan"
                         android:layout_width="19dp"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/margin_15"
@@ -138,7 +154,7 @@
                         android:textColor="@color/white"
                         android:textSize="@dimen/margin_20"
                         android:typeface="@{me.setTypeFace()}"
-                        android:visibility="@{me.ccqField > 0 ? View.VISIBLE : View.GONE}" />
+                        />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -282,6 +298,7 @@
                 android:layout_marginLeft="@dimen/margin_10"
                 android:layout_marginRight="@dimen/margin_10"
                 android:layout_marginTop="@dimen/margin_10"
+                android:visibility="gone"
                 >
 
                 <ImageView
@@ -309,6 +326,7 @@
                 app:me="@{me}"/>
 
             <include
+                android:id="@+id/ccq_layout"
                 layout="@layout/me_changchangqing_layout"
                 app:me="@{me}"
                 app:ccq="@{ccq}"
@@ -355,5 +373,5 @@
         </ScrollView>
     </RelativeLayout>
 
-
+    </in.srain.cube.views.ptr.PtrFrameLayout>
 </layout>

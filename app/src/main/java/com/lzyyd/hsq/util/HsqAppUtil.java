@@ -67,6 +67,9 @@ public class HsqAppUtil {
     public static final String USERLEVELNAME = "UserLevelName";
     public static final String SHAREDMEIMG = "Sharedmeimg";
     public static final String ADDRESS = "ADDRESS";
+    public static final String CCQTYPE = "CCQTYPE";
+    public static final String LEVEL = "LEVEL";
+    public static final String PROJECT = "PROJECT";
 
 
 

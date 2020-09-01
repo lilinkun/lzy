@@ -17,8 +17,8 @@ import me.goldze.mvvmhabit.base.BaseViewModel;
  */
 public class VipViewModel extends BaseViewModel<DataRepository> {
 
-    public ObservableField<Integer> projectField = new ObservableField<>(ProApplication.PROJECT);
-    public ObservableField<Integer> userLevelField = new ObservableField<>(ProApplication.USERLEVEL);
+    public ObservableField<Integer> projectField = new ObservableField<>();
+    public ObservableField<Boolean> userLevelField = new ObservableField<>();
 
     public VipViewModel(Application application,DataRepository dataRepository){
         super(application,dataRepository);

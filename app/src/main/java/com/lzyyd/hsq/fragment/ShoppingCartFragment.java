@@ -37,6 +37,11 @@ import java.util.Map;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.ViewModelProviders;
+import in.srain.cube.views.ptr.PtrClassicDefaultHeader;
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
+
+import static in.srain.cube.views.ptr.util.PtrLocalDisplay.dp2px;
 
 /**
  * Create by liguo on 2020/7/21
@@ -81,6 +86,8 @@ public class ShoppingCartFragment extends BaseFragment<FragmentGoodsCartBinding,
         binding.setGopay("结算");
         viewModel.setCallBack(this);
         viewModel.getGoodsCartList(ProApplication.SESSIONID());
+
+        initPtrFrame();
     }
 
     @Override
@@ -90,6 +97,51 @@ public class ShoppingCartFragment extends BaseFragment<FragmentGoodsCartBinding,
 
     public void setUpdate(){
         viewModel.getGoodsCartList(ProApplication.SESSIONID());
+    }
+
+    private void initPtrFrame() {
+//        final StoreHouseHeader header=new StoreHouseHeader(this);
+//        header.setPadding(dp2px(20), dp2px(20), 0, 0);
+//        header.initWithString("xiaoma is good");
+        final PtrClassicDefaultHeader header=new PtrClassicDefaultHeader(getActivity());
+        header.setPadding(dp2px(20), dp2px(20), 0, 0);
+        binding.mPtrframe.setHeaderView(header);
+        binding.mPtrframe.addPtrUIHandler(header);
+        binding.mPtrframe.setPtrHandler(new PtrDefaultHandler() {
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+               /* mPtrFrame.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mPtrFrame.refreshComplete();
+                    }
+                },2000);*/
+                viewModel.getGoodsCartList(ProApplication.SESSIONID());
+                updataData();
+            }
+
+            @Override
+            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+                return PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
+            }
+        });
+    }
+
+    private void updataData(){
+        if (orderListBeans != null && orderListBeans.size() > 0) {
+            for (int i = 0; i < orderListBeans.size(); i++) {
+                OrderGroupBean group = orderListBeans.get(i);
+                group.setChoosed(false);
+                List<CartChildBean> child = map.get(group.getOrderListBean().getStoreId());
+                for (int j = 0; j < child.size(); j++) {
+                    child.get(j).setChoosed(false);//这里出现过错误
+                }
+            }
+            myShoppingCarAdapter.notifyDataSetChanged();
+            calulate();
+            binding.allCheckBox.setChecked(false);
+        }
+        binding.mPtrframe.refreshComplete();
     }
 
     @Override

@@ -1,7 +1,9 @@
 package com.lzyyd.hsq.viewmodel;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.lzyyd.hsq.activity.CcqActivity;
@@ -21,6 +23,7 @@ import com.lzyyd.hsq.bean.LoginBean;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.fragment.MeFragment;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
+import com.lzyyd.hsq.util.HsqAppUtil;
 
 import java.util.HashMap;
 
@@ -33,6 +36,8 @@ import io.reactivex.schedulers.Schedulers;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.utils.RxUtils;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * Create by liguo on 2020/8/6
  * Describe:
@@ -41,7 +46,7 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
 
     private MeBackCall meBackCall;
     public ObservableField<Integer> OrderAllNum = new ObservableField<>();
-    public ObservableField<Integer> ccqField = new ObservableField<>(ProApplication.CCQTYPE);
+    public ObservableField<Integer> ccqField = new ObservableField<>();
     private BalanceBean balanceBeans;
 
     public MeViewModel(@NonNull Application application, DataRepository model) {
@@ -165,10 +170,10 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
     }
 
 
-    public void getUserInfo(String UserName,String SessionId) {
+    public void getUserInfo(String UserName, String SessionId,final Context context) {
         HashMap<String, String> params = new HashMap<>();
         params.put("cls", "UserBase");
-        params.put("fun", "UserBaseQueryGet");
+        params.put("fun", "UserBaseVipGet");
         params.put("UserName",UserName);
         params.put("SessionId", SessionId);
         model.getUserInfo(params)
@@ -183,9 +188,21 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
                 })
                 .subscribe(new HttpResultCallBack<LoginBean, Object>() {
                     @Override
-                    public void onResponse(LoginBean ccqBean, String status, Object page) {
+                    public void onResponse(LoginBean mLoginBean, String status, Object page) {
                         dismissDialog();
-                        meBackCall.getUserInfoSuccess(ccqBean);
+                        meBackCall.getUserInfoSuccess(mLoginBean);
+
+                        SharedPreferences sharedPreferences = context.getSharedPreferences(HsqAppUtil.LOGIN, MODE_PRIVATE);
+                        sharedPreferences.edit().putString("sessionid", ProApplication.SESSIONID()).putBoolean(HsqAppUtil.LOGIN, true)
+                                .putString(HsqAppUtil.ACCOUNT, mLoginBean.getNickName()).putString(HsqAppUtil.TELEPHONE, mLoginBean.getMobile())
+                                .putString(HsqAppUtil.USERNAME, mLoginBean.getUserName()).putString(HsqAppUtil.USERID, mLoginBean.getUserId())
+                                .putString(HsqAppUtil.VIPVALIDITY, mLoginBean.getVipValidity())
+                                .putString(HsqAppUtil.USERLEVEL, mLoginBean.getUserLevel() + "")
+                                .putString(HsqAppUtil.CCQTYPE,mLoginBean.getCcqType()+"")
+                                .putString(HsqAppUtil.LEVEL,mLoginBean.getUserLevel()+"")
+                                .putString(HsqAppUtil.PROJECT,mLoginBean.getProject()+"")
+                                .putString(HsqAppUtil.USERLEVELNAME, mLoginBean.getUserLevelName()).commit();
+
                     }
 
                     @Override

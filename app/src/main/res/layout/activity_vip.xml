@@ -130,6 +130,7 @@
                 >
 
                 <RelativeLayout
+                    android:id="@+id/rl_vip_chuangke"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_20"
@@ -158,11 +159,12 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/rl_vip_service_center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_20"
                     android:onClick="@{()->vip.setJumpChuangke(8)}"
-                    android:visibility="@{vip.projectField == 1 ? View.VISIBLE : View.GONE}"
+                    android:visibility="@{vip.projectField}"
                     >
 
                     <ImageView
@@ -189,11 +191,11 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/rl_update_vip"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_20"
                     android:layout_marginBottom="@dimen/margin_20"
-                    android:onClick="@{()->vip.setJumpChuangke(16)}"
                     >
 
                     <ImageView
@@ -212,7 +214,6 @@
                         android:text="去升级"
                         android:textColor="#ffffffff"
                         android:textSize="14sp"
-                        android:clickable="@{vip.userLevelField > 0}"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/margin_20"
                         android:layout_centerVertical="true"

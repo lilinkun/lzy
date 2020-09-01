@@ -82,6 +82,7 @@
             android:background="@drawable/shape_no_goods_car"
             android:layout_marginTop="@dimen/margin_15"
             android:text="回首页"
+
             android:textColor="#ffe9413f"
             android:textSize="18sp" />
 
