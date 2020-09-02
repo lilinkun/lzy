@@ -6,28 +6,18 @@ import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 
 import com.lzyyd.hsq.R;
-import com.lzyyd.hsq.activity.MainActivity;
 import com.lzyyd.hsq.base.BaseBindingAdapter;
-import com.lzyyd.hsq.bean.CartBean;
-import com.lzyyd.hsq.bean.OrderBean;
 import com.lzyyd.hsq.bean.OrderInfoBuyListBean;
 import com.lzyyd.hsq.databinding.AdapterSureOrderBinding;
 import com.lzyyd.hsq.util.UToast;
 
 import java.util.ArrayList;
-import java.util.Observable;
 
-import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ObservableArrayList;
-import androidx.databinding.ObservableChar;
 import androidx.databinding.ObservableField;
-import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 

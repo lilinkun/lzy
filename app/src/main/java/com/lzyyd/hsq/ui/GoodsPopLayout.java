@@ -28,7 +28,6 @@ import java.util.HashMap;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Create by liguo on 2020/7/21
@@ -139,6 +138,7 @@ public class GoodsPopLayout extends RelativeLayout implements View.OnClickListen
         } else if (position == 2) {
             tv_buy_goods.setText(R.string.modify_sure);
             tv_buy_goods.setVisibility(VISIBLE);
+            tv_buy_goods.setBackground(getResources().getDrawable(R.drawable.bg_chuangke_update));
             tv_add_cart.setVisibility(GONE);
         } else if (position == 3) {
             tv_buy_goods.setVisibility(VISIBLE);

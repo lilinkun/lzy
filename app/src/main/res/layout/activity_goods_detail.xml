@@ -415,11 +415,13 @@
 
      
     <LinearLayout
+        android:id="@+id/ll_goods_store"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:background="@color/white"
+        android:onClick="@{()->goodsDetailViewModel.setJumpStore()}"
         android:layout_marginTop="@dimen/margin_10"
         >
 
@@ -429,7 +431,7 @@
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
             android:layout_marginLeft="@dimen/margin_10"
-            app:image="@{goodsDetail.goodsImg}"
+            app:image="@{goodsDetail.storeLogo}"
             />
 
         <LinearLayout

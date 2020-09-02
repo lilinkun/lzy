@@ -4,7 +4,6 @@ import android.app.Application;
 import android.os.Bundle;
 
 import com.lzyyd.hsq.activity.ChuangkeActivity;
-import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.util.HsqAppUtil;
 

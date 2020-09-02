@@ -76,6 +76,14 @@ public class ChuangkeActivity extends BaseActivity<ActivityChuangkeBinding, Chua
         totalGoods.clear();
         vipChooseItemBeans.clear();
 
+        if (goodstype == 4){
+            binding.tvTitle.setText("创客礼包");
+        }else if (goodstype == 8){
+            binding.tvTitle.setText("服务中心");
+        }else if (goodstype == 16){
+            binding.tvTitle.setText("二次进货");
+        }
+
         viewModel.setChuangkeCategoryDateCallBack(this);
         viewModel.getCategoryData(1,20);
 
@@ -162,10 +170,10 @@ public class ChuangkeActivity extends BaseActivity<ActivityChuangkeBinding, Chua
 
         try{
             JSONArray jsonArray = new JSONArray();
-            JSONObject jsonObject = new JSONObject();
 
             for (VipChooseItemBean vipChooseItemBean : vipChooseItemBeans) {
 
+                JSONObject jsonObject = new JSONObject();
                 String goodsid = vipChooseItemBean.getGoodsId();
                 int AttrId = 0;
                 if (vipChooseItemBean.getGoodsChooseBean() != null) {

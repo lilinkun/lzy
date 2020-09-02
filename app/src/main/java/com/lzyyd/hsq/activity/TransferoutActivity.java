@@ -13,7 +13,6 @@ import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.databinding.ActivityTransferoutBinding;
 import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
-import com.lzyyd.hsq.util.UtilTool;
 import com.lzyyd.hsq.viewmodel.TransferoutViewModel;
 
 import androidx.appcompat.app.AlertDialog;

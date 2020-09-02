@@ -10,10 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lzyyd.hsq.R;
-import com.lzyyd.hsq.adapter.ChuangkeAdapter;
 import com.lzyyd.hsq.adapter.ChuangkePopAdapter;
-import com.lzyyd.hsq.bean.GoodsChooseBean;
-import com.lzyyd.hsq.bean.GoodsDetailInfoBean;
 import com.lzyyd.hsq.bean.VipChooseItemBean;
 
 import java.util.ArrayList;

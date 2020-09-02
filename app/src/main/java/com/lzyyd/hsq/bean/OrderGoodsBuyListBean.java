@@ -14,7 +14,7 @@ public class OrderGoodsBuyListBean {
     private double MarketPrice;
     private double Price;
     private int Integral;
-    private int ReturnIntegral;
+    private double ReturnIntegral;
     private int Num;
     private String AttrId;
     private String AttrOneName;
@@ -94,11 +94,11 @@ public class OrderGoodsBuyListBean {
         Integral = integral;
     }
 
-    public int getReturnIntegral() {
+    public double getReturnIntegral() {
         return ReturnIntegral;
     }
 
-    public void setReturnIntegral(int returnIntegral) {
+    public void setReturnIntegral(double returnIntegral) {
         ReturnIntegral = returnIntegral;
     }
 

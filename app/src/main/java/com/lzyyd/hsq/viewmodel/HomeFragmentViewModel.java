@@ -2,21 +2,15 @@ package com.lzyyd.hsq.viewmodel;
 
 import android.app.Application;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.View;
 
 import com.lzyyd.hsq.activity.GoodsDetailActivity;
 import com.lzyyd.hsq.activity.SearchActivity;
 import com.lzyyd.hsq.activity.VipActivity;
-import com.lzyyd.hsq.bean.GoodsListBean;
 import com.lzyyd.hsq.bean.HomeBean;
-import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
 import com.lzyyd.hsq.util.HsqAppUtil;
-import com.lzyyd.hsq.util.UToast;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import androidx.annotation.NonNull;

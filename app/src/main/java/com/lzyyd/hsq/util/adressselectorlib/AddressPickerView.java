@@ -1,6 +1,5 @@
 package com.lzyyd.hsq.util.adressselectorlib;
 
-import android.app.Application;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;

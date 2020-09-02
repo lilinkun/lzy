@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.lzyyd.hsq.data.DataRepository;
-import com.lzyyd.hsq.util.UToast;
 
 import androidx.databinding.ObservableField;
 import me.goldze.mvvmhabit.base.BaseViewModel;

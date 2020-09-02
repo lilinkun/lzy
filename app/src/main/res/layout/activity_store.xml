@@ -9,6 +9,10 @@
             name="store"
             type="com.lzyyd.hsq.viewmodel.StoreViewModel" />
 
+        <variable
+            name="imgRes"
+            type="String" />
+
     </data>
 
 <LinearLayout
@@ -34,6 +38,7 @@
         <com.lzyyd.hsq.ui.RoundImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
+            app:image="@{imgRes}"
             />
 
         <TextView
@@ -44,6 +49,13 @@
 
 
     </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rv_store"
+        />
 
 </LinearLayout>
 </layout>

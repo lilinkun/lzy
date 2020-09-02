@@ -17,6 +17,16 @@ android {
         multiDexEnabled true
     }
 
+    //配置keystore签名
+    signingConfigs {
+        release {
+            storeFile file("libs/lzy.jks")
+            storePassword "lzy123789"
+            keyAlias "lzy"
+            keyPassword "lzy123789"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false

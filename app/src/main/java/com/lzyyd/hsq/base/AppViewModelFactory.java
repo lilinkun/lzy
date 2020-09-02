@@ -3,9 +3,7 @@ package com.lzyyd.hsq.base;
 import android.annotation.SuppressLint;
 import android.app.Application;
 
-import com.lzyyd.hsq.activity.ChuangkeActivity;
-import com.lzyyd.hsq.activity.ModifyPayActivity;
-import com.lzyyd.hsq.activity.SearchActivity;
+import com.lzyyd.hsq.activity.StoreActivity;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.viewmodel.AddAddressViewModel;
 import com.lzyyd.hsq.viewmodel.AddressListViewModel;
@@ -33,6 +31,7 @@ import com.lzyyd.hsq.viewmodel.RechargeViewModel;
 import com.lzyyd.hsq.viewmodel.RegisterViewModel;
 import com.lzyyd.hsq.viewmodel.SearchViewModel;
 import com.lzyyd.hsq.viewmodel.ShoppingcartViewModel;
+import com.lzyyd.hsq.viewmodel.StoreViewModel;
 import com.lzyyd.hsq.viewmodel.SureOrderViewModel;
 import com.lzyyd.hsq.viewmodel.TakeGoodsViewModel;
 import com.lzyyd.hsq.viewmodel.TianfengCoinViewModel;
@@ -139,6 +138,8 @@ public class AppViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             return (T) new SearchViewModel(mApplication, mRepository);
         }else if (modelClass.isAssignableFrom(TakeGoodsViewModel.class)){
             return (T) new TakeGoodsViewModel(mApplication, mRepository);
+        }else if (modelClass.isAssignableFrom(StoreViewModel.class)){
+            return (T) new StoreViewModel(mApplication, mRepository);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

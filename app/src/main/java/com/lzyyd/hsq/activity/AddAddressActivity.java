@@ -1,6 +1,5 @@
 package com.lzyyd.hsq.activity;
 
-import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -23,7 +22,6 @@ import com.lzyyd.hsq.viewmodel.AddAddressViewModel;
 
 import java.util.ArrayList;
 
-import androidx.annotation.Nullable;
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.ViewModelProviders;
 import me.goldze.mvvmhabit.utils.StringUtils;

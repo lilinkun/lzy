@@ -1,10 +1,6 @@
 package com.lzyyd.hsq.bean;
 
-import android.printservice.CustomPrinterIconCallback;
-
 import java.io.Serializable;
-
-import androidx.databinding.ObservableField;
 
 /**
  * Create by liguo on 2020/8/14
@@ -61,6 +57,33 @@ public class GoodsListBean implements Serializable {
     private String TeamType;
     private String TeamTypeName;
     private int UserLevel;
+    private String StoreLogo;
+    private String StoreName;
+    private int StoreId;
+
+    public String getStoreLogo() {
+        return StoreLogo;
+    }
+
+    public void setStoreLogo(String storeLogo) {
+        StoreLogo = storeLogo;
+    }
+
+    public String getStoreName() {
+        return StoreName;
+    }
+
+    public void setStoreName(String storeName) {
+        StoreName = storeName;
+    }
+
+    public int getStoreId() {
+        return StoreId;
+    }
+
+    public void setStoreId(int storeId) {
+        StoreId = storeId;
+    }
 
     public String getGoodsId() {
         return GoodsId;

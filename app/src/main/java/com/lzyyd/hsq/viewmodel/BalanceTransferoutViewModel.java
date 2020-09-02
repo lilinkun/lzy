@@ -1,17 +1,13 @@
 package com.lzyyd.hsq.viewmodel;
 
 import android.app.Application;
-import android.content.DialogInterface;
 
-import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
-import com.lzyyd.hsq.util.UToast;
 
 import java.util.HashMap;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.databinding.ObservableField;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -19,7 +15,6 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.utils.RxUtils;
-import me.goldze.mvvmhabit.utils.StringUtils;
 
 /**
  * Create by liguo on 2020/8/31

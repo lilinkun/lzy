@@ -2,7 +2,6 @@ package com.lzyyd.hsq.viewmodel;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 

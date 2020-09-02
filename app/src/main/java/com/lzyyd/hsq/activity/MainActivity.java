@@ -1,7 +1,6 @@
 package com.lzyyd.hsq.activity;
 
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.SparseArray;
 import android.widget.RadioButton;
@@ -22,7 +21,6 @@ import com.lzyyd.hsq.fragment.ShoppingCartFragment;
 import com.lzyyd.hsq.util.Eyes;
 import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
-import com.lzyyd.hsq.viewmodel.LoginViewModel;
 import com.lzyyd.hsq.viewmodel.MVVMViewModel;
 
 import androidx.lifecycle.ViewModelProviders;

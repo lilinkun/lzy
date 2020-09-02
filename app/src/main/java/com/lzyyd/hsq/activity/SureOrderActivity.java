@@ -2,7 +2,6 @@ package com.lzyyd.hsq.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.FloatProperty;
 
 import com.lzyyd.hsq.R;
 import com.lzyyd.hsq.adapter.SureOrderAdapter;
@@ -16,7 +15,6 @@ import com.lzyyd.hsq.bean.OrderinfoBean;
 import com.lzyyd.hsq.databinding.ActivitySureOrderBinding;
 import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
-import com.lzyyd.hsq.viewmodel.RechargeViewModel;
 import com.lzyyd.hsq.viewmodel.SureOrderViewModel;
 
 import org.json.JSONArray;
@@ -25,7 +23,6 @@ import org.json.JSONObject;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**
@@ -73,6 +70,8 @@ public class SureOrderActivity extends BaseActivity<ActivitySureOrderBinding, Su
     public void getOrderInfoSuccess(OrderinfoBean orderinfoBean) {
 
         this.orderinfoBean = orderinfoBean;
+
+        binding.setReturnInt(orderinfoBean.getReturnIntegral()+"");
 
         if (sureOrderAdapter == null) {
             sureOrderAdapter = new SureOrderAdapter(this, (int)orderinfoBean.getMoney3Balance(),this);

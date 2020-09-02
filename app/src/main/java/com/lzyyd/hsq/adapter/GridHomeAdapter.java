@@ -1,20 +1,11 @@
 package com.lzyyd.hsq.adapter;
 
 import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.lzyyd.hsq.R;
 import com.lzyyd.hsq.base.BaseBindingAdapter;
 import com.lzyyd.hsq.bean.HomeGridItemBean;
 import com.lzyyd.hsq.databinding.AdapterItemHomeBinding;
-import com.lzyyd.hsq.util.HomeGridRvEnum;
-import com.squareup.picasso.Picasso;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Create by liguo on 2020/7/20

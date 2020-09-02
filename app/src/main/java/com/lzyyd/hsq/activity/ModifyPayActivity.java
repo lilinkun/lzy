@@ -14,7 +14,6 @@ import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.PhoneFormatCheckUtils;
 import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.ModifyPayViewModel;
-import com.lzyyd.hsq.viewmodel.MyQrcodeViewModel;
 
 import androidx.lifecycle.ViewModelProviders;
 

@@ -8,7 +8,6 @@ import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseActivity;
 import com.lzyyd.hsq.databinding.ActivityRechargeBinding;
 import com.lzyyd.hsq.util.Eyes;
-import com.lzyyd.hsq.viewmodel.GetCashViewModel;
 import com.lzyyd.hsq.viewmodel.RechargeViewModel;
 
 import androidx.lifecycle.ViewModelProviders;

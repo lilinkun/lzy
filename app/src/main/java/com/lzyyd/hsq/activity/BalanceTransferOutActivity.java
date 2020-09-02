@@ -14,7 +14,6 @@ import com.lzyyd.hsq.databinding.ActivityBalancetransferoutBinding;
 import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.BalanceTransferoutViewModel;
-import com.lzyyd.hsq.viewmodel.BindCardViewModel;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.ViewModelProviders;

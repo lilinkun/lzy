@@ -119,6 +119,7 @@
     <string name="me_bind_card">认证绑卡</string>
     <string name="me_address">我的地址</string>
     <string name="me_collect">收藏夹</string>
+    <string name="get_goods_back">收货返</string>
 
     <!--个人信息-->
     <string name="personal_over">完成</string>

@@ -17,9 +17,7 @@ import com.lzyyd.hsq.bean.GoodsListBean;
 import com.lzyyd.hsq.bean.HomeBean;
 import com.lzyyd.hsq.bean.LocalBean;
 import com.lzyyd.hsq.bean.LoginBean;
-import com.lzyyd.hsq.bean.OrderBean;
 import com.lzyyd.hsq.bean.OrderDetailAddressBean;
-import com.lzyyd.hsq.bean.OrderGoodsBuyListBean;
 import com.lzyyd.hsq.bean.OrderListBean;
 import com.lzyyd.hsq.bean.OrderinfoBean;
 import com.lzyyd.hsq.bean.PageBean;
@@ -28,7 +26,6 @@ import com.lzyyd.hsq.bean.UrlBean;
 import com.lzyyd.hsq.bean.UserBankBean;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import io.reactivex.Observable;

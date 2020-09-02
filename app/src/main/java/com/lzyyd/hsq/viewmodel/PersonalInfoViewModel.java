@@ -2,7 +2,6 @@ package com.lzyyd.hsq.viewmodel;
 
 import android.app.Application;
 import android.content.Context;
-import android.widget.Toast;
 
 import com.lzyyd.hsq.activity.AddressListActivity;
 import com.lzyyd.hsq.activity.BindCardActivity;
@@ -11,7 +10,6 @@ import com.lzyyd.hsq.activity.ModifyPayActivity;
 import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.LoginBean;
 import com.lzyyd.hsq.data.DataRepository;
-import com.lzyyd.hsq.http.callback.HttpCallBack;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
 import com.lzyyd.hsq.util.DataCleanManager;
 import com.lzyyd.hsq.util.UToast;

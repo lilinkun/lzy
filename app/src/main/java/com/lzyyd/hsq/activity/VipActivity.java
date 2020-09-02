@@ -12,7 +12,6 @@ import com.lzyyd.hsq.base.BaseActivity;
 import com.lzyyd.hsq.databinding.ActivityVipBinding;
 import com.lzyyd.hsq.util.Eyes;
 import com.lzyyd.hsq.util.HsqAppUtil;
-import com.lzyyd.hsq.viewmodel.CollectViewModel;
 import com.lzyyd.hsq.viewmodel.VipViewModel;
 
 import androidx.lifecycle.ViewModelProviders;

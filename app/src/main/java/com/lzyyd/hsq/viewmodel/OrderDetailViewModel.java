@@ -1,15 +1,10 @@
 package com.lzyyd.hsq.viewmodel;
 
 import android.app.Application;
-import android.os.Bundle;
 
-import com.lzyyd.hsq.activity.GetCashActivity;
-import com.lzyyd.hsq.activity.WalletActivity;
 import com.lzyyd.hsq.bean.OrderDetailAddressBean;
-import com.lzyyd.hsq.bean.UserBankBean;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
-import com.lzyyd.hsq.util.UToast;
 
 import java.util.HashMap;
 

@@ -1,9 +1,5 @@
 package com.lzyyd.hsq.bean;
 
-import android.graphics.Typeface;
-
-import com.lzyyd.hsq.base.ProApplication;
-
 import java.util.ArrayList;
 
 /**
@@ -12,7 +8,7 @@ import java.util.ArrayList;
  */
 public class OrderInfoBuyListBean {
     private int Integral;
-    private int ReturnIntegral;
+    private double ReturnIntegral;
     private String Discount;
     private double GoodsAmount;
     private double OrderAmount;
@@ -31,11 +27,11 @@ public class OrderInfoBuyListBean {
         Integral = integral;
     }
 
-    public int getReturnIntegral() {
+    public double getReturnIntegral() {
         return ReturnIntegral;
     }
 
-    public void setReturnIntegral(int returnIntegral) {
+    public void setReturnIntegral(double returnIntegral) {
         ReturnIntegral = returnIntegral;
     }
 

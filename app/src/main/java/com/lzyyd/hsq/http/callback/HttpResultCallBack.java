@@ -8,7 +8,6 @@ import com.lzyyd.hsq.http.factory.ResultException;
 import com.lzyyd.hsq.util.HsqAppUtil;
 
 import io.reactivex.observers.DisposableObserver;
-import rx.Subscriber;
 
 public abstract class HttpResultCallBack<M, T> extends DisposableObserver<ResultBean<M, T>> {
 

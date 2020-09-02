@@ -2,17 +2,12 @@ package com.lzyyd.hsq.viewmodel;
 
 import android.app.Application;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.lzyyd.hsq.activity.ShoppingcartActivity;
+import com.lzyyd.hsq.activity.StoreActivity;
 import com.lzyyd.hsq.base.ProApplication;
-import com.lzyyd.hsq.bean.GoodsBean;
 import com.lzyyd.hsq.bean.GoodsChooseBean;
-import com.lzyyd.hsq.bean.GoodsDetailBean;
 import com.lzyyd.hsq.bean.GoodsDetailInfoBean;
-import com.lzyyd.hsq.bean.GoodsListBean;
-import com.lzyyd.hsq.bean.ResultBean;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
 
@@ -20,20 +15,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import androidx.databinding.ObservableBoolean;
-import androidx.databinding.ObservableField;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.utils.RxUtils;
-import me.tatarka.bindingcollectionadapter2.BR;
 
 public class GoodsDetailViewModel extends BaseViewModel<DataRepository> {
 
     private Application application;
     private GoodsDetailDataCallBack goodsDetailDataCallBack;
     private String goodsId;
+    private int storeId;
 
     public ObservableBoolean observableBoolean = new ObservableBoolean();
     public ObservableBoolean goodsBoolean = new ObservableBoolean(false);
@@ -60,10 +54,10 @@ public class GoodsDetailViewModel extends BaseViewModel<DataRepository> {
         }
     }
 
-    public void setJumpStore(int storeId){
+    public void setJumpStore(){
         Bundle bundle = new Bundle();
         bundle.putInt("storeId",storeId);
-//        startActivity();
+        startActivity(StoreActivity.class,bundle);
     }
 
     public void addGoodCollect(String OtherId, String CollectType, String SessionId) {
@@ -200,6 +194,7 @@ public class GoodsDetailViewModel extends BaseViewModel<DataRepository> {
                     @Override
                     public void onResponse(GoodsDetailInfoBean<ArrayList<GoodsChooseBean>> s, String status, String page) {
                         dismissDialog();
+                        storeId = s.getStoreId();
                         goodsDetailDataCallBack.getDataSuccess(s);
                     }
 

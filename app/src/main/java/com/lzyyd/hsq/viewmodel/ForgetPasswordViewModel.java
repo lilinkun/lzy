@@ -11,8 +11,6 @@ import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.databinding.ActivityForgetpasswordBinding;
 import com.lzyyd.hsq.model.ForgetPsdModel;
 
-import androidx.databinding.ObservableBoolean;
-import androidx.databinding.ObservableChar;
 import androidx.databinding.ObservableField;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 

@@ -1,6 +1,5 @@
 package com.lzyyd.hsq.fragment;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,10 +9,7 @@ import android.widget.ScrollView;
 
 import com.lzyyd.hsq.BR;
 import com.lzyyd.hsq.R;
-import com.lzyyd.hsq.activity.GoodsDetailActivity;
 import com.lzyyd.hsq.activity.GoodsListActivity;
-import com.lzyyd.hsq.activity.WebViewActivity;
-import com.lzyyd.hsq.adapter.GoodsListAdapter;
 import com.lzyyd.hsq.adapter.GridHomeAdapter;
 import com.lzyyd.hsq.adapter.RecommendAdapter;
 import com.lzyyd.hsq.adapter.ViewAdapter;
@@ -21,23 +17,19 @@ import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseFragment;
 import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.FlashBean;
-import com.lzyyd.hsq.bean.GoodsListBean;
 import com.lzyyd.hsq.bean.HomeBean;
 import com.lzyyd.hsq.bean.HomeItemBean;
-import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.databinding.FragmentHomeBinding;
 import com.lzyyd.hsq.interf.OnScrollChangedListener;
 import com.lzyyd.hsq.ui.CustomBannerView;
 import com.lzyyd.hsq.ui.GridSpacingItemDecoration;
 import com.lzyyd.hsq.util.DensityUtil;
-import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.HomeFragmentViewModel;
 
 import java.util.ArrayList;
 
 import androidx.annotation.Nullable;
-import androidx.databinding.BindingMethods;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;

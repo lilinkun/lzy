@@ -2,23 +2,17 @@ package com.lzyyd.hsq.viewmodel;
 
 import android.app.Application;
 import android.view.View;
-import android.widget.Toast;
 
-import com.lzyyd.hsq.BR;
 import com.lzyyd.hsq.bean.CartBean;
 import com.lzyyd.hsq.bean.CartListBean;
 import com.lzyyd.hsq.bean.CollectBean;
-import com.lzyyd.hsq.bean.PageBean;
-import com.lzyyd.hsq.bean.StoreCartBean;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
-import com.lzyyd.hsq.util.UToast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import androidx.databinding.ObservableField;
-import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;

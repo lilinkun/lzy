@@ -2,10 +2,8 @@ package com.lzyyd.hsq.viewmodel;
 
 
 import android.app.Application;
-import android.os.Bundle;
 
 import com.lzyyd.hsq.activity.AddAddressActivity;
-import com.lzyyd.hsq.activity.AddressListActivity;
 import com.lzyyd.hsq.bean.AddressBean;
 import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.data.DataRepository;

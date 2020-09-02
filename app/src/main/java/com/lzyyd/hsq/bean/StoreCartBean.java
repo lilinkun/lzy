@@ -1,7 +1,6 @@
 package com.lzyyd.hsq.bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  * Create by liguo on 2020/8/15

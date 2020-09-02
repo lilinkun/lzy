@@ -6,7 +6,6 @@ import android.widget.Toast;
 
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.databinding.ActivityRegisterBinding;
-import com.lzyyd.hsq.http.callback.HttpCallBack;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
 import com.lzyyd.hsq.util.UToast;
 

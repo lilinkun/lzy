@@ -1,16 +1,10 @@
 package com.lzyyd.hsq.activity;
 
-import android.app.Dialog;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.lzyyd.hsq.BR;
@@ -19,14 +13,11 @@ import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseActivity;
 import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.BalanceBean;
-import com.lzyyd.hsq.bean.BankBean;
 import com.lzyyd.hsq.bean.UserBankBean;
 import com.lzyyd.hsq.databinding.ActivityGetcashBinding;
 import com.lzyyd.hsq.util.Eyes;
 import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.GetCashViewModel;
-
-import java.text.NumberFormat;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.ViewModelProviders;

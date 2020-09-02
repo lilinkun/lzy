@@ -1,6 +1,5 @@
 package com.lzyyd.hsq.activity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,13 +15,11 @@ import com.lzyyd.hsq.base.BaseActivity;
 import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.AddressBean;
 import com.lzyyd.hsq.bean.BalanceBean;
-import com.lzyyd.hsq.bean.CartChildBean;
 import com.lzyyd.hsq.bean.GoodsChooseBean;
 import com.lzyyd.hsq.bean.GoodsDetailInfoBean;
 import com.lzyyd.hsq.databinding.ActivityTakeGoodsBinding;
 import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
-import com.lzyyd.hsq.util.UtilTool;
 import com.lzyyd.hsq.viewmodel.TakeGoodsViewModel;
 
 import java.util.ArrayList;

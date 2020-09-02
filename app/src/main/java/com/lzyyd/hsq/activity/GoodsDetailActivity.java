@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,9 +15,7 @@ import com.lzyyd.hsq.R;
 import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseActivity;
 import com.lzyyd.hsq.base.ProApplication;
-import com.lzyyd.hsq.bean.GoodsBean;
 import com.lzyyd.hsq.bean.GoodsChooseBean;
-import com.lzyyd.hsq.bean.GoodsDetailBean;
 import com.lzyyd.hsq.bean.GoodsDetailInfoBean;
 import com.lzyyd.hsq.databinding.ActivityGoodsDetailBinding;
 import com.lzyyd.hsq.interf.OnScrollChangedListener;
@@ -37,8 +34,8 @@ import com.xw.banner.loader.ImageLoader;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
+import me.goldze.mvvmhabit.utils.StringUtils;
 import me.tatarka.bindingcollectionadapter2.BR;
 
 public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding,GoodsDetailViewModel> implements GoodsPopLayout.OnAddCart, OnScrollChangedListener, GoodsDetailViewModel.GoodsDetailDataCallBack, OnBannerListener {
@@ -80,6 +77,10 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
             viewModel.goodsBoolean.set(true);
             binding.llCollect.setVisibility(View.GONE);
             binding.goodsLayout.llGoodsLayout.setVisibility(View.GONE);
+        }
+
+        if (getIntent().getExtras().getString("storeVisible") != null && !StringUtils.isEmpty(getIntent().getExtras().getString("storeVisible"))){
+            binding.llGoodsStore.setEnabled(false);
         }
     }
 

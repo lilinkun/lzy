@@ -3,7 +3,6 @@ package com.lzyyd.hsq.viewmodel;
 import android.app.Application;
 
 import com.lzyyd.hsq.bean.GoodsListBean;
-import com.lzyyd.hsq.bean.OrderListBean;
 import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
@@ -18,7 +17,6 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.utils.RxUtils;
-import me.goldze.mvvmhabit.utils.StringUtils;
 
 public class GoodsListViewModel extends BaseViewModel<DataRepository> {
     private GetGoodsListCallBack getGoodsListCallBack;

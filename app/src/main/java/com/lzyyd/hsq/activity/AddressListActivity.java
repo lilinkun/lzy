@@ -12,7 +12,6 @@ import com.lzyyd.hsq.base.BaseActivity;
 import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.AddressBean;
 import com.lzyyd.hsq.databinding.ActivityAddressBinding;
-import com.lzyyd.hsq.ui.GridSpacingItemDecoration;
 import com.lzyyd.hsq.ui.SpacesItemDecoration;
 import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
@@ -23,7 +22,6 @@ import java.util.ArrayList;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 /**

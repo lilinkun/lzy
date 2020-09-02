@@ -42,7 +42,7 @@ public class GoodsDetailInfoBean<T> implements Serializable {
     private int GoodsType;
     private String GoodsTypeName;
     private double Integral;
-    private String ReturnIntegral;
+    private double ReturnIntegral;
     private String CreateDate;
     private String LastUpdate;
     private String MobileDesc;
@@ -342,11 +342,11 @@ public class GoodsDetailInfoBean<T> implements Serializable {
         Integral = integral;
     }
 
-    public String getReturnIntegral() {
+    public double getReturnIntegral() {
         return ReturnIntegral;
     }
 
-    public void setReturnIntegral(String returnIntegral) {
+    public void setReturnIntegral(double returnIntegral) {
         ReturnIntegral = returnIntegral;
     }
 

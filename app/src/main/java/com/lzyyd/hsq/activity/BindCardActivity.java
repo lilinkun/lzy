@@ -22,7 +22,6 @@ import com.lzyyd.hsq.databinding.ActivityBindCardBinding;
 import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.BindCardViewModel;
-import com.lzyyd.hsq.viewmodel.SureOrderViewModel;
 
 import java.util.ArrayList;
 

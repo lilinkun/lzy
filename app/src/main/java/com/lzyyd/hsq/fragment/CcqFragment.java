@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.zxing.WriterException;
 import com.lzyyd.hsq.BR;
 import com.lzyyd.hsq.R;
 import com.lzyyd.hsq.adapter.CcqAdapter;
@@ -25,9 +24,7 @@ import com.lzyyd.hsq.base.BaseFragment;
 import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.CcqListBean;
 import com.lzyyd.hsq.databinding.FragmentCcqBinding;
-import com.lzyyd.hsq.qrcode.encode.CodeCreator;
 import com.lzyyd.hsq.util.QRCodeUtil;
-import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.CcqViewModel;
 
 import java.util.ArrayList;

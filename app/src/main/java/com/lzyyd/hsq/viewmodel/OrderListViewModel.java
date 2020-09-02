@@ -2,9 +2,6 @@ package com.lzyyd.hsq.viewmodel;
 
 import android.app.Application;
 
-import com.lzyyd.hsq.bean.GoodsChooseBean;
-import com.lzyyd.hsq.bean.GoodsDetailInfoBean;
-import com.lzyyd.hsq.bean.OrderBean;
 import com.lzyyd.hsq.bean.OrderListBean;
 import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.data.DataRepository;

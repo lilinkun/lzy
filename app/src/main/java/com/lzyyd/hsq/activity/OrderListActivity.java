@@ -1,28 +1,21 @@
 package com.lzyyd.hsq.activity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.lzyyd.hsq.BR;
 import com.lzyyd.hsq.R;
-import com.lzyyd.hsq.adapter.SelfOrderAdapter;
 import com.lzyyd.hsq.adapter.TabPageAdapter;
 import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseActivity;
-import com.lzyyd.hsq.base.ProApplication;
-import com.lzyyd.hsq.bean.OrderListBean;
 import com.lzyyd.hsq.databinding.ActivityOrderlistBinding;
 import com.lzyyd.hsq.fragment.OrderAllFragment;
 import com.lzyyd.hsq.util.Eyes;
-import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.OrderListViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;

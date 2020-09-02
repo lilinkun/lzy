@@ -6,22 +6,15 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.lzyyd.hsq.R;
-import com.lzyyd.hsq.base.BaseBindingAdapter;
 import com.lzyyd.hsq.bean.AddressBean;
 import com.lzyyd.hsq.databinding.AdapterAddresslistBinding;
-import com.lzyyd.hsq.util.UToast;
 
 import java.util.ArrayList;
 
-import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**

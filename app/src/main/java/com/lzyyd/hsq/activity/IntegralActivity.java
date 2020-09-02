@@ -2,13 +2,10 @@ package com.lzyyd.hsq.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
 
 import com.lzyyd.hsq.BR;
 import com.lzyyd.hsq.R;
 import com.lzyyd.hsq.adapter.GoodsListAdapter;
-import com.lzyyd.hsq.adapter.GridHomeAdapter;
-import com.lzyyd.hsq.adapter.IntegralTitleAdapter;
 import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseActivity;
 import com.lzyyd.hsq.base.ProApplication;
@@ -22,7 +19,6 @@ import com.lzyyd.hsq.viewmodel.IntegralViewModel;
 import java.util.ArrayList;
 
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;

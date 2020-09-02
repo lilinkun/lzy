@@ -4,7 +4,6 @@ import android.app.Application;
 
 import com.lzyyd.hsq.bean.AddressBean;
 import com.lzyyd.hsq.bean.LocalBean;
-import com.lzyyd.hsq.bean.ResultBean;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
 

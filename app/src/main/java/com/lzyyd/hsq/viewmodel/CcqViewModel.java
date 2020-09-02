@@ -2,7 +2,6 @@ package com.lzyyd.hsq.viewmodel;
 
 import android.app.Application;
 
-import com.lzyyd.hsq.bean.BalanceBean;
 import com.lzyyd.hsq.bean.CcqListBean;
 import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.data.DataRepository;

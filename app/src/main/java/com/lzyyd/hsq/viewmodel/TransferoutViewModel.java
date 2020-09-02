@@ -2,10 +2,8 @@ package com.lzyyd.hsq.viewmodel;
 
 import android.app.Application;
 
-import com.lzyyd.hsq.bean.OrderinfoBean;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
-import com.lzyyd.hsq.util.UToast;
 
 import java.util.HashMap;
 
@@ -17,7 +15,6 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.utils.RxUtils;
-import me.goldze.mvvmhabit.utils.StringUtils;
 
 /**
  * Create by liguo on 2020/8/29

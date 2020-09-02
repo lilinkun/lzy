@@ -1,11 +1,9 @@
 package com.lzyyd.hsq.viewmodel;
 
 import android.app.Application;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import com.lzyyd.hsq.activity.BalanceTransferOutActivity;
-import com.lzyyd.hsq.activity.BindCardActivity;
 import com.lzyyd.hsq.activity.GetCashActivity;
 import com.lzyyd.hsq.activity.PointActivity;
 import com.lzyyd.hsq.activity.RechargeActivity;
@@ -24,7 +22,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.lzyyd.hsq.R;
 import com.lzyyd.hsq.activity.OrderDetailActivity;
@@ -18,10 +17,8 @@ import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.OrderListBean;
 import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.databinding.FragmentAllOrderBinding;
-import com.lzyyd.hsq.ui.GridSpacingItemDecoration;
 import com.lzyyd.hsq.ui.SpacesItemDecoration;
 import com.lzyyd.hsq.util.UToast;
-import com.lzyyd.hsq.viewmodel.MeViewModel;
 import com.lzyyd.hsq.viewmodel.OrderListViewModel;
 
 import java.util.ArrayList;
@@ -29,7 +26,6 @@ import java.util.ArrayList;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;

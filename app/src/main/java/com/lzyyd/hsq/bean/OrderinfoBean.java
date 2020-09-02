@@ -15,7 +15,7 @@ public class OrderinfoBean {
     private double Money6Balance; //优惠券
     private int Integral;
     private double GoodsAmount;
-    private int ReturnIntegral;
+    private double ReturnIntegral;
     private double Discount;
     private double OrderAmount;
     private double ShippingFree;
@@ -86,11 +86,11 @@ public class OrderinfoBean {
         GoodsAmount = goodsAmount;
     }
 
-    public int getReturnIntegral() {
+    public double getReturnIntegral() {
         return ReturnIntegral;
     }
 
-    public void setReturnIntegral(int returnIntegral) {
+    public void setReturnIntegral(double returnIntegral) {
         ReturnIntegral = returnIntegral;
     }
 

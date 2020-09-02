@@ -1,8 +1,6 @@
 package com.lzyyd.hsq.viewmodel;
 
 import android.app.Application;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
 
 import com.lzyyd.hsq.activity.IntegralListActivity;
 import com.lzyyd.hsq.bean.GoodsListBean;
@@ -13,7 +11,6 @@ import com.lzyyd.hsq.http.callback.HttpResultCallBack;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import androidx.annotation.Dimension;
 import androidx.annotation.NonNull;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;

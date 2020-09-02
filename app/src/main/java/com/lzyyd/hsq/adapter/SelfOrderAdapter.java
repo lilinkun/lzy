@@ -3,7 +3,6 @@ package com.lzyyd.hsq.adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.lzyyd.hsq.R;
-import com.lzyyd.hsq.activity.WebViewActivity;
 import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.OrderGoodsBuyListBean;
 import com.lzyyd.hsq.bean.OrderListBean;

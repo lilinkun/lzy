@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
-import android.widget.Toast;
 
 import com.lzyyd.hsq.BR;
 import com.lzyyd.hsq.R;
@@ -14,13 +13,10 @@ import com.lzyyd.hsq.base.BaseActivity;
 import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.CollectListBean;
 import com.lzyyd.hsq.databinding.ActivityCollectBinding;
-import com.lzyyd.hsq.ui.GridSpacingItemDecoration;
 import com.lzyyd.hsq.ui.SpacesItemDecoration;
 import com.lzyyd.hsq.util.Eyes;
 import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.CollectViewModel;
-import com.lzyyd.hsq.viewmodel.ForgetPasswordViewModel;
-import com.lzyyd.hsq.viewmodel.GoodsListViewModel;
 
 import java.util.ArrayList;
 

@@ -1,17 +1,11 @@
 package com.lzyyd.hsq.viewmodel;
 
 import android.app.Application;
-import android.content.SharedPreferences;
 
-import com.lzyyd.hsq.activity.MainActivity;
-import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.BankBean;
-import com.lzyyd.hsq.bean.LoginBean;
 import com.lzyyd.hsq.bean.UserBankBean;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
-import com.lzyyd.hsq.util.HsqAppUtil;
-import com.lzyyd.hsq.util.UToast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,8 +17,6 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.utils.RxUtils;
-
-import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Create by liguo on 2020/8/28

@@ -1,7 +1,6 @@
 package com.lzyyd.hsq.fragment;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,6 @@ import com.lzyyd.hsq.R;
 import com.lzyyd.hsq.activity.LoginActivity;
 import com.lzyyd.hsq.activity.SureOrderActivity;
 import com.lzyyd.hsq.adapter.MyShoppingCarAdapter;
-import com.lzyyd.hsq.adapter.SureOrderAdapter;
 import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseFragment;
 import com.lzyyd.hsq.base.ProApplication;

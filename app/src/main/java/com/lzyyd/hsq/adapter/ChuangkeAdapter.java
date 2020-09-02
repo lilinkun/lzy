@@ -100,6 +100,7 @@ public class ChuangkeAdapter extends BaseBindingAdapter<GoodsListBean, AdapterCh
                 Bundle bundle = new Bundle();
                 bundle.putString(HsqAppUtil.GOODSID,item.getGoodsId());
                 bundle.putInt(HsqAppUtil.TYPE,HsqAppUtil.GOODSTYPE_VIP);
+                bundle.putString("storeVisible","1");
                 intent.putExtras(bundle);
                 intent.setClass(context, GoodsDetailActivity.class);
                 context.startActivity(intent);

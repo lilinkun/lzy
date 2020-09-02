@@ -28,7 +28,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".base.ProApplication"
+        android:name="com.lzyyd.hsq.base.ProApplication"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.lzyyd.hsq.activity.WelcomeActivity">
@@ -39,7 +39,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.LoginActivity"
+        <activity android:name="com.lzyyd.hsq.activity.LoginActivity"
             android:screenOrientation="portrait"/>
         <activity android:name="com.lzyyd.hsq.activity.MainActivity"
             android:screenOrientation="portrait"/>
@@ -109,11 +109,13 @@
             android:screenOrientation="portrait"/>
         <activity android:name="com.lzyyd.hsq.activity.SearchActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.StoreActivity"
+            android:screenOrientation="portrait"/>
 
 
 
 
-        <activity android:name=".qrcode.android.CaptureActivity"
+        <activity android:name="com.lzyyd.hsq.qrcode.android.CaptureActivity"
             />
 
 

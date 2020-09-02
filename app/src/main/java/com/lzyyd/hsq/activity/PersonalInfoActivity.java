@@ -1,11 +1,6 @@
 package com.lzyyd.hsq.activity;
 
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
@@ -22,14 +17,7 @@ import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.PersonalInfoViewModel;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.lifecycle.ViewModelProviders;
-
-import static java.security.spec.MGF1ParameterSpec.SHA1;
 
 /**
  * Created by LG on 2018/11/19.

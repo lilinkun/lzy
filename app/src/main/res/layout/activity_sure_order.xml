@@ -15,6 +15,10 @@
         <variable
             name="orderPrice"
             type="String" />
+        
+        <variable
+            name="returnInt"
+            type="String" />
 
     </data>
 
@@ -168,7 +172,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="收货返100积分"
+                    android:text="@{@string/get_goods_back+ returnInt +@string/me_integral}"
                     android:textColor="@color/text_common_bg"
                     android:textSize="12sp"
                     />

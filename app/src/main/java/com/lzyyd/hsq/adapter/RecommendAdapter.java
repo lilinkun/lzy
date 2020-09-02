@@ -3,24 +3,13 @@ package com.lzyyd.hsq.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
-import com.lzyyd.hsq.BR;
 import com.lzyyd.hsq.R;
 import com.lzyyd.hsq.activity.GoodsDetailActivity;
 import com.lzyyd.hsq.base.BaseBindingAdapter;
 import com.lzyyd.hsq.bean.HomeItemBean;
 import com.lzyyd.hsq.databinding.AdapterRecommendlistBinding;
 import com.lzyyd.hsq.util.HsqAppUtil;
-
-import java.util.ArrayList;
-
-import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
-import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Create by liguo on 2020/8/27
