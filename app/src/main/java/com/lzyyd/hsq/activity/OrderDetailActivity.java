@@ -83,7 +83,7 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderdetailBinding
 
         if (status == 1 ){
             binding.tvPayMessage.setText("买家已付款，等待发货");
-            binding.rlBottom.setVisibility(View.GONE);
+            binding.llBottom.setVisibility(View.GONE);
             binding.ivOrderStatus.setImageDrawable(getResources().getDrawable(R.drawable.ic_me_wait_get_goods));
         }else if (status == 2){
             binding.tvExitOrder.setVisibility(View.GONE);
@@ -102,7 +102,7 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderdetailBinding
             binding.ivOrderStatus.setImageDrawable(getResources().getDrawable(R.drawable.ic_me_successful_trade));
         } else if(status == 5){
             binding.tvPayMessage.setText("");
-            binding.rlBottom.setVisibility(View.GONE);
+            binding.llBottom.setVisibility(View.GONE);
             binding.ivOrderStatus.setImageDrawable(getResources().getDrawable(R.drawable.ic_me_all_order));
         }
 

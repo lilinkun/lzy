@@ -93,17 +93,23 @@ public class ChuangkeAdapter extends BaseBindingAdapter<GoodsListBean, AdapterCh
             }
         });
 
+        binding.goodsImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                bundle.putString(HsqAppUtil.GOODSID,item.getGoodsId());
+                bundle.putInt(HsqAppUtil.TYPE,HsqAppUtil.GOODSTYPE_VIP);
+                intent.putExtras(bundle);
+                intent.setClass(context, GoodsDetailActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
     protected void onclick(int position) {
-        Intent intent = new Intent();
-        Bundle bundle = new Bundle();
-        bundle.putString(HsqAppUtil.GOODSID,items.get(position).getGoodsId());
-        bundle.putInt(HsqAppUtil.TYPE,HsqAppUtil.GOODSTYPE_VIP);
-        intent.putExtras(bundle);
-        intent.setClass(context, GoodsDetailActivity.class);
-        context.startActivity(intent);
     }
 
     public void setModifyCountInterface(ModifyCountInterface modifyCountInterface) {

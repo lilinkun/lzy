@@ -52,9 +52,10 @@
             android:scaleType="fitXY"
             android:src="@mipmap/ic_me_bg"/>
 
-        <ScrollView
+        <com.lzyyd.hsq.ui.TranslucentScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fillViewport="true"
             >
         <LinearLayout
             android:layout_width="match_parent"
@@ -330,6 +331,7 @@
                 layout="@layout/me_changchangqing_layout"
                 app:me="@{me}"
                 app:ccq="@{ccq}"
+                app:balance="@{balance}"
                 />
 
             <include
@@ -370,7 +372,7 @@
 
         </LinearLayout>
 
-        </ScrollView>
+        </com.lzyyd.hsq.ui.TranslucentScrollView>
     </RelativeLayout>
 
     </in.srain.cube.views.ptr.PtrFrameLayout>

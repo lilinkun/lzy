@@ -3,7 +3,6 @@ package com.lzyyd.hsq.viewmodel;
 import android.app.Application;
 
 import com.lzyyd.hsq.bean.GoodsListBean;
-import com.lzyyd.hsq.bean.OrderListBean;
 import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
@@ -20,27 +19,35 @@ import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.utils.RxUtils;
 import me.goldze.mvvmhabit.utils.StringUtils;
 
-public class GoodsListViewModel extends BaseViewModel<DataRepository> {
-    private GetGoodsListCallBack getGoodsListCallBack;
+/**
+ * Create by liguo on 2020/9/2
+ * Describe:
+ */
+public class SearchViewModel extends BaseViewModel<DataRepository> {
 
-    public GoodsListViewModel(@NonNull Application application,DataRepository dataRepository) {
-        super(application,dataRepository);
+    private OnDataListener onDataListener;
+
+    public SearchViewModel(@NonNull Application application, DataRepository model) {
+        super(application, model);
     }
 
-    public void setListener(GetGoodsListCallBack getGoodsListCallBack){
-        this.getGoodsListCallBack = getGoodsListCallBack;
+    public void setListener(OnDataListener onDataListener){
+        this.onDataListener = onDataListener;
     }
 
-    public void getGoodsListData(int PageIndex, int PageCount, int GoodsType,String OrderBy,String SessionId){
+    public void getData(String PageIndex, String PageCount, String GoodsType,String OrderBy, String GoodsName,String SessionId){
 
         HashMap<String, String> params = new HashMap<>();
         params.put("cls", "Goods");
-        params.put("fun", "GoodsListGuest");
-        params.put("PageIndex",PageIndex+"");
-        params.put("PageCount",PageCount+"");
-        params.put("GoodsType",GoodsType+"");
-        params.put("OrderBy",OrderBy);
-        params.put("SessionId",SessionId);
+        params.put("fun", "GoodsListVip");
+        params.put("PageIndex", PageIndex);
+        params.put("PageCount", PageCount);
+        params.put("GoodsName", GoodsName);
+        params.put("GoodsFlag", "2");
+        if (!GoodsType.equals("")) {
+            params.put("GoodsType", GoodsType);
+        }
+        params.put("OrderBy", OrderBy);
         model.getGoodsListVip(params)
                 .compose(RxUtils.schedulersTransformer())
                 .subscribeOn(Schedulers.newThread())
@@ -54,13 +61,13 @@ public class GoodsListViewModel extends BaseViewModel<DataRepository> {
                 .subscribe(new HttpResultCallBack<ArrayList<GoodsListBean>, PageBean>() {
                     @Override
                     public void onResponse(ArrayList<GoodsListBean> goodsListBeans, String status, PageBean page) {
-                        getGoodsListCallBack.getDataSuccess(goodsListBeans, page);
+                        onDataListener.getDataSuccess(goodsListBeans);
                         dismissDialog();
                     }
 
                     @Override
                     public void onErr(String msg, String status) {
-                        getGoodsListCallBack.getDataFail(msg);
+                        onDataListener.getDataFail(msg);
                         dismissDialog();
 
                     }
@@ -68,8 +75,8 @@ public class GoodsListViewModel extends BaseViewModel<DataRepository> {
 
     }
 
-    public interface GetGoodsListCallBack{
-        public void getDataSuccess(ArrayList<GoodsListBean> goodsListBeans,PageBean page);
+    public interface OnDataListener{
+        public void getDataSuccess(ArrayList<GoodsListBean> goodsListBeans);
         public void getDataFail(String msg);
     }
 

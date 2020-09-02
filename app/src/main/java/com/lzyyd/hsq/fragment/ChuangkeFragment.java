@@ -77,12 +77,12 @@ public class ChuangkeFragment extends BaseFragment<FragmentChuangkeBinding, Chua
         viewModel.setChuangkeDataCallBack(this);
 
 
-        viewModel.getSelfData(1,20,goodstype,categoryId, ProApplication.SESSIONID());
+        viewModel.getSelfData(1,80,goodstype,categoryId, ProApplication.SESSIONID());
 
         binding.refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                viewModel.getSelfData(1,20,goodstype,categoryId,ProApplication.SESSIONID());
+                viewModel.getSelfData(1,80,goodstype,categoryId,ProApplication.SESSIONID());
             }
         });
     }

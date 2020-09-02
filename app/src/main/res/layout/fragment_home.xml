@@ -128,7 +128,8 @@
                      android:layout_gravity="center_vertical"
                      android:layout_marginLeft="10dp"
                      android:layout_marginRight="@dimen/margin_10"
-                     android:layout_marginTop="@dimen/margin_10"
+                     android:layout_marginTop="@dimen/margin_5"
+                     android:layout_marginBottom="@dimen/margin_5"
                      >
         
         
@@ -512,6 +513,7 @@
         </in.srain.cube.views.ptr.PtrFrameLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_home_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/RED_E00000"
@@ -544,6 +546,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="5dp"
+                android:onClick="@{()->home.setJumpSearch()}"
                 android:orientation="horizontal">
 
                 <ImageView

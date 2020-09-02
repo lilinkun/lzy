@@ -18,6 +18,7 @@ public class UrlBean{
     private int IsAndroidAuditing;
     private String LogisticsUrl;
     private String ShareImg;
+    private String CcqGoodsId;
     private int UserLevelPrice10;
     private int UserLevelPrice20;
 
@@ -131,5 +132,13 @@ public class UrlBean{
 
     public void setUserLevelPrice20(int userLevelPrice20) {
         UserLevelPrice20 = userLevelPrice20;
+    }
+
+    public String getCcqGoodsId() {
+        return CcqGoodsId;
+    }
+
+    public void setCcqGoodsId(String ccqGoodsId) {
+        CcqGoodsId = ccqGoodsId;
     }
 }

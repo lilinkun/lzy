@@ -83,7 +83,7 @@ public class ProApplication extends Application {
 
 
     public static String SESSIONID() {
-        return "hsq" + getUniqueId(ProApplication.context());
+        return "hsqapp" + getUniqueId(ProApplication.context());
     }
 
     public static String HEADIMG = "";
@@ -120,11 +120,14 @@ public class ProApplication extends Application {
 
     public static int USERLEVELPRICE20 = 0;
 
+    public static String CCQGOODSID = "";
+
+    public static String APP = "HSQ";
+
     public static final String IMG_BIG = "imgdb/";
     public static final String IMG_HOME_ADDRESS = "imgdb/velet/";
     public static final String IMG_SMALL = "img/300/300/";
     public static final String IMG_SMALL_ = "img/150/150/";
-
 
     public static synchronized ProApplication context() {
         return (ProApplication) mContext;

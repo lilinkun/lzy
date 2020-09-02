@@ -5,6 +5,7 @@ import android.app.Application;
 
 import com.lzyyd.hsq.activity.ChuangkeActivity;
 import com.lzyyd.hsq.activity.ModifyPayActivity;
+import com.lzyyd.hsq.activity.SearchActivity;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.viewmodel.AddAddressViewModel;
 import com.lzyyd.hsq.viewmodel.AddressListViewModel;
@@ -30,8 +31,10 @@ import com.lzyyd.hsq.viewmodel.PayViewModel;
 import com.lzyyd.hsq.viewmodel.PersonalInfoViewModel;
 import com.lzyyd.hsq.viewmodel.RechargeViewModel;
 import com.lzyyd.hsq.viewmodel.RegisterViewModel;
+import com.lzyyd.hsq.viewmodel.SearchViewModel;
 import com.lzyyd.hsq.viewmodel.ShoppingcartViewModel;
 import com.lzyyd.hsq.viewmodel.SureOrderViewModel;
+import com.lzyyd.hsq.viewmodel.TakeGoodsViewModel;
 import com.lzyyd.hsq.viewmodel.TianfengCoinViewModel;
 import com.lzyyd.hsq.viewmodel.TransferoutViewModel;
 import com.lzyyd.hsq.viewmodel.VipViewModel;
@@ -132,6 +135,10 @@ public class AppViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             return (T) new BalanceTransferoutViewModel(mApplication, mRepository);
         }else if (modelClass.isAssignableFrom(ModifyPayViewModel.class)){
             return (T) new ModifyPayViewModel(mApplication, mRepository);
+        }else if (modelClass.isAssignableFrom(SearchViewModel.class)){
+            return (T) new SearchViewModel(mApplication, mRepository);
+        }else if (modelClass.isAssignableFrom(TakeGoodsViewModel.class)){
+            return (T) new TakeGoodsViewModel(mApplication, mRepository);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

@@ -73,6 +73,9 @@ public class ChuangkeActivity extends BaseActivity<ActivityChuangkeBinding, Chua
 
         goodstype = getIntent().getExtras().getInt(HsqAppUtil.GOODSTYPE);
 
+        totalGoods.clear();
+        vipChooseItemBeans.clear();
+
         viewModel.setChuangkeCategoryDateCallBack(this);
         viewModel.getCategoryData(1,20);
 
@@ -253,16 +256,16 @@ public class ChuangkeActivity extends BaseActivity<ActivityChuangkeBinding, Chua
             if (totalGoods.contains(goodsListBean.getGoodsId())){
                 totalGoods.remove(goodsListBean.getGoodsId());
             }
-            for (VipChooseItemBean vipChooseItemBean : vipChooseItemBeans){
-                if (vipChooseItemBean.getGoodsId().equals(goodsListBean.getGoodsId())){
-                    vipChooseItemBeans.remove(vipChooseItemBean);
+            for (int i =0 ; i < vipChooseItemBeans.size();i++){
+                if (vipChooseItemBeans.get(i).getGoodsId().equals(goodsListBean.getGoodsId())){
+                    vipChooseItemBeans.remove(i);
                 }
             }
         }else {
 
-            for (VipChooseItemBean vipChooseItemBean : vipChooseItemBeans){
-                if (vipChooseItemBean.getGoodsId().equals(goodsListBean.getGoodsId())){
-                    vipChooseItemBean.setNum(showCountView);
+            for (int i =0 ; i < vipChooseItemBeans.size();i++){
+                if (vipChooseItemBeans.get(i).getGoodsId().equals(goodsListBean.getGoodsId())){
+                    vipChooseItemBeans.get(i).setNum(showCountView);
                 }
             }
         }

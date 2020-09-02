@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.view.View;
 
 import com.lzyyd.hsq.activity.GoodsDetailActivity;
+import com.lzyyd.hsq.activity.SearchActivity;
 import com.lzyyd.hsq.activity.VipActivity;
 import com.lzyyd.hsq.bean.GoodsListBean;
 import com.lzyyd.hsq.bean.HomeBean;
@@ -64,6 +65,10 @@ public class HomeFragmentViewModel extends BaseViewModel<DataRepository> {
         bundle.putString(HsqAppUtil.GOODSID,goodsid);
         bundle.putInt(HsqAppUtil.TYPE,1);
         startActivity(GoodsDetailActivity.class,bundle);
+    }
+
+    public void setJumpSearch(){
+        startActivity(SearchActivity.class);
     }
 
     public void getHomeData(String SessionId){

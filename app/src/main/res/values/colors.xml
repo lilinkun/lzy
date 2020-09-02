@@ -43,6 +43,9 @@
     <color name="register_vcode_bg">#FE744A</color>
 
 
+    <color name="main_app_color">#FC377D</color>
+
+
     <!--Zxing相关-->
     <color name="contents_text">#ff000000</color>
     <color name="encode_view">#ffffffff</color>

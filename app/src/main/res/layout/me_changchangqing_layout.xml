@@ -57,6 +57,147 @@
 
     </RelativeLayout>
 
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="@dimen/margin_10"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
+        android:background="@drawable/bg_ccq_youxiao"
+        android:gravity="center_vertical"
+        android:onClick="@{()->me.setJumpCcq()}"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ll_ccq_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="￥1680"
+                    android:textColor="@color/red_e61e16"
+                    android:textSize="17sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:layout_marginRight="@dimen/margin_10"
+                    android:gravity="center_vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="线下体验码"
+                        android:textColor="@color/red_e61e16"
+                        android:gravity="center_vertical"
+                        android:textSize="11sp" />
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:gravity="center_vertical"
+                        android:src="@drawable/ic_qrcode"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:background="@mipmap/ic_ccq_line" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/ll_use"
+            android:layout_toRightOf="@+id/ll_ccq_layout"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_10"
+                android:text="益生元常常清排毒产品套装"
+                android:textColor="#ff4b4b4b"
+                android:textSize="13sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="@dimen/margin_10"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{"剩余"+ String.valueOf(ccq.ccq.ccqNoUse) + @string/piece}'
+                    android:textColor="#ffe61e16"
+                    android:textSize="10sp"
+                    android:background="@drawable/shape_me_ccq"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{@string/used + String.valueOf(ccq.ccq.ccqUse) + @string/piece}'
+                    android:textColor="#ff333333"
+                    android:textSize="10sp"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_use"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/bg_ccq_youxiao_btn"
+            android:gravity="center"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="1"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10"
+                android:textSize="@dimen/textsize12"
+                android:text="立即使用" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -64,6 +205,7 @@
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/margin_10"
         android:paddingRight="@dimen/margin_10"
+        android:visibility="gone"
         android:onClick="@{()->me.setJumpCcq()}"
         >
 
@@ -113,49 +255,81 @@
         android:layout_height="80dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
+        android:background="@drawable/bg_ccq_youxiao"
         android:layout_marginTop="@dimen/margin_10"
-        android:paddingLeft="@dimen/margin_10"
-        android:paddingRight="@dimen/margin_10"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
+        android:onClick="@{()->me.setJumpTihuo()}"
         >
 
-        <ImageView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_ccq_gift_item"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            />
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/ll_tihuo"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10"
+                android:text="益生元常常清排毒产品套装"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:textColor="#ff4b4b4b"
+                android:textSize="13sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:layout_marginLeft="@dimen/margin_10"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{"剩余"+ String.valueOf(balance.money7Balance) + @string/piece}'
+                    android:textColor="#ffe61e16"
+                    android:textSize="10sp"
+                    android:background="@drawable/shape_me_ccq"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{"已提"+ String.valueOf(balance.moneyUse7) + @string/piece}'
+                    android:textColor="#ff333333"
+                    android:textSize="10sp"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
 
         <LinearLayout
+            android:id="@+id/ll_tihuo"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="@dimen/margin_10"
-            android:layout_marginBottom="@dimen/margin_10"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/bg_ccq_youxiao_btn"
+            android:gravity="center"
+            android:alpha="0.5"
             >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text='@{"剩余"+ String.valueOf(balance.money7Balance) + @string/piece}'
-                android:textColor="#ffe61e16"
-                android:textSize="10sp"
-                android:background="@drawable/shape_me_ccq"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text='@{"已提"+ String.valueOf(balance.money7Balance) + @string/piece}'
-                android:textColor="#ff333333"
-                android:textSize="10sp"
+                android:ems="1"
+                android:gravity="center"
+                android:textColor="@color/white"
                 android:layout_marginLeft="@dimen/margin_10"
-                />
-
+                android:layout_marginRight="@dimen/margin_10"
+                android:textSize="@dimen/textsize12"
+                android:text="立即提货" />
         </LinearLayout>
-
 
     </RelativeLayout>
 

@@ -5,7 +5,13 @@
 
     <data>
 
+        <variable
+            name="goodslist"
+            type="com.lzyyd.hsq.viewmodel.GoodsListViewModel" />
 
+        <variable
+            name="goodslistactivity"
+            type="com.lzyyd.hsq.activity.GoodsListActivity" />
 
     </data>
 
@@ -60,8 +66,10 @@
         android:orientation="horizontal">
 
         <RelativeLayout
+            android:id="@+id/rl_goods_list_popularity"
             android:layout_width="0.0dip"
             android:layout_height="wrap_content"
+            android:onClick="@{()->goodslistactivity.clickSort(1)}"
             android:layout_weight="1.0">
 
             <TextView
@@ -70,8 +78,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="10.0dip"
-                android:text="@string/clother_host"
-                android:textColor="#232323"
+                android:text="综合"
+                android:textColor="#E43A3C"
                 android:textSize="14sp" />
 
             <View
@@ -86,6 +94,7 @@
         <RelativeLayout
             android:layout_width="0.0dip"
             android:layout_height="wrap_content"
+            android:onClick="@{()->goodslistactivity.clickSort(2)}"
             android:layout_weight="1.0">
 
             <TextView
@@ -116,6 +125,7 @@
                 android:id="@+id/rel_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@{()->goodslistactivity.clickSort(3)}"
                 android:layout_centerInParent="true">
 
                 <TextView
@@ -165,6 +175,7 @@
             android:id="@+id/rel_offer"
             android:layout_width="0.0dip"
             android:layout_height="wrap_content"
+            android:onClick="@{()->goodslistactivity.clickSort(4)}"
             android:layout_weight="1.0">
 
             <RelativeLayout
@@ -180,31 +191,10 @@
                     android:layout_centerVertical="true"
                     android:paddingBottom="10.0dip"
                     android:paddingTop="10.0dip"
-                    android:text="@string/clother_nestest"
+                    android:text="筛选"
                     android:textColor="#232323"
                     android:textSize="14sp" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="5.0dip"
-                    android:layout_toRightOf="@+id/tx_newest"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/img1_offer"
-                        android:layout_width="6.0dip"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/j_1" />
-
-                    <ImageView
-                        android:id="@+id/img2_offer"
-                        android:layout_width="6.0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:src="@mipmap/j_2" />
-                </LinearLayout>
             </RelativeLayout>
 
             <View

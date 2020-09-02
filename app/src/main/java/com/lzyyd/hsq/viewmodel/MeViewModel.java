@@ -13,6 +13,7 @@ import com.lzyyd.hsq.activity.MyQrcodeActivity;
 import com.lzyyd.hsq.activity.OrderListActivity;
 import com.lzyyd.hsq.activity.PersonalInfoActivity;
 import com.lzyyd.hsq.activity.PointActivity;
+import com.lzyyd.hsq.activity.TakeGoodsActivity;
 import com.lzyyd.hsq.activity.VipActivity;
 import com.lzyyd.hsq.activity.WalletActivity;
 import com.lzyyd.hsq.base.ProApplication;
@@ -87,6 +88,15 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
 
     public void setJumpCcq(){
         startActivity(CcqActivity.class);
+    }
+
+    public void setJumpTihuo(){
+        if (balanceBeans.getMoney7Balance() > 0){
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("balance",balanceBeans);
+            startActivity(TakeGoodsActivity.class,bundle, MeFragment.RESULT_CODE_POINT);
+        }
+
     }
 
     public void setJumpOrderlist(int position){
@@ -260,5 +270,6 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
 
         public void getUserInfoSuccess(LoginBean loginBean);
         public void getUserInfoFail(String msg);
+
     }
 }

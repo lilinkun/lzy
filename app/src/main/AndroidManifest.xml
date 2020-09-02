@@ -105,6 +105,10 @@
             android:screenOrientation="portrait"/>
         <activity android:name="com.lzyyd.hsq.activity.ModifyPayActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.TakeGoodsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.SearchActivity"
+            android:screenOrientation="portrait"/>
 
 
 

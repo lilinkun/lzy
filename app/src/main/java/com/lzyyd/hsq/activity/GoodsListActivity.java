@@ -25,6 +25,9 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 public class GoodsListActivity extends BaseActivity<ActivityGoodslistBinding, GoodsListViewModel> implements GoodsListViewModel.GetGoodsListCallBack {
 
+    private GoodsListAdapter goodsListAdapter;
+    private boolean isPrice = false;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +42,7 @@ public class GoodsListActivity extends BaseActivity<ActivityGoodslistBinding, Go
 
     @Override
     public int initVariableId() {
-        return 0;
+        return BR.goodslist;
     }
 
     @Override
@@ -50,22 +53,28 @@ public class GoodsListActivity extends BaseActivity<ActivityGoodslistBinding, Go
 
     @Override
     public void initData() {
+        binding.setGoodslistactivity(this);
         viewModel.setListener(this);
-        viewModel.getGoodsListData(1,20,1, ProApplication.SESSIONID());
+        viewModel.getGoodsListData(1,20,1,"0", ProApplication.SESSIONID());
+
     }
 
     @Override
     public void getDataSuccess(ArrayList<GoodsListBean> goodsListBeans, PageBean page) {
 
-        GoodsListAdapter goodsListAdapter = new GoodsListAdapter(this);
-        goodsListAdapter.getItems().addAll(goodsListBeans);
-
-
-        StaggeredGridLayoutManager gridLayoutManager1 = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
-        binding.rvGoodsList.addItemDecoration(new GridSpacingItemDecoration(2, 20, false));
+        if (goodsListAdapter == null) {
+            goodsListAdapter = new GoodsListAdapter(this);
+            goodsListAdapter.getItems().addAll(goodsListBeans);
+            StaggeredGridLayoutManager gridLayoutManager1 = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+            binding.rvGoodsList.addItemDecoration(new GridSpacingItemDecoration(2, 20, false));
 //        gridLayoutManager1.setOrientation(GridLayoutManager.VERTICAL);
-        binding.rvGoodsList.setLayoutManager(gridLayoutManager1);
-        binding.rvGoodsList.setAdapter(goodsListAdapter);
+            binding.rvGoodsList.setLayoutManager(gridLayoutManager1);
+            binding.rvGoodsList.setAdapter(goodsListAdapter);
+        }else {
+            goodsListAdapter.getItems().clear();
+            goodsListAdapter.getItems().addAll(goodsListBeans);
+            goodsListAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -73,5 +82,75 @@ public class GoodsListActivity extends BaseActivity<ActivityGoodslistBinding, Go
         UToast.show(this,msg);
     }
 
+
+    public void clickSort(int position){
+        switch (position){
+            case 1:
+
+                viewModel.getGoodsListData(1,20,1,"0", ProApplication.SESSIONID());
+
+                binding.txPople.setTextColor(Color.parseColor("#E43A3C"));
+                binding.txTop.setTextColor(Color.parseColor("#232323"));
+                binding.txPrice.setTextColor(Color.parseColor("#232323"));
+                binding.txNewest.setTextColor(Color.parseColor("#232323"));
+
+                isPrice = false;
+
+                binding.img1.setImageResource(R.mipmap.j_1);
+                binding.img2.setImageResource(R.mipmap.j_2);
+                break;
+
+
+            case 2:
+
+                viewModel.getGoodsListData(1,20,1,"2", ProApplication.SESSIONID());
+
+                binding.txTop.setTextColor(Color.parseColor("#E43A3C"));
+                binding.txPople.setTextColor(Color.parseColor("#232323"));
+                binding.txPrice.setTextColor(Color.parseColor("#232323"));
+                binding.txNewest.setTextColor(Color.parseColor("#232323"));
+
+                binding.img1.setImageResource(R.mipmap.j_1);
+                binding.img2.setImageResource(R.mipmap.j_2);
+                isPrice = false;
+                break;
+
+            case 3:
+
+                isPrice = !isPrice;
+                if (isPrice) {
+                    viewModel.getGoodsListData(1, 20, 1, "3", ProApplication.SESSIONID());
+                    binding.img1.setImageResource(R.mipmap.j_1_1);
+                    binding.img2.setImageResource(R.mipmap.j_2);
+
+                }else {
+                    viewModel.getGoodsListData(1, 20, 1, "4", ProApplication.SESSIONID());
+                    binding.img1.setImageResource(R.mipmap.j_1);
+                    binding.img2.setImageResource(R.mipmap.j_2_1);
+                }
+
+                binding.txPrice.setTextColor(Color.parseColor("#E43A3C"));
+                binding.txTop.setTextColor(Color.parseColor("#232323"));
+                binding.txPople.setTextColor(Color.parseColor("#232323"));
+                binding.txNewest.setTextColor(Color.parseColor("#232323"));
+
+                break;
+
+            case 4:
+
+                viewModel.getGoodsListData(1,20,1,"5", ProApplication.SESSIONID());
+
+                binding.txNewest.setTextColor(Color.parseColor("#E43A3C"));
+                binding.txTop.setTextColor(Color.parseColor("#232323"));
+                binding.txPrice.setTextColor(Color.parseColor("#232323"));
+                binding.txPople.setTextColor(Color.parseColor("#232323"));
+
+                binding.img1.setImageResource(R.mipmap.j_1);
+                binding.img2.setImageResource(R.mipmap.j_2);
+                isPrice = false;
+
+                break;
+        }
+    }
 
 }

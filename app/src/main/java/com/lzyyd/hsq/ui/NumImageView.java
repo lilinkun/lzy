@@ -83,7 +83,7 @@ public class NumImageView extends AppCompatImageView {
             //设置字体大小
             paint.setTextSize(textSize);
             //画数字
-            canvas.drawText("" + (num < 99 ? num : 99),
+            canvas.drawText("" + (num < 10000 ? num : 10000),
                     num < 10 ? getWidth() - radius - textSize / 4 - paddingRight/2
                             : getWidth() - radius - textSize / 2 - paddingRight/2,
                     radius + textSize / 3 + paddingTop/2, paint);

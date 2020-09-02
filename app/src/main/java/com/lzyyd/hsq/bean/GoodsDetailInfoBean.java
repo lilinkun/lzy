@@ -58,6 +58,33 @@ public class GoodsDetailInfoBean<T> implements Serializable {
     private T Attr;
     private int IsPresell;
     private String PresellDate;
+    private String StoreName;
+    private String StoreLogo;
+    private int StoreId;
+
+    public String getStoreName() {
+        return StoreName;
+    }
+
+    public void setStoreName(String storeName) {
+        StoreName = storeName;
+    }
+
+    public String getStoreLogo() {
+        return StoreLogo;
+    }
+
+    public void setStoreLogo(String storeLogo) {
+        StoreLogo = storeLogo;
+    }
+
+    public int getStoreId() {
+        return StoreId;
+    }
+
+    public void setStoreId(int storeId) {
+        StoreId = storeId;
+    }
 
     public int getIsPresell() {
         return IsPresell;

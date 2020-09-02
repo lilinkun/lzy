@@ -43,4 +43,14 @@
     <declare-styleable name="NumImageView">
         <attr name="num" format="integer" />
     </declare-styleable>
+
+
+    <declare-styleable name="TopLayout">
+        <attr name="up_arrow" format="reference"/>
+        <attr name="down_arrow" format="reference"/>
+        <attr name="textcolor" format="color"/>
+        <attr name="textnormalcolor" format="color"/>
+        <attr name="type" format="integer"/>
+
+    </declare-styleable>
 </resources>

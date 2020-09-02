@@ -9,6 +9,14 @@
             name="takegoods"
             type="com.lzyyd.hsq.viewmodel.TakeGoodsViewModel" />
 
+        <variable
+            name="goodsdetail"
+            type="com.lzyyd.hsq.bean.GoodsDetailInfoBean" />
+
+        <variable
+            name="address"
+            type="com.lzyyd.hsq.bean.AddressBean" />
+
     </data>
 
 <LinearLayout
@@ -67,6 +75,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginLeft="@dimen/margin_10"
             android:scaleType="centerCrop"
+            app:image="@{goodsdetail.goodsImg}"
             app:radius="5dp" />
 
         <RelativeLayout
@@ -85,6 +94,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="2"
+                android:text="@{goodsdetail.goodsName}"
                 android:textColor="@color/text_222222"
                 android:textSize="15dp" />
 
@@ -126,6 +136,7 @@
                     android:lines="1"
                     android:textColor="@color/setting_title_color"
                     android:textSize="16.5sp"
+                    android:text="@{@string/price + String.valueOf(goodsdetail.price)}"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -186,6 +197,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_10"
         android:orientation="vertical"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
         android:background="@drawable/bg_sure_order_address"
         >
 
@@ -201,7 +214,7 @@
             android:textSize="@dimen/textsize14"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/margin_10"
-            android:text="商品总价"/>
+            android:text="经销商编号"/>
 
 
         <TextView
@@ -211,6 +224,7 @@
             android:layout_alignParentRight="true"
             android:textColor="@color/grey_333333"
             android:textSize="@dimen/textsize14"
+            android:text="@{takegoods.usernameField}"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/margin_10"
             />
@@ -222,9 +236,12 @@
         android:layout_height="0.5dp"
         android:background="@color/line_bg"/>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="44dp">
+        android:layout_height="44dp"
+        android:gravity="center_vertical"
+        android:onClick="@{()->takegoods.onChooseAddress()}"
+        android:orientation="horizontal">
 
     <TextView
         android:layout_width="wrap_content"
@@ -233,19 +250,43 @@
         android:textSize="@dimen/textsize14"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/margin_10"
-        android:text="商品总价"/>
+        android:text="收货地址"/>
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:textColor="@color/grey_333333"
-        android:textSize="@dimen/textsize14"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/margin_10"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/tv_add_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey_color3"
+            android:background="@drawable/take_goods_address"
+            android:layout_alignParentRight="true"
+            android:text="请选择收货地址"
+            android:textSize="@dimen/textsize14"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin_10"/>
+
+            <TextView
+                android:id="@+id/tv_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/textsize14"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:text="@{address.addressName + address.address}"
+                android:layout_marginRight="@dimen/margin_10"
+                android:layout_alignParentRight="true"
+                />
+
+
+        </RelativeLayout>
+
+</LinearLayout>
 
     <View
         android:id="@+id/view_need_integral"
@@ -253,31 +294,131 @@
         android:layout_height="0.5dp"
         android:background="@color/line_bg"/>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="44dp">
+        android:layout_height="44dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/grey_333333"
             android:textSize="@dimen/textsize14"
-            android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/margin_10"
-            android:text="商品总价"/>
+            android:text="交易密码"/>
 
 
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:gravity="right"
+            android:background="@null"
             android:textColor="@color/grey_333333"
             android:textSize="@dimen/textsize14"
-            android:layout_centerVertical="true"
+            android:text="@={takegoods.psdField}"
+            android:hint="请输入交易密码"
+            android:inputType="textPassword"
             android:layout_marginRight="@dimen/margin_10"
             />
 
-    </RelativeLayout>
+    </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="bottom">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:background="@drawable/shape_bottom_chuangke"
+            android:orientation="horizontal"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                android:background="@drawable/shape_bottom_chuangke"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                <com.lzyyd.hsq.ui.NumImageView
+                    android:id="@+id/nim_all_order"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:src="@mipmap/ic_chuangke_goods"
+                    app:num="@{takegoods.numField}"
+                    />
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/margin_5">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/textsize16"
+                            android:layout_marginLeft="@dimen/textsize10"
+                            android:textColor="@color/grey_333333"
+                            android:text="剩余提货: "/>
+
+                        <TextView
+                            android:id="@+id/tv_total_goods_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/textsize16"
+                            android:textColor="#E61D15"
+                            android:text="@{String.valueOf(takegoods.reduceField)}"/>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="right|center_vertical">
+                    <TextView
+                        android:id="@+id/tv_settlement"
+                        android:layout_width="100dp"
+                        android:layout_height="39dp"
+                        android:layout_marginRight="@dimen/margin_5"
+                        android:text="立即提货"
+                        android:background="@drawable/bg_chuangke_update"
+                        android:gravity="center"
+                        android:textSize="@dimen/textsize16"
+                        android:textColor="@color/white"
+                        app:onClickCommand="@{takegoods.bindingCommand}"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
 
     </LinearLayout>
 

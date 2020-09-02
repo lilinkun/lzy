@@ -130,7 +130,6 @@ public class OrderAllFragment extends BaseFragment<FragmentAllOrderBinding, Orde
 
     @Override
     public void getDataFail(String msg) {
-        UToast.show(getActivity(),msg);
     }
 
     @Override

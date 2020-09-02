@@ -108,6 +108,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
             public void onRefreshBegin(PtrFrameLayout frame) {
 
                 viewModel.getHomeData(ProApplication.SESSIONID());
+
             }
 
             @Override

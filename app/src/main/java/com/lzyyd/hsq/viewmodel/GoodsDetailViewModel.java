@@ -1,6 +1,7 @@
 package com.lzyyd.hsq.viewmodel;
 
 import android.app.Application;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -57,6 +58,12 @@ public class GoodsDetailViewModel extends BaseViewModel<DataRepository> {
         }else {
             addGoodCollect(goodsId,"1",ProApplication.SESSIONID());
         }
+    }
+
+    public void setJumpStore(int storeId){
+        Bundle bundle = new Bundle();
+        bundle.putInt("storeId",storeId);
+//        startActivity();
     }
 
     public void addGoodCollect(String OtherId, String CollectType, String SessionId) {
