@@ -3,13 +3,13 @@ package com.lzyyd.hsq.base;
 import android.annotation.SuppressLint;
 import android.app.Application;
 
-import com.lzyyd.hsq.activity.StoreActivity;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.viewmodel.AddAddressViewModel;
 import com.lzyyd.hsq.viewmodel.AddressListViewModel;
 import com.lzyyd.hsq.viewmodel.BalanceTransferoutViewModel;
 import com.lzyyd.hsq.viewmodel.BindCardViewModel;
 import com.lzyyd.hsq.viewmodel.CcqViewModel;
+import com.lzyyd.hsq.viewmodel.ChooseWxLoginViewModel;
 import com.lzyyd.hsq.viewmodel.ChuangkeViewModel;
 import com.lzyyd.hsq.viewmodel.CollectViewModel;
 import com.lzyyd.hsq.viewmodel.ForgetPasswordViewModel;
@@ -140,6 +140,8 @@ public class AppViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             return (T) new TakeGoodsViewModel(mApplication, mRepository);
         }else if (modelClass.isAssignableFrom(StoreViewModel.class)){
             return (T) new StoreViewModel(mApplication, mRepository);
+        }else if (modelClass.isAssignableFrom(ChooseWxLoginViewModel.class)){
+            return (T) new ChooseWxLoginViewModel(mApplication, mRepository);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

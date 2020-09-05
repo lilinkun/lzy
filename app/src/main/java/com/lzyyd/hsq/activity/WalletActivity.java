@@ -88,7 +88,6 @@ public class WalletActivity extends BaseActivity<ActivityWalletBinding, WalletVi
 
     @Override
     public void getDataFail(String msg) {
-        UToast.show(this,msg);
     }
 
     @Override

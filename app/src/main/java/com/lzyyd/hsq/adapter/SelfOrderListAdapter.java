@@ -46,11 +46,11 @@ public class SelfOrderListAdapter extends RecyclerView.Adapter<SelfOrderListAdap
         holder.tv_goods_title.setText("" + selfOrderInfoBeans.get(position).getGoodsName());
         holder.tv_goods_price.setText("¥" + selfOrderInfoBeans.get(position).getPrice());
 
-        if (selfOrderInfoBeans.get(position).getIntegral() == 0) {
+        /*if (selfOrderInfoBeans.get(position).getIntegral() == 0) {
             holder.tv_integral.setVisibility(View.GONE);
         } else {
             holder.tv_integral.setText("+" + selfOrderInfoBeans.get(position).getIntegral() + "积分");
-        }
+        }*/
 
         if (selfOrderInfoBeans.get(position).getAttrOne() != null && !selfOrderInfoBeans.get(position).getAttrOne().isEmpty()) {
             holder.tv_goods_spec1.setText(selfOrderInfoBeans.get(position).getAttrOne());

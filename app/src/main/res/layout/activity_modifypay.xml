@@ -9,6 +9,18 @@
             name="modify"
             type="com.lzyyd.hsq.viewmodel.ModifyPayViewModel" />
 
+        <variable
+            name="username"
+            type="String" />
+
+        <variable
+            name="hintstr"
+            type="String" />
+
+        <variable
+            name="titlename"
+            type="String" />
+
     </data>
 
 <LinearLayout
@@ -48,7 +60,7 @@
             android:layout_centerInParent="true"
             android:textColor="@color/text_commom"
             android:textSize="18sp"
-            android:text="修改支付密码"/>
+            android:text="@{titlename}"/>
 
     </RelativeLayout>
 
@@ -72,15 +84,17 @@
                 android:paddingLeft="@dimen/margin_10"
                 android:textSize="@dimen/textsize16"
                 android:textColor="@color/grey_333333"
-                android:text="手机号"/>
+                android:text="@{username}"/>
 
-            <TextView
+            <EditText
                 android:id="@+id/tv_phone"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:textSize="@dimen/textsize14"
+                android:hint="@{hintstr}"
                 android:textColor="@color/grey_333333"
+                android:gravity="center_vertical"
                 android:paddingLeft="@dimen/padding_10"
                 android:background="@null"/>
         </LinearLayout>
@@ -112,11 +126,12 @@
                 <EditText
                     android:id="@+id/ev_vcode"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_toLeftOf="@+id/tv_send_vcode"
                     android:layout_centerVertical="true"
                     android:layout_weight="3"
                     android:paddingLeft="@dimen/padding_10"
+                    android:textSize="@dimen/textsize14"
                     android:hint="@string/tv_register_input_vcode"
                     android:background="@null"/>
 
@@ -161,9 +176,10 @@
             <EditText
                 android:id="@+id/ev_new_psd"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:paddingLeft="@dimen/padding_10"
+                android:textSize="@dimen/textsize14"
                 android:inputType="numberPassword"
                 android:hint="@string/tv_forget_input_new_psd"
                 android:background="@null"/>
@@ -193,9 +209,10 @@
             <EditText
                 android:id="@+id/ev_sure_psd"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:paddingLeft="@dimen/padding_10"
+                android:textSize="@dimen/textsize14"
                 android:inputType="numberPassword"
                 android:hint="@string/tv_forget_sure_new_psd"
                 android:background="@null"/>

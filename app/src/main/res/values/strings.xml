@@ -11,6 +11,7 @@
     <string name="tv_forget_psd_hint">我们已经发送了验证码到你的手机：</string>
     <string name="tv_forget_get_vcode">获取验证码</string>
     <string name="tv_forget_input_vcode">请输入验证码</string>
+    <string name="tv_input_mobile">请输入手机号</string>
     <string name="tv_forget_next">下一步</string>
     <string name="tv_forget_useless_no">手机不可用?</string>
     <string name="tv_forget_tip">必须是6-20个字母、数字或符号(除空格)</string>
@@ -70,6 +71,7 @@
 
 
     <string name="piece">张</string>
+    <string name="jian">件</string>
     <string name="used">已使用</string>
     <string name="estimate">预计</string>
     <string name="deliver_goods">发货</string>
@@ -196,8 +198,8 @@
     <string name="goods_add_address">添加地址</string>
 
 
-    <string name="you">有</string>
-    <string name="wu">无</string>
+    <string name="you">否</string>
+    <string name="wu">是</string>
 
     <string name="price">￥</string>
 
@@ -331,5 +333,10 @@
 
     <string name="viewfinderview_status_text1">将二维码/条码放入取景框内</string>
     <string name="viewfinderview_status_text2">即可自动扫描</string>
+    <!-- WXPayEntryActivity -->
+    <string name="pay_result_tip">这个界面用于显示第三方app通过微信支付的结果</string>
+    <string name="pay_result_callback_msg" formatted="false">微信支付结果：%s</string>
+
+    <string name="wallet_balance">余额:</string>
 
 </resources>

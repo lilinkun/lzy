@@ -22,6 +22,8 @@ public class OrderDetailAddressBean {
     private double PayFee;
     private double Money1;
     private double Money2;
+    private double Money3;
+    private double Money6;
     private double GoodsAmount;
     private String LgsName;
     private String LgsNumber;
@@ -38,8 +40,43 @@ public class OrderDetailAddressBean {
     private String ShippingDate;
     private String EffectivePaymentDate;
     private ArrayList<OrderGoodsBuyListBean> orderDetail;
+    private int StoreId;
+    private String StoreName;
+    private String StoreLogo;
 
     private String FreezeId;
+
+    public double getMoney6() {
+        return Money6;
+    }
+
+    public void setMoney6(double money6) {
+        Money6 = money6;
+    }
+
+    public int getStoreId() {
+        return StoreId;
+    }
+
+    public void setStoreId(int storeId) {
+        StoreId = storeId;
+    }
+
+    public String getStoreName() {
+        return StoreName;
+    }
+
+    public void setStoreName(String storeName) {
+        StoreName = storeName;
+    }
+
+    public String getStoreLogo() {
+        return StoreLogo;
+    }
+
+    public void setStoreLogo(String storeLogo) {
+        StoreLogo = storeLogo;
+    }
 
     public int getOrderId() {
         return OrderId;
@@ -159,6 +196,14 @@ public class OrderDetailAddressBean {
 
     public void setMoney2(double money2) {
         Money2 = money2;
+    }
+
+    public double getMoney3() {
+        return Money3;
+    }
+
+    public void setMoney3(double money3) {
+        Money3 = money3;
     }
 
     public double getGoodsAmount() {

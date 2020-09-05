@@ -18,6 +18,7 @@ import com.lzyyd.hsq.databinding.ActivityMainBinding;
 import com.lzyyd.hsq.fragment.HomeFragment;
 import com.lzyyd.hsq.fragment.MeFragment;
 import com.lzyyd.hsq.fragment.ShoppingCartFragment;
+import com.lzyyd.hsq.util.ActivityUtil;
 import com.lzyyd.hsq.util.Eyes;
 import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
@@ -44,45 +45,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MVVMViewMode
 
     @Override
     public void initData(){
-        viewModel.getUrl(this);
-    }
-
-
-    @Override
-    public MVVMViewModel initViewModel() {
-        AppViewModelFactory appViewModelFactory = AppViewModelFactory.getInstance(getApplication());
-        return ViewModelProviders.of(this,appViewModelFactory).get(MVVMViewModel.class);
-    }
-
-    private void getMenusFragments() {
-        sparseArray.put(HsqAppUtil.PAGE_HOMEPAGE, new HomeFragment());
-        sparseArray.put(HsqAppUtil.PAGE_FIND, shoppingCartFragment);
-        sparseArray.put(HsqAppUtil.PAGE_MALL,new MeFragment());
-    }
-
-    @Override
-    public void getUrlSuccess(UrlBean urlBean) {
-
-        ProApplication.HEADIMG = urlBean.getImgUrl() + ProApplication.IMG_SMALL;
-        ProApplication.BANNERIMG = urlBean.getImgUrl() + ProApplication.IMG_BIG;
-        ProApplication.HOMEADDRESS = urlBean.getImgUrl() + ProApplication.IMG_HOME_ADDRESS;
-        ProApplication.CUSTOMERIMG = urlBean.getServiesUrl();
-        ProApplication.SHAREDIMG = urlBean.getSharedWebUrl();
-        ProApplication.REGISTERREQUIREMENTS = urlBean.getRegisterRequirements();
-        ProApplication.LOGISTICSURL = urlBean.getLogisticsUrl();
-        ProApplication.UPGRADEURL = urlBean.getUpgradeUrl();
-        ProApplication.UPGRADETOKEN = urlBean.getUpgradeToken();
-        ProApplication.PHONE = urlBean.getKFMobile();
-        ProApplication.SERVIESVIP = urlBean.getServiesVip();
-        ProApplication.SHAREDMEIMG = urlBean.getShareImg();
-        ProApplication.USERLEVELPRICE10 = urlBean.getUserLevelPrice10();
-        ProApplication.USERLEVELPRICE20 = urlBean.getUserLevelPrice20();
-        ProApplication.CCQGOODSID = urlBean.getCcqGoodsId();
-        SharedPreferences sharedPreferences = getSharedPreferences(HsqAppUtil.LOGIN, MODE_PRIVATE);
-        sharedPreferences.edit().putString(HsqAppUtil.IMG, ProApplication.HEADIMG).putString(HsqAppUtil.BANNERIMG, ProApplication.BANNERIMG)
-                .putString(HsqAppUtil.CUSTOMER, ProApplication.CUSTOMERIMG).putString(HsqAppUtil.SHAREDIMG, ProApplication.SHAREDIMG)
-                .putString(HsqAppUtil.SHAREDMEIMG,"").commit();
-
+        ActivityUtil.addHomeActivity(this);
         FragmentsAdapter adapter = new FragmentsAdapter(getSupportFragmentManager());
         getMenusFragments();
         adapter.setFragments(sparseArray);
@@ -127,6 +90,25 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MVVMViewMode
                 }
             }
         });
+
+    }
+
+
+    @Override
+    public MVVMViewModel initViewModel() {
+        AppViewModelFactory appViewModelFactory = AppViewModelFactory.getInstance(getApplication());
+        return ViewModelProviders.of(this,appViewModelFactory).get(MVVMViewModel.class);
+    }
+
+    private void getMenusFragments() {
+        sparseArray.put(HsqAppUtil.PAGE_HOMEPAGE, new HomeFragment());
+        sparseArray.put(HsqAppUtil.PAGE_FIND, shoppingCartFragment);
+        sparseArray.put(HsqAppUtil.PAGE_MALL,new MeFragment());
+    }
+
+    @Override
+    public void getUrlSuccess(UrlBean urlBean) {
+
     }
 
     @Override

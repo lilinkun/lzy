@@ -91,10 +91,13 @@ public class OrderListActivity extends BaseActivity<ActivityOrderlistBinding, Or
 
 
         Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        int position = bundle.getInt("position");
-        binding.orderListVp.setCurrentItem(position,false);
-
+        if (intent != null) {
+            Bundle bundle = intent.getExtras();
+            if (bundle != null) {
+                int position = bundle.getInt("position");
+                binding.orderListVp.setCurrentItem(position, false);
+            }
+        }
     }
 
 }

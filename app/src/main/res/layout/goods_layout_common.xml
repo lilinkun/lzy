@@ -35,6 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:paddingLeft="10dp"
+        android:visibility="@{goodsDetail.qty == 0 ? View.GONE : View.VISIBLE}"
         android:onClick="@{()->goodsDetailViewModel.setClickSpecifications()}"
         >
 

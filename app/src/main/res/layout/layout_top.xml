@@ -169,7 +169,6 @@
             android:id="@+id/view_4"
             android:layout_width="fill_parent"
             android:layout_height="1.0dip"
-            android:layout_below="@+id/rel_good_offer"
             android:visibility="gone" />
     </RelativeLayout>
 

@@ -9,16 +9,23 @@ import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseActivity;
 import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.AddressBean;
+import com.lzyyd.hsq.bean.CollectBean;
 import com.lzyyd.hsq.bean.OrderGoodsBuyListBean;
 import com.lzyyd.hsq.bean.OrderInfoBuyListBean;
 import com.lzyyd.hsq.bean.OrderinfoBean;
 import com.lzyyd.hsq.databinding.ActivitySureOrderBinding;
+import com.lzyyd.hsq.interf.IWxPayListener;
+import com.lzyyd.hsq.interf.IWxResultListener;
 import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
+import com.lzyyd.hsq.util.WxPayUtil;
 import com.lzyyd.hsq.viewmodel.SureOrderViewModel;
+import com.lzyyd.hsq.wxapi.WXEntryActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
@@ -29,13 +36,15 @@ import me.tatarka.bindingcollectionadapter2.BR;
  * Create by liguo on 2020/7/21
  * Describe:
  */
-public class SureOrderActivity extends BaseActivity<ActivitySureOrderBinding, SureOrderViewModel> implements SureOrderViewModel.SureOrderCallBack, SureOrderAdapter.OnDataGetFare {
+public class SureOrderActivity extends BaseActivity<ActivitySureOrderBinding, SureOrderViewModel> implements SureOrderViewModel.SureOrderCallBack, SureOrderAdapter.OnDataGetFare, IWxResultListener, IWxPayListener {
 
     private String key;
     private OrderinfoBean orderinfoBean;
     private AddressBean addressBean;
     private SureOrderAdapter sureOrderAdapter;
     public static final int ADDRESS_RESULT = 0x032;
+    private boolean isPay = false;
+    private ArrayList<String> strings = new ArrayList<>();
 
     @Override
     public int initContentView(Bundle savedInstanceState) {
@@ -64,6 +73,7 @@ public class SureOrderActivity extends BaseActivity<ActivitySureOrderBinding, Su
 
         viewModel.getData(key,"0", ProApplication.SESSIONID());
 
+        WXEntryActivity.setPayListener(this);
     }
 
     @Override
@@ -127,6 +137,7 @@ public class SureOrderActivity extends BaseActivity<ActivitySureOrderBinding, Su
             jsonObject.put("ShippingFree",orderinfoBean.getShippingFree());
             jsonObject.put("AddressId",orderinfoBean.getAddress().getAddressID());
 
+            int i = 0;
             for (OrderInfoBuyListBean orderInfoBuyListBean : orderinfoBean.getOrderInfoBuyList()){
                 JSONObject jsonObject1 = new JSONObject();
                 JSONArray jsonArray1 = new JSONArray();
@@ -135,9 +146,10 @@ public class SureOrderActivity extends BaseActivity<ActivitySureOrderBinding, Su
                 jsonObject1.put("ReturnIntegral",orderInfoBuyListBean.getReturnIntegral());
                 jsonObject1.put("OrderAmount",orderInfoBuyListBean.getOrderAmount());
                 jsonObject1.put("ShippingFree",orderInfoBuyListBean.getShippingFree());
-                jsonObject1.put("Money3",0);
+                jsonObject1.put("Money3",strings.get(i));
                 jsonObject1.put("StoreId",orderInfoBuyListBean.getStoreId());
                 jsonObject1.put("PostScript","");
+                i++;
                 for (OrderGoodsBuyListBean orderGoodsBuyListBean : orderInfoBuyListBean.getOrderGoodsBuyList()){
                     JSONObject jsonObject2 = new JSONObject();
                     jsonObject2.put("GoodsId",orderGoodsBuyListBean.getGoodsId());
@@ -151,7 +163,7 @@ public class SureOrderActivity extends BaseActivity<ActivitySureOrderBinding, Su
                 jsonArray.put(jsonObject1);
             }
             jsonObject.put("OrderInfoBuyList",jsonArray);
-            viewModel.sureOrder(key,jsonObject.toString() , ProApplication.SESSIONID());
+            viewModel.sureOrder(key,jsonObject.toString(), ProApplication.SESSIONID());
         }catch (Exception e){
 
         }
@@ -161,12 +173,26 @@ public class SureOrderActivity extends BaseActivity<ActivitySureOrderBinding, Su
 
     @Override
     public void getOrderPaySuccess(String msg) {
-        UToast.show(this,msg);
+        isPay = true;
+        WxPayUtil.wxProgramPay(HsqAppUtil.APP_ID,this,"pages/Payment/Paymentall?key="+msg + "&SessionId=" + ProApplication.SESSIONID() + "&send=234");
+
+//        viewModel.setWxPay("",orderinfoBean.getOrderAmount()+"","30","0","Android","com.lzyyd.lyb", ProApplication.SESSIONID());
     }
 
     @Override
     public void getOrderPayFail(String msg) {
         UToast.show(this,msg);
+    }
+
+    @Override
+    public void getWxSuccess(CollectBean collectBean) {
+        String orderSn = collectBean.getMessage();
+        WxPayUtil.wxProgramPay(HsqAppUtil.APP_ID,this,"pages/Payment/Paymentall?key="+orderSn + "&SessionId=" + ProApplication.SESSIONID() + "&send=234");
+    }
+
+    @Override
+    public void getWxFail(String msg) {
+
     }
 
     @Override
@@ -193,5 +219,61 @@ public class SureOrderActivity extends BaseActivity<ActivitySureOrderBinding, Su
             binding.setOrderPrice(orderPrice + "(包含"+ ((int)orderinfoBean.getMoney3Balance() - point) +"积分)");
         }
 
+    }
+
+    @Override
+    public void onIntegral(ArrayList<String> arrayList) {
+        strings = arrayList;
+    }
+
+    @Override
+    public void setWxSuccess() {
+
+        Bundle bundle = new Bundle();
+        bundle.putString("price",orderinfoBean.getOrderAmount() +"");
+        startActivity(PayActivity.class,bundle);
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    @Override
+    public void setWxFail() {
+        UToast.show(this,"fail");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if (isPay){
+            Intent intent = new Intent();
+            intent.setClass(this,OrderListActivity.class);
+            startActivity(intent);
+            finish();
+            isPay = !isPay;
+        }
+
+    }
+
+    @Override
+    public void setWxPaySuccess(String msg) {
+        if (isPay){
+            Intent intent = new Intent();
+            intent.setClass(this,OrderListActivity.class);
+            startActivity(intent);
+            finish();
+            isPay = !isPay;
+        }
+    }
+
+    @Override
+    public void setWxPayFail(String msg) {
+        UToast.show(this,msg);
+        if (isPay){
+            Intent intent = new Intent();
+            intent.setClass(this,OrderListActivity.class);
+            startActivity(intent);
+            finish();
+            isPay = !isPay;
+        }
     }
 }

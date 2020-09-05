@@ -37,6 +37,8 @@ public class SureOrderAdapter extends BaseBindingAdapter<OrderInfoBuyListBean, A
 
     public ObservableField<String> orderField = new ObservableField<>();
     public ObservableField<Integer> maxpoint = new ObservableField<>();
+    private ArrayList<String> strings = new ArrayList<>();
+
 
     public SureOrderAdapter(Context context,int maxpoint,OnDataGetFare onDataGetFare) {
         super(context);
@@ -76,10 +78,14 @@ public class SureOrderAdapter extends BaseBindingAdapter<OrderInfoBuyListBean, A
                 maxpoint.set(maxpoint.get() - item.getIntegral());
             } else {
                 orderField.set(maxpoint + "");
+                binding.orderIntegral.setText(maxpoint.get()+"");
             }
         }else {
             orderField.set("0");
+            binding.orderIntegral.setText("0");
         }
+
+        strings.add(orderField.get());
 
         binding.rlIntegral.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +111,13 @@ public class SureOrderAdapter extends BaseBindingAdapter<OrderInfoBuyListBean, A
                                     binding.orderIntegral.setText(editText.getText().toString() + "");
 
                                     onDataGetFare.onPoint(maxpoint.get());
+
+                                    for(int i = 0; i < items.size(); i++){
+                                        if (items.get(i).getStoreId() == item.getStoreId()) {
+                                            strings.set(i,orderField.get());
+                                            onDataGetFare.onIntegral(strings);
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -120,6 +133,7 @@ public class SureOrderAdapter extends BaseBindingAdapter<OrderInfoBuyListBean, A
 
         if (item.getStoreId() == items.get(items.size()-1).getStoreId()){
             onDataGetFare.onPoint(maxpoint.get());
+            onDataGetFare.onIntegral(strings);
         }
 
 
@@ -138,6 +152,7 @@ public class SureOrderAdapter extends BaseBindingAdapter<OrderInfoBuyListBean, A
 
     public interface OnDataGetFare{
         public void onPoint(int point);
+        public void onIntegral(ArrayList<String> arrayList);
     }
 
 }

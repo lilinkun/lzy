@@ -150,7 +150,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         }
 
 
-        viewModel.getKey(goodsDetailBean.getGoodsId(), goodsDetailBean.getAttr() + "",   num+"", ProApplication.SESSIONID());
+        viewModel.getKey(goodsDetailBean.getGoodsId(), attr_id,   num+"", ProApplication.SESSIONID());
 //        this.goodsChooseBean = goodsChooseBean;
 //        this.num = num + "";
 
@@ -301,9 +301,9 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
                     mRightNowBuy(goodsDetailBean, null, 1);
                 }
             } else {
-                if (goodsDetailBean.getQty() == 0) {
+
                     getpopup();
-                }
+
             }
         }
     }

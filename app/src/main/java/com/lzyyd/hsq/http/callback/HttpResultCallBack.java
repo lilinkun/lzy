@@ -54,7 +54,7 @@ public abstract class HttpResultCallBack<M, T> extends DisposableObserver<Result
             onResponse(result.getData(), result.getDesc(), result.getPage());
 
         } else {
-            onHttpFail(result.getDesc(), HsqAppUtil.RESULT_FAIL + result.getCode());
+            onHttpFail(result.getDesc(), result.getCode());
         }
     }
 }

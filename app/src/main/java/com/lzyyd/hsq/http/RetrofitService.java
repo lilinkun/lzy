@@ -189,4 +189,8 @@ public interface RetrofitService {
     @POST("Api/")
     Observable<ResultBean<OrderDetailAddressBean, Object>> getOrderDetail(@FieldMap Map<String, String> params);
 
+    @FormUrlEncoded
+    @POST("Api/")
+    Observable<ResultBean<CollectBean, Object>> wxPay(@FieldMap Map<String, String> params);
+
 }

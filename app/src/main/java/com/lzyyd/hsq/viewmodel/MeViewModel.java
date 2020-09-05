@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 import com.lzyyd.hsq.activity.CcqActivity;
 import com.lzyyd.hsq.activity.CollectGoodsActivity;
-import com.lzyyd.hsq.activity.IntegralActivity;
+import com.lzyyd.hsq.activity.IntegralListActivity;
 import com.lzyyd.hsq.activity.MyQrcodeActivity;
 import com.lzyyd.hsq.activity.OrderListActivity;
 import com.lzyyd.hsq.activity.PersonalInfoActivity;
@@ -72,9 +72,12 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
     }
 
     public void setJumpIntegral(){
-        Bundle bundle = new Bundle();
+        /*Bundle bundle = new Bundle();
         bundle.putInt("integral",(int) balanceBeans.getMoney3Balance());
-        startActivity(IntegralActivity.class,bundle);
+        startActivity(IntegralActivity.class,bundle);*/
+        Bundle bundle = new Bundle();
+        bundle.putInt("type",3);
+        startActivity(IntegralListActivity.class,bundle);
     }
 
     public void setJumpPoint(){
@@ -210,6 +213,7 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
                                 .putString(HsqAppUtil.CCQTYPE,mLoginBean.getCcqType()+"")
                                 .putString(HsqAppUtil.LEVEL,mLoginBean.getUserLevel()+"")
                                 .putString(HsqAppUtil.PROJECT,mLoginBean.getProject()+"")
+                                .putString(HsqAppUtil.HEADIMGURL,mLoginBean.getPortrait())
                                 .putString(HsqAppUtil.USERLEVELNAME, mLoginBean.getUserLevelName()).commit();
 
                     }

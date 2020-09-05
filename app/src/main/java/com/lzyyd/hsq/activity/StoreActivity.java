@@ -10,6 +10,7 @@ import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.GoodsListBean;
 import com.lzyyd.hsq.databinding.ActivityStoreBinding;
 import com.lzyyd.hsq.ui.GridSpacingItemDecoration;
+import com.lzyyd.hsq.util.Eyes;
 import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.StoreViewModel;
 
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import me.tatarka.bindingcollectionadapter2.BR;
 
 /**
  * Create by liguo on 2020/9/2
@@ -33,7 +35,7 @@ public class StoreActivity extends BaseActivity<ActivityStoreBinding, StoreViewM
 
     @Override
     public int initVariableId() {
-        return 0;
+        return BR.store;
     }
 
 
@@ -45,6 +47,7 @@ public class StoreActivity extends BaseActivity<ActivityStoreBinding, StoreViewM
 
     @Override
     public void initData() {
+        Eyes.setStatusBarWhiteColor(this, getResources().getColor(R.color.white));
 
         int storeId = getIntent().getExtras().getInt("storeId");
 
@@ -57,6 +60,7 @@ public class StoreActivity extends BaseActivity<ActivityStoreBinding, StoreViewM
     public void getDataSuccess(ArrayList<GoodsListBean> goodsListBeans) {
         if (goodsListAdapter == null) {
             binding.setImgRes(goodsListBeans.get(0).getStoreLogo());
+            binding.setName(goodsListBeans.get(0).getStoreName());
             goodsListAdapter = new GoodsListAdapter(this);
             goodsListAdapter.getItems().addAll(goodsListBeans);
             StaggeredGridLayoutManager gridLayoutManager1 = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);

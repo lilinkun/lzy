@@ -11,6 +11,7 @@ import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.BalanceBean;
 import com.lzyyd.hsq.bean.BalanceDetailBean;
 import com.lzyyd.hsq.databinding.ActivityIntegralListBinding;
+import com.lzyyd.hsq.util.Eyes;
 import com.lzyyd.hsq.viewmodel.WalletViewModel;
 
 import java.util.ArrayList;
@@ -49,8 +50,18 @@ public class IntegralListActivity extends BaseActivity<ActivityIntegralListBindi
     @Override
     public void initData() {
 
+        Eyes.setStatusBarWhiteColor(this, getResources().getColor(R.color.white));
+
+        int type = getIntent().getExtras().getInt("type");
+
+        if (type == 3){
+            binding.setTitlename("· 积分明细 ·");
+        }else {
+            binding.setTitlename("· 预到账明细 ·");
+        }
+
         viewModel.setListener(this);
-        viewModel.getPriceData(PAGE_INDEX + "", PAGE_COUNT+"", "3", ProApplication.SESSIONID());
+        viewModel.getPriceData(PAGE_INDEX + "", PAGE_COUNT+"", type+"", ProApplication.SESSIONID());
     }
 
     @Override

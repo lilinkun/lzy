@@ -2,6 +2,7 @@ package com.lzyyd.hsq.wxapi;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -9,10 +10,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.lzyyd.hsq.bean.WxUserInfo;
 import com.lzyyd.hsq.interf.IWxLoginListener;
+import com.lzyyd.hsq.interf.IWxPayListener;
 import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.OkHttpUtils;
+import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
+import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
@@ -29,6 +33,7 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
     private String openid;
     public static int wxType = 0;
     public static IWxLoginListener iWxResult;
+    public static IWxPayListener iWxPayListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,33 +56,50 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
 
     //请求回调结果处理
     @Override
-    public void onResp(BaseResp baseResp) {
-        //登录回调
-        switch (baseResp.errCode) {
-            case BaseResp.ErrCode.ERR_OK:
-                if (wxType == HsqAppUtil.WXTYPE_LOGIN) {
-                    String code = ((SendAuth.Resp) baseResp).code;
-                    //获取用户信息
-                    getAccessToken(code);
-                } else {
-                    finish();
-                }
-                break;
-            case BaseResp.ErrCode.ERR_AUTH_DENIED://用户拒绝授权
+    public void onResp(BaseResp resp) {
+        Log.d("login", "onPayFinish, errCode = " + resp.errCode);
+        if (resp.getType() == ConstantsAPI.COMMAND_LAUNCH_WX_MINIPROGRAM){
+            WXLaunchMiniProgram.Resp launchMiniProResp = (WXLaunchMiniProgram.Resp) resp;
+            String extraData =launchMiniProResp.extMsg; //对应小程序组件 <button open-type="launchApp"> 中的 app-parameter 属性
+            String str = extraData.substring(extraData.length()-1);
+            if (extraData.substring(extraData.length()-1).equals("1")){
+                iWxPayListener.setWxPaySuccess("支付成功");
                 finish();
-                break;
-            case BaseResp.ErrCode.ERR_USER_CANCEL://用户取消
+            }else {
+                iWxPayListener.setWxPayFail("支付失败");
                 finish();
-                break;
-            case BaseResp.ErrCode.ERR_BAN:
-                Toast.makeText(this, "签名错误", Toast.LENGTH_LONG).show();
-                break;
-            case RETURN_MSG_TYPE_SHARE:
-                finish();
-                break;
+            }
+        }else {
 
-            default:
-                break;
+            //登录回调
+            switch (resp.errCode) {
+                case BaseResp.ErrCode.ERR_OK:
+                    if (wxType == HsqAppUtil.WXTYPE_LOGIN) {
+                        String code = ((SendAuth.Resp) resp).code;
+                        //获取用户信息
+                        getAccessToken(code);
+                    } else {
+                        finish();
+                    }
+                    break;
+                case BaseResp.ErrCode.ERR_AUTH_DENIED://用户拒绝授权
+                    finish();
+                    break;
+                case BaseResp.ErrCode.ERR_USER_CANCEL://用户取消
+                    finish();
+                    break;
+                case BaseResp.ErrCode.ERR_BAN:
+                    Toast.makeText(this, "签名错误", Toast.LENGTH_LONG).show();
+                    break;
+                case RETURN_MSG_TYPE_SHARE:
+                    finish();
+                    break;
+
+
+                default:
+                    break;
+            }
+
         }
     }
 
@@ -175,6 +197,10 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
 
     public static void setLoginListener(IWxLoginListener iWxResultListener) {
         iWxResult = iWxResultListener;
+    }
+
+    public static void setPayListener(IWxPayListener payListener){
+        iWxPayListener = payListener;
     }
 
     public static void wxType(int type) {

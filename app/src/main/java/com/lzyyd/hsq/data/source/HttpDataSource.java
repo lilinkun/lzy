@@ -120,4 +120,6 @@ public interface HttpDataSource {
 
     Observable<ResultBean<OrderDetailAddressBean,Object>> getOrderDetail(HashMap<String, String> hashMap);
 
+    Observable<ResultBean<CollectBean,Object>> wxPay(HashMap<String, String> hashMap);
+
 }

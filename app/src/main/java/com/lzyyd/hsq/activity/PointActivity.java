@@ -13,6 +13,7 @@ import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.BalanceBean;
 import com.lzyyd.hsq.bean.BalanceDetailBean;
 import com.lzyyd.hsq.databinding.ActivityPointBinding;
+import com.lzyyd.hsq.util.Eyes;
 import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.WalletViewModel;
 
@@ -54,9 +55,11 @@ public class PointActivity extends BaseActivity<ActivityPointBinding, WalletView
     @Override
     public void initData() {
 
+        Eyes.setStatusBarWhiteColor(this,getResources().getColor(R.color.white));
+
         viewModel.setListener(this);
         viewModel.getBalance(ProApplication.SESSIONID());
-        viewModel.getPriceData("1","20","2", ProApplication.SESSIONID());
+        viewModel.getPriceData("1","80","2", ProApplication.SESSIONID());
 
     }
 
@@ -121,7 +124,7 @@ public class PointActivity extends BaseActivity<ActivityPointBinding, WalletView
         if (resultCode == RESULT_OK){
             if (requestCode == foresult || requestCode == WalletActivity.TRANFERRESULT){
                 viewModel.getBalance(ProApplication.SESSIONID());
-                viewModel.getPriceData("1","20","2", ProApplication.SESSIONID());
+                viewModel.getPriceData("1","80","2", ProApplication.SESSIONID());
             }
         }
     }

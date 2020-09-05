@@ -4,6 +4,9 @@ import android.app.Application;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.lzyyd.hsq.activity.MainActivity;
+import com.lzyyd.hsq.base.ProApplication;
+import com.lzyyd.hsq.bean.WxUserInfo;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.databinding.ActivityRegisterBinding;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
@@ -34,6 +37,7 @@ public class RegisterViewModel extends BaseViewModel<DataRepository> {
     public ObservableField<String> invitedStr = new ObservableField<>();
     public ObservableField<String> nicknameStr = new ObservableField<>();
     private OnRegisterListener listener;
+    private WxUserInfo wxUserInfo;
 
     //封装一个界面发生改变的观察者
     public UIChangeObservable uc = new UIChangeObservable();
@@ -53,6 +57,10 @@ public class RegisterViewModel extends BaseViewModel<DataRepository> {
             statusHeight = context.getResources().getDimensionPixelSize(resourceId);
         }
 
+    }
+
+    public void setWxInfo(WxUserInfo wxInfo){
+        this.wxUserInfo = wxInfo;
     }
 
     public void setBinding(ActivityRegisterBinding binding){
@@ -75,8 +83,6 @@ public class RegisterViewModel extends BaseViewModel<DataRepository> {
             UToast.show(context,"请输入手机号码");
         }else if (StringUtils.isEmpty(vcodeStr.get())){
             UToast.show(context,"请输入验证码");
-        }else if (StringUtils.isEmpty(nicknameStr.get()) || nicknameStr.get().trim().length() < 2 || nicknameStr.get().trim().length() > 22){
-            UToast.show(context,"请输入正确昵称");
         }else if (StringUtils.isEmpty(passwordStr.get())){
             UToast.show(context,"请输入密码");
         }else if (StringUtils.isEmpty(invitedStr.get())){
@@ -84,20 +90,23 @@ public class RegisterViewModel extends BaseViewModel<DataRepository> {
         }else if (!isSeeFile){
             UToast.show(context,"请同意阅读《用户协议》");
         }else {
-            register();
+            register(wxUserInfo);
         }
     }
 
-    public void register(){
+    public void register(WxUserInfo wxUserInfo){
         HashMap<String, String> params = new HashMap<>();
         params.put("cls", "UserBase");
         params.put("fun", "Register");
         params.put("Mobile",mobileStr.get());
         params.put("Code",vcodeStr.get());
         params.put("PassWord",passwordStr.get());
-        params.put("NickName",nicknameStr.get());
+        params.put("OpenId",wxUserInfo.getOpenid());
+        params.put("UnionId",wxUserInfo.getUnionid());
+        params.put("NickName",wxUserInfo.getNickname());
+        params.put("Portrait",wxUserInfo.getHeadimgurl());
         params.put("Referees",invitedStr.get());
-        params.put("OpenId","11212121");
+        params.put("SessionId", ProApplication.SESSIONID());
         params.put("TPLType","2");
         model.register(params)
                 .compose(RxUtils.schedulersTransformer())
@@ -113,7 +122,9 @@ public class RegisterViewModel extends BaseViewModel<DataRepository> {
                     @Override
                     public void onResponse(String s, String status, String page) {
                         dismissDialog();
-                        Toast.makeText(context,s,Toast.LENGTH_SHORT).show();
+
+                        startActivity(MainActivity.class);
+                        finish();
                     }
 
                     @Override

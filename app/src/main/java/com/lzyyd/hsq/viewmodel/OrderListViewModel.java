@@ -100,6 +100,41 @@ public class OrderListViewModel extends BaseViewModel<DataRepository> {
     }
 
     /**
+     * 获取key
+     */
+    public void getKey(String OrderSn,String SessionId){
+        HashMap<String, String> params = new HashMap<>();
+        params.put("cls", "OrderInfo");
+        params.put("fun", "OrderInfoGetPayByKey");
+        params.put("OrderSn", OrderSn);
+        params.put("SessionId", SessionId);
+        model.OrderSaveRedis(params)
+                .compose(RxUtils.schedulersTransformer())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>(){
+                    @Override
+                    public void accept(Disposable disposable){
+                        showDialog();
+                    }
+                })
+                .subscribe(new HttpResultCallBack<String, String>() {
+                    @Override
+                    public void onResponse(String addressBeans, String status, String page) {
+                        dismissDialog();
+                        onGetDataCallback.getOrderPaySuccess(addressBeans);
+                    }
+
+                    @Override
+                    public void onErr(String msg, String status) {
+                        dismissDialog();
+                        onGetDataCallback.getOrderPayFail(msg);
+                    }
+
+                });
+    }
+
+    /**
      * 取消订单
      *
      * @param OrderId
@@ -147,5 +182,8 @@ public class OrderListViewModel extends BaseViewModel<DataRepository> {
 
         public void exitOrderSuccess(String s);
         public void exitOrderFail(String msg);
+
+        public void getOrderPaySuccess(String msg);
+        public void getOrderPayFail(String msg);
     }
 }

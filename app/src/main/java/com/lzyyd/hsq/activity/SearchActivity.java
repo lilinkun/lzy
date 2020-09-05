@@ -1,37 +1,49 @@
 package com.lzyyd.hsq.activity;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lzyyd.hsq.BR;
 import com.lzyyd.hsq.R;
+import com.lzyyd.hsq.adapter.GoodsListAdapter;
 import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseActivity;
 import com.lzyyd.hsq.base.ProApplication;
+import com.lzyyd.hsq.bean.GoodsListBean;
 import com.lzyyd.hsq.bean.SearchBean;
 import com.lzyyd.hsq.databinding.ActivitySearchBinding;
 import com.lzyyd.hsq.db.DBManager;
 import com.lzyyd.hsq.interf.IGoodsTypeListener;
+import com.lzyyd.hsq.ui.GridSpacingItemDecoration;
 import com.lzyyd.hsq.util.Eyes;
 import com.lzyyd.hsq.viewmodel.SearchViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 /**
  * Create by liguo on 2020/9/2
  * Describe:
  */
-public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchViewModel> implements IGoodsTypeListener {
+public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchViewModel> implements IGoodsTypeListener, View.OnClickListener, SearchViewModel.OnDataListener {
 
     private LinearLayout.LayoutParams layoutParams;
     private String PAGE_COUNT = "80";
     private String orderby = "0";
     private String goodsType = "";
+    private GoodsListAdapter goodsListAdapter;
 
     @Override
     public int initContentView(Bundle savedInstanceState) {
@@ -83,7 +95,54 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchVi
             binding.flowSearchHistory.specifyLines(6);
         }
 
+        viewModel.setListener(this);
+
         binding.llTop.setListener(this);
+
+        binding.tvSearch.setOnClickListener(this);
+
+        binding.etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() == 0) {
+                    goodsType = "";
+                    binding.tvSearch.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() == 0) {
+                }
+            }
+        });
+
+        binding.etSearch.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+        binding.etSearch.setSingleLine();
+        binding.etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+            @Override
+            public boolean onEditorAction(TextView v, int actionId,
+                                          KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    // 先隐藏键盘
+                    ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE))
+                            .hideSoftInputFromWindow(SearchActivity.this
+                                            .getCurrentFocus().getWindowToken(),
+                                    InputMethodManager.HIDE_NOT_ALWAYS);
+                    if (!binding.etSearch.getText().toString().isEmpty()) {
+                        //搜索
+                        doSearch();
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     private void doSearch() {
@@ -110,6 +169,7 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchVi
         binding.llResult.setVisibility(View.VISIBLE);
         binding.llSearchGoodsType.setVisibility(View.VISIBLE);
 
+        viewModel.getData("1", PAGE_COUNT, goodsType, "", binding.etSearch.getText().toString(),ProApplication.SESSIONID());
 
     }
 
@@ -155,6 +215,45 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchVi
                 viewModel.getData("1", PAGE_COUNT, goodsType, orderby, binding.etSearch.getText().toString(), ProApplication.SESSIONID());
 
                 break;
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.tv_search:
+
+                doSearch();
+
+                break;
+        }
+    }
+
+    @Override
+    public void getDataSuccess(ArrayList<GoodsListBean> goodsListBeans) {
+        binding.rvSearchGoods.setVisibility(View.VISIBLE);
+
+
+        if (goodsListAdapter == null) {
+            goodsListAdapter = new GoodsListAdapter(this);
+            goodsListAdapter.getItems().addAll(goodsListBeans);
+            StaggeredGridLayoutManager gridLayoutManager1 = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+            binding.rvSearchGoods.addItemDecoration(new GridSpacingItemDecoration(2, 20, false));
+//        gridLayoutManager1.setOrientation(GridLayoutManager.VERTICAL);
+            binding.rvSearchGoods.setLayoutManager(gridLayoutManager1);
+            binding.rvSearchGoods.setAdapter(goodsListAdapter);
+        }else {
+            goodsListAdapter.getItems().clear();
+            goodsListAdapter.getItems().addAll(goodsListBeans);
+            goodsListAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void getDataFail(String msg) {
+
+        if (msg.contains("查无数据")) {
+            binding.rvSearchGoods.setVisibility(View.GONE);
         }
     }
 }

@@ -155,39 +155,39 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
         ArrayList<FlashBean> flashBeans = homeBean.getFlash();
         CustomBannerView.startBanner(flashBeans,binding.bannerView,getActivity());
 
-            GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 5);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 5);
 
-            gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
+        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
 
-            binding.rvHome.setLayoutManager(gridLayoutManager);
+        binding.rvHome.setLayoutManager(gridLayoutManager);
 
-            gridHomeAdapter = new GridHomeAdapter(getActivity());
+        gridHomeAdapter = new GridHomeAdapter(getActivity());
 
-            gridHomeAdapter.getItems().addAll(homeBean.getSqIcon());
+        gridHomeAdapter.getItems().addAll(homeBean.getSqIcon());
 
-            int spanCount = 5; // 3 columns
-            int spacing = 20; // 50px
-            boolean includeEdge = false;
-            binding.rvHome.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
+        int spanCount = 5; // 3 columns
+        int spacing = 20; // 50px
+        boolean includeEdge = false;
+        binding.rvHome.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
 
-            binding.rvHome.setAdapter(gridHomeAdapter);
+        binding.rvHome.setAdapter(gridHomeAdapter);
 
 
-            if (homeType == 1){
-                homeItemBeans = homeBean.getGoodsList6();
-            }else if(homeType == 2){
-                homeItemBeans = homeBean.getGoodsList4();
-            }else if (homeType == 3){
-                homeItemBeans = homeBean.getGoodsList5();
-            }
-            recommendAdapter = new RecommendAdapter(getActivity());
-            recommendAdapter.getItems().addAll(homeItemBeans);
+        if (homeType == 1){
+            homeItemBeans = homeBean.getGoodsList4();
+        }else if(homeType == 2){
+            homeItemBeans = homeBean.getGoodsList5();
+        }else if (homeType == 3){
+            homeItemBeans = homeBean.getGoodsList6();
+        }
+        recommendAdapter = new RecommendAdapter(getActivity());
+        recommendAdapter.getItems().addAll(homeItemBeans);
 
-            StaggeredGridLayoutManager gridLayoutManager1 = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-            binding.rvHomeGoodsList.addItemDecoration(new GridSpacingItemDecoration(2, 20, false));
+        StaggeredGridLayoutManager gridLayoutManager1 = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        binding.rvHomeGoodsList.addItemDecoration(new GridSpacingItemDecoration(2, 20, false));
 //        gridLayoutManager1.setOrientation(GridLayoutManager.VERTICAL);
-            binding.rvHomeGoodsList.setLayoutManager(gridLayoutManager1);
-            binding.rvHomeGoodsList.setAdapter(recommendAdapter);
+        binding.rvHomeGoodsList.setLayoutManager(gridLayoutManager1);
+        binding.rvHomeGoodsList.setAdapter(recommendAdapter);
 
 
 
@@ -207,16 +207,6 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
         switch (position){
             case 1:
                 homeType = 1;
-                viewModel.recommemdFirst.set(true);
-                viewModel.recommemdSecond.set(false);
-                viewModel.recommemdThird.set(false);
-                recommendAdapter.getItems().clear();
-                recommendAdapter.getItems().addAll(homeBean.getGoodsList6());
-                recommendAdapter.notifyDataSetChanged();
-                break;
-
-            case 2:
-                homeType = 2;
                 viewModel.recommemdFirst.set(false);
                 viewModel.recommemdSecond.set(true);
                 viewModel.recommemdThird.set(false);
@@ -225,13 +215,23 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
                 recommendAdapter.notifyDataSetChanged();
                 break;
 
-            case 3:
-                homeType = 3;
+            case 2:
+                homeType = 2;
                 viewModel.recommemdFirst.set(false);
                 viewModel.recommemdSecond.set(false);
                 viewModel.recommemdThird.set(true);
                 recommendAdapter.getItems().clear();
                 recommendAdapter.getItems().addAll(homeBean.getGoodsList5());
+                recommendAdapter.notifyDataSetChanged();
+                break;
+
+            case 3:
+                homeType = 3;
+                viewModel.recommemdFirst.set(true);
+                viewModel.recommemdSecond.set(false);
+                viewModel.recommemdThird.set(false);
+                recommendAdapter.getItems().clear();
+                recommendAdapter.getItems().addAll(homeBean.getGoodsList6());
                 recommendAdapter.notifyDataSetChanged();
                 break;
 

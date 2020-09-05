@@ -136,18 +136,48 @@
 
         </LinearLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:background="@drawable/bg_order_detail_top"
+                >
+
+                <com.lzyyd.hsq.ui.RoundImageView
+                    android:id="@+id/ic_order_store"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    app:image="@{orderdetailbean.storeLogo}"/>
+
+                <TextView
+                    android:id="@+id/tv_order_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/grey_333333"
+                    android:textSize="@dimen/textsize14"
+                    android:layout_marginLeft="@dimen/margin_5"
+                    android:layout_toRightOf="@+id/ic_order_store"
+                    android:text="@{orderdetailbean.storeName}"/>
+
+            </RelativeLayout>
+
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_order"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_10"
                 android:layout_marginRight="@dimen/margin_10"
-                android:layout_marginTop="@dimen/margin_10"
-                android:background="@drawable/bg_sure_order_address">
+                android:background="@drawable/bg_order_detail_bottom">
 
             </androidx.recyclerview.widget.RecyclerView>
 
-            <include layout="@layout/pay_layout"
+            <include
+                android:id="@+id/pay_layout"
+                layout="@layout/pay_layout"
                 app:orderdetailbean="@{orderdetailbean}"/>
 
             <LinearLayout
@@ -320,6 +350,7 @@
             android:paddingTop="@dimen/margin_7"
             android:paddingBottom="@dimen/margin_7"
             android:background="#FFF4E1"
+            android:visibility="gone"
             />
 
     <RelativeLayout

@@ -83,6 +83,16 @@ public class MeFragment extends BaseFragment<FragmentMeBinding, MeViewModel> imp
 
         viewModel.getUserInfo(sharedPreferences.getString(HsqAppUtil.USERNAME, ""),ProApplication.SESSIONID(),getActivity());
 
+        if(ProApplication.CCQTYPE == 0) {
+
+            binding.tvGoScan.setVisibility(View.GONE);
+            binding.ccqLayout.rlCcqTihuo.setVisibility(View.GONE);
+        }else {
+            binding.tvGoScan.setVisibility(View.VISIBLE);
+            binding.ccqLayout.rlCcqTihuo.setVisibility(View.VISIBLE);
+        }
+
+
         initPtrFrame();
 
     }
@@ -95,6 +105,9 @@ public class MeFragment extends BaseFragment<FragmentMeBinding, MeViewModel> imp
     @Override
     public void getBalanceSuccess(BalanceBean balanceBean) {
         binding.setBalance(balanceBean);
+        if (binding.mPtrframe != null &&binding.mPtrframe.isEnabled()){
+            binding.mPtrframe.refreshComplete();
+        }
     }
 
     @Override
@@ -148,7 +161,10 @@ public class MeFragment extends BaseFragment<FragmentMeBinding, MeViewModel> imp
 
         binding.setUserinfo(loginBean);
 
+        ProApplication.CCQTYPE = loginBean.getCcqType();
+
         if(loginBean.getCcqType() == 0 ) {
+
             binding.tvGoScan.setVisibility(View.GONE);
             binding.ccqLayout.rlCcqTihuo.setVisibility(View.GONE);
         }else {

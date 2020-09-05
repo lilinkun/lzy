@@ -28,6 +28,7 @@
         android:id="@+id/tsv_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="45dp"
         >
 
     <LinearLayout
@@ -336,6 +337,7 @@
             android:paddingRight="5dp"
             android:paddingTop="2dp"
             android:paddingBottom="2dp"
+            android:visibility="gone"
             android:background="@drawable/bg_tv_goods_detail"
             />
 
@@ -358,7 +360,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="#ff999999"
                     android:textSize="12sp"
-                    android:text="运费："
+                    android:text="包邮："
                     />
 
                 <TextView
@@ -457,6 +459,7 @@
                 android:textColor="#ffb6b6b6"
                 android:layout_marginTop="@dimen/margin_5"
                 android:textSize="12sp"
+                android:visibility="gone"
                 />
 
         </LinearLayout>

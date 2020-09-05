@@ -3,7 +3,6 @@ package com.lzyyd.hsq.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.lzyyd.hsq.R;
 import com.lzyyd.hsq.bean.ArticleDetailBean;
@@ -63,7 +62,7 @@ public class ViewAdapter {
             @Override
             public void onClick(View v) {
                 //比如打开url
-                Toast.makeText(view.getContext(), data.getCategoryName(), Toast.LENGTH_SHORT).show();
+
             }
         });
     }

@@ -281,4 +281,9 @@ public class DataRepository extends BaseModel implements HttpDataSource, LocalDa
         return mHttpDataSource.getOrderDetail(mHashMap);
     }
 
+    public Observable<ResultBean<CollectBean, Object>> wxPay(HashMap<String, String> mHashMap) {
+        return mHttpDataSource.wxPay(mHashMap);
+    }
+
+
 }

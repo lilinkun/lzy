@@ -8,6 +8,7 @@ import com.lzyyd.hsq.BR;
 import com.lzyyd.hsq.R;
 import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseActivity;
+import com.lzyyd.hsq.bean.WxUserInfo;
 import com.lzyyd.hsq.databinding.ActivityRegisterBinding;
 import com.lzyyd.hsq.util.Eyes;
 import com.lzyyd.hsq.viewmodel.RegisterViewModel;
@@ -46,6 +47,9 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding,Regis
         binding.ivWelcome.setLayoutParams(layoutParams);
 
         viewModel.setBinding(binding);
+
+        WxUserInfo wxUserInfo = (WxUserInfo) getIntent().getExtras().getSerializable("wx");
+        viewModel.setWxInfo(wxUserInfo);
     }
 
     @Override

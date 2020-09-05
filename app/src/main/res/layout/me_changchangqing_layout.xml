@@ -138,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/margin_10"
-                android:text="益生元常常清排毒产品套装"
+                android:text="益生源常常清排毒体验码"
                 android:textColor="#ff4b4b4b"
                 android:textSize="13sp" />
 
@@ -272,7 +272,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_10"
-                android:text="益生元常常清排毒产品套装"
+                android:text="益生源常常清排毒产品套装"
                 android:layout_marginLeft="@dimen/margin_10"
                 android:textColor="#ff4b4b4b"
                 android:textSize="13sp" />
@@ -289,7 +289,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text='@{"剩余"+ String.valueOf(balance.money7Balance) + @string/piece}'
+                    android:text='@{"剩余"+ String.valueOf(balance.money7Balance) + @string/jian}'
                     android:textColor="#ffe61e16"
                     android:textSize="10sp"
                     android:background="@drawable/shape_me_ccq"
@@ -298,7 +298,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text='@{"已提"+ String.valueOf(balance.moneyUse7) + @string/piece}'
+                    android:text='@{"已提"+ String.valueOf(balance.moneyUse7) + @string/jian}'
                     android:textColor="#ff333333"
                     android:textSize="10sp"
                     android:layout_marginLeft="@dimen/margin_10"

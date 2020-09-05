@@ -20,17 +20,37 @@ android {
     //配置keystore签名
     signingConfigs {
         release {
-            storeFile file("libs/lzy.jks")
-            storePassword "lzy123789"
-            keyAlias "lzy"
-            keyPassword "lzy123789"
+            storeFile file("libs/hsq.jks")
+            storePassword "hsq123789"
+            keyAlias "hsq"
+            keyPassword "hsq123789"
         }
     }
 
+    //配置keystore签名
     buildTypes {
-        release {
+        debug {
+            signingConfig signingConfigs.release
+            //启用代码混淆
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //zip压缩
+            zipAlignEnabled false
+            //移除无用的resource文件
+            shrinkResources false
+            //混淆规则配置文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+//            debuggable true
+            signingConfig signingConfigs.release
+            //开启混淆
+            minifyEnabled false
+            zipAlignEnabled false
+            //移除无用的resource文件
+            shrinkResources false
+
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
@@ -117,6 +137,9 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
 
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+
+    implementation 'com.zhy:okhttputils:2.6.2'
+    implementation 'pub.devrel:easypermissions:1.0.1'
 
     implementation project(":banner")
     //MVVMHabit

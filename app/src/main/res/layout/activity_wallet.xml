@@ -54,12 +54,26 @@
                 android:textSize="18sp"
                 android:text="@string/wallet"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:text="预到账"
+                android:textColor="@color/grey_333333"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:onClick="@{()->wallet.yudaozhangList()}"
+                android:layout_marginRight="@dimen/margin_10"
+                android:layout_centerVertical="true"
+                />
+
+
 
         </RelativeLayout>
     
         <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="75dp"
         android:layout_marginTop="@dimen/margin_10"
         android:layout_marginLeft="@dimen/margin_15"
         android:layout_marginRight="@dimen/margin_15"
@@ -142,6 +156,7 @@
             android:layout_height="50dp"
             android:orientation="horizontal"
             android:background="#33FFFFFF"
+            android:visibility="gone"
             >
 
             <LinearLayout
@@ -222,7 +237,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{String.valueOf(balance.money4Balance)}"
+                    android:text="@{String.valueOf(balance.moneyLock5)}"
                     android:textColor="#ffffffff"
                     android:textSize="17sp"
                     />
@@ -230,7 +245,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="预到账余额"
+                    android:text="锁定余额"
                     android:textColor="#ffffffff"
                     android:textSize="12sp"
                     />

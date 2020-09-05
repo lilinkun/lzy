@@ -17,9 +17,13 @@ import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.OrderListBean;
 import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.databinding.FragmentAllOrderBinding;
+import com.lzyyd.hsq.interf.IWxPayListener;
 import com.lzyyd.hsq.ui.SpacesItemDecoration;
+import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
+import com.lzyyd.hsq.util.WxPayUtil;
 import com.lzyyd.hsq.viewmodel.OrderListViewModel;
+import com.lzyyd.hsq.wxapi.WXEntryActivity;
 
 import java.util.ArrayList;
 
@@ -35,7 +39,7 @@ import me.tatarka.bindingcollectionadapter2.BR;
  * Create by liguo on 2020/8/12
  * Describe:
  */
-public class OrderAllFragment extends BaseFragment<FragmentAllOrderBinding, OrderListViewModel> implements OrderListViewModel.OnGetDataCallback, SelfOrderAdapter.OnItemClickListener, SelfOrderAdapter.OnItemClick {
+public class OrderAllFragment extends BaseFragment<FragmentAllOrderBinding, OrderListViewModel> implements OrderListViewModel.OnGetDataCallback, SelfOrderAdapter.OnItemClickListener, SelfOrderAdapter.OnItemClick, IWxPayListener {
 
     private String orderStatus = "";
     private SelfOrderAdapter selfOrderAdapter;
@@ -75,6 +79,8 @@ public class OrderAllFragment extends BaseFragment<FragmentAllOrderBinding, Orde
 
         viewModel.setListener(this);
         viewModel.getOrderData("1","20",orderStatus, ProApplication.SESSIONID());
+
+        WXEntryActivity.setPayListener(this);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
@@ -149,6 +155,16 @@ public class OrderAllFragment extends BaseFragment<FragmentAllOrderBinding, Orde
     }
 
     @Override
+    public void getOrderPaySuccess(String msg) {
+        WxPayUtil.wxProgramPay(HsqAppUtil.APP_ID,getActivity(),"pages/Payment/Paymentall?key="+msg + "&SessionId=" + ProApplication.SESSIONID() + "&send=234");
+    }
+
+    @Override
+    public void getOrderPayFail(String msg) {
+
+    }
+
+    @Override
     public void onItemClick(int position) {
         Bundle bundle = new Bundle();
         bundle.putString("ordersn",orderListBeans.get(position).getOrderSn());
@@ -162,7 +178,7 @@ public class OrderAllFragment extends BaseFragment<FragmentAllOrderBinding, Orde
 
     @Override
     public void go_pay(OrderListBean orderId) {
-
+        viewModel.getKey(orderId.getOrderSn(),ProApplication.SESSIONID());
     }
 
     @Override
@@ -199,13 +215,26 @@ public class OrderAllFragment extends BaseFragment<FragmentAllOrderBinding, Orde
 
             if (requestCode == OrderListActivity.ORDERRESULT){
 
-                viewModel.getOrderData("1","20",orderStatus, ProApplication.SESSIONID());
+                viewModel.getOrderData("1","80",orderStatus, ProApplication.SESSIONID());
             }
-
 
         }
 
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+
+    @Override
+    public void setWxPaySuccess(String msg) {
+
+
+        viewModel.getOrderData("1","80",orderStatus, ProApplication.SESSIONID());
+    }
+
+    @Override
+    public void setWxPayFail(String msg) {
+
+        UToast.show(getActivity(),msg);
     }
 }

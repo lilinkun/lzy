@@ -10,5 +10,6 @@ public interface IWxLoginListener {
 
     public void setWxLoginSuccess(WxUserInfo wxSuccess);
 
+
     public void setWxLoginFail(String msg);
 }

@@ -3,17 +3,21 @@ package com.lzyyd.hsq.viewmodel;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.view.View;
 
-import com.lzyyd.hsq.activity.ForgetPasswordActivity;
+import com.lzyyd.hsq.activity.ChooseWxLoginActivity;
 import com.lzyyd.hsq.activity.MainActivity;
+import com.lzyyd.hsq.activity.ModifyPayActivity;
 import com.lzyyd.hsq.activity.RegisterActivity;
 import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.LoginBean;
 import com.lzyyd.hsq.bean.UrlBean;
+import com.lzyyd.hsq.bean.WxUserInfo;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
 import com.lzyyd.hsq.model.LoginModel;
+import com.lzyyd.hsq.util.ActivityUtil;
 import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
 
@@ -60,13 +64,17 @@ public class LoginViewModel extends BaseViewModel<DataRepository> {
         }
     }
 
-    public void register(View view){
-        startActivity(RegisterActivity.class);
+    public void register(WxUserInfo wxUserInfo){
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("wx", wxUserInfo);
+        startActivity(ChooseWxLoginActivity.class,bundle,0x1234);
     }
 
 
     public void forgetPsd(View view){
-        startActivity(ForgetPasswordActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt("type",1);
+        startActivity(ModifyPayActivity.class,bundle,0x1234);
     }
 
     public void clickLogin(){
@@ -111,6 +119,7 @@ public class LoginViewModel extends BaseViewModel<DataRepository> {
                                 .putString(HsqAppUtil.CCQTYPE,mLoginBean.getCcqType()+"")
                                 .putString(HsqAppUtil.LEVEL,mLoginBean.getUserLevel()+"")
                                 .putString(HsqAppUtil.PROJECT,mLoginBean.getProject()+"")
+                                .putString(HsqAppUtil.HEADIMGURL,mLoginBean.getPortrait())
                                 .putString(HsqAppUtil.USERLEVELNAME, mLoginBean.getUserLevelName()).commit();
 
                         startActivity(MainActivity.class);
@@ -124,8 +133,58 @@ public class LoginViewModel extends BaseViewModel<DataRepository> {
                     }
 
                 });
-
     }
+
+
+    public void wxlogin(final String openid, final String unionid, String TPLType, String sessionId) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("cls", "UserBase");
+        params.put("fun", "WxLogin");
+        params.put("openid", openid);
+        params.put("unionid", unionid);
+        params.put("SessionId", sessionId);
+        params.put("TPLType", TPLType);
+        params.put("MobileType", "android");
+        model.login(params)
+                .compose(RxUtils.schedulersTransformer())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>(){
+                    @Override
+                    public void accept(Disposable disposable){
+                        showDialog();
+                    }
+                })
+                .subscribe(new HttpResultCallBack<LoginBean,String>() {
+                    @Override
+                    public void onResponse(LoginBean mLoginBean, String status, String page) {
+                        dismissDialog();
+
+                        SharedPreferences sharedPreferences = context.getSharedPreferences(HsqAppUtil.LOGIN, MODE_PRIVATE);
+                        sharedPreferences.edit().putString("sessionid", ProApplication.SESSIONID()).putBoolean(HsqAppUtil.LOGIN, true)
+                                .putString(HsqAppUtil.ACCOUNT, mLoginBean.getNickName()).putString(HsqAppUtil.TELEPHONE, mLoginBean.getMobile())
+                                .putString(HsqAppUtil.USERNAME, mLoginBean.getUserName()).putString(HsqAppUtil.USERID, mLoginBean.getUserId())
+                                .putString(HsqAppUtil.VIPVALIDITY, mLoginBean.getVipValidity())
+                                .putString(HsqAppUtil.USERLEVEL, mLoginBean.getUserLevel() + "")
+                                .putString(HsqAppUtil.CCQTYPE,mLoginBean.getCcqType()+"")
+                                .putString(HsqAppUtil.LEVEL,mLoginBean.getUserLevel()+"")
+                                .putString(HsqAppUtil.PROJECT,mLoginBean.getProject()+"")
+                                .putString(HsqAppUtil.USERLEVELNAME, mLoginBean.getUserLevelName()).commit();
+
+                        startActivity(MainActivity.class);
+                        finish();
+                    }
+
+                    @Override
+                    public void onErr(String msg, String status) {
+                        dismissDialog();
+                        loginCallBack.getWxLoginFail(msg);
+
+                    }
+
+                });
+    }
+
 
 
     public void seckill(View view){
@@ -178,12 +237,68 @@ public class LoginViewModel extends BaseViewModel<DataRepository> {
 
     }
 
+    public void setBingWx(String UserName,String OpenId,String UnionId,String NickName,String PassWord,String Portrait,String sessionId,String TPLType){
+        HashMap<String, String> params = new HashMap<>();
+        params.put("cls", "UserBase");
+        params.put("fun", "UserBaseBind");
+        params.put("UserName", UserName);
+        params.put("OpenId", OpenId);
+        params.put("UnionId", UnionId);
+        params.put("NickName", NickName);
+        params.put("PassWord", PassWord);
+        params.put("Portrait", Portrait);
+        params.put("SessionId", sessionId);
+        params.put("TPLType", TPLType);
+        params.put("MobileType", "android");
+        model.login(params)
+                .compose(RxUtils.schedulersTransformer())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>(){
+                    @Override
+                    public void accept(Disposable disposable){
+                        showDialog();
+                    }
+                })
+                .subscribe(new HttpResultCallBack<LoginBean,String>() {
+                    @Override
+                    public void onResponse(LoginBean mLoginBean, String status, String page) {
+                        dismissDialog();
+
+                        SharedPreferences sharedPreferences = context.getSharedPreferences(HsqAppUtil.LOGIN, MODE_PRIVATE);
+                        sharedPreferences.edit().putString("sessionid", ProApplication.SESSIONID()).putBoolean(HsqAppUtil.LOGIN, true)
+                                .putString(HsqAppUtil.ACCOUNT, mLoginBean.getNickName()).putString(HsqAppUtil.TELEPHONE, mLoginBean.getMobile())
+                                .putString(HsqAppUtil.USERNAME, mLoginBean.getUserName()).putString(HsqAppUtil.USERID, mLoginBean.getUserId())
+                                .putString(HsqAppUtil.VIPVALIDITY, mLoginBean.getVipValidity())
+                                .putString(HsqAppUtil.USERLEVEL, mLoginBean.getUserLevel() + "")
+                                .putString(HsqAppUtil.CCQTYPE,mLoginBean.getCcqType()+"")
+                                .putString(HsqAppUtil.LEVEL,mLoginBean.getUserLevel()+"")
+                                .putString(HsqAppUtil.PROJECT,mLoginBean.getProject()+"")
+                                .putString(HsqAppUtil.USERLEVELNAME, mLoginBean.getUserLevelName()).commit();
+
+                        startActivity(MainActivity.class);
+
+                        ActivityUtil.finishAll();
+                    }
+
+                    @Override
+                    public void onErr(String msg, String status) {
+                        dismissDialog();
+                        UToast.show(context,msg);
+
+                    }
+
+                });
+    }
+
 
     public interface LoginCallBack{
         public void getUrlSuccess(UrlBean urlBean);
         public void getUrlFail(String msg);
 
         public void getOnclickWxLogin();
+
+        public void getWxLoginFail(String msg);
     }
 
 }

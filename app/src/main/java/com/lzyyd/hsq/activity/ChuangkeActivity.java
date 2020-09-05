@@ -24,6 +24,7 @@ import com.lzyyd.hsq.databinding.ActivityChuangkeBinding;
 import com.lzyyd.hsq.fragment.ChuangkeFragment;
 import com.lzyyd.hsq.ui.GoodsPopLayout;
 import com.lzyyd.hsq.ui.VipGoodsPopLayout;
+import com.lzyyd.hsq.util.Eyes;
 import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.ChuangkeViewModel;
@@ -51,6 +52,7 @@ public class ChuangkeActivity extends BaseActivity<ActivityChuangkeBinding, Chua
     private PopupWindow vipGoodsPopupWindow;
     private int positionFragment = 0;
     private int goodstype = 0;
+    private double price = 0;
 
     @Override
     public int initContentView(Bundle savedInstanceState) {
@@ -70,6 +72,8 @@ public class ChuangkeActivity extends BaseActivity<ActivityChuangkeBinding, Chua
 
     @Override
     public void initData() {
+
+        Eyes.setStatusBarWhiteColor(this,getResources().getColor(R.color.white));
 
         goodstype = getIntent().getExtras().getInt(HsqAppUtil.GOODSTYPE);
 
@@ -167,6 +171,11 @@ public class ChuangkeActivity extends BaseActivity<ActivityChuangkeBinding, Chua
 
     @Override
     public void sureorder() {
+
+        if (price <= ProApplication.USERLEVELPRICE10){
+            UToast.show(this,"所选金额不足");
+            return;
+        }
 
         try{
             JSONArray jsonArray = new JSONArray();
@@ -377,7 +386,7 @@ public class ChuangkeActivity extends BaseActivity<ActivityChuangkeBinding, Chua
 
     public void setNum(){
         int num = 0;
-        double price = 0;
+        price = 0;
 
         if (vipChooseItemBeans == null || vipChooseItemBeans.size() == 0){
 
@@ -392,8 +401,7 @@ public class ChuangkeActivity extends BaseActivity<ActivityChuangkeBinding, Chua
             }
 
             viewModel.goodsCount.set(num);
-            String s = String.valueOf(price);
-            viewModel.price.set("￥" + s);
+            viewModel.price.set("￥" + price);
         }
     }
 

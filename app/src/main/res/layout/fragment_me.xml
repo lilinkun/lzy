@@ -28,17 +28,7 @@
 
     </data>
 
-    <in.srain.cube.views.ptr.PtrFrameLayout
-        android:background="#F1F1F2"
-        android:id="@+id/mPtrframe"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:ptr_resistance="1.7"
-        app:ptr_ratio_of_header_height_to_refresh="1.2"
-        app:ptr_duration_to_close="300"
-        app:ptr_duration_to_close_header="2000"
-        app:ptr_keep_header_when_refresh="true"
-        app:ptr_pull_to_fresh="false">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -51,7 +41,16 @@
             android:layout_height="120dp"
             android:scaleType="fitXY"
             android:src="@mipmap/ic_me_bg"/>
-
+        <in.srain.cube.views.ptr.PtrFrameLayout
+            android:id="@+id/mPtrframe"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:ptr_resistance="1.7"
+            app:ptr_ratio_of_header_height_to_refresh="1.2"
+            app:ptr_duration_to_close="300"
+            app:ptr_duration_to_close_header="2000"
+            app:ptr_keep_header_when_refresh="true"
+            app:ptr_pull_to_fresh="false">
         <com.lzyyd.hsq.ui.TranslucentScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -67,12 +66,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="@dimen/margin_28"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_30"
                 >
 
                 <com.lzyyd.hsq.ui.RoundImageView
+                    android:id="@+id/riv_me"
                     android:layout_width="55dp"
                     android:layout_height="55dp"
+                    app:images="@{userinfo.portrait}"
                     android:onClick="@{()->me.setJumpPersonal()}"
                     />
 
@@ -190,6 +192,33 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:onClick="@{()->me.setJumpWallet()}"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(balance.money5Balance)}"
+                    android:textColor="#ffe94240"
+                    android:textSize="14sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="余额"
+                    android:textColor="#ff666666"
+                    android:textSize="12sp"
+                    />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:onClick="@{()->me.setJumpPoint()}"
                 android:orientation="vertical">
 
@@ -237,31 +266,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:onClick="@{()->me.setJumpWallet()}"
-                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{String.valueOf(balance.money5Balance)}"
-                    android:textColor="#ffe94240"
-                    android:textSize="14sp"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="余额"
-                    android:textColor="#ff666666"
-                    android:textSize="12sp"
-                    />
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -373,7 +378,7 @@
         </LinearLayout>
 
         </com.lzyyd.hsq.ui.TranslucentScrollView>
+        </in.srain.cube.views.ptr.PtrFrameLayout>
     </RelativeLayout>
 
-    </in.srain.cube.views.ptr.PtrFrameLayout>
 </layout>

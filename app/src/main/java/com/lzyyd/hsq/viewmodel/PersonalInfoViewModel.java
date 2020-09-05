@@ -2,6 +2,7 @@ package com.lzyyd.hsq.viewmodel;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Bundle;
 
 import com.lzyyd.hsq.activity.AddressListActivity;
 import com.lzyyd.hsq.activity.BindCardActivity;
@@ -11,6 +12,7 @@ import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.LoginBean;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
+import com.lzyyd.hsq.util.ActivityUtil;
 import com.lzyyd.hsq.util.DataCleanManager;
 import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.util.UpdateManager;
@@ -74,34 +76,7 @@ public class PersonalInfoViewModel extends BaseViewModel<DataRepository> {
     }
 
     public void updateApp(){
-
-        HashMap<String,String> params = new HashMap<>();
-        params.put("api_token", "");
-
-        model.sendVCode(params)
-                .compose(RxUtils.schedulersTransformer())
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(new Consumer<Disposable>(){
-                    @Override
-                    public void accept(Disposable disposable){
-                        showDialog();
-                    }
-                })
-                .subscribe(new HttpResultCallBack<String,String>() {
-                    @Override
-                    public void onResponse(String s, String status, String page) {
-
-                    }
-
-                    @Override
-                    public void onErr(String msg, String status) {
-
-                    }
-
-                });
-
-
+        onPersonelInfoCallback.UpdateApp();
     }
 
     public void setJumpAddress(){
@@ -111,7 +86,7 @@ public class PersonalInfoViewModel extends BaseViewModel<DataRepository> {
     public void setJumpBank(){
         startActivity(BindCardActivity.class);
     }
-
+    
 
     public void getUserInfo(String UserName,String SessionId) {
         HashMap<String, String> params = new HashMap<>();
@@ -165,6 +140,7 @@ public class PersonalInfoViewModel extends BaseViewModel<DataRepository> {
                     public void onResponse(String s, String status, String page) {
                         dismissDialog();
                         startActivity(LoginActivity.class);
+                        ActivityUtil.finishHomeAll();
                     }
 
                     @Override
@@ -180,7 +156,9 @@ public class PersonalInfoViewModel extends BaseViewModel<DataRepository> {
     public BindingCommand bindingCommand = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            startActivity(ModifyPayActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("type",2);
+            startActivity(ModifyPayActivity.class,bundle);
         }
     });
 
@@ -189,6 +167,7 @@ public class PersonalInfoViewModel extends BaseViewModel<DataRepository> {
         public void getUserInfoSuccess(LoginBean loginBean);
         public void getUserInfoFail(String msg);
 
+        public void UpdateApp();
     }
 
 }

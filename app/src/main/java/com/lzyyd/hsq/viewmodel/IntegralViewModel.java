@@ -1,6 +1,7 @@
 package com.lzyyd.hsq.viewmodel;
 
 import android.app.Application;
+import android.os.Bundle;
 
 import com.lzyyd.hsq.activity.IntegralListActivity;
 import com.lzyyd.hsq.bean.GoodsListBean;
@@ -73,7 +74,9 @@ public class IntegralViewModel extends BaseViewModel<DataRepository> {
 
 
     public void integralList(){
-        startActivity(IntegralListActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt("type",3);
+        startActivity(IntegralListActivity.class,bundle);
     }
 
     public interface GetGoodsListCallBack{

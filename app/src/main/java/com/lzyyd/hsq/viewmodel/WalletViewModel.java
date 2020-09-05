@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.lzyyd.hsq.activity.BalanceTransferOutActivity;
 import com.lzyyd.hsq.activity.GetCashActivity;
+import com.lzyyd.hsq.activity.IntegralListActivity;
 import com.lzyyd.hsq.activity.PointActivity;
 import com.lzyyd.hsq.activity.RechargeActivity;
 import com.lzyyd.hsq.activity.TianfengCoinActivity;
@@ -59,8 +60,10 @@ public class WalletViewModel extends BaseViewModel<DataRepository> {
     }
 
     public void getReCharge(){
-        if (balance != null && balance.trim().length() > 0) {
-            startActivity(RechargeActivity.class, null, PointActivity.RECHARGEFORESULT);
+        if (balanceBean != null) {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("balance", balanceBean);
+            startActivity(RechargeActivity.class, bundle, PointActivity.RECHARGEFORESULT);
         }
     }
 
@@ -82,6 +85,14 @@ public class WalletViewModel extends BaseViewModel<DataRepository> {
         bundle.putDouble("balance",balanceBean.getMoney5Balance());
         startActivity(BalanceTransferOutActivity.class,bundle, WalletActivity.TRANFERRESULT);
 
+    }
+
+
+
+    public void yudaozhangList(){
+        Bundle bundle = new Bundle();
+        bundle.putInt("type",4);
+        startActivity(IntegralListActivity.class,bundle);
     }
 
 

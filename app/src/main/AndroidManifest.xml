@@ -111,8 +111,15 @@
             android:screenOrientation="portrait"/>
         <activity android:name="com.lzyyd.hsq.activity.StoreActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.BindWxActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.ChooseWxLoginActivity"
+            android:screenOrientation="portrait"/>
 
 
+        <activity android:name="com.lzyyd.hsq.wxapi.WXEntryActivity"
+            android:launchMode="singleTask"
+            android:exported="true"/>
 
 
         <activity android:name="com.lzyyd.hsq.qrcode.android.CaptureActivity"

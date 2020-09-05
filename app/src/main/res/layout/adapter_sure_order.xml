@@ -143,7 +143,7 @@
                     android:id="@+id/order_integral"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{String.valueOf(orders.integral)}"
+                    android:text="@{sureadapter.orderField}"
                     android:textColor="#ffa37d5f"
                     android:textSize="14sp"
                     />

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lzy="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="payresult"
+            type="com.lzyyd.hsq.viewmodel.PayResultViewModel" />
+
+        <variable
+            name="result"
+            type="String" />
+
+    </data>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:onClick="@{()->payresult.onBackPressed()}"
+            android:paddingLeft="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_back"
+                android:textColor="@color/black"
+                android:typeface="@{payresult.setTypeFace()}"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/text_commom"
+            android:textSize="18sp"
+            android:text="支付结果"/>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_30"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_order_over"
+            android:layout_centerHorizontal="true"
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{result}"
+            android:textColor="#FC3D77"/>
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_5"
+            android:textSize="@dimen/textsize20"
+            android:textColor="#282828"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/tv_see_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查看订单"
+            android:background="@drawable/bg_btn_order"
+            android:paddingLeft="@dimen/margin_20"
+            android:paddingRight="@dimen/margin_20"/>
+
+        <TextView
+            android:id="@+id/tv_back_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="返回首页"
+            android:background="@drawable/bg_btn_order"
+            android:layout_marginLeft="30dp"
+            android:paddingLeft="@dimen/margin_20"
+            android:paddingRight="@dimen/margin_20"/>
+
+    </LinearLayout>
+</LinearLayout>
+</layout>

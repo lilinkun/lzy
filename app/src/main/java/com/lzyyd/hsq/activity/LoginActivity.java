@@ -1,5 +1,6 @@
 package com.lzyyd.hsq.activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
@@ -13,6 +14,7 @@ import com.lzyyd.hsq.bean.UrlBean;
 import com.lzyyd.hsq.bean.WxUserInfo;
 import com.lzyyd.hsq.databinding.ActivityLoginBinding;
 import com.lzyyd.hsq.interf.IWxLoginListener;
+import com.lzyyd.hsq.util.ActivityUtil;
 import com.lzyyd.hsq.util.Eyes;
 import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
@@ -22,6 +24,7 @@ import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -29,6 +32,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding,LoginViewMo
 
     LoginViewModel loginViewModel;
     IWXAPI iwxapi = null;
+    private WxUserInfo wxSuccess;
 
     @Override
     public int initContentView(Bundle savedInstanceState) {
@@ -50,6 +54,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding,LoginViewMo
     public void initData() {
         Eyes.translucentStatusBar(this);
 
+        ActivityUtil.addActivity(this);
 
         iwxapi = WXAPIFactory.createWXAPI(this, HsqAppUtil.APP_ID, true);
         iwxapi.registerApp(HsqAppUtil.APP_ID);
@@ -112,12 +117,29 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding,LoginViewMo
     }
 
     @Override
-    public void setWxLoginSuccess(WxUserInfo wxSuccess) {
+    public void getWxLoginFail(String msg) {
+        viewModel.register(wxSuccess);
+    }
 
+    @Override
+    public void setWxLoginSuccess(WxUserInfo wxSuccess) {
+        this.wxSuccess = wxSuccess;
+
+        viewModel.wxlogin(wxSuccess.getOpenid(),wxSuccess.getUnionid(),2 + "", ProApplication.SESSIONID());
     }
 
     @Override
     public void setWxLoginFail(String msg) {
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        if (resultCode == RESULT_OK && requestCode == 0x1234){
+            finish();
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

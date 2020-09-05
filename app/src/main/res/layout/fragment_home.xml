@@ -196,7 +196,8 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scaleType="fitXY"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
                     app:image="@{homebean.vip.img}"
                     android:onClick="@{()->home.setImageClick()}"
                     />
@@ -205,7 +206,8 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scaleType="fitXY"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
                     app:image="@{homebean.ccq.get(0).flashPic}"
                     android:onClick="@{()->home.ccqEntrance(homebean.ccq.get(0).flashUrl)}"
                     android:layout_marginTop="@dimen/margin_10"
@@ -297,6 +299,7 @@
                                 android:layout_width="105dp"
                                 android:layout_height="105dp"
                                 android:scaleType="centerInside"
+                                android:adjustViewBounds="true"
                                 android:onClick="@{()->home.onClickGoodsItem(homebean.goodsList1.get(0).goodsId)}"
                                 app:image="@{homebean.goodsList1.get(0).goodsImg}"
                                 />
@@ -325,6 +328,7 @@
                                 android:layout_width="105dp"
                                 android:layout_height="105dp"
                                 android:scaleType="centerInside"
+                                android:adjustViewBounds="true"
                                 app:image="@{homebean.goodsList2.get(0).goodsImg}"
                                 android:onClick="@{()->home.onClickGoodsItem(homebean.goodsList2.get(0).goodsId)}"
                                 />
@@ -353,6 +357,7 @@
                                 android:layout_width="105dp"
                                 android:layout_height="105dp"
                                 android:scaleType="centerInside"
+                                android:adjustViewBounds="true"
                                 app:image="@{homebean.goodsList3.get(0).goodsImg}"
                                 android:onClick="@{()->home.onClickGoodsItem(homebean.goodsList3.get(0).goodsId)}"
                                 />
@@ -377,39 +382,14 @@
                     android:layout_marginTop="@dimen/margin_10"
                     >
 
+
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
                         android:onClick="@{()->home.onClick(1)}"
-                        android:gravity="center"
-                        >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="力荐"
-                            android:textColor="@{home.recommemdFirst ? @color/text_label : @color/grey_333333}"
-                            android:textSize="15sp"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="超值精选"
-                            android:textColor="@{home.recommemdFirst ? @color/white : @color/grey_color2}"
-                            android:background="@{home.recommemdFirst ? @drawable/bg_home_recommend_click : @drawable/bg_home_recommend_unclick}"
-                            android:textSize="10sp"
-                            />
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:onClick="@{()->home.onClick(2)}"
                         android:gravity="center"
                         >
 
@@ -437,7 +417,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:onClick="@{()->home.onClick(3)}"
+                        android:onClick="@{()->home.onClick(2)}"
                         android:gravity="center"
                         >
 
@@ -457,6 +437,33 @@
                             android:textSize="10sp"
                         />
 
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:onClick="@{()->home.onClick(3)}"
+                        android:gravity="center"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="力荐"
+                            android:textColor="@{home.recommemdFirst ? @color/text_label : @color/grey_333333}"
+                            android:textSize="15sp"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="超值精选"
+                            android:textColor="@{home.recommemdFirst ? @color/white : @color/grey_color2}"
+                            android:background="@{home.recommemdFirst ? @drawable/bg_home_recommend_click : @drawable/bg_home_recommend_unclick}"
+                            android:textSize="10sp"
+                            />
                     </LinearLayout>
 
                     <LinearLayout
@@ -479,7 +486,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="好货优选"
+                            android:text="更多好货"
                             android:textColor="@color/grey_color2"
                             android:textSize="10sp"
                             />

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="choosewx"
+            type="com.lzyyd.hsq.viewmodel.ChooseWxLoginViewModel" />
+
+        <variable
+            name="choose"
+            type="com.lzyyd.hsq.activity.ChooseWxLoginActivity" />
+
+    </data>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:gravity="center"
+        android:onClick="@{()->choosewx.onBackPressed()}"
+        android:paddingLeft="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_back"
+            android:textColor="@color/black"
+            android:typeface="@{choosewx.setTypeFace()}"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="60dp"
+        android:gravity="center_horizontal"
+        >
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/ic_login_wx"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="微信绑定"
+                android:textColor="#ff333333"
+                android:layout_marginLeft="@dimen/margin_8"
+                android:textSize="19sp"
+                />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="去绑定帐号"
+            android:textColor="#ffa37d5f"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:background="@drawable/bg_login_wx_bind_btn"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="60dp"
+            android:onClick="@{()->choose.setJumpBindWx()}"
+            android:paddingTop="@dimen/padding_15"
+            android:paddingBottom="@dimen/padding_15"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="没有帐号? 去注册"
+            android:textColor="#ffa37d5f"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:background="@drawable/bg_login_wx_bind_register_btn"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="10dp"
+            android:onClick="@{()->choose.setJumpRegister()}"
+            android:paddingTop="@dimen/padding_15"
+            android:paddingBottom="@dimen/padding_15"
+            />
+
+
+    </LinearLayout>
+
+</LinearLayout>
+</layout>

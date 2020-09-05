@@ -80,13 +80,20 @@ public class HsqAppUtil {
     public static final int GOODSTYPE_SECKILL = 16;//秒杀
     public static final int GOODSTYPE_CCQ = 64;//常常清
 
-    public static final String APP_ID = "wx27fb4ad747521493";
-    public static final String SECRET = "579a6a72da743151f2a4eb6c78fef144";
+    public static final String APP_ID = "wxd0358b9affd3d81b";
+    public static final String SECRET = "f24a148883365f08ab912dac8bc8a7d8";
+//    public static final String APP_ID = "wx27fb4ad747521493";
+//    public static final String SECRET = "b552b4f33b682c4520315ef3ca50a31d";
 
 
     @BindingAdapter({"image"})
     public static void setImage(ImageView view, String url) {
         Picasso.with(view.getContext()).load(ProApplication.BANNERIMG + url).error(R.mipmap.ic_banner).into(view);
+    }
+
+    @BindingAdapter({"images"})
+    public static void setImages(ImageView view, String url) {
+        Picasso.with(view.getContext()).load(url).into(view);
     }
 
 }

@@ -3,10 +3,12 @@ package com.lzyyd.hsq.activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.PopupWindow;
 
 import com.lzyyd.hsq.R;
+import com.lzyyd.hsq.adapter.OrderDetailAdapter;
 import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseActivity;
 import com.lzyyd.hsq.base.ProApplication;
@@ -14,20 +16,28 @@ import com.lzyyd.hsq.bean.AddressBean;
 import com.lzyyd.hsq.bean.OrderDetailAddressBean;
 import com.lzyyd.hsq.bean.OrderGoodsBuyListBean;
 import com.lzyyd.hsq.databinding.ActivityOrderdetailBinding;
+import com.lzyyd.hsq.interf.IWxPayListener;
+import com.lzyyd.hsq.ui.SpacesItemDecoration;
+import com.lzyyd.hsq.util.Eyes;
+import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
+import com.lzyyd.hsq.util.WxPayUtil;
 import com.lzyyd.hsq.viewmodel.OrderDetailViewModel;
+import com.lzyyd.hsq.wxapi.WXEntryActivity;
 
 import java.util.ArrayList;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**
  * Create by liguo on 2020/8/31
  * Describe:
  */
-public class OrderDetailActivity extends BaseActivity<ActivityOrderdetailBinding, OrderDetailViewModel> implements OrderDetailViewModel.OrderDetailListener {
+public class OrderDetailActivity extends BaseActivity<ActivityOrderdetailBinding, OrderDetailViewModel> implements OrderDetailViewModel.OrderDetailListener, IWxPayListener {
 
     private OrderGoodsBuyListBean orderDetailBean;
     private ArrayList<OrderGoodsBuyListBean> orderDetailBeans;
@@ -40,6 +50,9 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderdetailBinding
     double useIntegral = 0;
     double shipping_fee = 0;
     double order_amount = 0;
+    private boolean isPay = false;
+    String ordersn = "";
+    private OrderDetailAdapter orderDetailAdapter;
 
     @Override
     public int initContentView(Bundle savedInstanceState) {
@@ -60,11 +73,13 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderdetailBinding
     @Override
     public void initData() {
 
-        String ordersn = getIntent().getExtras().getString("ordersn");
+        Eyes.setStatusBarWhiteColor(this,getResources().getColor(R.color.white));
+        ordersn = getIntent().getExtras().getString("ordersn");
 
         viewModel.setLisener(this);
         viewModel.cartBuy(ordersn, ProApplication.SESSIONID());
 
+        WXEntryActivity.setPayListener(this);
     }
 
     @Override
@@ -77,9 +92,34 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderdetailBinding
         addressBean.setMobile(orderDetailBeans.getMobile());
         addressBean.setName(orderDetailBeans.getConsignee());
 
+
+        double price = orderDetailBeans.getOrderAmount() - orderDetailBeans.getMoney2() - orderDetailBeans.getMoney3() - orderDetailBeans.getMoney6();
+        binding.payLayout.tvTotal.setText("￥" + price);
+
         binding.setAddress(addressBean);
 
         status = orderDetailBeans.getOrderStatus();
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
+
+        int spacing = 20; // 50px
+        binding.rvOrder.addItemDecoration(new SpacesItemDecoration(spacing));
+
+        binding.rvOrder.setLayoutManager(linearLayoutManager);
+
+        if (orderDetailAdapter == null) {
+
+            orderDetailAdapter = new OrderDetailAdapter(this);
+
+            orderDetailAdapter.getItems().addAll(orderDetailBeans.getOrderDetail());
+            binding.rvOrder.setAdapter(orderDetailAdapter);
+        }else {
+            orderDetailAdapter.getItems().clear();
+            orderDetailAdapter.getItems().addAll(orderDetailBeans.getOrderDetail());
+            orderDetailAdapter.notifyDataSetChanged();
+        }
+
 
         if (status == 1 ){
             binding.tvPayMessage.setText("买家已付款，等待发货");
@@ -143,7 +183,7 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderdetailBinding
             public void onClick(View v) {
                     binding.tvPayOrder.setClickable(false);
                     if (status == 0) {
-
+                            viewModel.getKey(orderDetailBeans.getOrderSn() + "", ProApplication.SESSIONID());
 //                        allOrderPresenter.getOrderData(ProApplication.SESSIONID(AllOrderActivity.this));
                     } else if (status == 2) {
 
@@ -216,5 +256,48 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderdetailBinding
             binding.tvPayOrder.setClickable(true);
         }
         UToast.show(this,msg);
+    }
+
+    @Override
+    public void getOrderPaySuccess(String msg) {
+        isPay = true;
+        WxPayUtil.wxProgramPay(HsqAppUtil.APP_ID,this,"pages/Payment/Paymentall?key="+msg + "&SessionId=" + ProApplication.SESSIONID() + "&send=234");
+    }
+
+    @Override
+    public void getOrderPayFail(String msg) {
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if (isPay){
+            /*viewModel.cartBuy(ordersn, ProApplication.SESSIONID());
+            isPay = !isPay;*/
+        }
+    }
+
+    @Override
+    public void setWxPaySuccess(String msg) {
+        viewModel.cartBuy(ordersn, ProApplication.SESSIONID());
+    }
+
+    @Override
+    public void setWxPayFail(String msg) {
+        UToast.show(this,msg);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK){
+            setResult(RESULT_OK);
+            finish();
+            return true;
+        }
+
+
+        return super.onKeyDown(keyCode, event);
     }
 }

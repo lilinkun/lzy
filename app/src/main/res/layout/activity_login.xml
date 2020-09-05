@@ -140,7 +140,7 @@
             android:gravity="center"
             >
 
-            <!--<TextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="13sp"
@@ -148,12 +148,12 @@
                 android:text="@string/tv_login_forget_psd"
                 android:onClick="@{login::forgetPsd}"/>
 
-            <View
+            <!--<View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:background="#E8D6C8"/>-->
+                android:background="#E8D6C8"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -161,7 +161,7 @@
                 android:textSize="13sp"
                 android:textColor="@color/yellow_A47E60"
                 android:text="@string/tv_login_register"
-                android:onClick="@{login::register}"/>
+                android:onClick="@{login::register}"/>-->
 
 
         </LinearLayout>

@@ -9,6 +9,7 @@ import com.lzyyd.hsq.R;
 import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseActivity;
 import com.lzyyd.hsq.base.ProApplication;
+import com.lzyyd.hsq.bean.LoginBean;
 import com.lzyyd.hsq.databinding.ActivityModifypayBinding;
 import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.PhoneFormatCheckUtils;
@@ -24,6 +25,8 @@ import androidx.lifecycle.ViewModelProviders;
 public class ModifyPayActivity extends BaseActivity<ActivityModifypayBinding, ModifyPayViewModel> implements ModifyPayViewModel.ModifyPsdListener {
 
     MyCountDownTimer myCountDownTimer = new MyCountDownTimer(60000, 1000);
+
+    private int type = 0;
 
     @Override
     public int initContentView(Bundle savedInstanceState) {
@@ -49,11 +52,24 @@ public class ModifyPayActivity extends BaseActivity<ActivityModifypayBinding, Mo
 
         viewModel.setListener(this);
 
+        type = getIntent().getExtras().getInt("type");
+
+        if (type == 2){
+            binding.setUsername("手机号");
+            binding.setHintstr("请输入手机号");
+            binding.setTitlename("修改支付密码");
+        }else if (type == 1){
+            binding.setUsername("用户名");
+            binding.setHintstr("请输入用户名");
+            binding.setTitlename("忘记密码");
+        }
+
+
     }
 
     @Override
-    public void onSendVcodeSuccess() {
-        UToast.show(this,"获取验证码成功");
+    public void onSendVcodeSuccess(String msg) {
+        UToast.show(this,msg);
     }
 
     @Override
@@ -73,8 +89,36 @@ public class ModifyPayActivity extends BaseActivity<ActivityModifypayBinding, Mo
     }
 
     @Override
+    public void modifyUserPsdSuccess(LoginBean mLoginBean) {
+        SharedPreferences sharedPreferences = getSharedPreferences(HsqAppUtil.LOGIN, MODE_PRIVATE);
+        sharedPreferences.edit().putString("sessionid", ProApplication.SESSIONID()).putBoolean(HsqAppUtil.LOGIN, true)
+                .putString(HsqAppUtil.ACCOUNT, mLoginBean.getNickName()).putString(HsqAppUtil.TELEPHONE, mLoginBean.getMobile())
+                .putString(HsqAppUtil.USERNAME, mLoginBean.getUserName()).putString(HsqAppUtil.USERID, mLoginBean.getUserId())
+                .putString(HsqAppUtil.VIPVALIDITY, mLoginBean.getVipValidity())
+                .putString(HsqAppUtil.USERLEVEL, mLoginBean.getUserLevel() + "")
+                .putString(HsqAppUtil.CCQTYPE,mLoginBean.getCcqType()+"")
+                .putString(HsqAppUtil.LEVEL,mLoginBean.getUserLevel()+"")
+                .putString(HsqAppUtil.PROJECT,mLoginBean.getProject()+"")
+                .putString(HsqAppUtil.HEADIMGURL,mLoginBean.getPortrait())
+                .putString(HsqAppUtil.USERLEVELNAME, mLoginBean.getUserLevelName()).commit();
+
+        startActivity(MainActivity.class,null);
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    @Override
+    public void modifyUserPsdFail(String str) {
+        UToast.show(this,str);
+    }
+
+    @Override
     public void sendVcode() {
-        viewModel.SendSms(ProApplication.SESSIONID());
+        if (type==2) {
+            viewModel.SendSms(ProApplication.SESSIONID());
+        }else if(type==1){
+            viewModel.SendSmsForgetPsd(binding.tvPhone.getText().toString(),ProApplication.SESSIONID());
+        }
         myCountDownTimer.start();
     }
 
@@ -89,9 +133,11 @@ public class ModifyPayActivity extends BaseActivity<ActivityModifypayBinding, Mo
         } else if (!binding.evNewPsd.getText().toString().equals(binding.evSurePsd.getText().toString())) {
             UToast.show(this,"两次密码不同，请确认");
         } else {
-
-            viewModel.modifyPsd(binding.evVcode.getText().toString(), binding.evNewPsd.getText().toString(), binding.evSurePsd.getText().toString(), ProApplication.SESSIONID());
-
+            if (type == 2) {
+                viewModel.modifyPsd(binding.evVcode.getText().toString(), binding.evNewPsd.getText().toString(), binding.evSurePsd.getText().toString(), ProApplication.SESSIONID());
+            }else if (type == 1){
+                viewModel.modifyUserPsd(binding.tvPhone.getText().toString(),binding.evVcode.getText().toString(), binding.evNewPsd.getText().toString(), binding.evSurePsd.getText().toString(), ProApplication.SESSIONID());
+            }
         }
     }
 

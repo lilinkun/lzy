@@ -211,7 +211,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_update_vip"
-                        android:text="去升级"
+                        android:text="去选购"
                         android:textColor="#ffffffff"
                         android:textSize="14sp"
                         android:layout_alignParentRight="true"

@@ -47,6 +47,7 @@ public class SearchViewModel extends BaseViewModel<DataRepository> {
             params.put("GoodsType", GoodsType);
         }
         params.put("OrderBy", OrderBy);
+        params.put("SessionId",SessionId);
         model.getGoodsListVip(params)
                 .compose(RxUtils.schedulersTransformer())
                 .subscribeOn(Schedulers.newThread())

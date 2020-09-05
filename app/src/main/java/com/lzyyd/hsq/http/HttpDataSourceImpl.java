@@ -232,5 +232,9 @@ public class HttpDataSourceImpl implements HttpDataSource {
         return apiService.getOrderDetail(mHashMap);
     }
 
+    public Observable<ResultBean<CollectBean, Object>> wxPay(HashMap<String, String> mHashMap) {
+        return apiService.wxPay(mHashMap);
+    }
+
 
 }

@@ -36,9 +36,11 @@ public class WebViewActivity extends BaseActivity<ActivityWebviewBinding, Webvie
     public void initData() {
         super.initData();
 
+        String url = getIntent().getExtras().getString("url");
+
         binding.wvInput.getSettings().setDomStorageEnabled(true);
         binding.wvInput.getSettings().setJavaScriptEnabled(true);
-        binding.wvInput.loadUrl("https://dev-qssq.sqqmall.com/pages/login/login?channelCode=1dbf13d0e18107d6d381dd2a7397118a&userName=sm778952333&cardNo=&cardPass=");
+        binding.wvInput.loadUrl(url);
         binding.wvInput.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {

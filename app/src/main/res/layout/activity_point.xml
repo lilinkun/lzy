@@ -116,6 +116,7 @@
                         android:text="充值"
                         android:textColor="@color/text_common_bg"
                         android:textSize="14sp"
+                        android:visibility="gone"
                         android:onClick="@{()->point.getReCharge()}"
                         />
 
@@ -127,7 +128,7 @@
                         android:textColor="@color/text_common_bg"
                         android:textSize="14sp"
                         android:onClick="@{()->point.getTransferout()}"
-                        android:layout_marginLeft="@dimen/margin_15"
+                        android:layout_marginLeft="@dimen/margin_35"
                         />
 
                 </LinearLayout>

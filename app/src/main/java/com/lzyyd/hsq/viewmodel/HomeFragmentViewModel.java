@@ -78,20 +78,20 @@ public class HomeFragmentViewModel extends BaseViewModel<DataRepository> {
                 .doOnSubscribe(new Consumer<Disposable>(){
                     @Override
                     public void accept(Disposable disposable){
-                        showDialog();
+//                        showDialog();
                     }
                 })
                 .subscribe(new HttpResultCallBack<HomeBean, String>() {
                     @Override
                     public void onResponse(HomeBean homeBean, String status, String page) {
                         homeDataCallBack.getHomeDataSuccess(homeBean);
-                        dismissDialog();
+//                        dismissDialog();
                     }
 
                     @Override
                     public void onErr(String msg, String status) {
                         homeDataCallBack.getHomeDataFail(msg);
-                        dismissDialog();
+//                        dismissDialog();
                     }
 
                 });

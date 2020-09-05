@@ -123,6 +123,9 @@ public class ProApplication extends Application {
     public static String CCQGOODSID = "";
 
     public static String APP = "HSQ";
+    public static int CCQTYPE = 0;
+
+    public static String HeadImg = "";
 
     public static final String IMG_BIG = "imgdb/";
     public static final String IMG_HOME_ADDRESS = "imgdb/velet/";

@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
             name="recharge"
             type="com.lzyyd.hsq.viewmodel.RechargeViewModel" />
+
+        <variable
+            name="username"
+            type="String" />
+
+        <variable
+            name="headimg"
+            type="String" />
+
+        <variable
+            name="price"
+            type="String" />
 
     </data>
 
@@ -76,13 +89,23 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical">
+        
+        <com.lzyyd.hsq.ui.RoundImageView
+            android:id="@+id/tv_head"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="@dimen/margin_5"
+            app:image="@{headimg}"
+            />
 
         <TextView
             android:id="@+id/tv_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_15"
-            android:textSize="@dimen/margin_24"
+            android:layout_marginLeft="@dimen/margin_5"
+            android:textSize="@dimen/margin_18"
+            android:layout_toRightOf="@+id/tv_head"
+            android:text="@{username}"
             android:textColor="@color/text_commom"/>
 
         <TextView
@@ -90,9 +113,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:textSize="@dimen/textsize18"
+            android:textSize="@dimen/textsize14"
+            android:text="@{@string/wallet_balance + price}"
             android:layout_alignBottom="@+id/tv_account"
-            android:textColor="@color/text_commom"/>
+            android:textColor="@color/grey_color2"/>
 
     </RelativeLayout>
 
@@ -244,7 +268,7 @@
                 android:layout_marginLeft="@dimen/margin_10"
                 android:paddingTop="@dimen/margin_13"
                 android:paddingBottom="@dimen/margin_13"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 android:hint="其他金额"
                 android:text="@{recharge.rechargeStr}"
                 android:textColor="@color/text_commom"

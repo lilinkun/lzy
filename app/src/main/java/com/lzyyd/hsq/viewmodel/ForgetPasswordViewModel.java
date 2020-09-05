@@ -9,10 +9,18 @@ import com.lzyyd.hsq.R;
 import com.lzyyd.hsq.activity.ForgetSettingPsdActivity;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.databinding.ActivityForgetpasswordBinding;
+import com.lzyyd.hsq.http.callback.HttpResultCallBack;
 import com.lzyyd.hsq.model.ForgetPsdModel;
 
+import java.util.HashMap;
+
 import androidx.databinding.ObservableField;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import me.goldze.mvvmhabit.base.BaseViewModel;
+import me.goldze.mvvmhabit.utils.RxUtils;
 
 public class ForgetPasswordViewModel extends BaseViewModel<DataRepository> {
 
@@ -22,8 +30,13 @@ public class ForgetPasswordViewModel extends BaseViewModel<DataRepository> {
     public ObservableField<Boolean> isClick = new ObservableField<>(true);
     public ObservableField<String> str = new ObservableField<>();
     public ObservableField<Integer> colorInt = new ObservableField<>();
+    private OnForgetPsdListener onForgetPsdListener;
 
     MyCountDownTimer myCountDownTimer = new MyCountDownTimer(60000, 1000);
+
+    public void setListener(OnForgetPsdListener listener){
+        this.onForgetPsdListener = listener;
+    }
 
     public ForgetPasswordViewModel(Application application, DataRepository dataRepository) {
         super(application,dataRepository);
@@ -48,6 +61,45 @@ public class ForgetPasswordViewModel extends BaseViewModel<DataRepository> {
 
     public void setVCodeClick(View view){
         myCountDownTimer.start();
+    }
+
+    /**
+     * 发送短信验证码
+     *
+     * @param sessionId
+     */
+    public void SendSms(String UserName,String sessionId) {
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("cls", "SendSms");
+        params.put("fun", "ForgotPassword");
+        params.put("UserName", UserName);
+        params.put("SessionId", sessionId);
+        model.register(params)
+                .compose(RxUtils.schedulersTransformer())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>(){
+                    @Override
+                    public void accept(Disposable disposable){
+                        showDialog();
+                    }
+                })
+                .subscribe(new HttpResultCallBack<String,String>() {
+
+                    @Override
+                    public void onResponse(String o, String status, String page) {
+                        onForgetPsdListener.onSendVcodeSuccess(status);
+                        dismissDialog();
+                    }
+
+                    @Override
+                    public void onErr(String msg, String status) {
+                        onForgetPsdListener.onSendVcodeFail(msg);
+                        dismissDialog();
+                    }
+
+                });
     }
 
     /**
@@ -78,5 +130,10 @@ public class ForgetPasswordViewModel extends BaseViewModel<DataRepository> {
 
             colorInt.set(Color.parseColor("#FE744A"));
         }
+    }
+
+    public interface OnForgetPsdListener{
+        public void onSendVcodeSuccess(String msg);
+        public void onSendVcodeFail(String msg);
     }
 }

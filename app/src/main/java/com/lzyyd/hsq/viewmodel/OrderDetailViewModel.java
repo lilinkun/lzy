@@ -63,6 +63,7 @@ public class OrderDetailViewModel extends BaseViewModel<DataRepository> {
 
                     @Override
                     public void onErr(String msg, String status) {
+                        dismissDialog();
                         orderDetailListener.setDataFail(msg);
                     }
                 });
@@ -171,6 +172,43 @@ public class OrderDetailViewModel extends BaseViewModel<DataRepository> {
                 });
     }
 
+
+    /**
+     * 确认收货
+     */
+    public void getKey(String OrderSn,String SessionId){
+        HashMap<String, String> params = new HashMap<>();
+        params.put("cls", "OrderInfo");
+        params.put("fun", "OrderInfoGetPayByKey");
+        params.put("OrderSn", OrderSn);
+        params.put("SessionId", SessionId);
+        model.OrderSaveRedis(params)
+                .compose(RxUtils.schedulersTransformer())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>(){
+                    @Override
+                    public void accept(Disposable disposable){
+                        showDialog();
+                    }
+                })
+                .subscribe(new HttpResultCallBack<String, String>() {
+                    @Override
+                    public void onResponse(String addressBeans, String status, String page) {
+                        dismissDialog();
+                        orderDetailListener.getOrderPaySuccess(addressBeans);
+                    }
+
+                    @Override
+                    public void onErr(String msg, String status) {
+                        dismissDialog();
+                        orderDetailListener.getOrderPayFail(msg);
+                    }
+
+                });
+    }
+
+
     public interface OrderDetailListener{
         public void setDataSuccess(OrderDetailAddressBean orderDetailBeans);
         public void setDataFail(String msg);
@@ -183,6 +221,9 @@ public class OrderDetailViewModel extends BaseViewModel<DataRepository> {
 
         public void sureReceiptSuccess(String collectDeleteBean);
         public void sureReceiptFail(String msg);
+
+        public void getOrderPaySuccess(String msg);
+        public void getOrderPayFail(String msg);
     }
 
 }

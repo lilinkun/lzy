@@ -40,6 +40,5 @@ public class ForgetPasswordActivity extends BaseActivity<ActivityForgetpasswordB
     @Override
     public void initData() {
         Eyes.setStatusBarColor1(this,getResources().getColor(R.color.white));
-        viewModel.setMobileStr("130****4561");
     }
 }

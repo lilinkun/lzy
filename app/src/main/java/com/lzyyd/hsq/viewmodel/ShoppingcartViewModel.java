@@ -3,6 +3,7 @@ package com.lzyyd.hsq.viewmodel;
 import android.app.Application;
 import android.view.View;
 
+import com.lzyyd.hsq.activity.GoodsListActivity;
 import com.lzyyd.hsq.bean.CartBean;
 import com.lzyyd.hsq.bean.CartListBean;
 import com.lzyyd.hsq.bean.CollectBean;
@@ -40,6 +41,10 @@ public class ShoppingcartViewModel extends BaseViewModel<DataRepository> {
     }
 
 
+    public void setJumpGoodsDetail(){
+        startActivity(GoodsListActivity.class);
+    }
+
     /**
      * 获取购物车列表
      *
@@ -57,13 +62,13 @@ public class ShoppingcartViewModel extends BaseViewModel<DataRepository> {
                 .doOnSubscribe(new Consumer<Disposable>(){
                     @Override
                     public void accept(Disposable disposable){
-                        showDialog();
+//                        showDialog();
                     }
                 })
                 .subscribe(new HttpResultCallBack<ArrayList<CartListBean<ArrayList<CartBean>>>, String>() {
                     @Override
                     public void onResponse(ArrayList<CartListBean<ArrayList<CartBean>>> storeCartBeans, String status, String page) {
-                        dismissDialog();
+//                        dismissDialog();
                         if (storeCartBeans.size() > 0){
                             isGoodsField.set(true);
                         }
@@ -72,7 +77,7 @@ public class ShoppingcartViewModel extends BaseViewModel<DataRepository> {
 
                     @Override
                     public void onErr(String msg, String status) {
-                       dismissDialog();
+//                       dismissDialog();
                        cartCallback.getCartListFail(msg);
                     }
                 });
