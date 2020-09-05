@@ -1,0 +1,2 @@
+rootProject.name='hsq'
+include ':app', ':banner', ':mvvmhabit', ':labels'
