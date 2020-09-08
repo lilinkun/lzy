@@ -11,10 +11,16 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import com.lzyyd.hsq.BR;
 import com.lzyyd.hsq.R;
+import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseActivity;
 import com.lzyyd.hsq.databinding.ActivityWebviewBinding;
+import com.lzyyd.hsq.util.Eyes;
+import com.lzyyd.hsq.viewmodel.HomeFragmentViewModel;
 import com.lzyyd.hsq.viewmodel.WebviewViewModel;
+
+import androidx.lifecycle.ViewModelProviders;
 
 /**
  * Create by liguo on 2020/7/24
@@ -29,12 +35,16 @@ public class WebViewActivity extends BaseActivity<ActivityWebviewBinding, Webvie
 
     @Override
     public int initVariableId() {
-        return 0;
+        return BR.webview;
     }
 
     @Override
     public void initData() {
         super.initData();
+
+        binding.setWeb(this);
+
+        Eyes.setStatusBarWhiteColor(this,getResources().getColor(R.color.RED_E00000));
 
         String url = getIntent().getExtras().getString("url");
 
@@ -99,7 +109,9 @@ public class WebViewActivity extends BaseActivity<ActivityWebviewBinding, Webvie
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && binding.wvInput.canGoBack()) {
 
-            if (binding.wvInput.getOriginalUrl().contains("https://dev-qssq.sqqmall.com/pages/main/main?channelCode=1dbf13d0e18107d6d381dd2a7397118a")){
+
+            if (!binding.wvInput.canGoBack()){
+//            if (binding.wvInput.getOriginalUrl().contains("https://dev-qssq.sqqmall.com/pages/main/main?channelCode=1dbf13d0e18107d6d381dd2a7397118a")){
                 finish();
             }else {
                 binding.wvInput.goBack();// activityBaseWebAddWebView.reload();
@@ -109,5 +121,23 @@ public class WebViewActivity extends BaseActivity<ActivityWebviewBinding, Webvie
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void onBackPressed() {
+    if (!binding.wvInput.canGoBack()){
+        finish();
+    }else {
+        binding.wvInput.goBack();// activityBaseWebAddWebView.reload();
+        binding.wvInput.removeAllViews();//删除webview中所以进程
+
+    }
+    }
+
+
+    @Override
+    public WebviewViewModel initViewModel() {
+        AppViewModelFactory appViewModelFactory = AppViewModelFactory.getInstance(getApplication());
+        return ViewModelProviders.of(this,appViewModelFactory).get(WebviewViewModel.class);
     }
 }

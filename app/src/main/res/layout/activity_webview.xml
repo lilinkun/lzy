@@ -8,6 +8,10 @@
         <variable
             name="webview"
             type="com.lzyyd.hsq.viewmodel.WebviewViewModel" />
+
+        <variable
+            name="web"
+            type="com.lzyyd.hsq.activity.WebViewActivity" />
         
     </data>    
     
@@ -15,6 +19,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal"
+        android:background="@color/RED_E00000"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:onClick="@{()->web.onBackPressed()}"
+            android:paddingLeft="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_back"
+                android:textColor="@color/white"
+                android:typeface="@{webview.setTypeFace()}"
+                />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
 
     <WebView
         android:id="@+id/wv_input"

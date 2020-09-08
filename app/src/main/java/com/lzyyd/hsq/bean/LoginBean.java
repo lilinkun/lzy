@@ -24,6 +24,15 @@ public class LoginBean implements Serializable {
     private String SharedErm;
     private int Project;
     private int CcqType;
+    private String OtherUserName;
+
+    public String getOtherUserName() {
+        return OtherUserName;
+    }
+
+    public void setOtherUserName(String otherUserName) {
+        OtherUserName = otherUserName;
+    }
 
     public int getCcqType() {
         return CcqType;

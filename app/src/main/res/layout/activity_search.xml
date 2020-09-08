@@ -32,6 +32,7 @@
             android:layout_centerVertical="true"
             android:gravity="center"
             android:visibility="gone"
+            android:onClick="@{()->searchviewmodel.finish()}"
             android:layout_marginTop="@dimen/margin_10"
             android:layout_marginLeft="@dimen/margin_15"
             android:orientation="horizontal">

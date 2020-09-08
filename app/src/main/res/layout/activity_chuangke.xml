@@ -91,6 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
         <include
+            android:id="@+id/custom_bottom"
             layout="@layout/custom_bottom"
             app:chuangke="@{chuangke}"/>
     </LinearLayout>

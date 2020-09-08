@@ -67,6 +67,13 @@ public class SureOrderAdapter extends BaseBindingAdapter<OrderInfoBuyListBean, A
         binding.rvGoodsOrders.setLayoutManager(linearLayoutManager);
         binding.rvGoodsOrders.setAdapter(orderChildrenAdapter);
 
+        /*if (item.getOrderType() == 64){
+            binding.tvOrderAmountPrice.setText("¥" + (item.getOrderAmount() - (item.getOrderGoodsBuyList().get(0).getNum() * 1000)));
+        }else {*/
+            binding.tvOrderAmountPrice.setText('¥' + String.valueOf(item.getOrderAmount()));
+//        }
+
+
         if (item.getIntegral() == 0){
             binding.rlIntegral.setVisibility(View.GONE);
         }
@@ -93,7 +100,7 @@ public class SureOrderAdapter extends BaseBindingAdapter<OrderInfoBuyListBean, A
                 View view = LayoutInflater.from(context).inflate(R.layout.layout_edittext_point,null);
                 final EditText editText = (EditText) view.findViewById(R.id.edit_num);
                 editText.setText(orderField.get());
-                new AlertDialog.Builder(context).setMessage("修改使用积分").setView(view).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                new AlertDialog.Builder(context).setTitle("修改使用积分").setMessage("最多使用"+orderInfoBuyListBean.getIntegral() +"积分").setView(view).setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (!editText.getText().toString().isEmpty()){

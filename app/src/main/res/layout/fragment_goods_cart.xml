@@ -92,7 +92,7 @@
             <TextView
                 android:id="@+id/tv_cart_num"
                 android:layout_width="wrap_content"
-                android:layout_height="49dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_marginLeft="@dimen/margin_15"
                 android:textSize="@dimen/textsize15"
@@ -181,7 +181,7 @@
     <RelativeLayout
         android:id="@+id/rl_cart_bottom"
         android:layout_width="match_parent"
-        android:background="@color/white"
+        android:background="@drawable/shape_bottom_chuangke"
         android:layout_alignParentBottom="true"
         android:layout_height="49dp">
         <CheckBox
@@ -207,14 +207,15 @@
             android:id="@+id/go_pay"
             android:textSize="16sp"
             android:textColor="@android:color/white"
-            android:background="@color/setting_title_color"
+            android:background="@drawable/bg_chuangke_update"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:gravity="center"
+            android:layout_marginRight="@dimen/margin_5"
             android:text="@{gopay}"
             app:onClickCommand="@{shoppingcart.bindingCommand}"
             android:layout_width="100dp"
-            android:layout_height="60dp" />
+            android:layout_height="39dp" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -275,14 +276,15 @@
                 android:id="@+id/del_goods"
                 android:textSize="16sp"
                 android:textColor="@android:color/white"
-                android:background="@color/setting_title_color"
+                android:background="@drawable/bg_chuangke_update"
                 android:gravity="center"
                 android:paddingLeft="@dimen/margin_30"
+                android:layout_marginRight="@dimen/margin_5"
                 android:paddingRight="@dimen/margin_30"
                 app:onClickCommand="@{shoppingcart.bindingDelCommand}"
                 android:text="删除"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                android:layout_height="39dp" />
         </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>

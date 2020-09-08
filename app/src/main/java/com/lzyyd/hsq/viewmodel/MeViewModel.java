@@ -80,6 +80,15 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
         startActivity(IntegralListActivity.class,bundle);
     }
 
+    public void setJumpCoupon(){
+        /*Bundle bundle = new Bundle();
+        bundle.putInt("integral",(int) balanceBeans.getMoney3Balance());
+        startActivity(IntegralActivity.class,bundle);*/
+        Bundle bundle = new Bundle();
+        bundle.putInt("type",7);
+        startActivity(IntegralListActivity.class,bundle);
+    }
+
     public void setJumpPoint(){
         startActivity(PointActivity.class,null, MeFragment.RESULT_CODE_POINT);
     }
@@ -214,6 +223,7 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
                                 .putString(HsqAppUtil.LEVEL,mLoginBean.getUserLevel()+"")
                                 .putString(HsqAppUtil.PROJECT,mLoginBean.getProject()+"")
                                 .putString(HsqAppUtil.HEADIMGURL,mLoginBean.getPortrait())
+                                .putString(HsqAppUtil.OTHERUSERNAME,mLoginBean.getOtherUserName())
                                 .putString(HsqAppUtil.USERLEVELNAME, mLoginBean.getUserLevelName()).commit();
 
                     }

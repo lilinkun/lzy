@@ -120,6 +120,7 @@ public class LoginViewModel extends BaseViewModel<DataRepository> {
                                 .putString(HsqAppUtil.LEVEL,mLoginBean.getUserLevel()+"")
                                 .putString(HsqAppUtil.PROJECT,mLoginBean.getProject()+"")
                                 .putString(HsqAppUtil.HEADIMGURL,mLoginBean.getPortrait())
+                                .putString(HsqAppUtil.OTHERUSERNAME,mLoginBean.getOtherUserName())
                                 .putString(HsqAppUtil.USERLEVELNAME, mLoginBean.getUserLevelName()).commit();
 
                         startActivity(MainActivity.class);
@@ -169,6 +170,7 @@ public class LoginViewModel extends BaseViewModel<DataRepository> {
                                 .putString(HsqAppUtil.CCQTYPE,mLoginBean.getCcqType()+"")
                                 .putString(HsqAppUtil.LEVEL,mLoginBean.getUserLevel()+"")
                                 .putString(HsqAppUtil.PROJECT,mLoginBean.getProject()+"")
+                                .putString(HsqAppUtil.OTHERUSERNAME,mLoginBean.getOtherUserName())
                                 .putString(HsqAppUtil.USERLEVELNAME, mLoginBean.getUserLevelName()).commit();
 
                         startActivity(MainActivity.class);

@@ -97,6 +97,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding,LoginViewMo
         ProApplication.SHAREDMEIMG = urlBean.getShareImg();
         ProApplication.USERLEVELPRICE10 = urlBean.getUserLevelPrice10();
         ProApplication.USERLEVELPRICE20 = urlBean.getUserLevelPrice20();
+        ProApplication.KFMOBILE = urlBean.getKFMobile();
         SharedPreferences sharedPreferences = getSharedPreferences(HsqAppUtil.LOGIN, MODE_PRIVATE);
         sharedPreferences.edit().putString(HsqAppUtil.IMG, ProApplication.HEADIMG).putString(HsqAppUtil.BANNERIMG, ProApplication.BANNERIMG)
                 .putString(HsqAppUtil.CUSTOMER, ProApplication.CUSTOMERIMG).putString(HsqAppUtil.SHAREDIMG, ProApplication.SHAREDIMG)

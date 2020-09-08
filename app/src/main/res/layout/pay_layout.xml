@@ -69,6 +69,7 @@
         android:id="@+id/view_need_integral"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
+        android:visibility="@{orderdetailbean.money3 == 0 ? View.GONE : View.VISIBLE}"
         android:background="@color/line_bg"/>
 
     <RelativeLayout
@@ -112,6 +113,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
+        android:visibility="@{orderdetailbean.money2 == 0 ? View.GONE : View.VISIBLE}"
         android:background="@color/line_bg"/>
     <RelativeLayout
         android:id="@+id/rl_tel_coin"
@@ -226,7 +228,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/setting_title_color"
                 android:textSize="@dimen/textsize14"
-                android:text="+¥"/>
+                android:text="¥"/>
 
             <TextView
                 android:id="@+id/tv_fare"

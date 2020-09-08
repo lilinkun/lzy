@@ -24,6 +24,7 @@ import com.lzyyd.hsq.bean.CartChildBean;
 import com.lzyyd.hsq.bean.OrderBean;
 import com.lzyyd.hsq.bean.OrderGroupBean;
 import com.lzyyd.hsq.bean.StoreInfo;
+import com.lzyyd.hsq.ui.RoundImageView;
 import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.util.UtilTool;
@@ -127,6 +128,8 @@ public class MyShoppingCarAdapter extends BaseExpandableListAdapter {
             }
         });
         groupViewHolder.storeCheckBox.setChecked(group.isChoosed());
+
+        Picasso.with(mcontext).load(ProApplication.HEADIMG + group.getOrderListBean().getStoreLogo()).into(groupViewHolder.riv_cart);
 
         return convertView;
     }
@@ -320,6 +323,8 @@ public class MyShoppingCarAdapter extends BaseExpandableListAdapter {
         CheckBox storeCheckBox;
         @BindView(R.id.store_name)
         TextView storeName;
+        @BindView(R.id.riv_cart)
+        RoundImageView riv_cart;
 
         public GroupViewHolder(View view) {
             ButterKnife.bind(this, view);

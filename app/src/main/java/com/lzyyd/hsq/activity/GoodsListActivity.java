@@ -63,7 +63,7 @@ public class GoodsListActivity extends BaseActivity<ActivityGoodslistBinding, Go
     public void getDataSuccess(ArrayList<GoodsListBean> goodsListBeans, PageBean page) {
 
         if (goodsListAdapter == null) {
-            goodsListAdapter = new GoodsListAdapter(this);
+            goodsListAdapter = new GoodsListAdapter(this,1);
             goodsListAdapter.getItems().addAll(goodsListBeans);
             StaggeredGridLayoutManager gridLayoutManager1 = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
             binding.rvGoodsList.addItemDecoration(new GridSpacingItemDecoration(2, 20, false));

@@ -3,6 +3,7 @@ package com.lzyyd.hsq.base;
 import android.annotation.SuppressLint;
 import android.app.Application;
 
+import com.lzyyd.hsq.activity.WebViewActivity;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.viewmodel.AddAddressViewModel;
 import com.lzyyd.hsq.viewmodel.AddressListViewModel;
@@ -38,6 +39,7 @@ import com.lzyyd.hsq.viewmodel.TianfengCoinViewModel;
 import com.lzyyd.hsq.viewmodel.TransferoutViewModel;
 import com.lzyyd.hsq.viewmodel.VipViewModel;
 import com.lzyyd.hsq.viewmodel.WalletViewModel;
+import com.lzyyd.hsq.viewmodel.WebviewViewModel;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -142,6 +144,8 @@ public class AppViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             return (T) new StoreViewModel(mApplication, mRepository);
         }else if (modelClass.isAssignableFrom(ChooseWxLoginViewModel.class)){
             return (T) new ChooseWxLoginViewModel(mApplication, mRepository);
+        }else if (modelClass.isAssignableFrom(WebviewViewModel.class)){
+            return (T) new WebviewViewModel(mApplication, mRepository);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

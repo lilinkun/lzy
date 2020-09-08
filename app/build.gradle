@@ -11,7 +11,7 @@ android {
         minSdkVersion 18
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "1.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -119,8 +119,10 @@ dependencies {
 
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'pub.devrel:easypermissions:1.0.1'
-    implementation 'cn.bingoogolapple:bga-progressbar:1.0.0@aar'
+
+    implementation 'cn.bingoogolapple:bga-progressbar:1.0.1@aar'
     implementation 'cn.bingoogolapple:bga-update:1.0.2@aar'
+
     implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
 
     /*ButterKnife*/

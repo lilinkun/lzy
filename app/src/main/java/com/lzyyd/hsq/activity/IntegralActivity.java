@@ -1,5 +1,6 @@
 package com.lzyyd.hsq.activity;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -9,11 +10,14 @@ import com.lzyyd.hsq.adapter.GoodsListAdapter;
 import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseActivity;
 import com.lzyyd.hsq.base.ProApplication;
+import com.lzyyd.hsq.bean.BalanceBean;
 import com.lzyyd.hsq.bean.GoodsListBean;
+import com.lzyyd.hsq.bean.LoginBean;
 import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.databinding.ActivityIntegralBinding;
 import com.lzyyd.hsq.ui.GridSpacingItemDecoration;
 import com.lzyyd.hsq.util.Eyes;
+import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.viewmodel.IntegralViewModel;
 
 import java.util.ArrayList;
@@ -51,11 +55,12 @@ public class IntegralActivity extends BaseActivity<ActivityIntegralBinding,Integ
 
         Eyes.setStatusBarColor1(this, Color.parseColor("#FF3C38"));
 
-        int integral = getIntent().getExtras().getInt("integral");
-        binding.setIntegralCount(integral + "");
+//        int integral = getIntent().getExtras().getInt("integral");
+//        binding.setIntegralCount(integral + "");
 
         viewModel.setListener(this);
         viewModel.getGoodsListData(1,20,2, ProApplication.SESSIONID());
+        viewModel.getBalance(ProApplication.SESSIONID());
     }
 
 
@@ -64,7 +69,7 @@ public class IntegralActivity extends BaseActivity<ActivityIntegralBinding,Integ
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
 
-        GoodsListAdapter goodsListAdapter = new GoodsListAdapter(this);
+        GoodsListAdapter goodsListAdapter = new GoodsListAdapter(this,2);
         goodsListAdapter.getItems().addAll(goodsListBeans);
 
 
@@ -80,4 +85,15 @@ public class IntegralActivity extends BaseActivity<ActivityIntegralBinding,Integ
     public void getDataFail(String msg) {
 
     }
+
+    @Override
+    public void getBalanceSuccess(BalanceBean balanceBean) {
+        binding.setIntegralCount(balanceBean.getMoney3Balance()+"");
+    }
+
+    @Override
+    public void getBalanceFail(String msg) {
+
+    }
+
 }

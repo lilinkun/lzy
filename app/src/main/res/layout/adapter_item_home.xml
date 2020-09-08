@@ -7,7 +7,7 @@
 
         <variable
             name="griditem"
-            type="com.lzyyd.hsq.bean.HomeGridItemBean" />
+            type="com.lzyyd.hsq.bean.HomeGridListItemBean" />
 
     </data>
 

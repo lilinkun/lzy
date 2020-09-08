@@ -44,6 +44,7 @@ public class SureOrderActivity extends BaseActivity<ActivitySureOrderBinding, Su
     private SureOrderAdapter sureOrderAdapter;
     public static final int ADDRESS_RESULT = 0x032;
     private boolean isPay = false;
+    private String orderSn = "";
     private ArrayList<String> strings = new ArrayList<>();
 
     @Override
@@ -108,7 +109,7 @@ public class SureOrderActivity extends BaseActivity<ActivitySureOrderBinding, Su
 
     @Override
     public void getOrderSuccess(String msg) {
-
+        orderSn = msg;
         viewModel.waitpay(msg,ProApplication.SESSIONID());
 
     }
@@ -213,10 +214,16 @@ public class SureOrderActivity extends BaseActivity<ActivitySureOrderBinding, Su
     public void onPoint(int point) {
         double orderPrice = orderinfoBean.getOrderAmount() - ((int)orderinfoBean.getMoney3Balance() - point);
 
-        if (orderinfoBean.getMoney3Balance() == point){
-            binding.setOrderPrice(orderPrice+"");
+        if (orderinfoBean.getOrderInfoBuyList().get(0).getOrderType() == 64){
+            orderPrice = orderPrice - orderinfoBean.getOrderInfoBuyList().get(0).getOrderGoodsBuyList().get(0).getNum() * 1000;
+            binding.setOrderPrice(orderPrice + "(包含" + ((int) (orderinfoBean.getOrderInfoBuyList().get(0).getOrderGoodsBuyList().get(0).getNum() * 1000)) + "优惠券)");
         }else {
-            binding.setOrderPrice(orderPrice + "(包含"+ ((int)orderinfoBean.getMoney3Balance() - point) +"积分)");
+
+            if (orderinfoBean.getMoney3Balance() == point) {
+                binding.setOrderPrice(orderPrice + "");
+            } else {
+                binding.setOrderPrice(orderPrice + "(包含" + ((int) orderinfoBean.getMoney3Balance() - point) + "积分)");
+            }
         }
 
     }
@@ -258,7 +265,14 @@ public class SureOrderActivity extends BaseActivity<ActivitySureOrderBinding, Su
     public void setWxPaySuccess(String msg) {
         if (isPay){
             Intent intent = new Intent();
-            intent.setClass(this,OrderListActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("ordersn",orderSn);
+            intent.putExtras(bundle);
+            if (orderSn.contains(",")){
+                intent.setClass(this,OrderListActivity.class);
+            }else {
+                intent.setClass(this, OrderDetailActivity.class);
+            }
             startActivity(intent);
             finish();
             isPay = !isPay;
@@ -270,7 +284,14 @@ public class SureOrderActivity extends BaseActivity<ActivitySureOrderBinding, Su
         UToast.show(this,msg);
         if (isPay){
             Intent intent = new Intent();
-            intent.setClass(this,OrderListActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("ordersn",orderSn);
+            intent.putExtras(bundle);
+            if (orderSn.contains(",")){
+                intent.setClass(this,OrderListActivity.class);
+            }else {
+                intent.setClass(this, OrderDetailActivity.class);
+            }
             startActivity(intent);
             finish();
             isPay = !isPay;

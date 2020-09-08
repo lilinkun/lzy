@@ -181,12 +181,17 @@ public class GoodsPopLayout extends RelativeLayout implements View.OnClickListen
         } else if (type == HsqAppUtil.GOODSTYPE_CCQ) {
             tv_add_cart.setVisibility(GONE);
             tv_buy_goods.setBackground(getResources().getDrawable(R.drawable.bg_chuangke_update));
+            tv_goods_pop_price.setText("¥" + goodsDetailBean.getPrice());
         }else {
-                tv_goods_pop_price.setText("" + goodsDetailBean.getPrice());
+             tv_goods_pop_price.setText("¥" + goodsDetailBean.getPrice());
 
         }
 
         tv_stock.setText(goodsDetailBean.getGoodsNumber() + "件");
+
+        if (goodsDetailBean.getQty() == 0){
+            tv_size.setVisibility(GONE);
+        }
 
 
         if (goodsDetailBean != null && goodsDetailBean.getAttr() != null && goodsDetailBean.getAttr().size() != 0) {

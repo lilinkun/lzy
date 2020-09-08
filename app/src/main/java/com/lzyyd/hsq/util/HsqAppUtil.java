@@ -27,6 +27,7 @@ public class HsqAppUtil {
     public static final String TYPEID = "TYPEID";
     public static final String GOODSTYPE = "GOODSTYPE";
     public static final String USERNAME = "username";
+    public static final String OTHERUSERNAME = "OtherUserName";
     public static final String GOODSNAME = "goodsname";
     public static final String USERID = "userid";
     public static final String LOGIN = "login";

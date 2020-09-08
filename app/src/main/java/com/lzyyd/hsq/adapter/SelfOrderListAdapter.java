@@ -53,11 +53,11 @@ public class SelfOrderListAdapter extends RecyclerView.Adapter<SelfOrderListAdap
         }*/
 
         if (selfOrderInfoBeans.get(position).getAttrOne() != null && !selfOrderInfoBeans.get(position).getAttrOne().isEmpty()) {
-            holder.tv_goods_spec1.setText(selfOrderInfoBeans.get(position).getAttrOne());
+            holder.tv_goods_spec1.setText(selfOrderInfoBeans.get(position).getAttrOneName() + ":" + selfOrderInfoBeans.get(position).getAttrOne());
         }
 
         if (selfOrderInfoBeans.get(position).getAttrTwo() != null && !selfOrderInfoBeans.get(position).getAttrTwo().isEmpty()) {
-            holder.tv_goods_spec2.setText(" " + selfOrderInfoBeans.get(position).getAttrTwo());
+            holder.tv_goods_spec2.setText( "," + selfOrderInfoBeans.get(position).getAttrTwoName() + ":" +  selfOrderInfoBeans.get(position).getAttrTwo());
         }
         Picasso.with(context).load(ProApplication.HEADIMG + selfOrderInfoBeans.get(position).getGoodsImg()).into(holder.iv_goods_pic);
 

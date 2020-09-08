@@ -17,7 +17,16 @@ public class OrderInfoBuyListBean {
     private String StoreName;
     private String StoreLogo;
     private String Weight;
+    private int OrderType;
     private ArrayList<OrderGoodsBuyListBean> OrderGoodsBuyList;
+
+    public int getOrderType() {
+        return OrderType;
+    }
+
+    public void setOrderType(int orderType) {
+        OrderType = orderType;
+    }
 
     public int getIntegral() {
         return Integral;

@@ -127,6 +127,10 @@ public class ProApplication extends Application {
 
     public static String HeadImg = "";
 
+    public static String SQ = "";
+
+    public static String KFMOBILE = "";
+
     public static final String IMG_BIG = "imgdb/";
     public static final String IMG_HOME_ADDRESS = "imgdb/velet/";
     public static final String IMG_SMALL = "img/300/300/";

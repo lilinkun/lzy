@@ -15,7 +15,7 @@ public class HomeBean {
     private ArrayList<HomeItemBean> GoodsList5;
     private ArrayList<HomeItemBean> GoodsList6;
     private ArrayList<FlashBean> flash;
-    private ArrayList<HomeGridItemBean> SqIcon;
+    private ArrayList<HomeGridListItemBean> SqIcon;
     private HomeGridItemBean Vip;
     private HomeGridItemBean Sq;
     private List<ArticleDetailBean> News;
@@ -53,11 +53,11 @@ public class HomeBean {
         Sq = sq;
     }
 
-    public ArrayList<HomeGridItemBean> getSqIcon() {
+    public ArrayList<HomeGridListItemBean> getSqIcon() {
         return SqIcon;
     }
 
-    public void setSqIcon(ArrayList<HomeGridItemBean> sqIcon) {
+    public void setSqIcon(ArrayList<HomeGridListItemBean> sqIcon) {
         SqIcon = sqIcon;
     }
 

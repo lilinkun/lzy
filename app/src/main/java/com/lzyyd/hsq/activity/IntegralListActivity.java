@@ -56,8 +56,10 @@ public class IntegralListActivity extends BaseActivity<ActivityIntegralListBindi
 
         if (type == 3){
             binding.setTitlename("· 积分明细 ·");
-        }else {
+        }else if (type == 4){
             binding.setTitlename("· 预到账明细 ·");
+        }else if (type == 7){
+            binding.setTitlename("· 优惠券明细 ·");
         }
 
         viewModel.setListener(this);

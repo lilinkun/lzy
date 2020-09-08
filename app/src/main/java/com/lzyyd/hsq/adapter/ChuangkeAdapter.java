@@ -2,6 +2,7 @@ package com.lzyyd.hsq.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 
@@ -48,6 +49,8 @@ public class ChuangkeAdapter extends BaseBindingAdapter<GoodsListBean, AdapterCh
         binding.goodsSpec1.setText(item.getIsPresell() == 1 ? item.getBeginDate() : (item.getGoodsSpec1() + item.getGoodsSpec2()));
 
         binding.setGoodslist(item);
+
+        binding.tvMacketprice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 
 
         if (ChuangkeActivity.totalGoods != null && ChuangkeActivity.totalGoods.size() > 0){

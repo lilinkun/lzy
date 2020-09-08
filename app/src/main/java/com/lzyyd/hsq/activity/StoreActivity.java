@@ -61,7 +61,7 @@ public class StoreActivity extends BaseActivity<ActivityStoreBinding, StoreViewM
         if (goodsListAdapter == null) {
             binding.setImgRes(goodsListBeans.get(0).getStoreLogo());
             binding.setName(goodsListBeans.get(0).getStoreName());
-            goodsListAdapter = new GoodsListAdapter(this);
+            goodsListAdapter = new GoodsListAdapter(this,1);
             goodsListAdapter.getItems().addAll(goodsListBeans);
             StaggeredGridLayoutManager gridLayoutManager1 = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
             binding.rvStore.addItemDecoration(new GridSpacingItemDecoration(2, 20, false));

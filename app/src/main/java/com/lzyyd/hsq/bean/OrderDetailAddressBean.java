@@ -43,8 +43,17 @@ public class OrderDetailAddressBean {
     private int StoreId;
     private String StoreName;
     private String StoreLogo;
+    private String OrderStatusSay;
 
     private String FreezeId;
+
+    public String getOrderStatusSay() {
+        return OrderStatusSay;
+    }
+
+    public void setOrderStatusSay(String orderStatusSay) {
+        OrderStatusSay = orderStatusSay;
+    }
 
     public double getMoney6() {
         return Money6;

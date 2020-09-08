@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/grey_color3"
                 android:textSize="@dimen/textsize12"
-                android:text='@{Orderdetail.attrOne != null ? Orderdetail.attrOne : ""}'
+                android:text='@{Orderdetail.attrOne.toString().length() == 0 ? "" : Orderdetail.attrOne}'
                 android:layout_marginTop="@dimen/margin_5" />
 
             <TextView
@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/grey_color3"
                 android:textSize="@dimen/textsize12"
-                android:text='@{Orderdetail.attrTwo != null ? "," + Orderdetail.attrTwo : ""}'
+                android:text='@{Orderdetail.attrTwo.toString().length() == 0 ? "" : "," + Orderdetail.attrTwo}'
                 android:layout_marginTop="@dimen/margin_5" />
 
         </LinearLayout>
@@ -100,7 +100,8 @@
                 android:lineSpacingExtra="-3sp"
                 android:includeFontPadding="false"
                 android:layout_marginLeft="2dip"
-                android:textColor="@color/text_222222"
+                android:text='@{Orderdetail.integral == 0 ? "" : "+" + Orderdetail.integral + @string/me_integral}'
+                android:textColor="@color/RED_E00000"
                 android:textSize="@dimen/textsize15"
                 />
 

@@ -85,15 +85,34 @@
                     android:layout_marginLeft="10dp"
                     android:orientation="vertical">
 
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/margin_4"
+                        android:gravity="center_vertical"
+                        >
+
                     <TextView
-                        android:id="@+id/tv_wlm_account"
+                        android:id="@+id/tv_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/textsize16"
                         android:textColor="@color/white"
                         android:text="@{userinfo.nickName}"
-                        android:layout_marginTop="@dimen/margin_4"
                         />
+
+                    <TextView
+                        android:id="@+id/tv_account"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/textsize16"
+                        android:textColor="@color/white"
+                        android:text="@{userinfo.userName}"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        />
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/ll_me_vip"
@@ -117,7 +136,7 @@
                             android:id="@+id/tv_me_vip"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text='@{"VIP等级 :" + userinfo.userLevel}'
+                            android:text='@{userinfo.userLevelName}'
                             android:textColor="#ffffffff"
                             android:textSize="@dimen/textsize10"
                             android:layout_marginLeft="3dp"
@@ -273,6 +292,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:onClick="@{()->me.setJumpCoupon()}"
                 android:orientation="vertical">
 
                 <TextView

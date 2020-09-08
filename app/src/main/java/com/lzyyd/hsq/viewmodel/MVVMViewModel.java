@@ -4,7 +4,6 @@ import android.app.Application;
 
 import com.lzyyd.hsq.bean.UrlBean;
 import com.lzyyd.hsq.data.DataRepository;
-import com.lzyyd.hsq.databinding.ActivityMainBinding;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
 import com.lzyyd.hsq.model.MVVMModel;
 
@@ -21,7 +20,6 @@ public class MVVMViewModel extends BaseViewModel<DataRepository> {
 
 
     private MVVMModel mvvmModel;
-    private ActivityMainBinding binding;
 
     public MVVMViewModel(Application application, DataRepository dataRepository) {
         super(application,dataRepository);

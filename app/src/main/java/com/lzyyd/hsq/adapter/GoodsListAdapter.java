@@ -18,10 +18,12 @@ import com.lzyyd.hsq.util.HsqAppUtil;
 public class GoodsListAdapter extends BaseBindingAdapter<GoodsListBean, AdapterGoodslistBinding> {
 
     private Context context;
+    private int type;
 
-    public GoodsListAdapter(Context context){
+    public GoodsListAdapter(Context context,int type){
         super(context);
        this.context = context;
+       this.type = type;
     }
 
 
@@ -40,7 +42,7 @@ public class GoodsListAdapter extends BaseBindingAdapter<GoodsListBean, AdapterG
 
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
-        bundle.putInt(HsqAppUtil.TYPE,HsqAppUtil.GOODSTYPE_INTEGRAL);
+        bundle.putInt(HsqAppUtil.TYPE,type);
         bundle.putString(HsqAppUtil.GOODSID,items.get(position).getGoodsId());
         intent.putExtras(bundle);
         intent.setClass(context, GoodsDetailActivity.class);

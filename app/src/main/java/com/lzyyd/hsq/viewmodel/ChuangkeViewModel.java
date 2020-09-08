@@ -35,7 +35,7 @@ public class ChuangkeViewModel extends BaseViewModel<DataRepository> {
     private ChuangkeDataCallBack chuangkeDataCallBack;
     private ChuangkeCategoryDateCallBack chuangkeCategoryDateCallBack;
 
-    public ObservableField<String> maxPrice = new ObservableField<>("应选" + ProApplication.USERLEVELPRICE10 + "元");
+    public ObservableField<String> maxPrice = new ObservableField<>();
 
     public ObservableField<Integer> goodsCount = new ObservableField<>();
     public ObservableField<String> price = new ObservableField<>();

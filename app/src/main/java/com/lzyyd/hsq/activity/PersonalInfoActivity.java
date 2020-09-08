@@ -31,6 +31,7 @@ import com.lzyyd.hsq.util.ActivityUtil;
 import com.lzyyd.hsq.util.Eyes;
 import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
+import com.lzyyd.hsq.util.UpdateManager;
 import com.lzyyd.hsq.viewmodel.PersonalInfoViewModel;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -41,11 +42,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProviders;
+import cn.bingoogolapple.update.BGADownloadProgressEvent;
 import cn.bingoogolapple.update.BGAUpgradeUtil;
 import okhttp3.Call;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 import rx.Subscriber;
+import rx.functions.Action1;
 
 /**
  * Created by LG on 2018/11/19.
@@ -95,7 +98,7 @@ public class PersonalInfoActivity extends BaseActivity<ActivityPersonalInfoBindi
                 TextView tv_dialog_phone = (TextView) view.findViewById(R.id.tv_dialog_phone);
                 TextView tv_exit = (TextView) view.findViewById(R.id.tv_exit);
                 TextView tv_call = (TextView) view.findViewById(R.id.tv_call);
-                tv_dialog_phone.setText("4006655625");
+                tv_dialog_phone.setText(ProApplication.KFMOBILE);
 
                 tv_exit.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -112,6 +115,18 @@ public class PersonalInfoActivity extends BaseActivity<ActivityPersonalInfoBindi
                 });
             }
         });
+
+
+        // 监听下载进度
+        BGAUpgradeUtil.getDownloadProgressEventObservable()
+                .subscribe(new Action1<BGADownloadProgressEvent>() {
+                    @Override
+                    public void call(BGADownloadProgressEvent downloadProgressEvent) {
+                        if (mDownloadingDialog != null && mDownloadingDialog.isShowing() && downloadProgressEvent.isNotDownloadFinished()) {
+                            mDownloadingDialog.setProgress(downloadProgressEvent.getProgress(), downloadProgressEvent.getTotal());
+                        }
+                    }
+                });
     }
 
     @Override
@@ -157,6 +172,7 @@ public class PersonalInfoActivity extends BaseActivity<ActivityPersonalInfoBindi
                 .putString(HsqAppUtil.LEVEL,mLoginBean.getUserLevel()+"")
                 .putString(HsqAppUtil.PROJECT,mLoginBean.getProject()+"")
                 .putString(HsqAppUtil.HEADIMGURL,mLoginBean.getPortrait())
+                .putString(HsqAppUtil.OTHERUSERNAME,mLoginBean.getOtherUserName())
                 .putString(HsqAppUtil.USERLEVELNAME, mLoginBean.getUserLevelName()).commit();
     }
 
@@ -173,7 +189,7 @@ public class PersonalInfoActivity extends BaseActivity<ActivityPersonalInfoBindi
         }
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_CALL);
-        intent.setData(Uri.parse("tel:4006655625"));
+        intent.setData(Uri.parse("tel:"+ProApplication.KFMOBILE));
         startActivity(intent);
     }
 
@@ -215,6 +231,7 @@ public class PersonalInfoActivity extends BaseActivity<ActivityPersonalInfoBindi
                     UToast.show(this, "CALL_PHONE Denied");
                 }
                 break;
+
             default:
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
@@ -233,6 +250,7 @@ public class PersonalInfoActivity extends BaseActivity<ActivityPersonalInfoBindi
         myPermission();
 
         String url = ProApplication.UPGRADEURL;
+        final double code = UpdateManager.getInstance().getVersionName(this);
         OkHttpUtils.get()
                 .url(url)
                 .addParams("api_token", ProApplication.UPGRADETOKEN)

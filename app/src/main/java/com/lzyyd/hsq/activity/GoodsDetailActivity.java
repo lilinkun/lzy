@@ -1,11 +1,17 @@
 package com.lzyyd.hsq.activity;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -196,6 +202,44 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         }
 
 
+        binding.wvDetail.getSettings().setJavaScriptEnabled(true);
+        binding.wvDetail.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN); // 让网页的内容呈单列显示
+        binding.wvDetail.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH); // 加速显示图片
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            binding.wvDetail.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
+        }
+        binding.wvDetail.setVisibility(View.GONE);
+        binding.wvDetail.setWebViewClient(new WebViewClient() {
+            public boolean shouldOverrideUrlLoading(WebView paramAnonymousWebView, String paramAnonymousString) {
+                return false;
+            }
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                binding.wvDetail.setVisibility(View.VISIBLE);
+                view.getSettings().setJavaScriptEnabled(true);
+
+                super.onPageFinished(view, url);
+            }
+        });
+
+        binding.wvDetail.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+
+            }
+        });
+
+        String mobileDesc = goodsListBeans.getMobileDesc();
+
+        binding.wvDetail.loadUrl(mobileDesc);
+
+
         this.goodsDetailBean = goodsListBeans;
 //        type = goodsDetailBean.getGoodsType();
 
@@ -206,6 +250,14 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         }
 
         if (type == HsqAppUtil.GOODSTYPE_INTEGRAL){
+
+            binding.rlIntegralDetail.setVisibility(View.VISIBLE);
+            binding.llCommon.setVisibility(View.GONE);
+            TextUtil.setText(this, goodsListBeans.getGoodsName(), "积分", binding.tvGoodsContent);
+            binding.tvIntegralMacketprice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        }
+
+        if (type == HsqAppUtil.GOODSTYPE_COMMON && goodsListBeans.getIntegral() != 0){
 
             binding.rlIntegralDetail.setVisibility(View.VISIBLE);
             binding.llCommon.setVisibility(View.GONE);

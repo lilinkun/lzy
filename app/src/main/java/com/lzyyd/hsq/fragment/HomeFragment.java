@@ -172,6 +172,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
 
         binding.rvHome.setAdapter(gridHomeAdapter);
 
+        ProApplication.SQ = homeBean.getSq().getUrl();
 
         if (homeType == 1){
             homeItemBeans = homeBean.getGoodsList4();

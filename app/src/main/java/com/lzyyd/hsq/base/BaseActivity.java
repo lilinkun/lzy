@@ -12,6 +12,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
@@ -276,4 +277,18 @@ public abstract class BaseActivity<V extends ViewDataBinding,VM extends BaseView
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        if (requestCode == REQUEST_EXTERNAL_STORAGE){
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                onPermission();
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    public void onPermission(){
+
+    }
 }

@@ -4,7 +4,9 @@ import android.app.Application;
 import android.os.Bundle;
 
 import com.lzyyd.hsq.activity.IntegralListActivity;
+import com.lzyyd.hsq.bean.BalanceBean;
 import com.lzyyd.hsq.bean.GoodsListBean;
+import com.lzyyd.hsq.bean.LoginBean;
 import com.lzyyd.hsq.bean.PageBean;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
@@ -72,6 +74,36 @@ public class IntegralViewModel extends BaseViewModel<DataRepository> {
 
     }
 
+    public void getBalance(String SessionId) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("cls", "UserBase");
+        params.put("fun", "BankBase_GetBalance");
+        params.put("SessionId", SessionId);
+        model.getBalance(params)
+                .compose(RxUtils.schedulersTransformer())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>(){
+                    @Override
+                    public void accept(Disposable disposable){
+                        showDialog();
+                    }
+                })
+                .subscribe(new HttpResultCallBack<BalanceBean, Object>() {
+                    @Override
+                    public void onResponse(BalanceBean balanceBean, String status, Object page) {
+                        dismissDialog();
+                        getGoodsListCallBack.getBalanceSuccess(balanceBean);
+                    }
+
+                    @Override
+                    public void onErr(String msg, String status) {
+                        dismissDialog();
+                        getGoodsListCallBack.getBalanceFail(msg);
+                    }
+                });
+    }
+
 
     public void integralList(){
         Bundle bundle = new Bundle();
@@ -82,6 +114,8 @@ public class IntegralViewModel extends BaseViewModel<DataRepository> {
     public interface GetGoodsListCallBack{
         public void getDataSuccess(ArrayList<GoodsListBean> goodsListBeans,PageBean page);
         public void getDataFail(String msg);
+        public void getBalanceSuccess(BalanceBean balanceBean);
+        public void getBalanceFail(String msg);
     }
 
 }

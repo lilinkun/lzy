@@ -27,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#F2F2F2"
+        android:visibility="@{goodsDetail.qty == 0 ? View.GONE : View.VISIBLE}"
         />
 
 
@@ -74,6 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#F2F2F2"
+        android:visibility="@{goodsDetail.isPresell > 0 ? View.VISIBLE : View.GONE}"
         />
 
     <RelativeLayout

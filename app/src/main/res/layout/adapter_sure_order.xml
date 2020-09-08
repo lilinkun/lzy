@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -12,6 +13,8 @@
         <variable
             name="sureadapter"
             type="com.lzyyd.hsq.adapter.SureOrderAdapter" />
+
+        <import type="android.view.View"/>
 
     </data>
 
@@ -31,9 +34,11 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            <com.lzyyd.hsq.ui.RoundImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:image="@{orders.storeLogo}"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -94,6 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/devide_ededed"
+            android:visibility="@{orders.integral == 0 ? View.GONE : View.VISIBLE}"
             />
 
 
@@ -101,6 +107,7 @@
             android:id="@+id/rl_integral"
             android:layout_width="match_parent"
             android:layout_height="44dp"
+            android:visibility="@{orders.integral == 0 ? View.GONE : View.VISIBLE}"
             >
 
             <LinearLayout
@@ -140,7 +147,7 @@
 
 
                 <TextView
-                    android:id="@+id/order_integral"
+                    android:id="@+id/order_coupon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{sureadapter.orderField}"
@@ -161,6 +168,7 @@
 
 
         </RelativeLayout>
+
 
         <View
             android:layout_width="match_parent"
@@ -202,16 +210,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/margin_10"
-                    android:text="+ ￥"
+                    android:text="￥"
                     android:textColor="#ff222222"
                     android:textSize="14sp"
+                    android:visibility="gone"
                     />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/margin_10"
-                    android:text='@{String.valueOf(orders.shippingFree)}'
+                    android:text='@{@string/price + String.valueOf(orders.shippingFree)}'
                     android:textColor="#ff222222"
                     android:textSize="14sp"
                     />
@@ -219,6 +228,64 @@
             </LinearLayout>
 
 
+
+
+        </RelativeLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/devide_ededed"
+            android:visibility="@{orders.orderType == 64 ? View.VISIBLE : View.GONE}"
+            />
+
+
+        <RelativeLayout
+            android:id="@+id/rl_coupon"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:visibility="@{orders.orderType == 64 ? View.VISIBLE : View.GONE}"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="优惠券"
+                    android:textColor="#ff222222"
+                    android:textSize="14sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:layout_marginRight="@dimen/margin_10"
+                android:orientation="horizontal"
+                >
+
+
+                <TextView
+                    android:id="@+id/order_integral"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{@string/price + String.valueOf(orders.orderGoodsBuyList.get(0).num * 1000)}"
+                    android:textColor="@color/red_e61d15"
+                    android:textSize="14sp"
+                    />
+
+
+            </LinearLayout>
 
 
         </RelativeLayout>
@@ -280,12 +347,12 @@
                 android:textSize="14sp"/>
 
             <TextView
+                android:id="@+id/tv_order_amount_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/margin_10"
-                android:text="@{'¥' + String.valueOf(orders.orderAmount)}"
                 android:textColor="@color/red_e61d15"
                 android:textSize="14sp"
                 android:layout_marginLeft="@dimen/margin_15"

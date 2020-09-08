@@ -13,6 +13,7 @@ import com.lzyyd.hsq.databinding.ActivityVipBinding;
 import com.lzyyd.hsq.util.Eyes;
 import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.viewmodel.VipViewModel;
+import com.squareup.picasso.Picasso;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -44,6 +45,13 @@ public class VipActivity extends BaseActivity<ActivityVipBinding, VipViewModel> 
         SharedPreferences sharedPreferences = getSharedPreferences(HsqAppUtil.LOGIN,MODE_PRIVATE);
         String Project = sharedPreferences.getString(HsqAppUtil.PROJECT,"");
         String userLevel = sharedPreferences.getString(HsqAppUtil.USERLEVEL,"");
+        String userLevelName = sharedPreferences.getString(HsqAppUtil.USERLEVELNAME,"");
+
+        String headImg = sharedPreferences.getString(HsqAppUtil.HEADIMGURL,"");
+        Picasso.with(this).load(headImg).into(binding.rivVip);
+
+        binding.vipName.setText(userLevelName);
+
 
         viewModel.projectField.set(Integer.valueOf(Project) == 1 ? View.VISIBLE : View.GONE);
 
@@ -54,18 +62,24 @@ public class VipActivity extends BaseActivity<ActivityVipBinding, VipViewModel> 
                     viewModel.setJumpChuangke(16);
                 }
             });
+        }else {
+            binding.tvVip.setBackground(getResources().getDrawable(R.drawable.bg_update_vip_unclick));
         }
 
         if (Project.equals("1")){
             if (Integer.valueOf(userLevel) >= 120){
                 binding.rlVipChuangke.setEnabled(false);
+                binding.tvChuangke.setBackground(getResources().getDrawable(R.drawable.bg_update_vip_unclick));
                 binding.rlVipServiceCenter.setEnabled(false);
+                binding.tvCenter.setBackground(getResources().getDrawable(R.drawable.bg_update_vip_unclick));
             }else if (Integer.valueOf(userLevel) >= 110 && Integer.valueOf(userLevel) < 120){
                 binding.rlVipChuangke.setEnabled(false);
+                binding.tvChuangke.setBackground(getResources().getDrawable(R.drawable.bg_update_vip_unclick));
             }
         }else if (Project.equals("2")){
             if (Integer.valueOf(userLevel) >= 220){
                 binding.rlVipChuangke.setEnabled(false);
+                binding.tvChuangke.setBackground(getResources().getDrawable(R.drawable.bg_update_vip_unclick));
             }
 
         }

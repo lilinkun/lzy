@@ -82,10 +82,15 @@ public class ChuangkeActivity extends BaseActivity<ActivityChuangkeBinding, Chua
 
         if (goodstype == 4){
             binding.tvTitle.setText("创客礼包");
+            viewModel.maxPrice.set("应选" + ProApplication.USERLEVELPRICE10 + "元");
         }else if (goodstype == 8){
-            binding.tvTitle.setText("服务中心");
+            binding.tvTitle.setText("申请服务中心");
+            viewModel.maxPrice.set("应选" + ProApplication.USERLEVELPRICE20 + "元");
+            binding.customBottom.tvSettlement.setText("申请服务中心");
+            binding.customBottom.tvSettlement.setTextSize(14);
         }else if (goodstype == 16){
             binding.tvTitle.setText("二次进货");
+            binding.customBottom.tvSettlement.setText("二次进货");
         }
 
         viewModel.setChuangkeCategoryDateCallBack(this);
@@ -172,9 +177,16 @@ public class ChuangkeActivity extends BaseActivity<ActivityChuangkeBinding, Chua
     @Override
     public void sureorder() {
 
-        if (price <= ProApplication.USERLEVELPRICE10){
-            UToast.show(this,"所选金额不足");
-            return;
+        if (goodstype == 4) {
+            if (price < ProApplication.USERLEVELPRICE10) {
+                UToast.show(this, "所选金额不足");
+                return;
+            }
+        }else if (goodstype == 8){
+            if (price < ProApplication.USERLEVELPRICE20) {
+                UToast.show(this, "所选金额不足");
+                return;
+            }
         }
 
         try{
@@ -198,7 +210,7 @@ public class ChuangkeActivity extends BaseActivity<ActivityChuangkeBinding, Chua
                 jsonArray.put(jsonObject);
             }
 
-            viewModel.buyVipGoods(jsonArray.toString(),HsqAppUtil.GOODSTYPE_VIP+"",ProApplication.SESSIONID());
+            viewModel.buyVipGoods(jsonArray.toString(),goodstype+"",ProApplication.SESSIONID());
         }catch (Exception e){
             e.printStackTrace();
         }
