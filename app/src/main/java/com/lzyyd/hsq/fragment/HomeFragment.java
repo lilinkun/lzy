@@ -52,7 +52,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
     // 滑动的最大距离（自行定义，you happy jiu ok）
     int maxHeight = DensityUtil.dp2px(70);
 
-    int topHeight = DensityUtil.dp2px(30);
+    int topHeight = DensityUtil.dp2px(35);
 
     private int homeType = 1;
 

@@ -104,7 +104,7 @@ public class ChuangkeViewModel extends BaseViewModel<DataRepository> {
         params.put("PageCount",PageCount+"");
         params.put("GoodsType",GoodsType+"");
         params.put("SessionId",SessionId);
-        if (CategoryId != null && StringUtils.isEmpty(CategoryId)) {
+        if (CategoryId != null && !StringUtils.isEmpty(CategoryId)) {
             params.put("CategoryId", CategoryId + "");
         }
         model.getGoodsListVip(params)

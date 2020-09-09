@@ -89,37 +89,58 @@
     </LinearLayout>
 
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_15"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/giv"
+            >
+
     <TextView
-        android:layout_width="105dp"
-        android:layout_height="40dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="加入购物车"
         android:gravity="center"
         android:textColor="#ffffffff"
         android:textSize="14sp"
         android:onClick="@{()->goodsDetailViewModel.addCart()}"
-        android:layout_marginLeft="15dp"
+        android:padding="@dimen/padding_10"
         android:background="@drawable/bg_add_cart"
         />
 
 
     <TextView
-        android:layout_width="105dp"
-        android:layout_height="40dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="立即购买"
         android:gravity="center"
         android:textColor="#ffffffff"
         android:textSize="14sp"
+        android:padding="@dimen/padding_10"
         android:background="@drawable/bg_buy_right_now"
         android:onClick="@{()->goodsDetailViewModel.sureOrder()}"
         />
-
+        </LinearLayout>
 
     <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/giv"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="@dimen/margin_15"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_15"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
         android:src="@drawable/ic_goods_detail_shared"
         />
+
+    </RelativeLayout>
 
 </LinearLayout>
 </RelativeLayout>

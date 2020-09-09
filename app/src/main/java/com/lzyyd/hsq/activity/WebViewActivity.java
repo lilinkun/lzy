@@ -1,12 +1,17 @@
 package com.lzyyd.hsq.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.gesture.GestureOverlayView;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.webkit.GeolocationPermissions;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
@@ -50,6 +55,24 @@ public class WebViewActivity extends BaseActivity<ActivityWebviewBinding, Webvie
 
         binding.wvInput.getSettings().setDomStorageEnabled(true);
         binding.wvInput.getSettings().setJavaScriptEnabled(true);
+        binding.wvInput.getSettings().setBlockNetworkImage(false);
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+
+            binding.wvInput.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+
+        }
+
+        binding.wvInput.getSettings().setDatabaseEnabled(true);
+        String dir = this.getApplicationContext().getDir("database", Context.MODE_PRIVATE).getPath();
+        //启用地理定位
+        binding.wvInput.getSettings().setGeolocationEnabled(true);
+        //设置定位的数据库路径
+        binding.wvInput.getSettings().setGeolocationDatabasePath(dir);
+        //最重要的方法，一定要设置，这就是出不来的主要原因
+        binding.wvInput.getSettings().setDomStorageEnabled(true);
+
+
         binding.wvInput.loadUrl(url);
         binding.wvInput.setWebViewClient(new WebViewClient() {
             @Override
@@ -98,11 +121,15 @@ public class WebViewActivity extends BaseActivity<ActivityWebviewBinding, Webvie
                 super.onProgressChanged(view, newProgress);
             }
 
-
+            @Override
+            public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
+                callback.invoke(origin, true, true);
+            }
         });
 //        binding.wvInput.loadUrl("https://www.baidu.com");
 
 //        Log.v("asdaaaaaaaaaaaaaaaaaa","asdasdasd");
+
     }
 
     @Override
@@ -125,13 +152,18 @@ public class WebViewActivity extends BaseActivity<ActivityWebviewBinding, Webvie
 
     @Override
     public void onBackPressed() {
-    if (!binding.wvInput.canGoBack()){
-        finish();
-    }else {
-        binding.wvInput.goBack();// activityBaseWebAddWebView.reload();
-        binding.wvInput.removeAllViews();//删除webview中所以进程
+        if (!binding.wvInput.canGoBack()){
+            finish();
+        }else {
+            binding.wvInput.goBack();// activityBaseWebAddWebView.reload();
+            binding.wvInput.removeAllViews();//删除webview中所以进程
 
+        }
     }
+
+
+    public void onBackHome(){
+        finish();
     }
 
 

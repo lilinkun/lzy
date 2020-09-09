@@ -253,7 +253,14 @@ public class SureOrderActivity extends BaseActivity<ActivitySureOrderBinding, Su
         super.onRestart();
         if (isPay){
             Intent intent = new Intent();
-            intent.setClass(this,OrderListActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("ordersn",orderSn);
+            intent.putExtras(bundle);
+            if (orderSn.contains(",")){
+                intent.setClass(this,OrderListActivity.class);
+            }else {
+                intent.setClass(this, OrderDetailActivity.class);
+            }
             startActivity(intent);
             finish();
             isPay = !isPay;

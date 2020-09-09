@@ -18,4 +18,5 @@ public class WebviewViewModel extends BaseViewModel<DataRepository> {
         super(application,dataRepository);
     }
 
+
 }

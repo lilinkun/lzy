@@ -129,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:text="@{transferout.amountPoint}"
-                android:textColor="#ff333333"
+                android:textColor="@color/red_e61e16"
                 android:textSize="16sp"
                 />
 
@@ -162,19 +162,37 @@
                 android:textSize="16sp"
                 />
 
-
-            <EditText
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
+                >
+
+            <EditText
+                android:id="@+id/et_receiver"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:hint="请输入接收人会员编号"
                 android:background="@null"
+                android:layout_toLeftOf="@+id/tv_transfername"
                 android:text="@={transferout.ReceiverName}"
-                android:textColor="#ff333333"
+                android:textColor="@color/grey_333333"
                 android:textSize="16sp"
                 />
 
+                <TextView
+                    android:id="@+id/tv_transfername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:textSize="@dimen/textsize16"
+                    android:textColor="@color/grey_333333"
+                    android:layout_marginRight="@dimen/margin_10"
+                    />
+
+            </RelativeLayout>
 
         </LinearLayout>
 

@@ -413,7 +413,7 @@ public class ChuangkeActivity extends BaseActivity<ActivityChuangkeBinding, Chua
             }
 
             viewModel.goodsCount.set(num);
-            viewModel.price.set("￥" + price);
+            viewModel.price.set("¥" + price);
         }
     }
 

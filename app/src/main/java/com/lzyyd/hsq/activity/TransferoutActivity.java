@@ -3,14 +3,22 @@ package com.lzyyd.hsq.activity;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.TextView;
 
 import com.lzyyd.hsq.BR;
 import com.lzyyd.hsq.R;
 import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseActivity;
 import com.lzyyd.hsq.base.ProApplication;
+import com.lzyyd.hsq.bean.LoginBean;
 import com.lzyyd.hsq.databinding.ActivityTransferoutBinding;
+import com.lzyyd.hsq.util.Eyes;
 import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.TransferoutViewModel;
@@ -25,6 +33,10 @@ import me.goldze.mvvmhabit.utils.StringUtils;
  */
 public class TransferoutActivity extends BaseActivity<ActivityTransferoutBinding, TransferoutViewModel> implements TransferoutViewModel.OnTransferoutListener {
 
+    Handler handler = new Handler();
+    Runnable runnable;
+
+
     @Override
     public int initContentView(Bundle savedInstanceState) {
         return R.layout.activity_transferout;
@@ -37,6 +49,7 @@ public class TransferoutActivity extends BaseActivity<ActivityTransferoutBinding
 
     @Override
     public void initData() {
+        Eyes.setStatusBarWhiteColor(this,getResources().getColor(R.color.white));
 
         String balance = getIntent().getExtras().getString("balance");
 
@@ -47,6 +60,17 @@ public class TransferoutActivity extends BaseActivity<ActivityTransferoutBinding
         binding.setEleName(sharedPreferences.getString(HsqAppUtil.USERNAME, ""));
 
         viewModel.setListener(this);
+
+        binding.etReceiver.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus){
+                    if (!StringUtils.isEmpty(binding.etReceiver.getText().toString())) {
+                        viewModel.setFindUsername(binding.etReceiver.getText().toString(), ProApplication.SESSIONID());
+                    }
+                }
+            }
+        });
 
     }
 
@@ -66,6 +90,17 @@ public class TransferoutActivity extends BaseActivity<ActivityTransferoutBinding
 
     @Override
     public void getTransferoutFail(String msg) {
+        UToast.show(this,msg);
+    }
+
+    @Override
+    public void getUserInfoSuccess(LoginBean msg) {
+        binding.tvTransfername.setText(msg.getNickName());
+    }
+
+    @Override
+    public void getUserInfoFail(String msg) {
+        binding.tvTransfername.setText("");
         UToast.show(this,msg);
     }
 

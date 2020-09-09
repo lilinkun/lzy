@@ -3,5 +3,5 @@
 android:shape="rectangle"><solid android:color="#ffe5846e" />
     <gradient android:type="linear" android:useLevel="true" android:startColor="#fffcede0" android:endColor="#fffbe4d4" android:angle="90" />
     <corners android:topLeftRadius="10dp" android:topRightRadius="10dp" android:bottomLeftRadius="10dp" android:bottomRightRadius="10dp" />
-    <padding android:bottom="@dimen/padding_10" android:top="@dimen/padding_10" android:right="@dimen/padding_18" android:left="@dimen/padding_18" />
+    <padding android:bottom="@dimen/padding_5" android:top="@dimen/padding_5" android:right="@dimen/padding_18" android:left="@dimen/padding_18" />
 </shape>

@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.lzyyd.hsq.R;
 import com.lzyyd.hsq.activity.GoodsDetailActivity;
+import com.lzyyd.hsq.activity.StoreActivity;
 import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.CartBean;
 import com.lzyyd.hsq.bean.CartChildBean;
@@ -130,6 +131,18 @@ public class MyShoppingCarAdapter extends BaseExpandableListAdapter {
         groupViewHolder.storeCheckBox.setChecked(group.isChoosed());
 
         Picasso.with(mcontext).load(ProApplication.HEADIMG + group.getOrderListBean().getStoreLogo()).into(groupViewHolder.riv_cart);
+
+        groupViewHolder.ll_store.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                bundle.putString("storeId",group.getOrderListBean().getStoreId());
+                intent.putExtras(bundle);
+                intent.setClass(mcontext, StoreActivity.class);
+                mcontext.startActivity(intent);
+            }
+        });
 
         return convertView;
     }
@@ -325,6 +338,8 @@ public class MyShoppingCarAdapter extends BaseExpandableListAdapter {
         TextView storeName;
         @BindView(R.id.riv_cart)
         RoundImageView riv_cart;
+        @BindView(R.id.ll_store)
+        LinearLayout ll_store;
 
         public GroupViewHolder(View view) {
             ButterKnife.bind(this, view);

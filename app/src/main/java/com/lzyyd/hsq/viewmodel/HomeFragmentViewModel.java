@@ -1,11 +1,16 @@
 package com.lzyyd.hsq.viewmodel;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.lzyyd.hsq.activity.GoodsDetailActivity;
 import com.lzyyd.hsq.activity.SearchActivity;
 import com.lzyyd.hsq.activity.VipActivity;
+import com.lzyyd.hsq.activity.WebViewActivity;
+import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.HomeBean;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
@@ -108,6 +113,16 @@ public class HomeFragmentViewModel extends BaseViewModel<DataRepository> {
         public void getHomeDataFail(String msg);
 
         public void onHomeClick(int position);
+    }
+
+    public void onHomeGo(){
+
+        SharedPreferences sharedPreferences = application.getApplicationContext().getSharedPreferences(HsqAppUtil.LOGIN, Context.MODE_PRIVATE);
+        String username = sharedPreferences.getString(HsqAppUtil.OTHERUSERNAME,"");
+
+        Bundle bundle = new Bundle();
+        bundle.putString("url", ProApplication.SQ +"&userName=" + username);
+        startActivity(WebViewActivity.class,bundle);
     }
 
 }

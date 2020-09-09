@@ -60,7 +60,7 @@ public class GoodsPopLayout extends RelativeLayout implements View.OnClickListen
     private int spec2 = -1;
     private int position = 0;
     private TextView tv_stock;
-    private RelativeLayout rl_pop;
+    private View rl_pop;
     private int count = 0;
     private int Stock = 0;
     private int type = 0;
@@ -114,7 +114,7 @@ public class GoodsPopLayout extends RelativeLayout implements View.OnClickListen
 
         tv_stock = (TextView) view.findViewById(R.id.tv_stock);
 
-        rl_pop = (RelativeLayout)view.findViewById(R.id.rl_pop);
+        rl_pop = (View)view.findViewById(R.id.rl_pop);
 
         iv_goods_plus.setOnClickListener(this);
         iv_goods_subtraction.setOnClickListener(this);

@@ -57,6 +57,7 @@
     <string name="dustbin">&#xe656;</string>
     <string name="ic_qrcode">&#xe653;</string>
     <string name="ic_code">&#xe657;</string>
+    <string name="ic_delete">&#xe65c;</string>
 
     <string name="add">+</string>
     <string name="reduce">-</string>
@@ -201,7 +202,7 @@
     <string name="you">否</string>
     <string name="wu">是</string>
 
-    <string name="price">￥</string>
+    <string name="price">¥</string>
 
 
     <item name="tag_key_data" type="id"/>

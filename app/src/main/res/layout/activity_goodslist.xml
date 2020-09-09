@@ -305,7 +305,7 @@
                     android:layout_centerVertical="true"
                     android:paddingBottom="10.0dip"
                     android:paddingTop="10.0dip"
-                    android:text="筛选"
+                    android:text="人气"
                     android:textColor="#232323"
                     android:textSize="14sp" />
 

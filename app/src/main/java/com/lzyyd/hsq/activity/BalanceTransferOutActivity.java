@@ -11,6 +11,7 @@ import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseActivity;
 import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.databinding.ActivityBalancetransferoutBinding;
+import com.lzyyd.hsq.util.Eyes;
 import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.BalanceTransferoutViewModel;
@@ -89,6 +90,8 @@ public class BalanceTransferOutActivity extends BaseActivity<ActivityBalancetran
 
     @Override
     public void initData() {
+
+        Eyes.setStatusBarWhiteColor(this,getResources().getColor(R.color.white));
 
         double balance = getIntent().getExtras().getDouble("balance");
         viewModel.amountPoint.set(balance+"");

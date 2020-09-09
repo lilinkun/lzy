@@ -69,7 +69,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="75dp"
+                android:layout_height="90dp"
                 android:orientation="horizontal"
                 >
 
@@ -92,7 +92,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="账户余额(元)"
+                        android:text="电子币余额(元)"
                         android:textColor="#ffffffff"
                         android:textSize="12sp"
                         />
@@ -100,11 +100,17 @@
 
                 </LinearLayout>
 
-
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:orientation="horizontal"
                     >
@@ -116,7 +122,7 @@
                         android:text="充值"
                         android:textColor="@color/text_common_bg"
                         android:textSize="14sp"
-                        android:visibility="gone"
+                        android:visibility="invisible"
                         android:onClick="@{()->point.getReCharge()}"
                         />
 
@@ -133,28 +139,29 @@
 
                 </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:orientation="vertical">
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="申请天丰E购电子币转入"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/textsize12"
+                            android:layout_marginRight="@dimen/margin_10"
+                            android:onClick="@{()->point.getJumpTianfeng()}"
+                            android:background="@drawable/bg_ele_point_tv"
+                            />
+                    </LinearLayout>
 
             </LinearLayout>
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="申请天丰E购电子币转入"
-                android:textColor="@color/white"
-                android:textSize="@dimen/textsize12"
-                android:layout_marginRight="@dimen/margin_10"
-                android:onClick="@{()->point.getJumpTianfeng()}"
-                android:background="@drawable/bg_ele_point_tv"
-                />
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"

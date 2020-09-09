@@ -76,7 +76,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="￥"
+                android:text="¥"
                 android:textColor="#ffffffff"
                 android:textSize="14sp"
                 />
@@ -253,7 +253,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="￥"
+            android:text="¥"
             android:textColor="#E61E16"
             android:textSize="14sp"
             />
@@ -279,6 +279,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_5"
             android:orientation="horizontal">
 
             <TextView
@@ -286,7 +287,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="2"
-                android:textColor="#ff333333"
+                android:textColor="@color/grey_333333"
                 android:textSize="15sp"
                 android:text="@{goodsDetail.goodsName}"
                 android:layout_toLeftOf="@+id/ll_collect"
@@ -311,12 +312,13 @@
                     android:layout_height="wrap_content"
                     android:padding="3.0dip"
                     android:typeface="@{goodsDetailViewModel.setTypeFace()}"
+                    android:textColor="@{goodsDetailViewModel.observableBoolean ? @color/red_e61e16 : @color/grey_color3}"
                     android:text="@{goodsDetailViewModel.observableBoolean ? @string/tv_collect:@string/tv_uncollect }"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#ff999999"
+                    android:textColor="@color/grey_color3"
                     android:textSize="11sp"
                     android:text="@{goodsDetailViewModel.observableBoolean ? @string/goods_collect: @string/goods_uncollect}"/>
 

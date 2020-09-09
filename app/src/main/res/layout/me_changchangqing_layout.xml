@@ -86,7 +86,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="￥1680"
+                    android:text="¥1680"
                     android:textColor="@color/red_e61e16"
                     android:textSize="17sp" />
 
@@ -130,14 +130,14 @@
             android:layout_height="match_parent"
             android:layout_toLeftOf="@+id/ll_use"
             android:layout_toRightOf="@+id/ll_ccq_layout"
-            android:gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/margin_10"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/margin_10"
+                android:layout_marginLeft="@dimen/margin_10"
                 android:text="益生源常常清排毒体验码"
                 android:textColor="#ff4b4b4b"
                 android:textSize="13sp" />
@@ -145,7 +145,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/margin_10"
                 android:layout_alignParentBottom="true"
                 android:gravity="center_vertical"
                 android:layout_marginBottom="@dimen/margin_10"
@@ -188,8 +188,8 @@
                 android:ems="1"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:layout_marginLeft="@dimen/margin_10"
-                android:layout_marginRight="@dimen/margin_10"
+                android:layout_marginLeft="@dimen/margin_15"
+                android:layout_marginRight="@dimen/margin_15"
                 android:textSize="@dimen/textsize12"
                 android:text="立即使用" />
         </LinearLayout>
@@ -325,8 +325,8 @@
                 android:ems="1"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:layout_marginLeft="@dimen/margin_10"
-                android:layout_marginRight="@dimen/margin_10"
+                android:layout_marginLeft="@dimen/margin_15"
+                android:layout_marginRight="@dimen/margin_15"
                 android:textSize="@dimen/textsize12"
                 android:text="立即提货" />
         </LinearLayout>

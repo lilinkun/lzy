@@ -38,7 +38,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="￥1680"
+                    android:text="¥1680"
                     android:textColor="@{ccq.CcqStatus == 0 ? @color/red_e61e16 : @color/grey_color2}"
                     android:textSize="17sp" />
 

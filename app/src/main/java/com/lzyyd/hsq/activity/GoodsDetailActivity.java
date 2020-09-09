@@ -266,7 +266,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         }
 
 
-        binding.tvOldPrice.setText("￥" + goodsListBeans.getMarketPrice());
+        binding.tvOldPrice.setText("¥" + goodsListBeans.getMarketPrice());
 
         binding.tvOldPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         binding.tsvDetail.init(this);

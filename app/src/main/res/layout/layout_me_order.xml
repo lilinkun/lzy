@@ -42,7 +42,6 @@
             android:text="@string/tv_more"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/margin_10"
             android:typeface="@{me.setTypeFace()}"
             />
 

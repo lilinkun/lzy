@@ -194,7 +194,7 @@
             android:text="@string/all"
             android:checked="@={check}"
             android:onClick="@{shoppingcart.allClickCommand}"
-            android:button="@drawable/checkbox_bg"
+            android:button="@drawable/checkbox_bg_click"
             android:minHeight="64dp"
             android:layout_marginStart="@dimen/margin_15"
             android:layout_marginEnd="@dimen/margin_15"

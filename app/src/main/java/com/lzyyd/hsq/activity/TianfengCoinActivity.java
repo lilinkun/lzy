@@ -11,6 +11,7 @@ import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseActivity;
 import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.databinding.ActivityTianfengBinding;
+import com.lzyyd.hsq.util.Eyes;
 import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.TianfengCoinViewModel;
@@ -45,6 +46,8 @@ public class TianfengCoinActivity extends BaseActivity<ActivityTianfengBinding, 
 
     @Override
     public void initData() {
+
+        Eyes.setStatusBarWhiteColor(this,getResources().getColor(R.color.white));
 
         viewModel.setListener(this);
         viewModel.setTianfengbalance(ProApplication.SESSIONID());

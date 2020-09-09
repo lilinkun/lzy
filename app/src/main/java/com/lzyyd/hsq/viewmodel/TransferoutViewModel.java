@@ -2,6 +2,7 @@ package com.lzyyd.hsq.viewmodel;
 
 import android.app.Application;
 
+import com.lzyyd.hsq.bean.LoginBean;
 import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
 
@@ -78,9 +79,42 @@ public class TransferoutViewModel extends BaseViewModel<DataRepository> {
                 });
     }
 
+
+    public void setFindUsername(String UserName,String SessionId){
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("cls", "UserBase");
+        params.put("fun", "UserBaseQueryGet");
+        params.put("UserName", UserName);
+        params.put("SessionId", SessionId);
+        model.getUserInfo(params)
+                .compose(RxUtils.schedulersTransformer())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>(){
+                    @Override
+                    public void accept(Disposable disposable){
+                    }
+                })
+                .subscribe(new HttpResultCallBack<LoginBean, Object>() {
+                    @Override
+                    public void onResponse(LoginBean mLoginBean, String status, Object page) {
+                        onTransferoutListener.getUserInfoSuccess(mLoginBean);
+                    }
+
+                    @Override
+                    public void onErr(String msg, String status) {
+                        onTransferoutListener.getUserInfoFail(msg);
+                    }
+                });
+    }
+
     public interface OnTransferoutListener{
         public void getTransferoutSuccess(String msg);
         public void getTransferoutFail(String msg);
+
+        public void getUserInfoSuccess(LoginBean msg);
+        public void getUserInfoFail(String msg);
 
         public void clickTransferout();
     }

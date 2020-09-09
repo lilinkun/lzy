@@ -18,6 +18,7 @@ import com.lzyyd.hsq.bean.BalanceBean;
 import com.lzyyd.hsq.bean.GoodsChooseBean;
 import com.lzyyd.hsq.bean.GoodsDetailInfoBean;
 import com.lzyyd.hsq.databinding.ActivityTakeGoodsBinding;
+import com.lzyyd.hsq.util.Eyes;
 import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.util.UToast;
 import com.lzyyd.hsq.viewmodel.TakeGoodsViewModel;
@@ -60,6 +61,8 @@ public class TakeGoodsActivity extends BaseActivity<ActivityTakeGoodsBinding, Ta
 
     @Override
     public void initData() {
+
+        Eyes.setStatusBarWhiteColor(this,getResources().getColor(R.color.white));
 
         viewModel.setListener(this);
 

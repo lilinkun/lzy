@@ -27,7 +27,7 @@
         android:background="@color/RED_E00000"
         >
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
@@ -40,10 +40,32 @@
                 android:layout_height="wrap_content"
                 android:text="@string/tv_back"
                 android:textColor="@color/white"
+                android:layout_centerVertical="true"
                 android:typeface="@{webview.setTypeFace()}"
                 />
 
-        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="@dimen/padding_10"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:onClick="@{()->web.onBackHome()}"
+                android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ic_delete"
+                android:textColor="@color/white"
+                android:typeface="@{webview.setTypeFace()}"
+                />
+
+            </LinearLayout>
+
+        </RelativeLayout>
 
 
     </RelativeLayout>

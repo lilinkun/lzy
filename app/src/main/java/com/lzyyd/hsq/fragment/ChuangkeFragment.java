@@ -102,7 +102,12 @@ public class ChuangkeFragment extends BaseFragment<FragmentChuangkeBinding, Chua
 
     @Override
     public void getDataFail(String msg) {
-        UToast.show(getActivity(),msg);
+        if (binding.refreshLayout.isRefreshing()){
+            binding.refreshLayout.setRefreshing(false);
+        }
+        if (!msg.contains("查无数据")) {
+            UToast.show(getActivity(), msg);
+        }
     }
 
 

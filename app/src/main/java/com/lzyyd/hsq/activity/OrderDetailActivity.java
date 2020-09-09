@@ -94,7 +94,7 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderdetailBinding
 
 
         double price = orderDetailBeans.getOrderAmount() - orderDetailBeans.getMoney2() - orderDetailBeans.getMoney3() - orderDetailBeans.getMoney6();
-        binding.payLayout.tvTotal.setText("￥" + price);
+        binding.payLayout.tvTotal.setText("¥" + price);
 
         binding.setAddress(addressBean);
 

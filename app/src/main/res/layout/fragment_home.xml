@@ -178,6 +178,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
+                    android:onClick="@{()->home.onHomeGo()}"
                     >
 
                 <ImageView
@@ -569,7 +570,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="7dp"
-                    android:hint="中秋礼盒"
+                    android:hint="搜索商品"
                     android:textColor="@color/black"
                     android:textColorHint="#CCCCCC"
                     android:textSize="15sp" />
