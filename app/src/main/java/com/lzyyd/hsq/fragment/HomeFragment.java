@@ -93,6 +93,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
     private void initPtrFrame() {
         final PtrClassicDefaultHeader header=new PtrClassicDefaultHeader(getActivity());
         header.setPadding(dp2px(20), dp2px(20), 0, 0);
+
         binding.mPtrframe.setHeaderView(header);
         binding.mPtrframe.addPtrUIHandler(header);
         binding.mPtrframe.setPtrHandler(new PtrDefaultHandler() {

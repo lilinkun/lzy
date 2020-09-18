@@ -1,13 +1,16 @@
 package com.lzyyd.hsq.activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.gesture.GestureOverlayView;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.webkit.GeolocationPermissions;
 import android.webkit.WebChromeClient;
@@ -25,6 +28,8 @@ import com.lzyyd.hsq.util.Eyes;
 import com.lzyyd.hsq.viewmodel.HomeFragmentViewModel;
 import com.lzyyd.hsq.viewmodel.WebviewViewModel;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProviders;
 
 /**
@@ -57,6 +62,19 @@ public class WebViewActivity extends BaseActivity<ActivityWebviewBinding, Webvie
         binding.wvInput.getSettings().setJavaScriptEnabled(true);
         binding.wvInput.getSettings().setBlockNetworkImage(false);
 
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(getApplicationContext(),"没有权限,请手动开启定位权限",Toast.LENGTH_SHORT).show();
+            // 申请一个（或多个）权限，并提供用于回调返回的获取码（用户定义）
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
+        }
+
+
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
 
             binding.wvInput.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
@@ -73,11 +91,14 @@ public class WebViewActivity extends BaseActivity<ActivityWebviewBinding, Webvie
         binding.wvInput.getSettings().setDomStorageEnabled(true);
 
 
+
         binding.wvInput.loadUrl(url);
         binding.wvInput.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 WebView.HitTestResult hitTestResult = view.getHitTestResult();
+
+                Log.v("LG","url:" + url);
 
                 if( url.startsWith("http:") || url.startsWith("https:") ) {
                     //hitTestResult==null解决重定向问题
@@ -123,7 +144,8 @@ public class WebViewActivity extends BaseActivity<ActivityWebviewBinding, Webvie
 
             @Override
             public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
-                callback.invoke(origin, true, true);
+                callback.invoke(origin, true, false);
+                super.onGeolocationPermissionsShowPrompt(origin, callback);
             }
         });
 //        binding.wvInput.loadUrl("https://www.baidu.com");
