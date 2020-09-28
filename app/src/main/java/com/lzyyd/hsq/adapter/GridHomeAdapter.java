@@ -47,7 +47,8 @@ public class GridHomeAdapter extends BaseBindingAdapter<HomeGridListItemBean, Ad
 
             Intent intent = new Intent();
             Bundle bundle = new Bundle();
-            bundle.putString("url", ProApplication.SQ +"&userName=" + username);
+            bundle.putString("url", items.get(position).getUrl()+"&userName=" + username);
+//            bundle.putString("url", ProApplication.SQ +"&userName=" + username);
             intent.putExtras(bundle);
             intent.setClass(context, WebViewActivity.class);
             context.startActivity(intent);

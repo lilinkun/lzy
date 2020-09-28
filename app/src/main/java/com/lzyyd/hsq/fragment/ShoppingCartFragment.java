@@ -98,9 +98,6 @@ public class ShoppingCartFragment extends BaseFragment<FragmentGoodsCartBinding,
     }
 
     private void initPtrFrame() {
-//        final StoreHouseHeader header=new StoreHouseHeader(this);
-//        header.setPadding(dp2px(20), dp2px(20), 0, 0);
-//        header.initWithString("xiaoma is good");
         final PtrClassicDefaultHeader header=new PtrClassicDefaultHeader(getActivity());
         header.setPadding(dp2px(20), dp2px(20), 0, 0);
         binding.mPtrframe.setHeaderView(header);

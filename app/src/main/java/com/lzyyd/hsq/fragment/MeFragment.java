@@ -92,7 +92,6 @@ public class MeFragment extends BaseFragment<FragmentMeBinding, MeViewModel> imp
             binding.ccqLayout.rlCcqTihuo.setVisibility(View.VISIBLE);
         }
 
-
         initPtrFrame();
 
     }

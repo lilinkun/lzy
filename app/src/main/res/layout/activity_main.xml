@@ -70,6 +70,21 @@
                     android:text="首页"
                     android:textColor="@drawable/bottom_text" />
 
+
+                <RadioButton
+                    android:id="@+id/zunxiang"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_weight="1"
+                    android:background="@drawable/tab_selector_checked_bg"
+                    android:button="@null"
+                    android:drawableTop="@drawable/bottom_bg_3"
+                    android:gravity="center_horizontal|bottom"
+                    android:paddingTop="2dp"
+                    android:text="尊享"
+                    android:textColor="@drawable/bottom_text" />
+
                 <RadioButton
                     android:id="@+id/rbAddress"
                     android:layout_width="0dp"

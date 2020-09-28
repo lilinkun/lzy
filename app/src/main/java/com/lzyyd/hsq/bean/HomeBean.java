@@ -20,6 +20,24 @@ public class HomeBean {
     private HomeGridItemBean Sq;
     private List<ArticleDetailBean> News;
     private ArrayList<FlashBean> Ccq;
+    private int topHeight;
+    private String SqZsj;
+
+    public String getSqZsj() {
+        return SqZsj;
+    }
+
+    public void setSqZsj(String sqZsj) {
+        SqZsj = sqZsj;
+    }
+
+    public int getTopHeight() {
+        return topHeight;
+    }
+
+    public void setTopHeight(int topHeight) {
+        this.topHeight = topHeight;
+    }
 
     public ArrayList<FlashBean> getCcq() {
         return Ccq;

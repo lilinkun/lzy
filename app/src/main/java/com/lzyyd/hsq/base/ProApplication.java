@@ -136,6 +136,8 @@ public class ProApplication extends Application {
     public static final String IMG_SMALL = "img/300/300/";
     public static final String IMG_SMALL_ = "img/150/150/";
 
+    public static String SQURL = "";
+
     public static synchronized ProApplication context() {
         return (ProApplication) mContext;
     }

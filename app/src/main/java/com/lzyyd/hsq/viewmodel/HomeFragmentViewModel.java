@@ -4,7 +4,12 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.View;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.lzyyd.hsq.activity.GoodsDetailActivity;
 import com.lzyyd.hsq.activity.SearchActivity;
@@ -123,6 +128,65 @@ public class HomeFragmentViewModel extends BaseViewModel<DataRepository> {
         Bundle bundle = new Bundle();
         bundle.putString("url", ProApplication.SQ +"&userName=" + username);
         startActivity(WebViewActivity.class,bundle);
+    }
+
+    public void onHome(WebView webView){
+
+
+
+        SharedPreferences sharedPreferences = application.getApplicationContext().getSharedPreferences(HsqAppUtil.LOGIN, Context.MODE_PRIVATE);
+        String username = sharedPreferences.getString(HsqAppUtil.OTHERUSERNAME,"");
+
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.loadUrl(ProApplication.SQ +"&userName=" + username);
+
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return false;
+            }
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+
+                if (!webView.canGoBack()) {
+                    view.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                if (!webView.canGoBack()) {
+                    webView.scrollTo(0,1000);
+                    view.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        webView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus){
+
+                }
+            }
+        });
+
+        webView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (!webView.canGoBack()){
+                    if (scrollY < 1000){
+//                        ivPage.setVisibility(View.VISIBLE);
+                        webView.scrollTo(0,1000);
+
+                        webView.setFocusable(false);
+                    }
+                }
+            }
+        });
     }
 
 }

@@ -8,10 +8,10 @@ android {
 
     defaultConfig {
         applicationId "com.lzyyd.hsq"
-        minSdkVersion 18
+        minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
-        versionName "1.54"
+        versionName "1.58"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true

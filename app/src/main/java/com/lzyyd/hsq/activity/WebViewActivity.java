@@ -62,7 +62,6 @@ public class WebViewActivity extends BaseActivity<ActivityWebviewBinding, Webvie
         binding.wvInput.getSettings().setJavaScriptEnabled(true);
         binding.wvInput.getSettings().setBlockNetworkImage(false);
 
-
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED
                 || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -89,8 +88,6 @@ public class WebViewActivity extends BaseActivity<ActivityWebviewBinding, Webvie
         binding.wvInput.getSettings().setGeolocationDatabasePath(dir);
         //最重要的方法，一定要设置，这就是出不来的主要原因
         binding.wvInput.getSettings().setDomStorageEnabled(true);
-
-
 
         binding.wvInput.loadUrl(url);
         binding.wvInput.setWebViewClient(new WebViewClient() {
@@ -149,8 +146,6 @@ public class WebViewActivity extends BaseActivity<ActivityWebviewBinding, Webvie
             }
         });
 //        binding.wvInput.loadUrl("https://www.baidu.com");
-
-//        Log.v("asdaaaaaaaaaaaaaaaaaa","asdasdasd");
 
     }
 
