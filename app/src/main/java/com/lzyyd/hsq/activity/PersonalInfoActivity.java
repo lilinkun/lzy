@@ -161,6 +161,7 @@ public class PersonalInfoActivity extends BaseActivity<ActivityPersonalInfoBindi
     @Override
     public void getUserInfoSuccess(LoginBean mLoginBean) {
         binding.setPersoninfo(mLoginBean);
+        ProApplication.ISUSEQSQ = mLoginBean.getIsUseQsq();
 
         SharedPreferences sharedPreferences = getSharedPreferences(HsqAppUtil.LOGIN, MODE_PRIVATE);
         sharedPreferences.edit().putString("sessionid", ProApplication.SESSIONID()).putBoolean(HsqAppUtil.LOGIN, true)

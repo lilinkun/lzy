@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginLeft="@dimen/margin_10"
-                android:layout_marginTop="@dimen/margin_30"
+                android:layout_marginTop="@dimen/margin_35"
                 >
 
                 <com.lzyyd.hsq.ui.RoundImageView

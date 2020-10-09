@@ -11,6 +11,7 @@ import com.lzyyd.hsq.adapter.FragmentsAdapter;
 import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseActivity;
 import com.lzyyd.hsq.base.BaseFragment;
+import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.UrlBean;
 import com.lzyyd.hsq.databinding.ActivityMainBinding;
 import com.lzyyd.hsq.fragment.HomeFragment;
@@ -33,7 +34,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MVVMViewMode
 
     private ShoppingCartFragment shoppingCartFragment = new ShoppingCartFragment();
     private ZunXiangFragment zunXiangFragment = new ZunXiangFragment();
-    private HomeFragment homeFragment = new HomeFragment();
+    private MeFragment meFragment = new MeFragment();
 
     @Override
     public int initContentView(Bundle savedInstanceState) {
@@ -92,6 +93,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MVVMViewMode
                         break;
 
                     case R.id.zunxiang:
+                        if (ProApplication.ISUSEQSQ == 1) {
+                            zunXiangFragment.initUrl();
+                        }
                         binding.topVp.setCurrentItem(1,false);
                         break;
                 }
@@ -108,11 +112,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MVVMViewMode
     }
 
     private void getMenusFragments() {
-        sparseArray.put(HsqAppUtil.PAGE_HOMEPAGE, homeFragment);
+        sparseArray.put(HsqAppUtil.PAGE_HOMEPAGE, new HomeFragment());
         sparseArray.put(HsqAppUtil.PAGE_FIND, zunXiangFragment);
         sparseArray.put(HsqAppUtil.PAGE_MALL, shoppingCartFragment);
-        sparseArray.put(HsqAppUtil.PAGE_ME,new MeFragment());
-        homeFragment.setListener(this);
+        sparseArray.put(HsqAppUtil.PAGE_ME,meFragment);
+        meFragment.initListener(this);
     }
 
     @Override
@@ -126,7 +130,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MVVMViewMode
     }
 
     @Override
-    public void getDataStr(String urlStr) {
-        zunXiangFragment.initUrl(urlStr);
+    public void getDataStr() {
+        zunXiangFragment.initUrl();
     }
 }

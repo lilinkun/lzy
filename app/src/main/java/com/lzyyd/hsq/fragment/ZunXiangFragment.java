@@ -1,6 +1,7 @@
 package com.lzyyd.hsq.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.lzyyd.hsq.R;
+import com.lzyyd.hsq.activity.VipActivity;
 import com.lzyyd.hsq.activity.WebViewActivity;
 import com.lzyyd.hsq.base.AppViewModelFactory;
 import com.lzyyd.hsq.base.BaseFragment;
@@ -50,13 +52,47 @@ public class ZunXiangFragment extends BaseFragment<FragmentZunxiangBinding, Webv
 
     @Override
     public void initData() {
-        if(!ProApplication.SQURL.isEmpty()) {
-            initWebview(ProApplication.SQURL);
+        if (!ProApplication.SQURL.isEmpty()) {
+            if (ProApplication.ISUSEQSQ == 0) {
+                binding.rlNoPower.setVisibility(View.VISIBLE);
+                binding.rlNoPower.setEnabled(true);
+                binding.rlNoPower.setFocusable(true);
+                binding.rlNoPower.setFocusableInTouchMode(true);
+                binding.wvInput.setFocusable(false);
+                binding.wvInput.setFocusableInTouchMode(false);
+                binding.wvInput.setEnabled(false);
+                binding.wvInput.setClickable(false);
+            }
         }
+
+        binding.tvUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), VipActivity.class);
+                startActivity(intent);
+
+            }
+        });
     }
 
-    public void initUrl(String url){
-        initWebview(url);
+    public void initUrl(){
+        if (ProApplication.ISUSEQSQ == 1){
+            initWebview(ProApplication.SQURL);
+            binding.wvInput.setVisibility(View.VISIBLE);
+            binding.wvInput.setEnabled(false);
+        }else {
+            initWebview(ProApplication.SQURL);
+            binding.rlNoPower.setVisibility(View.VISIBLE);
+            binding.rlNoPower.setEnabled(true);
+            binding.rlNoPower.setFocusable(true);
+            binding.rlNoPower.setFocusableInTouchMode(true);
+            binding.wvInput.setFocusable(false);
+            binding.wvInput.setFocusableInTouchMode(false);
+            binding.wvInput.setEnabled(false);
+            binding.wvInput.setClickable(false);
+        }
     }
 
 

@@ -21,15 +21,6 @@ public class HomeBean {
     private List<ArticleDetailBean> News;
     private ArrayList<FlashBean> Ccq;
     private int topHeight;
-    private String SqZsj;
-
-    public String getSqZsj() {
-        return SqZsj;
-    }
-
-    public void setSqZsj(String sqZsj) {
-        SqZsj = sqZsj;
-    }
 
     public int getTopHeight() {
         return topHeight;

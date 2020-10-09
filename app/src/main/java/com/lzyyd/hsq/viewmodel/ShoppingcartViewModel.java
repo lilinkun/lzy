@@ -72,13 +72,17 @@ public class ShoppingcartViewModel extends BaseViewModel<DataRepository> {
                         if (storeCartBeans.size() > 0){
                             isGoodsField.set(true);
                         }
-                        cartCallback.getCartListSuccess(storeCartBeans);
+                        if (cartCallback != null) {
+                            cartCallback.getCartListSuccess(storeCartBeans);
+                        }
                     }
 
                     @Override
                     public void onErr(String msg, String status) {
 //                       dismissDialog();
-                       cartCallback.getCartListFail(msg);
+                        if (cartCallback != null) {
+                            cartCallback.getCartListFail(msg);
+                        }
                     }
                 });
     }
@@ -103,8 +107,11 @@ public class ShoppingcartViewModel extends BaseViewModel<DataRepository> {
                 .subscribe(new HttpResultCallBack<CollectBean,Object>() {
                     @Override
                     public void onResponse(CollectBean orderListBeans, String status,Object page) {
-                        cartCallback.modifyOrderSuccess(orderListBeans,Num,view,total);
-                        dismissDialog();
+
+                        if (cartCallback != null) {
+                            cartCallback.modifyOrderSuccess(orderListBeans, Num, view, total);
+                            dismissDialog();
+                        }
                     }
 
                     @Override
@@ -140,13 +147,18 @@ public class ShoppingcartViewModel extends BaseViewModel<DataRepository> {
                     @Override
                     public void onResponse(String b, String status,Object page) {
                         dismissDialog();
-                        cartCallback.deleteGoodsSuccess(b);
+                        if (cartCallback != null) {
+                            cartCallback.deleteGoodsSuccess(b);
+                        }
                     }
 
                     @Override
                     public void onErr(String msg, String status) {
                         dismissDialog();
-                        cartCallback.deleteGoodsFail(msg);
+
+                        if (cartCallback != null) {
+                            cartCallback.deleteGoodsFail(msg);
+                        }
                     }
                 });
     }
@@ -171,14 +183,20 @@ public class ShoppingcartViewModel extends BaseViewModel<DataRepository> {
                     @Override
                     public void onResponse(String collectBeans, String status, Object page) {
                         dismissDialog();
-                        cartCallback.SureOrderSuccess(collectBeans);
+
+                        if (cartCallback != null) {
+                            cartCallback.SureOrderSuccess(collectBeans);
+                        }
 
                     }
 
                     @Override
                     public void onErr(String msg, String status) {
                         dismissDialog();
-                        cartCallback.SureOrderFail(msg);
+
+                        if (cartCallback != null) {
+                            cartCallback.SureOrderFail(msg);
+                        }
                     }
                 });
     }

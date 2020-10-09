@@ -109,6 +109,7 @@ public class LoginViewModel extends BaseViewModel<DataRepository> {
                     @Override
                     public void onResponse(LoginBean mLoginBean, String status, String page) {
                         dismissDialog();
+                        ProApplication.ISUSEQSQ = mLoginBean.getIsUseQsq();
 
                         SharedPreferences sharedPreferences = context.getSharedPreferences(HsqAppUtil.LOGIN, MODE_PRIVATE);
                         sharedPreferences.edit().putString("sessionid", ProApplication.SESSIONID()).putBoolean(HsqAppUtil.LOGIN, true)

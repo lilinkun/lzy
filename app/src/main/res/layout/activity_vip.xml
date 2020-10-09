@@ -20,6 +20,7 @@
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/rl_vip_title"
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:orientation="horizontal"
@@ -77,112 +78,56 @@
 
     </RelativeLayout>
 
-    <ScrollView
+    <FrameLayout
+        android:id="@+id/fl_vip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#FBF5EF"
         >
-    <RelativeLayout
+
+    <LinearLayout
+        android:id="@+id/ll_vip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_horizontal"
         >
-        <ImageView
-            android:id="@+id/iv_vip_bg"
-            android:layout_width="match_parent"
-            android:layout_height="380dp"
-            android:src="@mipmap/ic_vip_bg"
-            android:scaleType="fitXY"
-            android:background="#1C1714"
-            />
-        
-        <LinearLayout
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="31dp"
-            android:layout_marginTop="@dimen/margin_10"
-            >
-            
-            <com.lzyyd.hsq.ui.RoundImageView
-                android:id="@+id/riv_vip"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:scaleType="fitXY"
-                />
+            android:text="尊享会员升级大礼包"
+            android:layout_marginTop="@dimen/margin_20"
+            android:textColor="@color/yellow_A47E60"
+            android:textSize="18sp"
+            />
 
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:src="@mipmap/ic_vip"
-                android:layout_marginLeft="@dimen/margin_5"
-                />
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:layout_marginLeft="-2dp"
-                >
-
-            <TextView
-                android:id="@+id/vip_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/textsize10"
-                android:textColor="#E94240"
-                android:background="@drawable/ic_vip_circle"
-                />
-            </RelativeLayout>
-            
-            
-        </LinearLayout>
-        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="申请vip收获超值礼包"
+            android:layout_marginTop="@dimen/margin_5"
+            android:textColor="@color/yellow_A47E60"
+            android:textSize="13sp"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/iv_vip_bg"
-            android:layout_marginTop="-20dp"
+            android:layout_marginLeft="@dimen/margin_30"
+            android:layout_marginRight="@dimen/margin_30"
             android:orientation="vertical"
-            android:background="@drawable/shape_vip_bottom_bg"
-            android:gravity="center_horizontal"
             >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="尊享会员升级大礼包"
-                android:layout_marginTop="@dimen/margin_20"
-                android:textColor="@color/yellow_A47E60"
-                android:textSize="18sp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="申请vip收获超值礼包"
-                android:layout_marginTop="@dimen/margin_5"
-                android:textColor="@color/yellow_A47E60"
-                android:textSize="13sp"
-                />
-            
-            <LinearLayout
+            <RelativeLayout
+                android:id="@+id/rl_vip_chuangke"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/margin_30"
-                android:layout_marginRight="@dimen/margin_30"
-                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20"
+                android:onClick="@{()->vip.setJumpChuangke(4)}"
                 >
-
-                <RelativeLayout
-                    android:id="@+id/rl_vip_chuangke"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_20"
-                    android:onClick="@{()->vip.setJumpChuangke(4)}"
-                    >
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -204,94 +149,199 @@
                     android:layout_centerVertical="true"
                     />
 
-                </RelativeLayout>
+            </RelativeLayout>
 
-                <RelativeLayout
-                    android:id="@+id/rl_vip_service_center"
+            <RelativeLayout
+                android:id="@+id/rl_vip_service_center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20"
+                android:onClick="@{()->vip.setJumpChuangke(8)}"
+                android:visibility="@{vip.projectField}"
+                >
+
+                <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_20"
-                    android:onClick="@{()->vip.setJumpChuangke(8)}"
-                    android:visibility="@{vip.projectField}"
-                    >
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:scaleType="fitXY"
-                        android:src="@mipmap/ic_vip_service_center"
-                        />
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/ic_vip_service_center"
+                    />
 
 
 
-                    <TextView
-                        android:id="@+id/tv_center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_update_vip"
-                        android:text="去升级"
-                        android:textColor="#ffffffff"
-                        android:textSize="14sp"
-                        android:layout_marginLeft="@dimen/margin_20"
-                        android:layout_centerVertical="true"
-                        />
+                <TextView
+                    android:id="@+id/tv_center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_update_vip"
+                    android:text="去升级"
+                    android:textColor="#ffffffff"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="@dimen/margin_20"
+                    android:layout_centerVertical="true"
+                    />
 
 
-                </RelativeLayout>
+            </RelativeLayout>
 
-                <RelativeLayout
-                    android:id="@+id/rl_update_vip"
+            <RelativeLayout
+                android:id="@+id/rl_update_vip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20"
+                >
+
+                <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_20"
-                    android:layout_marginBottom="@dimen/margin_20"
-                    >
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:scaleType="fitXY"
-                        android:src="@mipmap/ic_vip_two"
-                        />
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/ic_vip_two"
+                    />
 
 
 
-                    <TextView
-                        android:id="@+id/tv_vip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_update_vip"
-                        android:text="去选购"
-                        android:textColor="#ffffffff"
-                        android:textSize="14sp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/margin_20"
-                        android:layout_centerVertical="true"
-                        />
+                <TextView
+                    android:id="@+id/tv_vip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_update_vip"
+                    android:text="去选购"
+                    android:textColor="#ffffffff"
+                    android:textSize="14sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/margin_20"
+                    android:layout_centerVertical="true"
+                    />
 
 
-                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_point_vip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20"
+                android:layout_marginBottom="@dimen/margin_20"
+                >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/ic_vip_point"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_update_vip"
+                    android:text="去兑换"
+                    android:textColor="#ffffffff"
+                    android:textSize="14sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/margin_20"
+                    android:layout_centerVertical="true"
+                    />
 
 
-            </LinearLayout>
-
+            </RelativeLayout>
 
 
         </LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
+
+
+    </LinearLayout>
+
+        <com.lzyyd.hsq.ui.VipScrollView
+            android:id="@+id/sv_vip"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/iv_vip_bg"
-            android:layout_marginTop="-25dp"
-            android:src="@mipmap/ic_vip_cheap"
-            />
+            android:clickable="false"
+            android:focusable="false"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="480dp"
+                >
+
+            <RelativeLayout
+                android:id="@+id/rl_vip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="480dp"
+                android:clickable="false"
+                android:focusable="false"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_vip_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="31dp"
+                    android:layout_marginTop="@dimen/margin_10"
+                    >
+
+                    <com.lzyyd.hsq.ui.RoundImageView
+                        android:id="@+id/riv_vip"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:scaleType="fitXY"
+                        />
 
 
-    </RelativeLayout>
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@mipmap/ic_vip"
+                        android:layout_marginLeft="@dimen/margin_5"
+                        />
 
-    </ScrollView>
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginLeft="-2dp"
+                        >
 
+                        <TextView
+                            android:id="@+id/vip_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/textsize10"
+                            android:textColor="#E94240"
+                            android:background="@drawable/ic_vip_circle"
+                            />
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+            <!--<ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_vip_bg"
+                android:layout_marginTop="-25dp"
+                android:src="@mipmap/ic_vip_cheap"
+                />-->
+
+            </RelativeLayout>
+        </com.lzyyd.hsq.ui.VipScrollView>
+    </FrameLayout>
 </LinearLayout>
     
 

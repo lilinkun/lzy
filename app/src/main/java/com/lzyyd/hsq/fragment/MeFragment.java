@@ -23,6 +23,7 @@ import com.lzyyd.hsq.bean.CcqBean;
 import com.lzyyd.hsq.bean.CcqListBean;
 import com.lzyyd.hsq.bean.LoginBean;
 import com.lzyyd.hsq.databinding.FragmentMeBinding;
+import com.lzyyd.hsq.interf.IGetSqlListener;
 import com.lzyyd.hsq.qrcode.android.CaptureActivity;
 import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.viewmodel.MeViewModel;
@@ -49,6 +50,7 @@ public class MeFragment extends BaseFragment<FragmentMeBinding, MeViewModel> imp
     private static final int REQUEST_CODE_SCAN = 0x0000;
 
     public static final int RESULT_CODE_POINT = 0X2212;
+    private IGetSqlListener iGetSqlListener;
 
     @Override
     public int initVariableId() {
@@ -79,9 +81,7 @@ public class MeFragment extends BaseFragment<FragmentMeBinding, MeViewModel> imp
         viewModel.getBalance(ProApplication.SESSIONID());
         viewModel.getCcqUse(ProApplication.SESSIONID());
 
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(HsqAppUtil.LOGIN, getActivity().MODE_PRIVATE);
-
-        viewModel.getUserInfo(sharedPreferences.getString(HsqAppUtil.USERNAME, ""),ProApplication.SESSIONID(),getActivity());
+        viewModel.getUserInfo(ProApplication.SESSIONID(),getActivity());
 
         if(ProApplication.CCQTYPE == 0) {
 
@@ -94,6 +94,10 @@ public class MeFragment extends BaseFragment<FragmentMeBinding, MeViewModel> imp
 
         initPtrFrame();
 
+    }
+
+    public void initListener(IGetSqlListener iGetSqlListener){
+        this.iGetSqlListener = iGetSqlListener;
     }
 
 
@@ -161,6 +165,11 @@ public class MeFragment extends BaseFragment<FragmentMeBinding, MeViewModel> imp
         binding.setUserinfo(loginBean);
 
         ProApplication.CCQTYPE = loginBean.getCcqType();
+        ProApplication.ISUSEQSQ = loginBean.getIsUseQsq();
+
+        if (iGetSqlListener != null) {
+            iGetSqlListener.getDataStr();
+        }
 
         if(loginBean.getCcqType() == 0 ) {
 
@@ -237,9 +246,7 @@ public class MeFragment extends BaseFragment<FragmentMeBinding, MeViewModel> imp
                 viewModel.getBalance(ProApplication.SESSIONID());
                 viewModel.getCcqUse(ProApplication.SESSIONID());
 
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences(HsqAppUtil.LOGIN, getActivity().MODE_PRIVATE);
-
-                viewModel.getUserInfo(sharedPreferences.getString(HsqAppUtil.USERNAME, ""),ProApplication.SESSIONID(),getActivity());
+                viewModel.getUserInfo(ProApplication.SESSIONID(),getActivity());
             }
 
             @Override

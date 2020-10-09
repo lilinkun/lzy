@@ -5,5 +5,5 @@ package com.lzyyd.hsq.interf;
  * Describe:
  */
 public interface IGetSqlListener {
-    public void getDataStr(String urlStr);
+    public void getDataStr();
 }

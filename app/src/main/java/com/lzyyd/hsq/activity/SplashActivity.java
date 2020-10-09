@@ -114,6 +114,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, MVVMView
         ProApplication.USERLEVELPRICE20 = urlBean.getUserLevelPrice20();
         ProApplication.CCQGOODSID = urlBean.getCcqGoodsId();
         ProApplication.KFMOBILE = urlBean.getKFMobile();
+        ProApplication.SQURL = urlBean.getSqZsj();
         SharedPreferences sharedPreferences = getSharedPreferences(HsqAppUtil.LOGIN, MODE_PRIVATE);
         sharedPreferences.edit().putString(HsqAppUtil.IMG, ProApplication.HEADIMG).putString(HsqAppUtil.BANNERIMG, ProApplication.BANNERIMG)
                 .putString(HsqAppUtil.CUSTOMER, ProApplication.CUSTOMERIMG).putString(HsqAppUtil.SHAREDIMG, ProApplication.SHAREDIMG)

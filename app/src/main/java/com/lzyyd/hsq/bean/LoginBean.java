@@ -25,6 +25,15 @@ public class LoginBean implements Serializable {
     private int Project;
     private int CcqType;
     private String OtherUserName;
+    private int IsUseQsq;
+
+    public int getIsUseQsq() {
+        return IsUseQsq;
+    }
+
+    public void setIsUseQsq(int isUseQsq) {
+        IsUseQsq = isUseQsq;
+    }
 
     public String getOtherUserName() {
         return OtherUserName;

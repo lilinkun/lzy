@@ -21,6 +21,15 @@ public class UrlBean{
     private String CcqGoodsId;
     private int UserLevelPrice10;
     private int UserLevelPrice20;
+    private String SqZsj;
+
+    public String getSqZsj() {
+        return SqZsj;
+    }
+
+    public void setSqZsj(String sqZsj) {
+        SqZsj = sqZsj;
+    }
 
     public String getLogisticsUrl() {
         return LogisticsUrl;

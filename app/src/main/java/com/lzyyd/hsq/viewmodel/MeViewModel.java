@@ -191,11 +191,10 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
     }
 
 
-    public void getUserInfo(String UserName, String SessionId,final Context context) {
+    public void getUserInfo( String SessionId,final Context context) {
         HashMap<String, String> params = new HashMap<>();
         params.put("cls", "UserBase");
         params.put("fun", "UserBaseVipGet");
-        params.put("UserName",UserName);
         params.put("SessionId", SessionId);
         model.getUserInfo(params)
                 .compose(RxUtils.schedulersTransformer())

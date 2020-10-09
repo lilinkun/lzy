@@ -10,7 +10,7 @@
 
     </data>
 
-<LinearLayout
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
@@ -21,7 +21,61 @@
         android:layout_marginTop="@dimen/margin_25"
         android:layout_marginBottom="-60dp"
         />
-</LinearLayout>
+
+    <ScrollView
+        android:id="@+id/rl_no_power"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#E6FFFFFF"
+        android:visibility="gone"
+        >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_no_power"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="您还没有权限"
+            android:textColor="#ff9a9a9a"
+            android:textSize="18sp"
+            android:layout_marginTop="@dimen/margin_10"
+            />
+
+        <TextView
+            android:id="@+id/tv_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="去升级"
+            android:textColor="#ffea4240"
+            android:background="@drawable/shape_no_goods_car"
+            android:textSize="18sp"
+            android:layout_marginTop="@dimen/margin_10"
+            />
+
+    </LinearLayout>
+    </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
 
 
 </layout>

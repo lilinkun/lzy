@@ -27,10 +27,10 @@
 
         <in.srain.cube.views.ptr.PtrFrameLayout
             android:id="@+id/mPtrframe"
+            android:layout_below="@+id/rl_home_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@mipmap/ic_home_head_fresh"
-            android:layout_marginTop="30dp"
             app:ptr_duration_to_close="3000"
             app:ptr_duration_to_close_header="2000"
             app:ptr_keep_header_when_refresh="true"
@@ -49,7 +49,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#f2f2f2"
-        android:layout_marginTop="60dp"
         android:descendantFocusability="blocksDescendants"
         >
 
@@ -58,14 +57,14 @@
             android:id="@+id/wv_home"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="-180dp"
+            android:layout_below="@+id/ll_home"
             />
 
 
     <LinearLayout
         android:id="@+id/ll_home"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
 

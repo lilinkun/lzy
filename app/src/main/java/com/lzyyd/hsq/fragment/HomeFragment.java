@@ -80,7 +80,6 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
     private boolean isFresh = false;
     private String homeUrl = "";
     private String homeUrl2 = "";
-    private IGetSqlListener iGetSqlListener;
 
 
     @Override
@@ -120,10 +119,6 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
 
         binding.rvHome.setLayoutManager(gridLayoutManager);
-    }
-
-    public void setListener(IGetSqlListener listener){
-        this.iGetSqlListener = listener;
     }
 
     private void initPtrFrame() {
@@ -237,17 +232,18 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
         binding.avTitle.start();
         onHomeClick(1);
 
-//        UToast.show(getActivity(),binding.llHome.getHeight()+"");
+//        UToast.show(getActivity(),binding.llHome.getHeight()/2+"");
 
 //        viewModel.onHome(binding.wvHome);
 
         SharedPreferences sharedPreferences = getActivity().getApplicationContext().getSharedPreferences(HsqAppUtil.LOGIN, Context.MODE_PRIVATE);
         String username = sharedPreferences.getString(HsqAppUtil.OTHERUSERNAME,"");
         String url = ProApplication.SQ +"&userName=" + username;
-        initWebview(url,homeBean.getTopHeight());
 
-        iGetSqlListener.getDataStr(homeBean.getSqZsj());
-        ProApplication.SQURL = homeBean.getSqZsj();
+        int h = binding.llHome.getMeasuredHeight();
+        int h1 = homeBean.getTopHeight();
+
+        initWebview(url,(int)(-h1*1.6));
     }
 
     public void initWebview(String url,int topHeight){
@@ -279,6 +275,10 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
 
         Log.v("LG",url);
 
+        ViewGroup.LayoutParams layoutParams = binding.wvHome.getLayoutParams();
+        ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) layoutParams;
+        marginLayoutParams.setMargins(0,topHeight,0,0);
+        binding.wvHome.setLayoutParams(marginLayoutParams);
 
         binding.wvHome.loadUrl(url);
 //        binding.wvHome.loadUrl(ProApplication.SQ +"&userName=" + username);

@@ -1,9 +1,16 @@
 package com.lzyyd.hsq.activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 
 import com.lzyyd.hsq.BR;
 import com.lzyyd.hsq.R;
@@ -22,6 +29,11 @@ import androidx.lifecycle.ViewModelProviders;
  * Describe:
  */
 public class VipActivity extends BaseActivity<ActivityVipBinding, VipViewModel> {
+
+    private int h = 0;
+    private float rawy = 0;
+    private int y = 0;
+
     @Override
     public int initContentView(Bundle savedInstanceState) {
         return R.layout.activity_vip;
@@ -52,7 +64,6 @@ public class VipActivity extends BaseActivity<ActivityVipBinding, VipViewModel> 
 
         binding.vipName.setText(userLevelName);
 
-
         viewModel.projectField.set(Integer.valueOf(Project) == 1 ? View.VISIBLE : View.GONE);
 
         if (Integer.valueOf(userLevel) > 0) {
@@ -65,6 +76,16 @@ public class VipActivity extends BaseActivity<ActivityVipBinding, VipViewModel> 
         }else {
             binding.tvVip.setBackground(getResources().getDrawable(R.drawable.bg_update_vip_unclick));
         }
+
+        binding.rlPointVip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(VipActivity.this, IntegralActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         if (Project.equals("1")){
             if (Integer.valueOf(userLevel) >= 120){
@@ -84,5 +105,43 @@ public class VipActivity extends BaseActivity<ActivityVipBinding, VipViewModel> 
 
         }
 
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.ic_vip_bg);
+        binding.ivVipBg.setImageBitmap(bitmap);
+
+
+        binding.svVip.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent ev) {
+
+                if (ev.getAction() == MotionEvent.ACTION_DOWN){
+                    rawy = ev.getRawY();
+                }
+                if (ev.getAction() == MotionEvent.ACTION_MOVE){
+
+                    if (binding.svVip.getChildAt(0).getMeasuredHeight() > v.getScrollY() + v.getHeight()){
+                        y = (int)(y + ev.getRawY()-rawy);
+                        binding.svVip.setRY((int)(y));
+                        Log.v("LGG:", "getRawY:"+ev.getRawY() + "  sc_y:" + y + " rawy:" + rawy);
+                        rawy= ev.getRawY();
+                    }
+
+                    if (v.getScrollY() == 0){
+                        y = binding.rlVip.getTop() + binding.rlVipTitle.getHeight();
+                        binding.svVip.setRY(y);
+                    }
+                }
+
+                return false;
+            }
+        });
+
+
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        y = binding.rlVip.getTop() + binding.rlVipTitle.getHeight();
+        binding.svVip.setRY(y);
     }
 }
