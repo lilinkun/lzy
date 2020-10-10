@@ -5,6 +5,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.lzyyd.hsq.activity.MainActivity;
+import com.lzyyd.hsq.activity.UserAgreementActivity;
 import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.WxUserInfo;
 import com.lzyyd.hsq.data.DataRepository;
@@ -175,6 +176,12 @@ public class RegisterViewModel extends BaseViewModel<DataRepository> {
                 });
 
     }
+
+
+    public void userClick(){
+        startActivity(UserAgreementActivity.class);
+    }
+
 
     public interface OnRegisterListener{
         public void sendCode();

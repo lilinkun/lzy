@@ -85,6 +85,8 @@ public class ShoppingCartFragment extends BaseFragment<FragmentGoodsCartBinding,
         viewModel.setCallBack(this);
         viewModel.getGoodsCartList(ProApplication.SESSIONID());
 
+        binding.vBottom.setVisibility(View.VISIBLE);
+
         initPtrFrame();
     }
 

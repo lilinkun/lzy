@@ -42,6 +42,13 @@ public class Eyes {
             EyesKitKat.setStatusBarColor(activity, statusColor);
         }
     }
+    public static void setStatusBarColorDark(Activity activity, int statusColor) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            EyesLollipop.setStatusBarColor1(activity, statusColor);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            EyesKitKat.setStatusBarColor(activity, statusColor);
+        }
+    }
 
     public static void setStatusBarWhiteColor(Activity activity, int statusColor) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

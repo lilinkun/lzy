@@ -120,6 +120,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name="com.lzyyd.hsq.activity.ChooseWxLoginActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name="com.lzyyd.hsq.activity.UserAgreementActivity"
+            android:screenOrientation="portrait"/>
 
 
         <activity android:name="com.lzyyd.hsq.wxapi.WXEntryActivity"

@@ -20,13 +20,13 @@
             android:id="@+id/top_vp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:flipInterval="30"
-            android:layout_above="@+id/menu_bottom" />
+            android:flipInterval="30" />
         <LinearLayout
             android:orientation="vertical"
             android:id="@+id/menu_bottom"
             android:layout_width="fill_parent"
             android:layout_height="55.0dip"
+            android:background="@color/white"
             android:layout_alignParentBottom="true">
             <ImageView
                 android:background="@color/line_bg"

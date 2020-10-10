@@ -262,17 +262,33 @@
         </RelativeLayout>
 
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="60dp"
+            >
+
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:layout_marginBottom="60dp"
             android:paddingLeft="3dp"
             android:textColor="@color/text_common_bg"
             style="@style/CheckBox_forgetpsd"
             android:onCheckedChanged="@{(cb, isChecked) ->register.setChecked(isChecked)}"
             android:text="@string/tv_register_user_agreement"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:onClick="@{()->register.userClick()}"
+                android:text="《用户协议》"
+                />
+
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -118,7 +118,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, MVVMView
         SharedPreferences sharedPreferences = getSharedPreferences(HsqAppUtil.LOGIN, MODE_PRIVATE);
         sharedPreferences.edit().putString(HsqAppUtil.IMG, ProApplication.HEADIMG).putString(HsqAppUtil.BANNERIMG, ProApplication.BANNERIMG)
                 .putString(HsqAppUtil.CUSTOMER, ProApplication.CUSTOMERIMG).putString(HsqAppUtil.SHAREDIMG, ProApplication.SHAREDIMG)
-                .putString(HsqAppUtil.SHAREDMEIMG,"").commit();
+                .putString(HsqAppUtil.SHAREDMEIMG,"").putString(HsqAppUtil.SQURL,urlBean.getSqZsj()).commit();
         UpdateApp();
 //        turnHome();
     }

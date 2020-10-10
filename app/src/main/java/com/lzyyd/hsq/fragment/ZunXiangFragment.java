@@ -2,6 +2,7 @@ package com.lzyyd.hsq.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,10 +24,14 @@ import com.lzyyd.hsq.base.BaseFragment;
 import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.databinding.FragmentZunxiangBinding;
 import com.lzyyd.hsq.util.Eyes;
+import com.lzyyd.hsq.util.HsqAppUtil;
 import com.lzyyd.hsq.viewmodel.WebviewViewModel;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
+import me.goldze.mvvmhabit.utils.StringUtils;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Create by liguo on 2020/9/28
@@ -78,6 +83,11 @@ public class ZunXiangFragment extends BaseFragment<FragmentZunxiangBinding, Webv
     }
 
     public void initUrl(){
+        if (StringUtils.isEmpty(ProApplication.SQURL)){
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(HsqAppUtil.LOGIN, MODE_PRIVATE);
+            ProApplication.SQURL = sharedPreferences.getString(HsqAppUtil.SQURL,"");
+        }
+
         if (ProApplication.ISUSEQSQ == 1){
             initWebview(ProApplication.SQURL);
             binding.wvInput.setVisibility(View.VISIBLE);
@@ -125,7 +135,7 @@ public class ZunXiangFragment extends BaseFragment<FragmentZunxiangBinding, Webv
 
         }
         binding.wvInput.getSettings().setDatabaseEnabled(true);
-        String dir = this.getActivity().getDir("database", Context.MODE_PRIVATE).getPath();
+        String dir = this.getActivity().getDir("database", MODE_PRIVATE).getPath();
         //启用地理定位
         binding.wvInput.getSettings().setGeolocationEnabled(true);
         //设置定位的数据库路径

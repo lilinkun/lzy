@@ -52,7 +52,7 @@ public class VipActivity extends BaseActivity<ActivityVipBinding, VipViewModel> 
 
     @Override
     public void initData() {
-        Eyes.setStatusBarColor1(this, Color.parseColor("#1C1714"));
+        Eyes.setStatusBarColorDark(this, Color.parseColor("#1C1714"));
 
         SharedPreferences sharedPreferences = getSharedPreferences(HsqAppUtil.LOGIN,MODE_PRIVATE);
         String Project = sharedPreferences.getString(HsqAppUtil.PROJECT,"");

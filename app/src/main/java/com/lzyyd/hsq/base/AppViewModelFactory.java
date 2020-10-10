@@ -37,6 +37,7 @@ import com.lzyyd.hsq.viewmodel.SureOrderViewModel;
 import com.lzyyd.hsq.viewmodel.TakeGoodsViewModel;
 import com.lzyyd.hsq.viewmodel.TianfengCoinViewModel;
 import com.lzyyd.hsq.viewmodel.TransferoutViewModel;
+import com.lzyyd.hsq.viewmodel.UserAgreementViewModel;
 import com.lzyyd.hsq.viewmodel.VipViewModel;
 import com.lzyyd.hsq.viewmodel.WalletViewModel;
 import com.lzyyd.hsq.viewmodel.WebviewViewModel;
@@ -146,6 +147,8 @@ public class AppViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             return (T) new ChooseWxLoginViewModel(mApplication, mRepository);
         }else if (modelClass.isAssignableFrom(WebviewViewModel.class)){
             return (T) new WebviewViewModel(mApplication, mRepository);
+        }else if (modelClass.isAssignableFrom(UserAgreementViewModel.class)){
+            return (T) new UserAgreementViewModel(mApplication, mRepository);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }
