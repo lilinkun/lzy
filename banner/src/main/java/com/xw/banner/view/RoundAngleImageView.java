@@ -45,18 +45,18 @@ public class RoundAngleImageView extends ImageView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if (width >= 15 && height > 15) {
+        if (width >= 50 && height > 50) {
             Path path = new Path();
             //四个圆角
-            path.moveTo(15, 0);
-            path.lineTo(width - 15, 0);
-            path.quadTo(width, 0, width, 15);
-            path.lineTo(width, height - 15);
-            path.quadTo(width, height, width - 15, height);
-            path.lineTo(15, height);
-            path.quadTo(0, height, 0, height - 15);
-            path.lineTo(0, 15);
-            path.quadTo(0, 0, 15, 0);
+            path.moveTo(50, 0);
+            path.lineTo(width - 50, 0);
+            path.quadTo(width, 0, width, 50);
+            path.lineTo(width, height - 50);
+            path.quadTo(width, height, width - 50, height);
+            path.lineTo(50, height);
+            path.quadTo(0, height, 0, height - 50);
+            path.lineTo(0, 50);
+            path.quadTo(0, 0, 50, 0);
 
             canvas.clipPath(path);
         }

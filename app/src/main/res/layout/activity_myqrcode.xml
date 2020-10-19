@@ -98,8 +98,8 @@
 
                     <ImageView
                         android:id="@+id/ic_qrcode"
-                        android:layout_width="87dp"
-                        android:layout_height="87dp"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/margin_30"
                         android:layout_marginTop="@dimen/margin_20"

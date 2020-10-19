@@ -88,6 +88,8 @@ public class ProApplication extends Application {
 
     public static String HEADIMG = "";
 
+    public static String USERNAME = "";
+
     public static String BANNERIMG = "";
 
     public static String HOMEADDRESS = "";

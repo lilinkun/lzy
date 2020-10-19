@@ -166,6 +166,7 @@ public class MeFragment extends BaseFragment<FragmentMeBinding, MeViewModel> imp
 
         ProApplication.CCQTYPE = loginBean.getCcqType();
         ProApplication.ISUSEQSQ = loginBean.getIsUseQsq();
+        ProApplication.USERNAME = loginBean.getUserName();
 
         if (iGetSqlListener != null) {
             iGetSqlListener.getDataStr();

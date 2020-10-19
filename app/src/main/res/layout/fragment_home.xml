@@ -68,21 +68,23 @@
         android:orientation="vertical">
 
 
-        <com.xw.banner.Banner
-            android:id="@+id/bannerView"
-            android:layout_width="match_parent"
-            android:layout_height="145dp"
-            app:indicator_drawable_selected="@drawable/ic_home_circle_banner_click"
-            app:indicator_drawable_unselected="@drawable/ic_home_circle_banner_unclick"
-            app:indicator_height="10dp"
-            app:indicator_margin="5dp"
-            app:indicator_width="10dp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/ic_home_bg"
             >
+
+            <com.xw.banner.Banner
+                android:id="@+id/bannerView"
+                android:layout_width="match_parent"
+                android:layout_height="145dp"
+                app:indicator_drawable_selected="@drawable/ic_home_circle_banner_click"
+                app:indicator_drawable_unselected="@drawable/ic_home_circle_banner_unclick"
+                app:indicator_height="10dp"
+                app:indicator_margin="5dp"
+                app:indicator_width="10dp"
+                app:page_margin="20dp"/>
             
             <View
                 android:layout_width="match_parent"
@@ -95,6 +97,7 @@
                 android:id="@+id/ll_home_top"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/bannerView"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:orientation="vertical">
@@ -530,7 +533,7 @@
             android:id="@+id/rl_home_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/RED_E00000"
+            android:background="@color/common_bg"
             android:paddingTop="30dp"
             >
 
@@ -596,7 +599,7 @@
                 <TextView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_common_bg"
                     android:text="@string/ic_home_calendar"
                     android:typeface="@{home.setTypeFace()}"
                     android:layout_marginRight="10dp"
@@ -606,7 +609,7 @@
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:text="@string/ic_home_message"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_common_bg"
                     android:typeface="@{home.setTypeFace()}"
                     android:layout_marginRight="10dp"
                     />

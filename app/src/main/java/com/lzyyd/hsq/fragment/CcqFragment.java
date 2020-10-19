@@ -132,7 +132,7 @@ public class CcqFragment extends BaseFragment<FragmentCcqBinding, CcqViewModel> 
         } catch (WriterException e) {
             e.printStackTrace();
         }*/
-        Bitmap mBitmap = QRCodeUtil.createQRCodeBitmap(orderId, 200, 200, BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher));
+        Bitmap mBitmap = QRCodeUtil.createQRCodeBitmap(orderId, 200, 200, BitmapFactory.decodeResource(getResources(),R.drawable.ic_launcher1));
         imageView.setImageBitmap(mBitmap);
         dialog.setContentView(view);
         dialog.show();

@@ -177,7 +177,6 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
     @SuppressLint("SetJavaScriptEnabled")
     public void getHomeDataSuccess(HomeBean homeBean) {
 
-
         if (binding.mPtrframe != null &&binding.mPtrframe.isEnabled()){
             binding.mPtrframe.refreshComplete();
         }
@@ -209,7 +208,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
 
         ProApplication.SQ = homeBean.getSq().getUrl();
 
-        if (homeType == 1){
+        /*if (homeType == 1){
             homeItemBeans = homeBean.getGoodsList4();
         }else if(homeType == 2){
             homeItemBeans = homeBean.getGoodsList5();
@@ -223,14 +222,14 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
         binding.rvHomeGoodsList.addItemDecoration(new GridSpacingItemDecoration(2, 20, false));
 //        gridLayoutManager1.setOrientation(GridLayoutManager.VERTICAL);
         binding.rvHomeGoodsList.setLayoutManager(gridLayoutManager1);
-        binding.rvHomeGoodsList.setAdapter(recommendAdapter);
+        binding.rvHomeGoodsList.setAdapter(recommendAdapter);*/
 
 
 
         ViewAdapter viewAdapter = new ViewAdapter(homeBean.getNews());
         binding.avTitle.setAdapter(viewAdapter);
         binding.avTitle.start();
-        onHomeClick(1);
+//        onHomeClick(1);
 
 //        UToast.show(getActivity(),binding.llHome.getHeight()/2+"");
 
@@ -271,9 +270,6 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
         binding.wvHome.getSettings().setGeolocationDatabasePath(dir);
         //最重要的方法，一定要设置，这就是出不来的主要原因
         binding.wvHome.getSettings().setDomStorageEnabled(true);
-
-
-        Log.v("LG",url);
 
         ViewGroup.LayoutParams layoutParams = binding.wvHome.getLayoutParams();
         ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) layoutParams;

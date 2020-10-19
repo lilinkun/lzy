@@ -8,6 +8,7 @@ import com.lzyyd.hsq.activity.AddressListActivity;
 import com.lzyyd.hsq.activity.BindCardActivity;
 import com.lzyyd.hsq.activity.LoginActivity;
 import com.lzyyd.hsq.activity.ModifyPayActivity;
+import com.lzyyd.hsq.activity.UserAgreementActivity;
 import com.lzyyd.hsq.base.ProApplication;
 import com.lzyyd.hsq.bean.LoginBean;
 import com.lzyyd.hsq.data.DataRepository;
@@ -159,6 +160,13 @@ public class PersonalInfoViewModel extends BaseViewModel<DataRepository> {
             Bundle bundle = new Bundle();
             bundle.putInt("type",2);
             startActivity(ModifyPayActivity.class,bundle);
+        }
+    });
+
+    public BindingCommand binding1Command = new BindingCommand(new BindingAction() {
+        @Override
+        public void call() {
+            startActivity(UserAgreementActivity.class);
         }
     });
 

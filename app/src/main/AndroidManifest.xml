@@ -34,6 +34,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:name="com.lzyyd.hsq.base.ProApplication"
+        android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.lzyyd.hsq.activity.WelcomeActivity">
@@ -131,6 +132,7 @@
 
         <activity android:name="com.lzyyd.hsq.qrcode.android.CaptureActivity"
             />
+
 
 
     </application>

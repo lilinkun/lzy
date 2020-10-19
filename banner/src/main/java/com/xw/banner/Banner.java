@@ -23,6 +23,7 @@ import com.xw.banner.listener.OnBannerClickListener;
 import com.xw.banner.listener.OnBannerListener;
 import com.xw.banner.loader.ImageLoaderInterface;
 import com.xw.banner.view.BannerViewPager;
+import com.xw.banner.view.RoundAngleImageView;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -365,7 +366,7 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
                 imageView = imageLoader.createImageView(context);
             }
             if (imageView == null) {
-                imageView = new ImageView(context);
+                imageView = new RoundAngleImageView(context);
             }
             setScaleType(imageView);
             Object url = null;
@@ -462,7 +463,7 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
         viewPager.setCurrentItem(pos);
         if (mPageMargin != 0) {
             RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(viewPager.getLayoutParams());
-            layoutParams.setMargins(20,0,20,0);
+            layoutParams.setMargins(30,0,30,0);
             viewPager.setLayoutParams(layoutParams);
 
             viewPager.setPageMargin(mPageMargin);

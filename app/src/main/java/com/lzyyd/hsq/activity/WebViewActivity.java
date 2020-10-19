@@ -58,6 +58,12 @@ public class WebViewActivity extends BaseActivity<ActivityWebviewBinding, Webvie
 
         String url = getIntent().getExtras().getString("url");
 
+        /*if (url.contains("#")){
+            url = url.substring(0,url.lastIndexOf("#"));
+        }*/
+
+        Log.v("LG","url:" + url);
+
         binding.wvInput.getSettings().setDomStorageEnabled(true);
         binding.wvInput.getSettings().setJavaScriptEnabled(true);
         binding.wvInput.getSettings().setBlockNetworkImage(false);
@@ -94,8 +100,6 @@ public class WebViewActivity extends BaseActivity<ActivityWebviewBinding, Webvie
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 WebView.HitTestResult hitTestResult = view.getHitTestResult();
-
-                Log.v("LG","url:" + url);
 
                 if( url.startsWith("http:") || url.startsWith("https:") ) {
                     //hitTestResult==null解决重定向问题
@@ -137,6 +141,7 @@ public class WebViewActivity extends BaseActivity<ActivityWebviewBinding, Webvie
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
+                Log.v("LG","url:" + view.getUrl());
             }
 
             @Override

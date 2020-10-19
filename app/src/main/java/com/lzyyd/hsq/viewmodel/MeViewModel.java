@@ -3,8 +3,10 @@ package com.lzyyd.hsq.viewmodel;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
+import com.lzyyd.hsq.R;
 import com.lzyyd.hsq.activity.CcqActivity;
 import com.lzyyd.hsq.activity.CollectGoodsActivity;
 import com.lzyyd.hsq.activity.IntegralListActivity;
@@ -24,7 +26,9 @@ import com.lzyyd.hsq.data.DataRepository;
 import com.lzyyd.hsq.fragment.MeFragment;
 import com.lzyyd.hsq.http.callback.HttpResultCallBack;
 import com.lzyyd.hsq.util.HsqAppUtil;
+import com.lzyyd.hsq.util.WxShareUtils;
 
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 
 import androidx.annotation.NonNull;
@@ -48,9 +52,11 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
     public ObservableField<Integer> OrderAllNum = new ObservableField<>();
     public ObservableField<Integer> ccqField = new ObservableField<>();
     private BalanceBean balanceBeans;
+    private Application application;
 
     public MeViewModel(@NonNull Application application, DataRepository model) {
         super(application, model);
+        this.application = application;
 
     }
 
@@ -118,6 +124,16 @@ public class MeViewModel extends BaseViewModel<DataRepository> {
 
     public void setJumpQrcode(){
         startActivity(MyQrcodeActivity.class);
+    }
+
+    public void setWxShared(){
+        Context context = application;
+        String qrStr = "https://wx.lzyyd.com/account/Index/" + ProApplication.USERNAME;
+        Bitmap bitmap = WxShareUtils.getBitmap(context, R.drawable.ic_launcher1);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        WxShareUtils.shareWeb(context, HsqAppUtil.APP_ID,qrStr,"壕省钱一款省钱的APP","朋友，别再原价付款了！试试领券再下单，最高省钱90%啊~",baos.toByteArray(),0);
+
     }
 
 

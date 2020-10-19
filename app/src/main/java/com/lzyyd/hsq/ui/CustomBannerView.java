@@ -1,7 +1,9 @@
 package com.lzyyd.hsq.ui;
 
 import android.content.Context;
+import android.graphics.Outline;
 import android.view.View;
+import android.view.ViewOutlineProvider;
 import android.widget.ImageView;
 
 import com.lzyyd.hsq.R;
@@ -54,6 +56,13 @@ public class CustomBannerView {
         banner.setBannerAnimation(Transformer.RotateDown);
 
         banner.setPageTransformer(true, new BannerTransform());
+
+        banner.setOutlineProvider(new ViewOutlineProvider() {
+            @Override
+            public void getOutline(View view, Outline outline) {
+                outline.setRoundRect(0,0,view.getWidth(),view.getHeight(),30);
+            }
+        });
 
         //设置轮播图的标题集合
         banner.setBannerTitles(strings);

@@ -102,7 +102,9 @@ public class CollectGoodsActivity extends BaseActivity<ActivityCollectBinding, C
 
     @Override
     public void getCollectFail(String msg) {
-        UToast.show(this,msg);
+        if (!msg.contains("查无数据")) {
+            UToast.show(this, msg);
+        }
     }
 
     @Override

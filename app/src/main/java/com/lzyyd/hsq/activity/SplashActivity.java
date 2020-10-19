@@ -179,7 +179,6 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, MVVMView
     }
 
     public void UpdateApp(){
-        myPermission();
 
         String url = ProApplication.UPGRADEURL;
         final double code = UpdateManager.getInstance().getVersionName(this);
@@ -204,6 +203,8 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, MVVMView
                         bean = gson.fromJson(response, CheckBean.class);
 
                         if (bean.getVersionShort() > code) {
+
+                            myPermission();
                             AlertDialog.Builder builder = new AlertDialog.Builder(SplashActivity.this).setMessage("请升级更新app").setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {

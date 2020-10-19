@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -52,7 +54,7 @@ public class VipActivity extends BaseActivity<ActivityVipBinding, VipViewModel> 
 
     @Override
     public void initData() {
-        Eyes.setStatusBarColorDark(this, Color.parseColor("#1C1714"));
+        Eyes.setStatusBarWhiteColor(this, getResources().getColor(R.color.white));
 
         SharedPreferences sharedPreferences = getSharedPreferences(HsqAppUtil.LOGIN,MODE_PRIVATE);
         String Project = sharedPreferences.getString(HsqAppUtil.PROJECT,"");
@@ -108,8 +110,29 @@ public class VipActivity extends BaseActivity<ActivityVipBinding, VipViewModel> 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.ic_vip_bg);
         binding.ivVipBg.setImageBitmap(bitmap);
 
-
         binding.svVip.setOnTouchListener(new View.OnTouchListener() {
+
+            private int lastY = 0;
+            private int touchEventId = -9983761;
+            Handler handler = new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    super.handleMessage(msg);
+                    View scroller = (View) msg.obj;
+
+                    if (msg.what == touchEventId) {
+                        if (lastY == scroller.getScrollY()) {
+                            //停止了，此处你的操作业务
+                            y = (int)(y -lastY);
+                            binding.svVip.setRY((int)(y));
+                        } else {
+                            handler.sendMessageDelayed(handler.obtainMessage(touchEventId, scroller), 1);
+                            lastY = scroller.getScrollY();
+                        }
+                    }
+                }
+            };
+
             @Override
             public boolean onTouch(View v, MotionEvent ev) {
 
@@ -130,6 +153,11 @@ public class VipActivity extends BaseActivity<ActivityVipBinding, VipViewModel> 
                         binding.svVip.setRY(y);
                     }
                 }
+
+                if (ev.getAction() == MotionEvent.ACTION_UP){
+                    handler.sendMessageDelayed(handler.obtainMessage(touchEventId, v), 5);
+                }
+
 
                 return false;
             }

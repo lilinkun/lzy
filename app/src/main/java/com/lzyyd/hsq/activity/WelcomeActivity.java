@@ -1,6 +1,7 @@
 package com.lzyyd.hsq.activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import com.lzyyd.hsq.R;
 import com.lzyyd.hsq.util.PrefManager;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -57,6 +59,34 @@ public class WelcomeActivity extends AppCompatActivity {
     viewPager = (ViewPager)findViewById(R.id.view_pager);
     dotsLayout = (LinearLayout)findViewById(R.id.layoutDots);
     btnNext = (Button) findViewById(R.id.btn_next);
+
+    View view = LayoutInflater.from(this).inflate(R.layout.welcome_dialog,null);
+
+    TextView tv_welcome = (TextView) view.findViewById(R.id.tv_welcome);
+
+    tv_welcome.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent();
+            intent.setClass(WelcomeActivity.this,UserAgreementActivity.class);
+            startActivity(intent);
+        }
+    });
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(view).setNeutralButton("暂不使用", new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            finish();
+        }
+    }).setPositiveButton("同意", new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            dialog.cancel();
+        }
+    });
+        builder.setCancelable(false);
+        builder.show();
+
 
     //添加欢迎页面
     layouts = new int[]{

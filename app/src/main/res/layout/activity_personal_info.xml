@@ -389,7 +389,9 @@
     <RelativeLayout
         android:id="@+id/rl_me_customer_service"
         android:layout_width="match_parent"
-        android:layout_margin="@dimen/margin_10"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
+        android:layout_marginTop="@dimen/margin_10"
         android:background="@drawable/bg_sure_order_address"
         android:paddingLeft="@dimen/padding_10"
         android:paddingRight="@dimen/padding_10"
@@ -401,6 +403,34 @@
             android:textColor="@color/grey_333333"
             android:layout_centerVertical="true"
             android:text="@string/me_customer_service"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_more"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:typeface="@{personalViewModel.setTypeFace()}"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_me_user"
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/margin_10"
+        android:background="@drawable/bg_sure_order_address"
+        android:paddingLeft="@dimen/padding_10"
+        android:paddingRight="@dimen/padding_10"
+        app:onClickCommand="@{personalViewModel.binding1Command}"
+        android:layout_height="44dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textsize16"
+            android:textColor="@color/grey_333333"
+            android:layout_centerVertical="true"
+            android:text="@string/me_privacy"/>
 
         <TextView
             android:layout_width="wrap_content"
