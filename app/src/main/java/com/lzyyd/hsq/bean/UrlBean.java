@@ -22,6 +22,15 @@ public class UrlBean{
     private int UserLevelPrice10;
     private int UserLevelPrice20;
     private String SqZsj;
+    private String Search;
+
+    public String getSearch() {
+        return Search;
+    }
+
+    public void setSearch(String search) {
+        Search = search;
+    }
 
     public String getSqZsj() {
         return SqZsj;

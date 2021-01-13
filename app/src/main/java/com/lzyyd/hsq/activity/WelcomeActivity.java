@@ -81,7 +81,7 @@ public class WelcomeActivity extends AppCompatActivity {
     }).setPositiveButton("同意", new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            dialog.cancel();
+            dialog.dismiss();
         }
     });
         builder.setCancelable(false);

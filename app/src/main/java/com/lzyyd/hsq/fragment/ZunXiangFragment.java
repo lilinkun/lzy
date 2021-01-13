@@ -127,7 +127,13 @@ public class ZunXiangFragment extends BaseFragment<FragmentZunxiangBinding, Webv
         //适应屏幕
         binding.wvInput.getSettings().setLoadWithOverviewMode(true);
         binding.wvInput.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        binding.wvInput.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+
+
+//        String cacheDirPath = getActivity().getFilesDir().getAbsolutePath()+"cache/";
+//        binding.wvInput.getSettings().setAppCachePath(cacheDirPath);
+//        // 1. 设置缓存路径
+//        binding.wvInput.getSettings().setAppCacheMaxSize(20*1024*1024);
+//        binding.wvInput.getSettings().setAppCacheEnabled(true);
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
 
@@ -219,6 +225,10 @@ public class ZunXiangFragment extends BaseFragment<FragmentZunxiangBinding, Webv
                         startActivity(WebViewActivity.class, bundle);
                         return;
                     }
+                }
+
+                if (newProgress == 100){
+                    ProApplication.ISOPEN = true;
                 }
 
 

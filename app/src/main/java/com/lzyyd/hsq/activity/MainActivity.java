@@ -94,7 +94,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MVVMViewMode
 
                     case R.id.zunxiang:
                         if (ProApplication.ISUSEQSQ == 1) {
-                            zunXiangFragment.initUrl();
+                            if (!ProApplication.ISOPEN) {
+                                zunXiangFragment.initUrl();
+                            }
                         }
                         binding.topVp.setCurrentItem(1,false);
                         break;

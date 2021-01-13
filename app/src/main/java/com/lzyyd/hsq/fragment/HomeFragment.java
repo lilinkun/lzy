@@ -271,6 +271,12 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
         //最重要的方法，一定要设置，这就是出不来的主要原因
         binding.wvHome.getSettings().setDomStorageEnabled(true);
 
+//        String cacheDirPath = getActivity().getFilesDir().getAbsolutePath()+"cache/";
+//        binding.wvHome.getSettings().setAppCachePath(cacheDirPath);
+//        // 1. 设置缓存路径
+//        binding.wvHome.getSettings().setAppCacheMaxSize(20*1024*1024);
+//        binding.wvHome.getSettings().setAppCacheEnabled(true);
+
         ViewGroup.LayoutParams layoutParams = binding.wvHome.getLayoutParams();
         ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) layoutParams;
         marginLayoutParams.setMargins(0,topHeight,0,0);

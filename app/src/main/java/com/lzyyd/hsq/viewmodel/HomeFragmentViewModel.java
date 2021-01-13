@@ -72,7 +72,11 @@ public class HomeFragmentViewModel extends BaseViewModel<DataRepository> {
     }
 
     public void setJumpSearch(){
-        startActivity(SearchActivity.class);
+//        startActivity(SearchActivity.class);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("url", ProApplication.SEARCH);
+        startActivity(WebViewActivity.class,bundle);
     }
 
     public void getHomeData(String SessionId){

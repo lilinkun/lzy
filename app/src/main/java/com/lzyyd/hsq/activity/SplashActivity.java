@@ -115,10 +115,11 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, MVVMView
         ProApplication.CCQGOODSID = urlBean.getCcqGoodsId();
         ProApplication.KFMOBILE = urlBean.getKFMobile();
         ProApplication.SQURL = urlBean.getSqZsj();
+        ProApplication.SEARCH = urlBean.getSearch();
         SharedPreferences sharedPreferences = getSharedPreferences(HsqAppUtil.LOGIN, MODE_PRIVATE);
         sharedPreferences.edit().putString(HsqAppUtil.IMG, ProApplication.HEADIMG).putString(HsqAppUtil.BANNERIMG, ProApplication.BANNERIMG)
                 .putString(HsqAppUtil.CUSTOMER, ProApplication.CUSTOMERIMG).putString(HsqAppUtil.SHAREDIMG, ProApplication.SHAREDIMG)
-                .putString(HsqAppUtil.SHAREDMEIMG,"").putString(HsqAppUtil.SQURL,urlBean.getSqZsj()).commit();
+                .putString(HsqAppUtil.SHAREDMEIMG,"").putString(HsqAppUtil.SQURL,urlBean.getSqZsj()).putString(HsqAppUtil.SEARCH,urlBean.getSearch()).commit();
         UpdateApp();
 //        turnHome();
     }

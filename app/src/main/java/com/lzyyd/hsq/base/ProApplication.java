@@ -138,7 +138,10 @@ public class ProApplication extends Application {
     public static final String IMG_SMALL = "img/300/300/";
     public static final String IMG_SMALL_ = "img/150/150/";
 
+    public static boolean ISOPEN = false;
+
     public static String SQURL = "";
+    public static String SEARCH = "";
     public static int ISUSEQSQ = 1; //1，可以点击 0，不能点击
 
     public static synchronized ProApplication context() {

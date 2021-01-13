@@ -72,6 +72,7 @@ public class HsqAppUtil {
     public static final String LEVEL = "LEVEL";
     public static final String PROJECT = "PROJECT";
     public static final String SQURL = "SQURL";
+    public static final String SEARCH = "SEARCH";
 
     public static final int GOODSTYPE_COMMON = 1;//普通商品
     public static final int GOODSTYPE_INTEGRAL = 2;//积分商城
